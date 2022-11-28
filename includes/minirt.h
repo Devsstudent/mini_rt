@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/28 13:48:02 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:32:39 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -31,9 +31,9 @@ typedef struct s_rgb {
 }					t_rgb;
 
 typedef struct s_orientation{
-	char	x; //-1 1
-	char	y; //-1 1
-	char	z; //-1 1
+	float	x; //-1 1 0 20
+	float	y; //-1 1
+	float	z; //-1 1
 }			t_orientation;
 
 typedef struct s_ambient_light
