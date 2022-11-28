@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   check_ambient.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 10:44:55 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/28 16:23:52 by odessein         ###   ########.fr       */
+/*   Created: 2022/11/28 17:06:05 by odessein          #+#    #+#             */
+/*   Updated: 2022/11/28 17:14:25 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-static bool	check_extension(char *name)
+bool	check_ambient(char *line, int *semantic)
 {
-	int	i;
+	int		i;
+	bool	ratio;
 
 	i = 0;
-	while (name[i])
-		i++;
-	if (i >= 4 && name[i - 1] == 't' && name[i - 2] == 'r' && name[i - 3] == '.')
-		return (true);
-	else
+	ratio = false;
+	if (line && line[0] != 'A' && !is_space(line[1]))
+		return (false);
+	while (line[i])
 	{
-		error_msg("Error\nNeed to have the extension .rt\n");
-		return (false);
+		if (is_space(line[i]))
+		{
+			i++;
+			continue ;
+		}
+		if (is_digit(line[i]) && !ratio)
+		{
+			ratio = true;
+			if (line[i + 1] && line[i + 1] != '.')
+				return (false);
+			if (line[i + 2] && !is_digit(line[i + 2]))
+				return (false);
+		}
+		else if (is_digit(line[i])
 	}
-}
-
-bool	parsing(int ac, char **av)
-{
-	int	i;
-
-	i = 0;
-	if (ac != 2)
-		return (false);
-	if (!check_extension(av[1]))
-		return (false);
-	if (!open_and_store(av[1]))
-		return (false);
-	return (true);
 }
