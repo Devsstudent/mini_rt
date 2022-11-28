@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/24 12:57:12 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:48:02 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -18,37 +18,61 @@
 # include <string.h>
 # include <stdbool.h>
 
-typedef struct	s_data{
-	int		floor_color;
-	int		ceilling_color;
-	char	*east_texture;
-	char	*north_texture;
-	char	*west_texture;
-	char	*south_texture;
-}			t_data;
+typedef struct s_xyz {
+	int	x;
+	int	y;
+	int	z;
+}		t_xyz;
 
-typedef struct	s_player{
-	bool	up;
-	bool	down;
-	bool	left;
-	bool	right;
-	int		x;
-	int		y;
-}			t_player;
+typedef struct s_rgb {
+	unsigned char	R; //0-255
+	unsigned char	G; //0-255
+	unsigned char	B; //0-255
+}					t_rgb;
 
-typedef struct	s_vision{
-	int		fov;
-	bool	up;
-	bool	down;
-	bool	left;
-	bool	right;
-	int		horizontal_angle;
-}			t_vision;
+typedef struct s_orientation{
+	char	x; //-1 1
+	char	y; //-1 1
+	char	z; //-1 1
+}			t_orientation;
 
-typedef struct	s_game_info{
-	t_player	player;
-	t_vision	camera;
-	t_data		data;
-}				t_game_info;
+typedef struct s_ambient_light
+{
+	unsigned char	ratio; //0 1 2 3 4 5 6 7 8 9 10
+	t_rgb			color;
+}					t_ambient_light;
+
+typedef struct s_camera
+{
+	t_xyz			position;
+	t_orientation	vec_direction;
+	unsigned char	fov; //0-180
+}					t_camera
+
+typedef struct s_light {
+	t_xyz			position;
+	unsigned char	ratio; //0 1 2 3 4 5 6 7 8 9 10
+	t_rgb			color;
+}					t_light;
+
+typedef struct s_sphere {
+	t_xyz			position;
+	unsigned int	diameter;
+	t_rgb			color;
+}					t_sphere;
+
+typedef struct	s_plane {
+	t_xyz			position;
+	t_orientation	vec_direction;
+	t_rgb			color;
+}					t_plane;
+
+typedef struct	s_cylinder {
+	t_xyz			position;
+	t_orientation	vec_direction;
+	unsigned int	diameter;
+	unsigned int	height;
+	t_rgb			color;
+}					t_cylinder;
 
 #endif

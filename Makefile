@@ -1,4 +1,4 @@
-NAME = Cub3d
+NAME = mini_rt
 CC = cc
 FLAGS = -Wall -Werror -Wextra -g -MMD
 LIB = -L $(addprefix lib/, mlx) -lmlx -lXext -lX11 -lm -L $(addprefix lib/, libft) -lft
