@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 11:37:21 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/11/29 16:43:07 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:10:21 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ bool	convert_to_float(float *val, char *arr)
 	dot = 0;
 	nb = malloc(sizeof(char) * (ft_strlen(arr) + 1));
 	if (!nb)
+	{
+		msg_error
 		return (false);
+	}
 	while (arr[i])
 	{
 		if (arr[i] == '.')

@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/29 16:13:09 by odessein         ###   ########.fr       */
+/*   Created: 2022/11/29 12:57:53 by odessein          #+#    #+#             */
+/*   Updated: 2022/11/29 16:11:24 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef PARSING_H
-# define PARSING_H
-# include <stdbool.h>
-typedef struct s_must_have {
-	bool	ambient;
-	bool	camera;
-	bool	object;
-}			t_must_have;
+//#include "minirt.h"
+#include "parsing.h"
 
-//utils.c
-bool	free_split_return_false(char **line_split);
-bool	ft_is_space(char c);
+bool	free_split_return_false(char **line_split)
+{
+	int	i;
 
-//split_on_function.c
-char	**split_func_condition(char const *s, bool (*f)(char));
+	i = 0;
+	while (line_split[i])
+	{
+		free(line_split[i]);
+		i++;
+	}
+	free(line_split[i]);
+	return (false);
+}
 
-#endif
+bool	ft_is_space(char c)
+{
+	if (c < 15 && c > 6)
+		return (true);
+	if (c == 32)
+		return (true);
+	return (false);
+}

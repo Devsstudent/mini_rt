@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   elem_structure.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/29 16:13:09 by odessein         ###   ########.fr       */
+/*   Created: 2022/11/29 11:34:49 by odessein          #+#    #+#             */
+/*   Updated: 2022/11/29 11:41:27 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef PARSING_H
-# define PARSING_H
-# include <stdbool.h>
-typedef struct s_must_have {
-	bool	ambient;
-	bool	camera;
-	bool	object;
-}			t_must_have;
+#include "minirt.h"
 
-//utils.c
-bool	free_split_return_false(char **line_split);
-bool	ft_is_space(char c);
+void	init_all_elem(t_must_have *all_elem)
+{
+	all_elem->ambient = false;
+	all_elem->camera = false;
+	all_elem->object = false;
+}
 
-//split_on_function.c
-char	**split_func_condition(char const *s, bool (*f)(char));
-
-#endif
+bool	check_all_elem(t_must_have all_elem)
+{
+	if (!all_elem.ambient || !all_elem.camera || !all_elem.object)
+		return (false);
+	return (true);
+}
