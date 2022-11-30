@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:17:04 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 15:28:25 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:29:35 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -20,9 +20,8 @@ static int	line_nb(int fd, t_must_have *all_elem, t_function_parsing *arr)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line && line[0] != '\n')
+		if (line && line[0] == '\n')
 		{
-			i++;
 			free(line);
 			line = get_next_line(fd);
 			continue ;
@@ -32,10 +31,13 @@ static int	line_nb(int fd, t_must_have *all_elem, t_function_parsing *arr)
 			free(line);
 			return (0);
 		}
+		i++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
+	if (!check_all_elem(*all_elem))
+		return (0);
 	return (i);
 }
 
@@ -90,7 +92,7 @@ bool	open_and_store(char *name, char **lines)
 	line_nbr = 0;
 	arr = NULL;
 	init_all_elem(&all_elem);
-	setup_array_function(arr);
+	setup_array_function(&arr);
 	if (!get_line_nb_checking_line(name, arr, &line_nbr, &all_elem))
 		return (free_array_function(arr));
 	lines = malloc(sizeof(*lines) * (line_nbr + 1));

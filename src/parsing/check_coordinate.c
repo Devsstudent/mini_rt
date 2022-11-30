@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:00:43 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 14:58:24 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/30 20:38:55 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -34,8 +34,10 @@ bool	check_coordinate_direction(char *line)
 	int		turn;
 	float	value;
 	char	*save;
+	size_t	size;
 
 	save = line;
+	size = ft_strlen(line);
 	turn = 0;
 	while (line)
 	{
@@ -48,6 +50,8 @@ bool	check_coordinate_direction(char *line)
 		line = line + i;
 		if (*line != ',' && turn < 2)
 			return (false);
+		if (turn > (int) size / 3)
+			break ;
 		turn++;
 		line++;
 	}
@@ -61,8 +65,10 @@ bool	check_coordinate(char *line)
 	int		turn;
 	float	value;
 	char	*save;
+	size_t	size;
 
 	turn = 0;
+	size = ft_strlen(line);
 	save = line;
 	while (line)
 	{
@@ -80,6 +86,8 @@ bool	check_coordinate(char *line)
 			return (false);
 		turn++;
 		line++;
+		if (turn > ((int) size / 3))
+			break ;
 	}
 	line = save;
 	return (true);

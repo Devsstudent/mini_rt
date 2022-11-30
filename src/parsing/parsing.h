@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 15:39:52 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:08:01 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -30,7 +30,11 @@ typedef struct s_function_parsing {
 	char	*letter;
 }			t_function_parsing;
 
+//parsing.c
+bool	parsing(int ac, char **av);
+
 //utils.c
+bool	check_int_max(char *str);
 bool	free_split_return_false(char **line_split);
 bool	ft_is_space(char c);
 bool	free_array_function(t_function_parsing *arr);
@@ -46,7 +50,7 @@ bool	convert_to_float(float *val, char *arr);
 char	**split_func_condition(char const *s, bool (*f)(char));
 
 //setup_array_function.c
-bool	setup_array_function(t_function_parsing *arr);
+bool	setup_array_function(t_function_parsing **arr);
 
 //open_and_store_content_rt.c
 bool	open_and_store(char *name, char **lines);

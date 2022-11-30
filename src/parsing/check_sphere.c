@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:46:08 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 15:22:34 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/30 21:45:02 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -16,7 +16,7 @@ bool	check_sphere(char **line_split, t_must_have *all_elem)
 	bool	first;
 	float	value;
 
-	first = line_split[0] && line_split[0][0] == 's' && !line_split[0][1] && line_split[0][1] && line_split[0][1] == 'h' && !line_split[0][2];
+	first = line_split[0] && line_split[0][0] == 's' && line_split[0][1] && line_split[0][1] == 'p' && !line_split[0][2];
 	if (!first)
 		return (false);
 	if (!check_coordinate(line_split[1]))

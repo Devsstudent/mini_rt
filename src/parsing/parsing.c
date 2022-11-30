@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:44:55 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 14:51:13 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:47:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -35,7 +35,10 @@ bool	parsing(int ac, char **av)
 	i = 0;
 	lines = NULL;
 	if (ac != 2)
+	{
+		ft_putstr_fd("Error\nWrong arguments number", 2);
 		return (false);
+	}
 	if (!check_extension(av[1]))
 		return (false);
 	if (!open_and_store(av[1], lines))
