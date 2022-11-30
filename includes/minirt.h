@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/29 12:13:18 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:52:18 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -17,6 +17,9 @@
 # include <math.h>
 # include <string.h>
 # include <stdbool.h>
+# include "error.h"
+# include "parsing.h"
+# include "libft.h"
 
 typedef struct s_xyz {
 	int	x;

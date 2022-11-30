@@ -6,11 +6,12 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:57:53 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/29 16:11:24 by odessein         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:05:47 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//#include "minirt.h"
-#include "parsing.h"
+#include "minirt.h"
+
+//check_int_max value (digit by digit from char *)
 
 bool	free_split_return_false(char **line_split)
 {
@@ -32,5 +33,16 @@ bool	ft_is_space(char c)
 		return (true);
 	if (c == 32)
 		return (true);
+	return (false);
+}
+
+bool	free_array_function(t_function_parsing *arr)
+{
+	int	i;
+
+	i = 0;
+	while (i < ELEM_MAX)
+		free(arr[i].letter);
+	free(arr);
 	return (false);
 }
