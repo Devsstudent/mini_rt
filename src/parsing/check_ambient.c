@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:06:05 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 15:01:26 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:54:13 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -17,10 +17,11 @@ bool	check_ambient(char **line_split, t_must_have *all_elem)
 	bool	second;
 	float	value;
 
-	first = line_split[0] && line_split[0][0] == 'A' && !line_split[0][1];
+	first = line_split[0] && (line_split[0][0] == 'A' || line_split[0][0] == 'a')
+				&& !line_split[0][1];
 	second = line_split[1] && line_split[1][0] && ft_isdigit(line_split[1][0])
-		&& line_split[1][1] && line_split[1][1] == '.' && line_split[1][2]
-		&& ft_isdigit(line_split[1][2]) && !line_split[1][3];
+				&& line_split[1][1] && line_split[1][1] == '.' && line_split[1][2]
+				&& ft_isdigit(line_split[1][2]) && !line_split[1][3];
 	if (!first || (first && all_elem->ambient))
 		return (false);
 	if (!second)

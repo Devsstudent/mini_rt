@@ -6,13 +6,15 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:19:18 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 20:23:23 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:42:11 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
 static bool	attribute_function_letter(bool (*func)(), t_function_parsing *arr, char *letter)
 {
+	if (!letter)
+		return (false);
 	arr->f = func;
 	arr->letter = ft_strdup(letter);
 	if (!arr->letter)
@@ -36,15 +38,13 @@ bool	setup_array_function(t_function_parsing **arr)
 		if (i == 1)
 			res = attribute_function_letter(check_light, &(*arr)[i], "L");
 		if (i == 2)
-			res = attribute_function_letter(check_light, &(*arr)[i], "l");
-		if (i == 3)
 			res = attribute_function_letter(check_camera, &(*arr)[i], "C");
+		if (i == 3)
+			res = attribute_function_letter(check_sphere, &(*arr)[i], "SP");
 		if (i == 4)
-			res = attribute_function_letter(check_sphere, &(*arr)[i], "sp");
+			res = attribute_function_letter(check_plane, &(*arr)[i], "PL");
 		if (i == 5)
-			res = attribute_function_letter(check_plane, &(*arr)[i], "pl");
-		if (i == 6)
-			res = attribute_function_letter(check_cylinder, &(*arr)[i], "cy");
+			res = attribute_function_letter(check_cylinder, &(*arr)[i], "CY");
 		if (!res)
 			return (false);
 		i++;
@@ -52,4 +52,3 @@ bool	setup_array_function(t_function_parsing **arr)
 	(*arr)[i].f = NULL;
 	return (true);
 }
-

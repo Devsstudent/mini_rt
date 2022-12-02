@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:41:11 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 21:35:43 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:54:08 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -35,7 +35,8 @@ bool	check_camera(char **line_split, t_must_have *all_element)
 {
 	bool	first;
 
-	first = line_split[0] && line_split[0][0] == 'C' && !line_split[0][1];
+	first = line_split[0] && (line_split[0][0] == 'C' || line_split[0][0] == 'c')
+				&& !line_split[0][1];
 	if (!first || (first && all_element->camera))
 		return (false);
 	if (!check_coordinate(line_split[1]))

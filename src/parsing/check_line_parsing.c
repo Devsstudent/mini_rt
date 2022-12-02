@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:26:25 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 22:26:24 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 18:05:09 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -14,21 +14,27 @@
 bool	brows_arr_function(char *first, char **line_split,
 			t_function_parsing *arr, t_must_have *all_elem)
 {
-	int	i;
+	int		i;
+	char	*duped;
 
 	i = 0;
 	while (arr[i].f != NULL)
 	{
-		if (!ft_strncmp(first, arr[i].letter, 3))
+		duped = ft_tocaps(first);
+		if (!ft_strncmp(duped, arr[i].letter, 3))
 		{
 			if (!(*arr[i].f)(line_split, all_elem))
+			{
+				free(duped);
 				return (false);
+			}
 			else
 			{
-				ft_putstr_fd("Nice", 2);
+				free(duped);
 				return (true);
 			}
 		}
+		free(duped);
 		i++;
 	}
 	return (false);

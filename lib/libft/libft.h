@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:38:41 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/02 16:31:55 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:47:29 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstdisplay(t_list **stack);
 void	ft_sort_int_tab(int	*tab, int size);
+char	*ft_tocaps(char *str);
 
 #endif

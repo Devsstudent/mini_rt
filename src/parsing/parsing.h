@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 22:08:01 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:42:34 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -17,12 +17,13 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define ELEM_MAX 7
+# define ELEM_MAX 6
 
 typedef struct s_must_have {
 	bool	ambient;
 	bool	camera;
 	bool	object;
+	bool	light_maj;
 }			t_must_have;
 
 typedef struct s_function_parsing {
@@ -72,7 +73,7 @@ bool	check_cylinder(char **line_split, t_must_have *all_elem);
 bool	check_float_construction(char *line);
 
 //check_light.c
-bool	check_light(char **line_split);
+bool	check_light(char **line_split, t_must_have *all_element);
 
 //check_plane.c
 bool	check_plane(char **line_split, t_must_have *all_elem);
