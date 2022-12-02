@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:38:41 by odessein          #+#    #+#             */
-/*   Updated: 2022/07/08 22:46:28 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:31:55 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_sharp(char x, int *r_v);
 
 void	ft_bzero(void *s, size_t n);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int		ft_atoi(const char *nptr);
+long	ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);

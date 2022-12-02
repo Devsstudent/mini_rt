@@ -6,20 +6,29 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:00:43 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 20:38:55 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:35:40 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
 static bool	brows_line(char *line, int *i)
 {
+	bool	test;
+	char	*save;
+
+	test = false;
 	*i = 0;
+	save = line;
 	if (line[*i] == '-' || line[*i] == '+')
+	{
+		test = true;
 		(*i)++;
+	}
 	while (line[*i] && ft_isdigit(line[*i]))
 		(*i)++;
-	if (*i > 9)
-		//check_int_max_int_minvalue
+	if ((*i > 10 && !test)|| (*i > 11 && test))
+		return (false);
+	if (!check_int_max(save))
 		return (false);
 	if (line[*i] == '.')
 		(*i)++;

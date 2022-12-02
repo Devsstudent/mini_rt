@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:57:53 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 21:55:40 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 16:38:06 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -15,16 +15,9 @@
 
 bool	check_int_max(char *str)
 {
-	if (str[0] == '2' && str[1] == '1' && str[2] == '4' && str[3] == '7' && str[4] == '4' && str[5] == '8' && str[6] == '3' && str[7] == '6' && str[8] == '4' && str[9] == '7' && !str[10])
-		return (true);
-	return (false);
-}
-
-bool	check_int_min(char *str)
-{
-	if (str[0] == '-' && str[1] == '2' && str[2] == '1' && str[3] == '4' && str[4] == '7' && str[5] == '4' && str[6] == '8' && str[7] == '3' && str[8] == '6' && str[9] == '4' && str[10] == '8' && !str[11])
-		return (true);
-	return (false);
+	if (ft_atoi(str) == 2147483648)
+		return (false);
+	return (true);
 }
 
 bool	free_split_return_false(char **line_split)
