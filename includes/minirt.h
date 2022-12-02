@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 14:52:18 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/02 18:20:35 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -22,15 +22,15 @@
 # include "libft.h"
 
 typedef struct s_xyz {
-	int	x;
-	int	y;
-	int	z;
+	float	x;
+	float	y;
+	float	z;
 }		t_xyz;
 
 typedef struct s_rgb {
-	unsigned char	R; //0-255
-	unsigned char	G; //0-255
-	unsigned char	B; //0-255
+	uint_8	R; //0-255
+	uint_8	G; //0-255
+	uint_8	B; //0-255
 }					t_rgb;
 
 typedef struct s_orientation{
@@ -41,7 +41,7 @@ typedef struct s_orientation{
 
 typedef struct s_ambient_light
 {
-	unsigned char	ratio; //0 1 2 3 4 5 6 7 8 9 10
+	uint_8	ratio; //0 1 2 3 4 5 6 7 8 9 10
 	t_rgb			color;
 }					t_ambient_light;
 
@@ -49,18 +49,18 @@ typedef struct s_camera
 {
 	t_xyz			position;
 	t_orientation	vec_direction;
-	unsigned char	fov; //0-180
+	uint_8	fov; //0-180
 }					t_camera;
 
 typedef struct s_light {
 	t_xyz			position;
-	unsigned char	ratio; //0 1 2 3 4 5 6 7 8 9 10
+	uint_8	ratio; //0 1 2 3 4 5 6 7 8 9 10
 	t_rgb			color;
 }					t_light;
 
 typedef struct s_sphere {
 	t_xyz			position;
-	unsigned int	diameter;
+	unsigned float	diameter;
 	t_rgb			color;
 }					t_sphere;
 
@@ -73,8 +73,8 @@ typedef struct	s_plane {
 typedef struct	s_cylinder {
 	t_xyz			position;
 	t_orientation	vec_direction;
-	unsigned int	diameter;
-	unsigned int	height;
+	unsigned float	diameter;
+	unsigned float	height;
 	t_rgb			color;
 }					t_cylinder;
 
