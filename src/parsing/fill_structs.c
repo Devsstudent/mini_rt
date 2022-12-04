@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 11:37:21 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/04 22:08:11 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/04 22:29:19 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ char	***create_triple_arr(char **lines)
 
 	i = 0;
 	while (lines[i])
-	{
-		printf("i = %i, line = %p\n", i, lines[i]);
 		i++;
-	}
 	triple_arr = malloc(sizeof(char **) * (i + 1));
 	if (!triple_arr)
 		return (free_double_arr(lines), NULL);
@@ -93,6 +90,6 @@ bool	fill_structs(char **lines, t_objects *objects)
 	if (!triple_arr)
 		return (false);
 	if (!fill_each_struct(triple_arr, objects))
-		return (free_structs(objects), false);
-	return (true);
+		return (free_structs(objects), free_triple_arr(triple_arr), false);
+	return (free_triple_arr(triple_arr), true);
 }

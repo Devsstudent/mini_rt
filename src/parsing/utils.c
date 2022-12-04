@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:57:53 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/02 16:38:06 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/04 22:34:07 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -30,7 +30,7 @@ bool	free_split_return_false(char **line_split)
 		free(line_split[i]);
 		i++;
 	}
-	free(line_split[i]);
+	free(line_split);
 	return (false);
 }
 
