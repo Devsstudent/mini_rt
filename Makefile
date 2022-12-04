@@ -15,11 +15,15 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 												plane \
 												rgb \
 												sphere) \
-								convert_to_float \
 								elem_structure \
 								open_and_store_content_rt \
 								setup_array_function \
 								split_on_function \
+								conversions \
+								fill_structs \
+								build_elems \
+								fill_elems \
+								fill_structs_utils \
 								utils) \
 		$(addprefix error/, error)))
 

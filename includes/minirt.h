@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/02 18:23:31 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:16:04 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -42,7 +42,7 @@ typedef struct s_orientation{
 
 typedef struct s_ambient_light
 {
-	uint8_t	ratio; //0 1 2 3 4 5 6 7 8 9 10
+	float			ratio; //0 1 2 3 4 5 6 7 8 9 10
 	t_rgb			color;
 }					t_ambient_light;
 
@@ -55,13 +55,13 @@ typedef struct s_camera
 
 typedef struct s_light {
 	t_xyz			position;
-	uint8_t	ratio; //0 1 2 3 4 5 6 7 8 9 10
+	float			ratio; //0 1 2 3 4 5 6 7 8 9 10
 	t_rgb			color;
 }					t_light;
 
 typedef struct s_sphere {
 	t_xyz			position;
-	float	diameter;
+	float			diameter;
 	t_rgb			color;
 }					t_sphere;
 
@@ -74,16 +74,20 @@ typedef struct	s_plane {
 typedef struct	s_cylinder {
 	t_xyz			position;
 	t_orientation	vec_direction;
-	float	diameter;
-	float	height;
+	float			diameter;
+	float			height;
 	t_rgb			color;
 }					t_cylinder;
 
 typedef struct	s_objects {
 	t_cylinder		*cy;
+	int				nb_cy;
 	t_plane			*pl;
+	int				nb_pl;
 	t_sphere		*sp;
+	int				nb_sp;
 	t_light			*li;
+	int				nb_li;
 	t_camera		*cam;
 	t_ambient_light	*amb;
 }	t_objects;

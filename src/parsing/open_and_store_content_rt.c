@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:17:04 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 22:29:35 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/04 22:10:08 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -81,10 +81,11 @@ static bool	get_line_nb_checking_line(char *name, t_function_parsing *arr,
 	return (true);
 }
 
-bool	open_and_store(char *name, char **lines)
+char	**open_and_store(char *name)
 {
 	int					fd;
 	int					line_nbr;
+	char				**lines;
 	t_must_have			all_elem;
 	t_function_parsing	*arr;
 
@@ -94,19 +95,19 @@ bool	open_and_store(char *name, char **lines)
 	init_all_elem(&all_elem);
 	setup_array_function(&arr);
 	if (!get_line_nb_checking_line(name, arr, &line_nbr, &all_elem))
-		return (free_array_function(arr));
+		return (free_array_function(arr), NULL);
 	lines = malloc(sizeof(*lines) * (line_nbr + 1));
 	if (!lines)
 	{
 		perror("Error\n");
-		return (false);
+		return (NULL);
 	}
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 	{
 		free(lines);
 		perror("Error\n");
-		return (false);
+		return (NULL);
 	}
 	if (!fill_lines(lines, fd, line_nbr))
 	{
@@ -114,8 +115,9 @@ bool	open_and_store(char *name, char **lines)
 		close(fd);
 		free_double_arr(lines);
 		perror("Error\n");
-		return (false);
+		return (NULL);
 	}
 	close(fd);
-	return (true);
+	lines[line_nbr] = NULL;
+	return (lines);
 }

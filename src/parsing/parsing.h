@@ -6,18 +6,23 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/02 17:42:34 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/04 22:03:04 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "minirt.h"
+# include "../../includes/minirt.h"
 # include <stdbool.h>
 # include <limits.h>
 # include <fcntl.h>
 
 # define ELEM_MAX 6
+
+typedef struct s_xyz			t_xyz;
+typedef struct s_rgb			t_rgb;
+typedef struct s_orientation	t_orientation;
+typedef struct s_objects		t_objects;
 
 typedef struct s_must_have {
 	bool	ambient;
@@ -32,7 +37,7 @@ typedef struct s_function_parsing {
 }			t_function_parsing;
 
 //parsing.c
-bool	parsing(int ac, char **av);
+char	**parsing(int ac, char **av);
 
 //utils.c
 bool	check_int_max(char *str);
@@ -44,9 +49,6 @@ bool	free_array_function(t_function_parsing *arr);
 void	init_all_elem(t_must_have *all_elem);
 bool	check_all_elem(t_must_have all_elem);
 
-//convert_to_float.c
-bool	convert_to_float(float *val, char *arr);
-
 //split_on_function.c
 char	**split_func_condition(char const *s, bool (*f)(char));
 
@@ -54,7 +56,7 @@ char	**split_func_condition(char const *s, bool (*f)(char));
 bool	setup_array_function(t_function_parsing **arr);
 
 //open_and_store_content_rt.c
-bool	open_and_store(char *name, char **lines);
+char	**open_and_store(char *name);
 
 //check_ambient.c
 bool	check_ambient(char **line_split, t_must_have *all_elem);
@@ -84,7 +86,41 @@ bool	check_rgb(char *line);
 //check_sphere.c
 bool	check_sphere(char **line_split, t_must_have *all_elem);
 
-//chekc_line_parsing.c
+//check_line_parsing.c
 bool	check_line(char *line, t_function_parsing *arr, t_must_have *all_elem);
+
+//conversions
+bool	convert_to_float(float *val, char *arr);
+bool	convert_to_rgb(t_rgb *rgb, char *arr);
+bool	convert_to_xyz(t_xyz *xyz, char *arr);
+bool	convert_to_orientation(t_orientation *xyz, char *arr);
+
+//fill_elems
+bool	fill_ambient_light(char **arr, int j, t_objects *objects);
+bool	fill_camera(char **arr, int j, t_objects *objects);
+bool	fill_light(char **arr, int j, t_objects *objects);
+bool	fill_sphere(char **arr, int j, t_objects *objects);
+bool	fill_plane(char **arr, int j, t_objects *objects);
+bool	fill_cylinder(char **arr, int j, t_objects *objects);
+
+//build_elems
+bool	build_plane(char ***triple_arr, t_objects *objects);
+bool	build_cylinder(char ***triple_arr, t_objects *objects);
+bool	build_sphere(char ***triple_arr, t_objects *objects);
+bool	build_light(char ***triple_arr, t_objects *objects);
+bool	build_camera(char ***triple_arr, t_objects *objects);
+bool	build_ambient_light(char ***triple_arr, t_objects *objects);
+
+//free_structs_utils
+void	free_structs(t_objects *objects);
+void	free_double_arr(char **double_arr);
+void	free_triple_arr(char ***triple_arr);
+
+//fill_structs
+char	***create_triple_arr(char **lines);
+bool	match_obj(char ***triple_arr, char *type, int i);
+int		count_obj(char ***triple_arr, char *type);
+bool	fill_each_struct(char ***triple_arr, t_objects *objects);
+bool	fill_structs(char **lines, t_objects *objects);
 
 #endif
