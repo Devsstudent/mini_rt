@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/04 21:16:04 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/05 14:34:07 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -18,10 +18,14 @@
 # include <string.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include "mlx.h"
+# include "mlx_int.h"
 # include "error.h"
 # include "parsing.h"
 # include "libft.h"
+# include "window.h"
 
+//typedef struct s_mlx_info t_mlx_info;
 typedef struct s_xyz {
 	float	x;
 	float	y;

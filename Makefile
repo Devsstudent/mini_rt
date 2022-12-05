@@ -2,7 +2,7 @@ NAME = mini_rt
 CC = cc
 FLAGS = -Wall -Werror -Wextra -g -MMD
 LIB = -L $(addprefix lib/, mlx) -lmlx -lXext -lX11 -lm -L $(addprefix lib/, libft) -lft
-HEADER = -I $(addprefix lib/, mlx) -I $(addprefix lib/, libft) -I ./includes -I ./src/parsing -I ./src/error
+HEADER = -I $(addprefix lib/, mlx) -I $(addprefix lib/, libft) -I ./includes -I ./src/parsing -I ./src/error -I ./src/window
 OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix parsing/, parsing \
 							$(addprefix check_, ambient \
@@ -23,9 +23,10 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								fill_structs \
 								build_elems \
 								fill_elems \
-								fill_structs_utils \
 								utils) \
-		$(addprefix error/, error)))
+		$(addprefix error/, error \
+							fill_structs_utils) \
+		$(addprefix window/,  loop_mlx)))
 
 D_LST = $(OBJ:.o=.d)
 
@@ -44,6 +45,7 @@ obj_rep:
 	@mkdir -p obj/game/
 	@mkdir -p obj/parsing/
 	@mkdir -p obj/error/
+	@mkdir -p obj/window/
 
 clean:
 	make clean -s -C lib/libft

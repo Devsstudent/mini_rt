@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 11:37:21 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/04 22:29:19 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/05 12:58:16 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	***create_triple_arr(char **lines)
 
 bool	match_obj(char ***triple_arr, char *type, int i)
 {
+	// may need to catch CAPS too
 	if (triple_arr[i][0][0] == type[0] && triple_arr[i][0][1] == type[1])
 		return (true);
 	return (false);

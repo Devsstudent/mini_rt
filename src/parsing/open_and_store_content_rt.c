@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:17:04 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/04 22:10:08 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:46:39 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -52,6 +52,8 @@ static bool	fill_lines(char **lines, int fd, int line_nb)
 	{
 		if (line && line[0] != '\n')
 			lines[i++] = line;
+		else
+			free(line);
 		line = get_next_line(fd);
 	}
 	if (i != line_nb)

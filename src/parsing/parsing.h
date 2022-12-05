@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/04 22:03:04 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:38:18 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -29,6 +29,7 @@ typedef struct s_must_have {
 	bool	camera;
 	bool	object;
 	bool	light_maj;
+	bool	light;
 }			t_must_have;
 
 typedef struct s_function_parsing {
@@ -110,11 +111,6 @@ bool	build_sphere(char ***triple_arr, t_objects *objects);
 bool	build_light(char ***triple_arr, t_objects *objects);
 bool	build_camera(char ***triple_arr, t_objects *objects);
 bool	build_ambient_light(char ***triple_arr, t_objects *objects);
-
-//free_structs_utils
-void	free_structs(t_objects *objects);
-void	free_double_arr(char **double_arr);
-void	free_triple_arr(char ***triple_arr);
 
 //fill_structs
 char	***create_triple_arr(char **lines);
