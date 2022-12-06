@@ -6,10 +6,14 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/05 18:20:32 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:37:11 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
+
+#define V_WIDTH 0.35
+#define V_HEIGHT 0.5
+#define V_DIST 1.0
 
 //Need to find those 2 point where the circle hit y = 0;
 //En fonction de la position de la camera on obtient 2 point de la droite;
@@ -17,8 +21,6 @@
 //Point de depart (camera position)
 //Point d'arriver (j
 
-
-//Store your scene in a 3d plan
 
 //Calculate viewplane (what we will display)
 	//Depending on FOV, to know where to send the first ray
@@ -36,7 +38,17 @@
 //yindent = vireplandHeight / (float)yRes; (yRes = 1080) (1920 * 1080 resoltion)
 //Ces valeurs dépdendent du fov (field of vision), de la caméra, cependant nous allons assummer pour le moment que la largeur est de 0.35, la hauteur de 0.5 et la distance de 1.0. ?? How to define thos variable from the fov ..
 
+void	render_window(t_objects objs)
+{
+	t_xyz	up_left;
+	t_xyz	right;
+	t_xyz	up;
 
+	//To get up_left
+	//We have to define 1 vector (for left_right)
+	//We have to define 1 vector (for up_down)
+	right.x = 
+}
 
 t_equation	get_circle_equation(int ax, int bx, int ay, int by, int r)
 {
