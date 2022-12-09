@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:22:32 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/04 21:56:09 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:08:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ bool	convert_to_xyz(t_xyz *xyz, char *arr)
 	return (free_double_arr(xyz_arr), true);
 }
 
-bool	convert_to_orientation(t_orientation *xyz, char *arr)
+bool	convert_to_orientation(t_xyz *xyz, char *arr)
 {
 	char	**xyz_arr;
 	int		i;

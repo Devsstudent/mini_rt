@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/05 13:38:18 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:09:04 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -94,7 +94,7 @@ bool	check_line(char *line, t_function_parsing *arr, t_must_have *all_elem);
 bool	convert_to_float(float *val, char *arr);
 bool	convert_to_rgb(t_rgb *rgb, char *arr);
 bool	convert_to_xyz(t_xyz *xyz, char *arr);
-bool	convert_to_orientation(t_orientation *xyz, char *arr);
+bool	convert_to_orientation(t_xyz *xyz, char *arr);
 
 //fill_elems
 bool	fill_ambient_light(char **arr, int j, t_objects *objects);

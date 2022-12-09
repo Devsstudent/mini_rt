@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/05 14:34:07 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:11:58 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -52,10 +52,10 @@ typedef struct s_ambient_light
 
 typedef struct s_camera
 {
-	t_xyz			position;
-	t_orientation	vec_direction;
-	uint8_t	fov; //0-180
-}					t_camera;
+	t_xyz		position;
+	t_xyz		vec_direction;
+	uint8_t		fov; //0-180
+}				t_camera;
 
 typedef struct s_light {
 	t_xyz			position;
@@ -64,20 +64,20 @@ typedef struct s_light {
 }					t_light;
 
 typedef struct s_sphere {
-	t_xyz			position;
-	float			diameter;
-	t_rgb			color;
-}					t_sphere;
+	t_xyz		position;
+	float		diameter;
+	t_rgb		color;
+}				t_sphere;
 
 typedef struct	s_plane {
-	t_xyz			position;
-	t_orientation	vec_direction;
-	t_rgb			color;
-}					t_plane;
+	t_xyz	position;
+	t_xyz	vec_direction;
+	t_rgb	color;
+}			t_plane;
 
 typedef struct	s_cylinder {
 	t_xyz			position;
-	t_orientation	vec_direction;
+	t_xyz			vec_direction;
 	float			diameter;
 	float			height;
 	t_rgb			color;

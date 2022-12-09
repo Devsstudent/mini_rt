@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/06 10:20:55 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:32:25 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -39,7 +39,7 @@ bool	window(t_objects *objs, t_mlx_info *mlx)
 	if (!mlx->mlx)
 		return (false);
 	//window size to define depending on fov etc ??
-	mlx->win = mlx_new_window(mlx->mlx, 1920, 1080, "mini_rt :)");
+	mlx->win = mlx_new_window(mlx->mlx, 780, 540, "mini_rt :)");
 	if (!mlx->win)
 		return (false);
 	mlx_hook(mlx->win, 33, 1L << 1, &(close_window), mlx);

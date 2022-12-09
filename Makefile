@@ -26,7 +26,8 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								utils) \
 		$(addprefix error/, error \
 							fill_structs_utils) \
-		$(addprefix window/,  loop_mlx)))
+		$(addprefix window/,  loop_mlx \
+								sphere_equation)))
 
 D_LST = $(OBJ:.o=.d)
 

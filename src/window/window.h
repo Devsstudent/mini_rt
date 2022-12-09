@@ -6,12 +6,14 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/06 10:27:28 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:23:18 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
 # define WINDOW_H
 # define ESC 65307
+# define WIN_W 780
+# define WIN_H 540
 # include "minirt.h"
 
 typedef struct s_xyz			t_xyz;
@@ -32,5 +34,14 @@ typedef struct s_equation {
 }				t_equation;
 
 bool	window(t_objects *objs, t_mlx_info *mlx);
+
+
+t_xyz	get_vec_vertical(t_xyz original_pos);
+t_xyz	get_oppo(t_xyz right_pos);
+t_xyz	get_vec_horizontal(t_xyz v_director, t_xyz v_ortho);
+float	norm_of_vector(t_xyz vector);
+void	normalizing(t_xyz *vector, float vector_norm, float window_scale);
+void	render_window(t_objects objs);
+t_equation	get_circle_equation(float ax, float bx, float ay, float by, float r);
 
 #endif
