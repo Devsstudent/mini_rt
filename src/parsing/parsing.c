@@ -29,10 +29,8 @@ static bool	check_extension(char *name)
 
 char	**parsing(int ac, char **av)
 {
-	int		i;
 	char	**lines;
 
-	i = 0;
 	if (ac != 2)
 	{
 		ft_putstr_fd("Error\nWrong arguments number", 2);

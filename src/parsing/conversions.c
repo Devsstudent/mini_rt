@@ -54,9 +54,7 @@ bool	convert_to_float(float *val, char *arr)
 bool	convert_to_rgb(t_rgb *rgb, char *arr)
 {
 	char	**rgb_arr;
-	int		i;
 
-	i = 0;
 	rgb_arr = ft_split(arr, ',');
 	if (!rgb_arr)
 		return (false);
@@ -69,9 +67,7 @@ bool	convert_to_rgb(t_rgb *rgb, char *arr)
 bool	convert_to_xyz(t_xyz *xyz, char *arr)
 {
 	char	**xyz_arr;
-	int		i;
 
-	i = 0;
 	xyz_arr = ft_split(arr, ',');
 	if (!xyz_arr)
 		return (false);
@@ -87,9 +83,7 @@ bool	convert_to_xyz(t_xyz *xyz, char *arr)
 bool	convert_to_orientation(t_xyz *xyz, char *arr)
 {
 	char	**xyz_arr;
-	int		i;
 
-	i = 0;
 	xyz_arr = ft_split(arr, ',');
 	if (!xyz_arr)
 		return (false);

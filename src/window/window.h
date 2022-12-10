@@ -30,8 +30,19 @@ typedef struct s_mlx_info {
 typedef struct s_equation {
 	float	x_pow_two;
 	float	x_pow_one;
-	float	c;
+	float	c;	
 }				t_equation;
+
+typedef struct s_eq{
+	float	c;
+	float	t;
+}		t_eq;
+
+typedef struct s_line_eq {
+	t_eq	x;
+	t_eq	y;
+	t_eq	z;
+}		t_line_eq;
 
 bool	window(t_objects *objs, t_mlx_info *mlx);
 

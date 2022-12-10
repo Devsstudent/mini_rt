@@ -38,7 +38,6 @@
 
 t_xyz	get_vec_vertical(t_xyz original_pos)
 {
-	float	unknow;
 	t_xyz	res;
 
 	res.x = 0;
@@ -51,7 +50,6 @@ t_xyz	get_vec_vertical(t_xyz original_pos)
 	}
 	if (original_pos.z != 0)
 	{
-		unknow = original_pos.z;
 		res.z = (-((2) * original_pos.x) / original_pos.z - (( 4 * original_pos.y) / original_pos.z));
 		res.x = 2;
 		res.y = 4;
