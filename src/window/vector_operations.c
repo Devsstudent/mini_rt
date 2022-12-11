@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 18:27:49 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/10 21:57:25 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:44:40 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,20 @@ t_xyz	get_screen_unit_hor_vect(t_xyz vect_d, t_xyz vect_w, int fov, int screen_w
 	unit_w.y = normed_w.y * desired_norm / (float)screen_width;
 	unit_w.z = normed_w.z * desired_norm / (float)screen_width;
 	return (unit_w);
+}
+
+t_xyz	get_screen_unit_vert_vect(t_xyz unit_w, t_xyz vect_h, float window_scale)
+{
+	float	desired_norm;
+	t_xyz	normed_h;
+	t_xyz	unit_h;
+
+	desired_norm = norm_of_vector(unit_w);
+	normed_h = normalize_vector(vect_h);
+	unit_h.x = normed_h.x * desired_norm;
+	unit_h.y = normed_h.y * desired_norm;
+	unit_h.z = normed_h.z * desired_norm;
+	return (unit_h);
 }
 
 void	normalizing(t_xyz *vector, float vector_norm, float window_scale)
