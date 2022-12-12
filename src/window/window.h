@@ -44,8 +44,6 @@ typedef struct s_line_eq {
 	t_eq	z;
 }		t_line_eq;
 
-bool	window(t_objects *objs, t_mlx_info *mlx);
-
 //raytracing.c
 t_line_eq	get_rayline_eq(t_xyz vec_line, t_xyz start_point);
 t_xyz	get_vector(t_xyz hori, t_xyz verti, t_xyz orient);
@@ -67,7 +65,7 @@ int		render_window(void	*objss);
 int	close_window(t_mlx_info *mlx);
 int	hook_press(int keycode, t_mlx_info *mlx);
 int	hook_release(int keycode, t_mlx_info *mlx);
-bool	window(t_objects *objs, t_mlx_info *mlx);
+bool	window(t_objects *objs);
 
 //vector_opperation.c
 t_xyz	get_orthogonal_vect(t_xyz vector);

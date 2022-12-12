@@ -23,11 +23,13 @@ bool	fill_ambient_light(char **arr, int j, t_objects *objects)
 
 bool	fill_camera(char **arr, int j, t_objects *objects)
 {
+	write(1, "TYEST\n", 6);
 	if (!convert_to_xyz(&objects->cam[j].position, arr[1]))
 		return (false);
 	if (!convert_to_orientation(&objects->cam[j].vec_direction, arr[2]))
 		return (false);
 	objects->cam[j].fov = ft_atoi(arr[3]);
+	printf("%f\n", objects->cam->vec_direction.x);
 	return (true);
 }
 

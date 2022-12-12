@@ -70,6 +70,7 @@ bool	fill_each_struct(char ***triple_arr, t_objects *objects)
 	final_ret = true;
 	ret[0] = build_ambient_light(triple_arr, objects);
 	ret[1] = build_camera(triple_arr, objects);
+
 	ret[2] = build_light(triple_arr, objects);
 	ret[3] = build_cylinder(triple_arr, objects);
 	ret[4] = build_sphere(triple_arr, objects);

@@ -32,20 +32,18 @@ int	hook_release(int keycode, t_mlx_info *mlx)
 	return (0);
 }
 
-bool	window(t_objects *objs, t_mlx_info *mlx)
+bool	window(t_objects *objs)
 {
-	mlx->mlx = mlx_init();
-	objs->mlx = mlx;
-	if (!mlx->mlx)
+	objs->mlx->mlx = mlx_init();
+	if (!objs->mlx->mlx)
 		return (false);
-	//window size to define depending on fov etc ??
-	mlx->win = mlx_new_window(mlx->mlx, 780, 540, "mini_rt :)");
-	if (!mlx->win)
+	objs->mlx->win = mlx_new_window(objs->mlx->mlx, 780, 540, "mini_rt :)");
+	if (!objs->mlx->win)
 		return (false);
-	mlx_loop_hook(mlx->mlx, &(render_window), &objs);
-	mlx_hook(mlx->win, 33, 1L << 1, &(close_window), mlx);
-	mlx_hook(mlx->win, 2, 1L << 1, &(hook_release), mlx);
-	mlx_hook(mlx->win, 2, 1L << 0, &(hook_press), mlx);
-	mlx_loop(mlx->mlx);
+	mlx_loop_hook(objs->mlx->mlx, &(render_window), objs);
+	mlx_hook(objs->mlx->win, 33, 1L << 1, &(close_window), objs->mlx);
+	mlx_hook(objs->mlx->win, 2, 1L << 1, &(hook_release), objs->mlx);
+	mlx_hook(objs->mlx->win, 2, 1L << 0, &(hook_press), objs->mlx);
+	mlx_loop(objs->mlx->mlx);
 	return (true);
 }

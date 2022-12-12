@@ -29,7 +29,6 @@ int		main(int ac, char **av)
 {
 	char	**lines;
 	t_objects	objects;
-	t_mlx_info	mlx;
 
 	lines = parsing(ac, av);
 	if (!lines)
@@ -40,7 +39,9 @@ int		main(int ac, char **av)
 	{
 		return (2);
 	}
-	if (!window(&objects, &mlx))
+	objects.mlx = malloc(sizeof(t_mlx_info));
+	printf("%f %f %f\n", objects.cam->vec_direction.x,  objects.cam->vec_direction.y,  objects.cam->vec_direction.z );
+	if (!window(&objects))
 		return (3);
 	//printf("plan nb = %i\n", objects.nb_cy);
 	//printf("sphere rgb = %i,%i,%i\n", objects.sp[0].color.R, objects.sp[0].color.G, objects.sp[0].color.B);

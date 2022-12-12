@@ -85,7 +85,7 @@ int	render_window(void	*objss)
 	t_xyz	vector_height;
 	t_objects	*objs;
 
-	objs = ((t_objects *) objss);
+	objs = (t_objects *) objss;
 	printf("%f %f %f\n", objs->cam->vec_direction.x,  objs->cam->vec_direction.y,  objs->cam->vec_direction.z );
 	vector_height = get_vec_vertical(objs->cam->vec_direction);
 	if (!vector_height.x && !vector_height.y && !vector_height.z)
