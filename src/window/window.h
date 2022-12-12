@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/09 16:23:18 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:14:25 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -46,13 +46,36 @@ typedef struct s_line_eq {
 
 bool	window(t_objects *objs, t_mlx_info *mlx);
 
+//raytracing.c
+t_line_eq	get_rayline_eq(t_xyz vec_line, t_xyz start_point);
+t_xyz	get_vector(t_xyz hori, t_xyz verti, t_xyz orient);
+void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz orient);
+t_equation	get_circle_equation(t_line_eq rayline);
 
+//equation.c
+float	one_solu(t_equation eq);
+float	first_solut(t_equation eq, float res);
+float	second_solu(t_equation eq, float res);
+bool	solution(t_equation eq);
+
+//sphere_equations.c
 t_xyz	get_vec_vertical(t_xyz original_pos);
-t_xyz	get_oppo(t_xyz right_pos);
 t_xyz	get_vec_horizontal(t_xyz v_director, t_xyz v_ortho);
+int		render_window(void	*objss);
+
+//loop_mlx.c
+int	close_window(t_mlx_info *mlx);
+int	hook_press(int keycode, t_mlx_info *mlx);
+int	hook_release(int keycode, t_mlx_info *mlx);
+bool	window(t_objects *objs, t_mlx_info *mlx);
+
+//vector_opperation.c
+t_xyz	get_orthogonal_vect(t_xyz vector);
+t_xyz	get_opposite_vector(t_xyz vector);
+t_xyz	vector_product(t_xyz vector_1, t_xyz vector_2);
 float	norm_of_vector(t_xyz vector);
-void	normalizing(t_xyz *vector, float vector_norm, float window_scale);
-void	render_window(t_objects objs);
-t_equation	get_circle_equation(float ax, float bx, float ay, float by, float r);
+t_xyz	normalize_vector(t_xyz vector);
+t_xyz	get_screen_unit_hor_vect(t_xyz vect_d, t_xyz vect_w, int fov, int screen_width);
+t_xyz	get_screen_unit_vert_vect(t_xyz unit_w, t_xyz vect_h, float window_scale);
 
 #endif

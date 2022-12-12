@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/09 16:11:58 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:25:38 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -25,7 +25,8 @@
 # include "libft.h"
 # include "window.h"
 
-//typedef struct s_mlx_info t_mlx_info;
+typedef struct s_mlx_info t_mlx_info;
+
 typedef struct s_xyz {
 	float	x;
 	float	y;
@@ -94,6 +95,7 @@ typedef struct	s_objects {
 	int				nb_li;
 	t_camera		*cam;
 	t_ambient_light	*amb;
+	t_mlx_info		*mlx;
 }	t_objects;
 
 #endif

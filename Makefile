@@ -27,7 +27,10 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix error/, error \
 							fill_structs_utils) \
 		$(addprefix window/,  loop_mlx \
-								sphere_equation)))
+								sphere_equation \
+								raytracing \
+								vector_operations \
+								equation)))
 
 D_LST = $(OBJ:.o=.d)
 

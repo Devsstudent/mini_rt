@@ -6,46 +6,11 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 18:27:49 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/11 18:44:40 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/12 15:12:43 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
-
-t_xyz	get_orthogonal_vect(t_xyz vector)
-{
-	float	unknow;
-	t_xyz	res;
-
-	res.x = 0;
-	res.y = 0;
-	res.z = 0;
-	if (vector.x == 0 && vector.y == 0 && original_pos.z == 0)
-	{
-		ft_putstr_fd(2, "Not possible to get the orthogonal vector\n");
-		return (res);
-	}
-	if (vector.z != 0)
-	{
-		unknow = vector.z;
-		res.z = (-((2) * vector.x) / original_pos.z - (( 4 * original_pos.y) / original_pos.z));
-		res.x = 2;
-		res.y = 4;
-	}
-	else if (vector.y != 0)
-	{
-		res.y = (-((2) * vector.x) / original_pos.y - (( 4 * original_pos.z) / original_pos.y));
-		res.x = 2;
-		res.z = 4;
-	}
-	else if (vector.x != 0)
-	{
-		res.x = (-((2) * vector.y) / original_pos.x - (( 4 * original_pos.z) / original_pos.x));
-		res.y = 2;
-		res.z = 4;
-	}
-	return (res);
-}
 
 t_xyz	get_opposite_vector(t_xyz vector)
 {
@@ -109,6 +74,7 @@ t_xyz	get_screen_unit_vert_vect(t_xyz unit_w, t_xyz vect_h, float window_scale)
 	t_xyz	normed_h;
 	t_xyz	unit_h;
 
+	(void) window_scale;
 	desired_norm = norm_of_vector(unit_w);
 	normed_h = normalize_vector(vect_h);
 	unit_h.x = normed_h.x * desired_norm;
@@ -116,17 +82,3 @@ t_xyz	get_screen_unit_vert_vect(t_xyz unit_w, t_xyz vect_h, float window_scale)
 	unit_h.z = normed_h.z * desired_norm;
 	return (unit_h);
 }
-
-void	normalizing(t_xyz *vector, float vector_norm, float window_scale)
-{
-	if (window_scale == 0 || vector_norm == 0)
-	{
-		ft_putstr_fd("Error dividing by zero in normalizing\n", 2);
-		return ;
-	}
-	vector->x = (vector->x / (window_scale * vector_norm));
-	vector->y = (vector->y / (window_scale * vector_norm));
-	vector->z = (vector->z / (window_scale * vector_norm));
-}
-
-

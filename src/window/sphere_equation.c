@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/10 18:37:56 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:42:28 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -35,8 +35,6 @@
 //Ces valeurs dépdendent du fov (field of vision), de la caméra, cependant nous allons assummer pour le moment que la largeur est de 0.35, la hauteur de 0.5 et la distance de 1.0. ?? How to define thos variable from the fov ..
 
 
-<<<<<<< HEAD
-
 t_xyz	get_vec_vertical(t_xyz original_pos)
 {
 	t_xyz	res;
@@ -44,6 +42,7 @@ t_xyz	get_vec_vertical(t_xyz original_pos)
 	res.x = 0;
 	res.y = 0;
 	res.z = 0;
+	printf("%f %f %f\n", original_pos.x, original_pos.y, original_pos.z);
 	if (original_pos.x == 0 && original_pos.y == 0 && original_pos.z == 0)
 	{
 		write(2, "Not possible to get the orthogonal vector\n", ft_strlen("Not possible to get the orthogonal vector\n"));
@@ -70,16 +69,6 @@ t_xyz	get_vec_vertical(t_xyz original_pos)
 	return (res);
 }
 
-t_xyz	get_oppo(t_xyz right_pos)
-{
-	t_xyz	res;
-
-	res.x = -right_pos.x;
-	res.y = -right_pos.y;
-	res.z = -right_pos.z;
-	return (res);
-}
-
 t_xyz	get_vec_horizontal(t_xyz v_director, t_xyz v_ortho)
 {
 	t_xyz	res;
@@ -90,55 +79,25 @@ t_xyz	get_vec_horizontal(t_xyz v_director, t_xyz v_ortho)
 	return (res);
 }
 
-float	norm_of_vector(t_xyz vector)
-{
-	float	res;
-
-	res = sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2));
-	return (res);
-}
-
-void	normalizing(t_xyz *vector, float vector_norm, float window_scale)
-{
-	if (window_scale == 0 || vector_norm == 0)
-	{
-		ft_putstr_fd("Error dividing by zero in normalizing\n", 2);
-		return ;
-	}
-	vector->x = (vector->x / (window_scale * vector_norm));
-	vector->y = (vector->y / (window_scale * vector_norm));
-	vector->z = (vector->z / (window_scale * vector_norm));
-}
-
-=======
->>>>>>> 08660739ac340fdbfbde6dcf94235d1d96504d4f
-void	render_window(t_objects objs)
+int	render_window(void	*objss)
 {
 	t_xyz	vector_width;
 	t_xyz	vector_height;
-	float	width_norm;
+	t_objects	*objs;
 
-	vector_height = get_vec_vertical(objs.cam->vec_direction);
+	objs = ((t_objects *) objss);
+	printf("%f %f %f\n", objs->cam->vec_direction.x,  objs->cam->vec_direction.y,  objs->cam->vec_direction.z );
+	vector_height = get_vec_vertical(objs->cam->vec_direction);
 	if (!vector_height.x && !vector_height.y && !vector_height.z)
-		return ;
-	vector_width = get_vec_horizontal(objs.cam->vec_direction, vector_height);
-	width_norm = tan(objs.cam->fov) / norm_of_vector(objs.cam->vec_direction);
-	width_norm *= 2;
-	normalizing(&vector_height, norm_of_vector(vector_height), width_norm);
-	normalizing(&vector_width, norm_of_vector(vector_width), width_norm * (WIN_W / WIN_H));
+		return (2);
+	vector_width = get_vec_horizontal(objs->cam->vec_direction, vector_height);
+	vector_height = get_screen_unit_vert_vect(vector_width, vector_height, (WIN_W / WIN_H));
+	vector_width = get_screen_unit_hor_vect(objs->cam->vec_direction, vector_width, objs->cam->fov, WIN_W);
+	loop(objs->mlx, vector_height, vector_width, objs->cam->position, objs->cam->vec_direction);
 	//To get up_left
 	//We have to define 1 vector (for left_right)
 	//We have to define 1 vector (for up_down)
-}
-
-t_equation	get_circle_equation(float ax, float bx, float ay, float by, float r)
-{
-	t_equation	res;
-
-	res.x_pow_two = (pow(bx, 2) + pow(by, 2));
-	res.x_pow_one = 2 * (ax * bx) + 2 * (ay * by);
-	res.c = pow(ax, 2) + pow(ay, 2) - pow(2, r);
-	return (res);
+	return (1);
 }
 
 //HFOV_rad = FOV * PI / 180;
