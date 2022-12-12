@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/09 16:24:15 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:37:56 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -35,6 +35,7 @@
 //Ces valeurs dépdendent du fov (field of vision), de la caméra, cependant nous allons assummer pour le moment que la largeur est de 0.35, la hauteur de 0.5 et la distance de 1.0. ?? How to define thos variable from the fov ..
 
 
+<<<<<<< HEAD
 
 t_xyz	get_vec_vertical(t_xyz original_pos)
 {
@@ -109,6 +110,8 @@ void	normalizing(t_xyz *vector, float vector_norm, float window_scale)
 	vector->z = (vector->z / (window_scale * vector_norm));
 }
 
+=======
+>>>>>>> 08660739ac340fdbfbde6dcf94235d1d96504d4f
 void	render_window(t_objects objs)
 {
 	t_xyz	vector_width;
