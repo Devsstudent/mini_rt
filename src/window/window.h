@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/12 15:14:25 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:28:48 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -47,8 +47,8 @@ typedef struct s_line_eq {
 //raytracing.c
 t_line_eq	get_rayline_eq(t_xyz vec_line, t_xyz start_point);
 t_xyz	get_vector(t_xyz hori, t_xyz verti, t_xyz orient);
-void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz orient);
-t_equation	get_circle_equation(t_line_eq rayline);
+t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_objects *objs);
+void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz orient, t_objects *objs);
 
 //equation.c
 float	one_solu(t_equation eq);

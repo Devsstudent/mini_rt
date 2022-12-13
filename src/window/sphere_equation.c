@@ -1,4 +1,3 @@
-/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sphere_equation.c                                  :+:      :+:    :+:   */
@@ -6,7 +5,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/12 16:42:28 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:29:18 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -83,6 +82,8 @@ int	render_window(void	*objss)
 {
 	t_xyz	vector_width;
 	t_xyz	vector_height;
+	t_xyz	pixel_width;
+	t_xyz	pixel_height;
 	t_objects	*objs;
 
 	objs = (t_objects *) objss;
@@ -91,9 +92,9 @@ int	render_window(void	*objss)
 	if (!vector_height.x && !vector_height.y && !vector_height.z)
 		return (2);
 	vector_width = get_vec_horizontal(objs->cam->vec_direction, vector_height);
-	vector_height = get_screen_unit_vert_vect(vector_width, vector_height, (WIN_W / WIN_H));
-	vector_width = get_screen_unit_hor_vect(objs->cam->vec_direction, vector_width, objs->cam->fov, WIN_W);
-	loop(objs->mlx, vector_height, vector_width, objs->cam->position, objs->cam->vec_direction);
+	pixel_width = get_screen_unit_hor_vect(objs->cam->vec_direction, vector_width, objs->cam->fov, WIN_W);
+	pixel_height = get_screen_unit_vert_vect(pixel_width, vector_height, (WIN_W / WIN_H));
+	loop(objs->mlx, pixel_height, pixel_width, objs->cam->position, objs->cam->vec_direction, objs);
 	//To get up_left
 	//We have to define 1 vector (for left_right)
 	//We have to define 1 vector (for up_down)

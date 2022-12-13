@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 18:27:49 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/12 15:12:43 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:58:08 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ t_xyz	get_screen_unit_hor_vect(t_xyz vect_d, t_xyz vect_w, int fov, int screen_w
 	float	desired_norm;
 
 	norm_d = norm_of_vector(vect_d);
-	desired_norm = tan(fov) / norm_d;
+	desired_norm = (tan(fov / 2) / norm_d);
 	normed_w = normalize_vector(vect_w);
-	unit_w.x = normed_w.x * desired_norm / (float)screen_width;
-	unit_w.y = normed_w.y * desired_norm / (float)screen_width;
-	unit_w.z = normed_w.z * desired_norm / (float)screen_width;
+	unit_w.x = normed_w.x * desired_norm / (float)(screen_width * 2.0);
+	unit_w.y = normed_w.y * desired_norm / (float)(screen_width * 2.0);
+	unit_w.z = normed_w.z * desired_norm / (float)(screen_width * 2.0);
 	return (unit_w);
 }
 
