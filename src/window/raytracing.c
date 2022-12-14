@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/14 16:15:16 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:04:28 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -54,6 +54,16 @@ t_xyz	get_up_left(t_xyz hori, t_xyz verti, t_xyz orient)
 	return (h_v_o);
 }
 
+void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color)
+{
+	char	*data_img;
+	int		addon ;
+
+	data_img = mlx->data;
+	addon = (j * (mlx->bpp / 8)) + (i * mlx->line_size);
+	*(unsigned int *)(data_img + addon) = color;
+}
+
 void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz orient, t_objects *objs)
 {
 	int			i;
@@ -75,19 +85,20 @@ void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz ori
 		while (j < WIN_W)
 		{
 			rayvec = get_vector(vect_up_left, multp(opp_hori, j), multp(opp_verti, i));
-			printf("vector : %f %f %f\n", rayvec.x, rayvec.y, rayvec.z);
+			//printf("vector : %f %f %f\n", rayvec.x, rayvec.y, rayvec.z);
 			rayline = get_rayline_eq(rayvec, start_point);
 			quadra = get_quadra_plan_equation(rayline, objs);
 			if (solution(quadra))
-				mlx_pixel_put(mlx->mlx, mlx->win, j, i, mlx_get_color_value(mlx->mlx, 0xABCDEF));
+			img_pixel_put(mlx, j, i, mlx_get_color_value(mlx->mlx, 0xABCDEF));
 			quadra = get_quadra_sphere_equation(rayline, objs);
 			if (solution(quadra))
-				mlx_pixel_put(mlx->mlx, mlx->win, j, i, mlx_get_color_value(mlx->mlx, 0x9AE));
+				img_pixel_put(mlx, j, i, mlx_get_color_value(mlx->mlx, 0x9AE));
 			//transposer dans l'equation de l'objet les x,y,z line
 			j++;
 		}
 		i++;
 	}
+	mlx_put_image_to_window(objs->mlx->mlx, objs->mlx->win, objs->mlx->img, 0, 0);
 }
 
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_objects *objs)

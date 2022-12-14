@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/12 16:43:44 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:01:31 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -40,6 +40,11 @@ bool	window(t_objects *objs)
 	objs->mlx->win = mlx_new_window(objs->mlx->mlx, 780, 540, "mini_rt :)");
 	if (!objs->mlx->win)
 		return (false);
+	objs->mlx->img = mlx_new_image(objs->mlx->mlx, WIN_W, WIN_H);
+	if (!objs->mlx->img)
+		return (false);
+	objs->mlx->data = mlx_get_data_addr(objs->mlx->img, &objs->mlx->bpp,
+			&objs->mlx->line_size, &objs->mlx->endian);
 	mlx_loop_hook(objs->mlx->mlx, &(render_window), objs);
 	mlx_hook(objs->mlx->win, 33, 1L << 1, &(close_window), objs->mlx);
 	mlx_hook(objs->mlx->win, 2, 1L << 1, &(hook_release), objs->mlx);

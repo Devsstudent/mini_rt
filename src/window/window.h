@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/14 16:14:49 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:00:50 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -25,6 +25,11 @@ typedef void * t_mlx;
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
 	t_mlx	*win;
+	t_mlx	*img;
+	int		bpp;
+	int		line_size;
+	int		endian;
+	char	*data;
 }			t_mlx_info;
 
 typedef struct s_equation {
@@ -66,6 +71,7 @@ int		render_window(void	*objss);
 int	close_window(t_mlx_info *mlx);
 int	hook_press(int keycode, t_mlx_info *mlx);
 int	hook_release(int keycode, t_mlx_info *mlx);
+void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color);
 bool	window(t_objects *objs);
 
 //vector_opperation.c

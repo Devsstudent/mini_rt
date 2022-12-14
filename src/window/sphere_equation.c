@@ -1,3 +1,4 @@
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sphere_equation.c                                  :+:      :+:    :+:   */
@@ -5,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/13 16:29:18 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:06:39 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -41,7 +42,7 @@ t_xyz	get_vec_vertical(t_xyz original_pos)
 	res.x = 0;
 	res.y = 0;
 	res.z = 0;
-	printf("%f %f %f\n", original_pos.x, original_pos.y, original_pos.z);
+	//printf("%f %f %f\n", original_pos.x, original_pos.y, original_pos.z);
 	if (original_pos.x == 0 && original_pos.y == 0 && original_pos.z == 0)
 	{
 		write(2, "Not possible to get the orthogonal vector\n", ft_strlen("Not possible to get the orthogonal vector\n"));
@@ -87,7 +88,7 @@ int	render_window(void	*objss)
 	t_objects	*objs;
 
 	objs = (t_objects *) objss;
-	printf("%f %f %f\n", objs->cam->vec_direction.x,  objs->cam->vec_direction.y,  objs->cam->vec_direction.z );
+	//printf("%f %f %f\n", objs->cam->vec_direction.x,  objs->cam->vec_direction.y,  objs->cam->vec_direction.z );
 	vector_height = get_vec_vertical(objs->cam->vec_direction);
 	if (!vector_height.x && !vector_height.y && !vector_height.z)
 		return (2);
