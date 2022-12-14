@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/14 14:16:35 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:15:16 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -77,14 +77,31 @@ void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz ori
 			rayvec = get_vector(vect_up_left, multp(opp_hori, j), multp(opp_verti, i));
 			printf("vector : %f %f %f\n", rayvec.x, rayvec.y, rayvec.z);
 			rayline = get_rayline_eq(rayvec, start_point);
-			quadra = get_quadra_sphere_equation(rayline, objs);
+			quadra = get_quadra_plan_equation(rayline, objs);
 			if (solution(quadra))
 				mlx_pixel_put(mlx->mlx, mlx->win, j, i, mlx_get_color_value(mlx->mlx, 0xABCDEF));
+			quadra = get_quadra_sphere_equation(rayline, objs);
+			if (solution(quadra))
+				mlx_pixel_put(mlx->mlx, mlx->win, j, i, mlx_get_color_value(mlx->mlx, 0x9AE));
 			//transposer dans l'equation de l'objet les x,y,z line
 			j++;
 		}
 		i++;
 	}
+}
+
+t_equation	get_quadra_plan_equation(t_line_eq rayline, t_objects *objs)
+{
+	t_equation	res;
+	t_xyz		vect_plan;
+	t_xyz		p_plan;
+
+	vect_plan = objs->pl->vec_direction;
+	p_plan = objs->pl->position;
+	res.x_pow_two = 0;
+	res.x_pow_one = rayline.x.t * vect_plan.x + rayline.y.t * vect_plan.y + rayline.z.t * vect_plan.z;
+	res.c = vect_plan.x * p_plan.x + vect_plan.y * p_plan.y + vect_plan.z * p_plan.z - (rayline.x.t * rayline.x.c + rayline.y.t * rayline.y.c + rayline.z.t * rayline.z.c);
+	return (res);
 }
 
 t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_objects *objs)

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/13 16:28:48 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:14:49 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -49,6 +49,7 @@ t_line_eq	get_rayline_eq(t_xyz vec_line, t_xyz start_point);
 t_xyz	get_vector(t_xyz hori, t_xyz verti, t_xyz orient);
 t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_objects *objs);
 void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz orient, t_objects *objs);
+t_equation	get_quadra_plan_equation(t_line_eq rayline, t_objects *objs);
 
 //equation.c
 float	one_solu(t_equation eq);
@@ -73,7 +74,6 @@ t_xyz	get_opposite_vector(t_xyz vector);
 t_xyz	vector_product(t_xyz vector_1, t_xyz vector_2);
 float	norm_of_vector(t_xyz vector);
 t_xyz	normalize_vector(t_xyz vector);
-t_xyz	get_screen_unit_hor_vect(t_xyz vect_d, t_xyz vect_w, int fov, int screen_width);
-t_xyz	get_screen_unit_vert_vect(t_xyz unit_w, t_xyz vect_h, float window_scale);
-
+t_xyz	get_screen_unit_vert_vect(t_xyz unit_w, t_xyz vect_h);
+t_xyz	get_screen_unit_hor_vect(t_xyz vect_d, t_xyz vect_w, int fov);
 #endif
