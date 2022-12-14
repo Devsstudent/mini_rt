@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/14 17:01:31 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:32:30 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -45,6 +45,7 @@ bool	window(t_objects *objs)
 		return (false);
 	objs->mlx->data = mlx_get_data_addr(objs->mlx->img, &objs->mlx->bpp,
 			&objs->mlx->line_size, &objs->mlx->endian);
+	printf("fov = %i\n", objs->cam[0].fov);
 	mlx_loop_hook(objs->mlx->mlx, &(render_window), objs);
 	mlx_hook(objs->mlx->win, 33, 1L << 1, &(close_window), objs->mlx);
 	mlx_hook(objs->mlx->win, 2, 1L << 1, &(hook_release), objs->mlx);

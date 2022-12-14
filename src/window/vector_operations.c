@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 18:27:49 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/14 14:43:06 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:38:51 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ t_xyz	get_screen_unit_hor_vect(t_xyz vect_d, t_xyz vect_w, int fov)
 	float	desired_norm;
 
 	norm_d = norm_of_vector(vect_d);
-	desired_norm = (tan(fov / 2) / norm_d);
+	//tan() takes an angle in radians, conversion is necessary
+	desired_norm = (tan((fov * PI / 180.0) / 2) / norm_d);
 	normed_w = normalize_vector(vect_w);
 	unit_w.x = normed_w.x * desired_norm / (float)(WIN_W * 2.0);
 	unit_w.y = normed_w.y * desired_norm / (float)(WIN_W * 2.0);
