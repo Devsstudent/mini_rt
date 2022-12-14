@@ -92,8 +92,8 @@ int	render_window(void	*objss)
 	if (!vector_height.x && !vector_height.y && !vector_height.z)
 		return (2);
 	vector_width = get_vec_horizontal(objs->cam->vec_direction, vector_height);
-	pixel_width = get_screen_unit_hor_vect(objs->cam->vec_direction, vector_width, objs->cam->fov, WIN_W);
-	pixel_height = get_screen_unit_vert_vect(pixel_width, vector_height, (WIN_W / WIN_H));
+	pixel_width = get_screen_unit_hor_vect(objs->cam->vec_direction, vector_width, objs->cam->fov);
+	pixel_height = get_screen_unit_vert_vect(pixel_width, vector_height);
 	loop(objs->mlx, pixel_height, pixel_width, objs->cam->position, objs->cam->vec_direction, objs);
 	//To get up_left
 	//We have to define 1 vector (for left_right)
