@@ -17,6 +17,7 @@
 # define WIN_H 540
 # include "minirt.h"
 
+typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_xyz			t_xyz;
 typedef struct s_rgb			t_rgb;
 typedef struct s_orientation	t_orientation;
@@ -51,10 +52,10 @@ typedef struct s_line_eq {
 }		t_line_eq;
 
 //raytracing.c
-t_line_eq	get_rayline_eq(t_xyz vec_line, t_xyz start_point);
-t_xyz	get_vector(t_xyz hori, t_xyz verti, t_xyz orient);
+t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
+t_vect	get_vector(t_vect hori, t_vect verti, t_vect orient);
 t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_objects *objs);
-void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz orient, t_objects *objs);
+void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect orient, t_objects *objs);
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_objects *objs);
 
 //equation.c
@@ -64,8 +65,8 @@ float	second_solu(t_equation eq, float res);
 bool	solution(t_equation eq);
 
 //sphere_equations.c
-t_xyz	get_vec_vertical(t_xyz original_pos);
-t_xyz	get_vec_horizontal(t_xyz v_director, t_xyz v_ortho);
+t_vect	get_vec_vertical(t_vect original_pos);
+t_vect	get_vec_horizontal(t_vect v_director, t_vect v_ortho);
 int		render_window(void	*objss);
 
 //loop_mlx.c
@@ -76,11 +77,11 @@ void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color);
 bool	window(t_objects *objs);
 
 //vector_opperation.c
-t_xyz	get_orthogonal_vect(t_xyz vector);
-t_xyz	get_opposite_vector(t_xyz vector);
-t_xyz	vector_product(t_xyz vector_1, t_xyz vector_2);
-float	norm_of_vector(t_xyz vector);
-t_xyz	normalize_vector(t_xyz vector);
-t_xyz	get_screen_unit_vert_vect(t_xyz unit_w, t_xyz vect_h);
-t_xyz	get_screen_unit_hor_vect(t_xyz vect_d, t_xyz vect_w, int fov);
+t_vect	get_orthogonal_vect(t_vect vector);
+t_vect	get_opposite_vector(t_vect vector);
+t_vect	vector_product(t_vect vector_1, t_vect vector_2);
+float	norm_of_vector(t_vect vector);
+t_vect	normalize_vector(t_vect vector);
+t_vect	get_screen_unit_vert_vect(t_vect unit_w, t_vect vect_h);
+t_vect	get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
 #endif

@@ -25,6 +25,7 @@
 # include "libft.h"
 # include "window.h"
 
+typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_mlx_info t_mlx_info;
 
 typedef struct s_xyz {
@@ -54,7 +55,7 @@ typedef struct s_ambient_light
 typedef struct s_camera
 {
 	t_xyz		position;
-	t_xyz		vec_direction;
+	t_vect		vec_direction;
 	uint8_t		fov; //0-180
 }				t_camera;
 
@@ -72,13 +73,13 @@ typedef struct s_sphere {
 
 typedef struct	s_plane {
 	t_xyz	position;
-	t_xyz	vec_direction;
+	t_vect	vec_direction;
 	t_rgb	color;
 }			t_plane;
 
 typedef struct	s_cylinder {
 	t_xyz			position;
-	t_xyz			vec_direction;
+	t_vect			vec_direction;
 	float			diameter;
 	float			height;
 	t_rgb			color;

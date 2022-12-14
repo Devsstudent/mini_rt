@@ -35,62 +35,62 @@
 //Ces valeurs dépdendent du fov (field of vision), de la caméra, cependant nous allons assummer pour le moment que la largeur est de 0.35, la hauteur de 0.5 et la distance de 1.0. ?? How to define thos variable from the fov ..
 
 
-t_xyz	get_vec_vertical(t_xyz original_pos)
+t_vect	get_vec_vertical(t_vect original_pos)
 {
-	t_xyz	res;
+	t_vect	res;
 
-	res.x = 0;
-	res.y = 0;
-	res.z = 0;
+	res[0] = 0;
+	res[1] = 0;
+	res[2] = 0;
 	//printf("%f %f %f\n", original_pos.x, original_pos.y, original_pos.z);
-	if (original_pos.x == 0 && original_pos.y == 0 && original_pos.z == 0)
+	if (original_pos[0] == 0 && original_pos[1] == 0 && original_pos[2] == 0)
 	{
 		write(2, "Not possible to get the orthogonal vector\n", ft_strlen("Not possible to get the orthogonal vector\n"));
 		return (res);
 	}
-	if (original_pos.z != 0)
+	if (original_pos[2] != 0)
 	{
-		res.z = (-((2) * original_pos.x) / original_pos.z - (( 4 * original_pos.y) / original_pos.z));
-		res.x = 2;
-		res.y = 4;
+		res[2] = (-((2) * original_pos[0]) / original_pos[2] - (( 4 * original_pos[1]) / original_pos[2]));
+		res[0] = 2;
+		res[1] = 4;
 	}
-	else if (original_pos.y != 0)
+	else if (original_pos[1] != 0)
 	{
-		res.y = (-((2) * original_pos.x) / original_pos.y - (( 4 * original_pos.z) / original_pos.y));
-		res.x = 2;
-		res.z = 4;
+		res[1] = (-((2) * original_pos[0]) / original_pos[1] - (( 4 * original_pos[2]) / original_pos[1]));
+		res[0] = 2;
+		res[2] = 4;
 	}
-	else if (original_pos.x != 0)
+	else if (original_pos[0] != 0)
 	{
-		res.x = (-((2) * original_pos.y) / original_pos.x - (( 4 * original_pos.z) / original_pos.x));
-		res.y = 2;
-		res.z = 4;
+		res[0] = (-((2) * original_pos[1]) / original_pos[0] - (( 4 * original_pos[2]) / original_pos[1]));
+		res[1] = 2;
+		res[2] = 4;
 	}
 	return (res);
 }
 
-t_xyz	get_vec_horizontal(t_xyz v_director, t_xyz v_ortho)
+t_vect	get_vec_horizontal(t_vect v_director, t_vect v_ortho)
 {
-	t_xyz	res;
+	t_vect	res;
 
-	res.x = v_director.y * v_ortho.z - v_director.z * v_ortho.y;
-	res.y = v_director.z * v_ortho.x - v_director.x * v_ortho.z;
-	res.z = v_director.x * v_ortho.y - v_director.y * v_ortho.x;
+	res[0] = v_director[1] * v_ortho[2] - v_director[2] * v_ortho[1];
+	res[1] = v_director[2] * v_ortho[0] - v_director[0] * v_ortho[2];
+	res[2] = v_director[0] * v_ortho[1] - v_director[1] * v_ortho[0];
 	return (res);
 }
 
 int	render_window(void	*objss)
 {
-	t_xyz	vector_width;
-	t_xyz	vector_height;
-	t_xyz	pixel_width;
-	t_xyz	pixel_height;
+	t_vect	vector_width;
+	t_vect	vector_height;
+	t_vect	pixel_width;
+	t_vect	pixel_height;
 	t_objects	*objs;
 
 	objs = (t_objects *) objss;
 	//printf("%f %f %f\n", objs->cam->vec_direction.x,  objs->cam->vec_direction.y,  objs->cam->vec_direction.z );
 	vector_height = get_vec_vertical(objs->cam->vec_direction);
-	if (!vector_height.x && !vector_height.y && !vector_height.z)
+	if (!vector_height[0] && !vector_height[1] && !vector_height[2])
 		return (2);
 	vector_width = get_vec_horizontal(objs->cam->vec_direction, vector_height);
 	pixel_width = get_screen_unit_hor_vect(objs->cam->vec_direction, vector_width, objs->cam->fov);

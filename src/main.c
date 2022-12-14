@@ -30,6 +30,7 @@ int		main(int ac, char **av)
 	char	**lines;
 	t_objects	objects;
 
+	
 	lines = parsing(ac, av);
 	if (!lines)
 	{
@@ -40,7 +41,7 @@ int		main(int ac, char **av)
 		return (2);
 	}
 	objects.mlx = malloc(sizeof(t_mlx_info));
-	printf("%f %f %f\n", objects.cam->vec_direction.x,  objects.cam->vec_direction.y,  objects.cam->vec_direction.z );
+//	printf("%f %f %f\n", objects.cam->vec_direction.x,  objects.cam->vec_direction.y,  objects.cam->vec_direction.z );
 	if (!window(&objects))
 		return (3);
 	//printf("plan nb = %i\n", objects.nb_cy);

@@ -11,46 +11,44 @@
 /* ************************************************************************** */
 #include "minirt.h"
 
-t_xyz	multp(t_xyz vector, int t)
+t_vect	multp(t_vect vector, int t)
 {
-	t_xyz	res;
+	t_vect	res;
 
-	res.x = vector.x * (float) t;
-	res.y = vector.y * (float) t;
-	res.z = vector.z * (float) t;
+	res[0] = vector[0] * (float) t;
+	res[1] = vector[1] * (float) t;
+	res[2] = vector[2] * (float) t;
 	return (res);
 }
 
-t_line_eq	get_rayline_eq(t_xyz vec_line, t_xyz start_point)
+t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point)
 {
 	t_line_eq	res;
 
 	res.x.c = start_point.x;
-	res.x.t = vec_line.x;
+	res.x.t = vec_line[0];
 	res.y.c = start_point.y;
-	res.y.t = vec_line.y;
+	res.y.t = vec_line[1];
 	res.z.c = start_point.z;
-	res.z.t = vec_line.z;
+	res.z.t = vec_line[2];
 	return (res);
 }
 
-t_xyz	get_vector(t_xyz up_left, t_xyz hori, t_xyz verti)
+t_vect	get_vector(t_vect up_left, t_vect hori, t_vect verti)
 {
-	t_xyz	res;
+	t_vect	res;
 
-	res.x = up_left.x + hori.x + verti.x;
-	res.y = up_left.y + hori.y + verti.y;
-	res.z = up_left.z + hori.z + verti.z;
+	res = up_left + hori + verti;
 	return (res);
 }
 
-t_xyz	get_up_left(t_xyz hori, t_xyz verti, t_xyz orient)
+t_vect	get_up_left(t_vect hori, t_vect verti, t_vect orient)
 {
-	t_xyz	h_v_o;
+	t_vect	h_v_o;
 
-	h_v_o.x = hori.x * (WIN_W / 2) + verti.x * (WIN_H / 2) + orient.x;
-	h_v_o.y = hori.y * (WIN_W / 2) + verti.y * (WIN_H / 2) + orient.y;
-	h_v_o.z = hori.z * (WIN_W / 2) + verti.z * (WIN_H / 2) + orient.z;
+	h_v_o[0] = hori[0] * (WIN_W / 2) + verti[0] * (WIN_H / 2) + orient[0];
+	h_v_o[1] = hori[1] * (WIN_W / 2) + verti[1] * (WIN_H / 2) + orient[1];
+	h_v_o[2] = hori[2] * (WIN_W / 2) + verti[2] * (WIN_H / 2) + orient[2];
 	return (h_v_o);
 }
 
@@ -64,16 +62,16 @@ void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color)
 	*(unsigned int *)(data_img + addon) = color;
 }
 
-void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz orient, t_objects *objs)
+void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect orient, t_objects *objs)
 {
 	int			i;
 	int			j;
-	t_xyz		rayvec;
+	t_vect		rayvec;
 	t_line_eq	rayline;
 	t_equation	quadra;
-	t_xyz		vect_up_left;
-	t_xyz		opp_hori;
-	t_xyz		opp_verti;
+	t_vect		vect_up_left;
+	t_vect		opp_hori;
+	t_vect		opp_verti;
 
 	i = 0;
 	opp_hori = get_opposite_vector(hori);
@@ -104,14 +102,14 @@ void	loop(t_mlx_info *mlx, t_xyz hori, t_xyz verti, t_xyz start_point, t_xyz ori
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_objects *objs)
 {
 	t_equation	res;
-	t_xyz		vect_plan;
+	t_vect		vect_plan;
 	t_xyz		p_plan;
 
 	vect_plan = objs->pl->vec_direction;
 	p_plan = objs->pl->position;
 	res.x_pow_two = 0;
-	res.x_pow_one = rayline.x.t * vect_plan.x + rayline.y.t * vect_plan.y + rayline.z.t * vect_plan.z;
-	res.c = vect_plan.x * p_plan.x + vect_plan.y * p_plan.y + vect_plan.z * p_plan.z - (rayline.x.t * rayline.x.c + rayline.y.t * rayline.y.c + rayline.z.t * rayline.z.c);
+	res.x_pow_one = rayline.x.t * vect_plan[0] + rayline.y.t * vect_plan[1] + rayline.z.t * vect_plan[2];
+	res.c = vect_plan[0] * p_plan.x + vect_plan[1] * p_plan.y + vect_plan[2] * p_plan.z - (rayline.x.t * rayline.x.c + rayline.y.t * rayline.y.c + rayline.z.t * rayline.z.c);
 	return (res);
 }
 

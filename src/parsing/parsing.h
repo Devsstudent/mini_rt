@@ -19,6 +19,7 @@
 
 # define ELEM_MAX 6
 
+typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_xyz			t_xyz;
 typedef struct s_rgb			t_rgb;
 typedef struct s_orientation	t_orientation;
@@ -92,9 +93,10 @@ bool	check_line(char *line, t_function_parsing *arr, t_must_have *all_elem);
 
 //conversions
 bool	convert_to_float(float *val, char *arr);
+bool	convert_to_vect_float(t_vect *val, char *arr, char *arr1, char *arr2);
 bool	convert_to_rgb(t_rgb *rgb, char *arr);
 bool	convert_to_xyz(t_xyz *xyz, char *arr);
-bool	convert_to_orientation(t_xyz *xyz, char *arr);
+bool	convert_to_orientation(t_vect *xyz, char *arr);
 
 //fill_elems
 bool	fill_ambient_light(char **arr, int j, t_objects *objects);

@@ -12,73 +12,73 @@
 
 #include "window.h"
 
-t_xyz	get_opposite_vector(t_xyz vector)
+t_vect	get_opposite_vector(t_vect vector)
 {
-	t_xyz	res;
+	t_vect	res;
 
-	res.x = -vector.x;
-	res.y = -vector.y;
-	res.z = -vector.z;
+	res[0] = -vector[0];
+	res[1] = -vector[1];
+	res[2] = -vector[2];
 	return (res);
 }
 
-t_xyz	vector_product(t_xyz vector_1, t_xyz vector_2)
+t_vect	vector_product(t_vect vector_1, t_vect vector_2)
 {
-	t_xyz	res;
+	t_vect	res;
 
-	res.x = vector_1.y * vector_2.z - vector_1.z * vector_2.y;
-	res.y = vector_1.z * vector_2.x - vector_1.x * vector_2.z;
-	res.z = vector_1.x * vector_2.y - vector_1.y * vector_2.x;
+	res[0] = vector_1[0] * vector_2[0] - vector_1[0] * vector_2[0];
+	res[1] = vector_1[1] * vector_2[1] - vector_1[1] * vector_2[1];
+	res[2] = vector_1[2] * vector_2[2] - vector_1[2] * vector_2[2];
 	return (res);
 }
 
-float	norm_of_vector(t_xyz vector)
+float	norm_of_vector(t_vect vector)
 {
 	float	res;
 
-	res = sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2));
+	res = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
 	return (res);
 }
 
-t_xyz	normalize_vector(t_xyz vector)
+t_vect	normalize_vector(t_vect vector)
 {
-	t_xyz	res;
+	t_vect	res;
 	float	norm;
 
 	norm = norm_of_vector(vector);
-	res.x = vector.x * (1.0 / norm);
-	res.y = vector.y * (1.0 / norm);
-	res.z = vector.z * (1.0 / norm);
+	res[0] = vector[0] * (1.0 / norm);
+	res[1] = vector[1] * (1.0 / norm);
+	res[2] = vector[2] * (1.0 / norm);
 	return (res);
 }
 
-t_xyz	get_screen_unit_hor_vect(t_xyz vect_d, t_xyz vect_w, int fov)
+t_vect	get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov)
 {
 	float	norm_d;
-	t_xyz	normed_w;
-	t_xyz	unit_w;
+	t_vect	normed_w;
+	t_vect	unit_w;
 	float	desired_norm;
 
 	norm_d = norm_of_vector(vect_d);
 	//tan() takes an angle in radians, conversion is necessary
 	desired_norm = (tan((fov * PI / 180.0) / 2) / norm_d);
 	normed_w = normalize_vector(vect_w);
-	unit_w.x = normed_w.x * desired_norm / (float)(WIN_W * 2.0);
-	unit_w.y = normed_w.y * desired_norm / (float)(WIN_W * 2.0);
-	unit_w.z = normed_w.z * desired_norm / (float)(WIN_W * 2.0);
+	unit_w[0] = normed_w[0] * desired_norm / (float)(WIN_W * 2.0);
+	unit_w[1] = normed_w[1] * desired_norm / (float)(WIN_W * 2.0);
+	unit_w[2] = normed_w[2] * desired_norm / (float)(WIN_W * 2.0);
 	return (unit_w);
 }
 
-t_xyz	get_screen_unit_vert_vect(t_xyz unit_w, t_xyz vect_h)
+t_vect	get_screen_unit_vert_vect(t_vect unit_w, t_vect vect_h)
 {
 	float	desired_norm;
-	t_xyz	normed_h;
-	t_xyz	unit_h;
+	t_vect	normed_h;
+	t_vect	unit_h;
 
 	desired_norm = norm_of_vector(unit_w);
 	normed_h = normalize_vector(vect_h);
-	unit_h.x = normed_h.x * desired_norm;
-	unit_h.y = normed_h.y * desired_norm;
-	unit_h.z = normed_h.z * desired_norm;
+	unit_h[0] = normed_h[0] * desired_norm;
+	unit_h[1] = normed_h[1] * desired_norm;
+	unit_h[2] = normed_h[2] * desired_norm;
 	return (unit_h);
 }
