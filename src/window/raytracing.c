@@ -48,7 +48,9 @@ t_vect	get_up_left(t_vect hori, t_vect verti, t_vect orient)
 	return (h_v_o);
 }
 
+//STOCKER LES POINTS D'intersection dans une liste chainee ?
 
+//FUNCTION A DECOUPER : 
 void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect orient, t_objects *objs)
 {
 	int			i;
