@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/14 18:40:13 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:11:14 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -70,6 +70,7 @@ t_vect	get_vec_horizontal(t_vect v_director, t_vect v_ortho);
 int		render_window(void	*objss);
 
 //loop_mlx.c
+void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color);
 int	close_window(t_mlx_info *mlx);
 int	hook_press(int keycode, t_mlx_info *mlx);
 int	hook_release(int keycode, t_mlx_info *mlx);

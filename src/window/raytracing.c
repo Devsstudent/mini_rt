@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/14 17:04:28 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:11:39 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -15,9 +15,7 @@ t_vect	multp(t_vect vector, int t)
 {
 	t_vect	res;
 
-	res[0] = vector[0] * (float) t;
-	res[1] = vector[1] * (float) t;
-	res[2] = vector[2] * (float) t;
+	res = vector * (float) t;
 	return (res);
 }
 
@@ -46,21 +44,10 @@ t_vect	get_up_left(t_vect hori, t_vect verti, t_vect orient)
 {
 	t_vect	h_v_o;
 
-	h_v_o[0] = hori[0] * (WIN_W / 2) + verti[0] * (WIN_H / 2) + orient[0];
-	h_v_o[1] = hori[1] * (WIN_W / 2) + verti[1] * (WIN_H / 2) + orient[1];
-	h_v_o[2] = hori[2] * (WIN_W / 2) + verti[2] * (WIN_H / 2) + orient[2];
+	h_v_o = hori * (WIN_W / 2) + verti * (WIN_H / 2) + orient;
 	return (h_v_o);
 }
 
-void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color)
-{
-	char	*data_img;
-	int		addon ;
-
-	data_img = mlx->data;
-	addon = (j * (mlx->bpp / 8)) + (i * mlx->line_size);
-	*(unsigned int *)(data_img + addon) = color;
-}
 
 void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect orient, t_objects *objs)
 {

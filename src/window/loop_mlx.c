@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/14 18:32:30 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:10:56 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -30,6 +30,16 @@ int	hook_release(int keycode, t_mlx_info *mlx)
 	(void)(keycode);
 	(void) mlx;
 	return (0);
+}
+
+void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color)
+{
+	char	*data_img;
+	int		addon ;
+
+	data_img = mlx->data;
+	addon = (j * (mlx->bpp / 8)) + (i * mlx->line_size);
+	*(unsigned int *)(data_img + addon) = color;
 }
 
 bool	window(t_objects *objs)
