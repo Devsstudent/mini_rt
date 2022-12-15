@@ -15,9 +15,7 @@ bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 {
 	float	delta;
 
-	if (!eq.x_pow_one)
-		return (false);
-	delta = (-eq.x_pow_two / (2 * eq.x_pow_one));
+	delta = (eq.x_pow_one * eq.x_pow_one) - 4 * (eq.x_pow_two * eq.c);
 	solu->sol_one = true;
 	solu->sol_two = false;
 	solu->one->x = equation.x.c + equation.x.t * delta;
@@ -32,9 +30,9 @@ bool	two_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 	float	b;
 	float	delta;
 
-	delta = (-eq.x_pow_two / (2 * eq.x_pow_one));
 	if (!eq.x_pow_one || !eq.x_pow_two)
 		return (false);
+	delta = (eq.x_pow_one * eq.x_pow_one) - 4 * (eq.x_pow_two * eq.c);
 	a = (-eq.x_pow_one - sqrtf(delta)) / (2 * eq.x_pow_two);
 	solu->sol_one = true;
 	solu->sol_two = true;
@@ -75,14 +73,15 @@ t_solution	solution(t_equation eq, t_line_eq equation, bool *error)
 	delta = (eq.x_pow_one * eq.x_pow_one) - 4 * (eq.x_pow_two * eq.c);
 	if (delta < 0)
 		return (solution);
-	else if (delta == 0)
+	else if (delta == 0 || eq.x_pow_two == 0)
 	{
 		if (!one_solu(&solution, eq, equation))
 			*error = true;
 	}
 	else
+	{
 		if (!two_solu(&solution, eq, equation))
 			*error = true;
-		//2 solution
+	}
 	return (solution);
 }
