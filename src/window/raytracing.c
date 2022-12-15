@@ -59,6 +59,8 @@ void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect 
 	t_vect		vect_up_left;
 	t_vect		opp_hori;
 	t_vect		opp_verti;
+	t_solution	solu;
+	bool		err;
 
 	i = 0;
 	opp_hori = get_opposite_vector(hori);
@@ -73,13 +75,25 @@ void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect 
 			//printf("vector : %f %f %f\n", rayvec.x, rayvec.y, rayvec.z);
 			rayline = get_rayline_eq(rayvec, start_point);
 			quadra = get_quadra_plan_equation(rayline, objs);
-			if (solution(quadra))
-			img_pixel_put(mlx, j, i, mlx_get_color_value(mlx->mlx, 0xABCDEF));
+			err = false;
+			solu = solution(quadra, rayline, &err);
+			if (err)
+				return ;
+			if (solu.one || solu.two)
+				img_pixel_put(mlx, j, i, mlx_get_color_value(mlx->mlx, 0xABCDEF));
+			free(solu.one);
+			free(solu.two);
 			quadra = get_quadra_sphere_equation(rayline, objs);
-			if (solution(quadra))
+			err = false;
+			solu = solution(quadra, rayline, &err);
+			if (err)
+				return ;
+			if (solu.sol_one || solu.sol_two)
 				img_pixel_put(mlx, j, i, mlx_get_color_value(mlx->mlx, 0x9AE));
 			//transposer dans l'equation de l'objet les x,y,z line
 			j++;
+			free(solu.one);
+			free(solu.two);
 		}
 		i++;
 	}

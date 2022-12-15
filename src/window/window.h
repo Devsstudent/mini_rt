@@ -51,6 +51,13 @@ typedef struct s_line_eq {
 	t_eq	z;
 }		t_line_eq;
 
+typedef struct s_solution{
+	t_xyz	*one;
+	t_xyz	*two;
+	bool	sol_one;
+	bool	sol_two;
+}		t_solution;
+
 //raytracing.c
 t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
 t_vect	get_vector(t_vect hori, t_vect verti, t_vect orient);
@@ -59,10 +66,9 @@ void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect 
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_objects *objs);
 
 //equation.c
-float	one_solu(t_equation eq);
-float	first_solut(t_equation eq, float res);
-float	second_solu(t_equation eq, float res);
-bool	solution(t_equation eq);
+bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation);
+bool	two_solu(t_solution *solu, t_equation eq, t_line_eq equation);
+t_solution	solution(t_equation eq, t_line_eq equation, bool *error);
 
 //sphere_equations.c
 t_vect	get_vec_vertical(t_vect original_pos);
