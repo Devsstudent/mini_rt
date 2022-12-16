@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/15 17:11:14 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:08:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -40,6 +40,12 @@ typedef struct s_equation {
 	float	c;	
 }				t_equation;
 
+typedef struct s_viewplan{
+	t_vect	hori;
+	t_vect	verti;
+	t_vect	up_left;
+}			t_viewplan;
+
 typedef struct s_eq{
 	float	c;
 	float	t;
@@ -57,6 +63,18 @@ typedef struct s_solution{
 	bool	sol_one;
 	bool	sol_two;
 }		t_solution;
+
+typedef enum e_elem_type{
+	CY,
+	PL,
+	SP,
+}	t_elem_type;
+
+typedef struct s_solution_list {
+	t_elem_type				type;
+	t_solution				solution;
+	struct s_solution_list	*next;
+}							t_solution_list;
 
 //raytracing.c
 t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);

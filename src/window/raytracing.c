@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/15 17:11:39 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:17:34 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -48,33 +48,67 @@ t_vect	get_up_left(t_vect hori, t_vect verti, t_vect orient)
 	return (h_v_o);
 }
 
-//STOCKER LES POINTS D'intersection dans une liste chainee ?
-
-//FUNCTION A DECOUPER : 
-void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect orient, t_objects *objs)
+bool	loop_rendering(t_object *objs, t_viewplan view_plan)
 {
 	int			i;
-	int			j;
+	t_vect		ver
+
+	i = 0;
+	while (i < WIN_H)
+	{
+		if (!loop_line(objs, view_plan))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+//Get all quadratic equaton solution and fill the structure solution
+bool	resolve_equation(t_object *objs, t_viewplan *view_plan, t_solution_list *list, t_vect rayvec)
+{
+
+	//loop on elem checking equation;
+	return (true);
+}
+
+bool	check_intersection(t_viewplan view_plan, t_object *objs, t_solution_list list)
+{
+	//Light_ray for each intersection (not the second of the sphere) to define color
+	//If one intersection on the sphere (Edge) we could make a combo of pixel arround 
+	//Stop check_intersecton after a plan .
+	return (true);
+}
+
+bool	loop_line(t_object *objs, t_viewplan view_plan, int i)
+{
+	int				j;
+	t_solution_list	list;
+	t_vect			rayvec;
+
+	j = 0;
+	while (j < WIN_W)
+	{
+		rayvec = get_vector(vect_up_left, multp(get_opposite_vector(view_plan->hori), j), multp(get_opposite_vector(view_plan->verti), i);
+		if (!resolve_equation(objs, view_plan, &list, rayvec))
+			return (false);
+		if (!check_intersection(view_plan, objs, list))
+			return (false);
+		j++;
+	}
+	return (true);
+}
+
+//STOCKER LES POINTS D'intersection dans une liste chainee ?
+
+//FUNCTION A DECOUPER :
+void	loop(t_mlx_info *mlx, t_vect hori, t_vect verti, t_xyz start_point, t_vect orient, t_objects *objs)
+{
 	t_vect		rayvec;
 	t_line_eq	rayline;
 	t_equation	quadra;
-	t_vect		vect_up_left;
-	t_vect		opp_hori;
-	t_vect		opp_verti;
 	t_solution	solu;
 	bool		err;
 
-	i = 0;
-	opp_hori = get_opposite_vector(hori);
-	opp_verti = get_opposite_vector(verti);
-	vect_up_left = get_up_left(hori, verti, orient);
-	while (i < WIN_H)
-	{
-		j = 0;
-		while (j < WIN_W)
-		{
-			rayvec = get_vector(vect_up_left, multp(opp_hori, j), multp(opp_verti, i));
-			//printf("vector : %f %f %f\n", rayvec.x, rayvec.y, rayvec.z);
 			rayline = get_rayline_eq(rayvec, start_point);
 			quadra = get_quadra_plan_equation(rayline, objs);
 			err = false;

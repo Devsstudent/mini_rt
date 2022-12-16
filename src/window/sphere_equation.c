@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/14 17:06:39 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:57:32 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -83,8 +83,7 @@ int	render_window(void	*objss)
 {
 	t_vect	vector_width;
 	t_vect	vector_height;
-	t_vect	pixel_width;
-	t_vect	pixel_height;
+	t_viewplan	view_plan;
 	t_objects	*objs;
 
 	objs = (t_objects *) objss;
@@ -93,8 +92,9 @@ int	render_window(void	*objss)
 	if (!vector_height[0] && !vector_height[1] && !vector_height[2])
 		return (2);
 	vector_width = get_vec_horizontal(objs->cam->vec_direction, vector_height);
-	pixel_width = get_screen_unit_hor_vect(objs->cam->vec_direction, vector_width, objs->cam->fov);
-	pixel_height = get_screen_unit_vert_vect(pixel_width, vector_height);
+	view_plan->hori = get_screen_unit_hor_vect(objs->cam->vec_direction, vector_width, objs->cam->fov);
+	view_plan->verti = get_screen_unit_vert_vect(pixel_width, vector_height);
+	view_plan->up_left = get_up_left(view_plan->hori, view_plan->verti, objs->cam->vec_direction);
 	loop(objs->mlx, pixel_height, pixel_width, objs->cam->position, objs->cam->vec_direction, objs);
 	//To get up_left
 	//We have to define 1 vector (for left_right)
