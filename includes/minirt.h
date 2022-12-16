@@ -85,15 +85,16 @@ typedef struct	s_cylinder {
 	t_rgb			color;
 }					t_cylinder;
 
+
 typedef struct	s_objects {
-	t_cylinder		*cy;
-	int				nb_cy;
-	t_plane			*pl;
-	int				nb_pl;
 	t_sphere		*sp;
-	int				nb_sp;
+	int			nb_sp;
+	t_cylinder		*cy;
+	int			nb_cy;
 	t_light			*li;
-	int				nb_li;
+	int			nb_li;
+	t_plane			*pl;
+	int			nb_pl;
 	t_camera		*cam;
 	t_ambient_light	*amb;
 	t_mlx_info		*mlx;

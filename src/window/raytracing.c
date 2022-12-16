@@ -63,16 +63,67 @@ bool	loop_rendering(t_object *objs, t_viewplan view_plan)
 	return (true);
 }
 
+bool	get_sphere(t_object obj, t_viewplan *viewplpan, t_solution_list *list, t_vect rayvec)
+{
+	t_line_eq	rayline;
+	t_equation	quadratic;
+	bool		err;
+	t_solution		solu;
+
+	err = false;
+	rayline = get_rayline_eq(rayvec, obj->cam->positon);
+	quadratic = get_quadra_sphere_equation(rayline, obj);
+	solu = solution(quadratic, rayline, &err)
+	if (err)
+		return (false);
+	if (!list_add(list, new_elem(SP, solu)))
+		return (false);
+	return (true);
+}
+
+bool	get_plane(t_object obj, t_viewplan *viewplpan, t_solution_list *list, t_vect rayvec)
+{
+	t_line_eq	rayline;
+	t_equation	quadratic;
+	bool		err;
+	t_solution		solu;
+
+	err = false;
+	rayline = get_rayline_eq(rayvec, obj->cam->positon);
+	quadratic = get_quadra_plane_equation(rayline, obj);
+	solu = solution(quadratic, rayline, &err)
+	if (err)
+		return (false);
+	if (!list_add(list, new_elem(SP, solu)))
+		return (false);
+	return (true);
+}
+/*
+bool	get_cy(t_obj_cy cy, t_viewplan *viewplpan, t_solution_list *list, t_vect rayvec)
+{
+	return (true);
+}
+*/
+
 //Get all quadratic equaton solution and fill the structure solution
 bool	resolve_equation(t_object *objs, t_viewplan *view_plan, t_solution_list *list, t_vect rayvec)
 {
-
+	if (!get_sphere(objs, view_plan, list, rayvec))
+		return (false);
+	if (!get_plan(objs, view_plan, list, rayvec))
+		return (false);
+	//get_cy(objs->cy, view_plan, list, rayvec);
 	//loop on elem checking equation;
 	return (true);
 }
 
+//
+
 bool	check_intersection(t_viewplan view_plan, t_object *objs, t_solution_list list)
 {
+	//If solution , find the closest one of the camera then check light then putpixel of color combo
+	//if (!get_ligth(objs, view_plan, list, rayvec))
+		
 	//Light_ray for each intersection (not the second of the sphere) to define color
 	//If one intersection on the sphere (Edge) we could make a combo of pixel arround 
 	//Stop check_intersecton after a plan .
