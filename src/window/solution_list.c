@@ -11,29 +11,45 @@
 /* ************************************************************************** */
 #include "window.h"
 
-bool	list_add(t_solution_list *head, t_solution_list new)
+bool	list_add(t_solution_list **head, t_solution_list *new)
 {
-	t_solution_list	buff;
+	t_solution_list	*buff;
 
 	if (!head)
 		return (false);
 	if (!(*head))
 	{
-		head = new;
+		*head = new;
 		return (true);
 	}
 	buff = *head;
 	while (buff->next != NULL)
 		buff = buff->next;
-	buff->next = &new;
+	buff->next = new;
 	return (true);
 }
 
-t_solution_list	new_elem(t_elem_type type, t_solution solution)
+t_solution_list	*new_elem(t_elem_type type, t_solution solution)
 {
-	t_solution_list	res;
+	t_solution_list	*res;
 
-	res.type = type;
-	res.solution = solution;
+	res = malloc(sizeof(t_solution_list));
+	if (!res)
+		return (NULL);
+	res->type = type;
+	res->solution = solution;
+	res->next = NULL;
 	return (res);
+}
+
+void	free_list(t_solution_list **head)
+{
+	t_solution_list	*buff;
+
+	while (*head != NULL)
+	{
+		buff = (*head)->next;
+		free(*head);
+		*head = buff;
+	}
 }

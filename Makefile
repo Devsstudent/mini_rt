@@ -28,6 +28,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 							fill_structs_utils) \
 		$(addprefix window/,  loop_mlx \
 								sphere_equation \
+								solution_list \
 								raytracing \
 								vector_operations \
 								equation)))
