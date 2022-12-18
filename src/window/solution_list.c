@@ -49,6 +49,8 @@ void	free_list(t_solution_list **head)
 	while (*head != NULL)
 	{
 		buff = (*head)->next;
+		free((*head)->solution.one);
+		free((*head)->solution.two);
 		free(*head);
 		*head = buff;
 	}

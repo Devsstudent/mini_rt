@@ -76,7 +76,7 @@ bool	get_sphere(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_
 	{
 		err = false;
 		rayline = get_rayline_eq(rayvec, obj->cam->position);
-		quadratic = get_quadra_sphere_equation(rayline, obj);
+		quadratic = get_quadra_sphere_equation(rayline, obj->sp[i]);
 		solu = solution(quadratic, rayline, &err);
 		if (err)
 			return (false);
@@ -101,7 +101,7 @@ bool	get_plane(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_v
 	{
 		err = false;
 		rayline = get_rayline_eq(rayvec, obj->cam->position);
-		quadratic = get_quadra_plan_equation(rayline, obj);
+		quadratic = get_quadra_plan_equation(rayline, obj->pl[i]);
 		solu = solution(quadratic, rayline, &err);
 		if (err)
 			return (false);
@@ -119,14 +119,18 @@ bool	get_cy(t_obj_cy cy, t_viewplan *viewplpan, t_solution_list *list, t_vect ra
 */
 
 //Get all quadratic equaton solution and fill the structure solution
-bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **list, t_vect rayvec)
+bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **list, t_vect rayvec, int j, int i)
 {
+	int	color;
+
+	color = create_color(objs->amb->color.R, objs->amb->color.G, objs->amb->color.B);
 	if (!get_sphere(objs, view_plan, list, rayvec))
 		return (false);
 	if (!get_plane(objs, view_plan, list, rayvec))
 		return (false);
-	if (!check_intersection(view_plan, objs, list))
+	if (!check_intersection(view_plan, objs, list, &color))
 		return (false);
+	img_pixel_put(objs->mlx, j, i, mlx_get_color_value(objs->mlx->mlx, color));
 	//get_cy(objs->cy, view_plan, list, rayvec);
 	//loop on elem checking equation;
 	free_list(list);
@@ -137,6 +141,7 @@ bool	is_closer(t_xyz *closest, t_xyz *intersec, t_xyz start_point, float *final_
 {
 	float	distance;
 
+	(void) closest;
 	distance = (powf(start_point.x - intersec->x, 2) + powf(start_point.y - intersec->y, 2) + powf(start_point.z - intersec->z, 2)) / 2;
 	if (*final_distance == -1)
 	{
@@ -151,27 +156,28 @@ bool	is_closer(t_xyz *closest, t_xyz *intersec, t_xyz start_point, float *final_
 	return (false);
 }
 
-bool	check_intersection(t_viewplan view_plan, t_objects *objs, t_solution_list **list)
+bool	check_intersection(t_viewplan *view_plan, t_objects *objs, t_solution_list **list, int *color)
 {
 	t_solution_list *buff;
 	t_xyz		start_point;
 	t_xyz		closest_point;
 	float		distance;
 
+	(void) view_plan;
 	closest_point.x = -1;
 	closest_point.y = -1;
 	closest_point.z = -1;
 	distance = -1;
-	start_point = objs->cam->positon;	
+	start_point = objs->cam->position;	
 	buff = *list;
 	while (buff != NULL)
 	{
-		if (buff->sol_one)
-			if (is_closer(&closest_point, buff->one, start_point, &distance))
-				closest_point = buff->one;
-		if (buff->sol_two)
-			if (is_closer(&closest_point, buff->two, start_point, &distance))
-				closest_point = buff->two;
+		if (buff->solution.sol_one)
+			if (is_closer(&closest_point, buff->solution.one, start_point, &distance))
+				closest_point = *buff->solution.one;
+		if (buff->solution.sol_two)
+			if (is_closer(&closest_point, buff->solution.two, start_point, &distance))
+				closest_point = *buff->solution.two;
 		buff = buff->next;
 	}
 	//We got the point where to check the color
@@ -181,19 +187,41 @@ bool	check_intersection(t_viewplan view_plan, t_objects *objs, t_solution_list *
 	t_line_eq	rayline;
 
 	i = 0;
-	while (i < objs.nb_li)
+	//Add the ambient color;
+	//*color = create_color(ambient)
+	while (i < objs->nb_li)
 	{
 		dir_vec[0] = objs->li[i].position.x - closest_point.x;
 		dir_vec[1] = objs->li[i].position.y - closest_point.y;
 		dir_vec[2] = objs->li[i].position.z - closest_point.z;
 		rayline = get_rayline_eq(dir_vec, closest_point);
-		if (check_shadow(rayline, closest_point, obj))
-			//Add grey
+		if (check_shadow(rayline, closest_point, objs))
+			add_color(color, 255, 255 ,255);
 		else
-			//Add_light_color to combo
+			add_color(color, objs->li[i].color.R, objs->li[i].color.G, objs->li[i].color.B);
 		i++;
 	}
+	return (true);
+}
+
+int	create_color(unsigned char r, unsigned char g, unsigned char b)
+{
+	int	color;
+
+	color = 0;
+	(color << 16 & 0xFF) = r;
+	(color << 8 & 0xFF) = g;
+	(color << 0 & 0xFF) = b;
+	return (color);
+}
+
+void	add_color(int *color, unsigned char r, unsigned char g, unsigned char b)
+{
+	(*color << 16 & 0xFF) = (*color << 16) / 2 + r / 2;
+	(*color << 8 & 0xFF) = (*color << 8) / 2 + g / 2;
+	(*color << 0 & 0xFF) = (*color << 0) / 2 + b / 2;
 	
+}
 	
 	//If solution , find the closest one of the camera then check light then putpixel of color combo
 	//if (!get_ligth(objs, view_plan, list, rayvec))
@@ -201,7 +229,6 @@ bool	check_intersection(t_viewplan view_plan, t_objects *objs, t_solution_list *
 	//Light_ray for each intersection (not the second of the sphere) to define color
 	//If one intersection on the sphere (Edge) we could make a combo of pixel arround 
 	//Stop check_intersecton after a plan .
-	return (true);
 }
 
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i)
@@ -216,10 +243,8 @@ bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i)
 	while (j < WIN_W)
 	{
 		rayvec = get_vector(view_plan->up_left, multp(get_opposite_vector(view_plan->hori), j), multp(get_opposite_vector(view_plan->verti), i));
-		if (!resolve_equation(objs, view_plan, list, rayvec))
+		if (!resolve_equation(objs, view_plan, list, rayvec, j, i))
 			return (false);
-//		if (!check_intersection(view_plan, objs, list))
-//			return (false);
 		j++;
 	}
 	return (true);
@@ -284,7 +309,7 @@ t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere)
 	t_xyz		origin;
 	float		rayon;
 
-	origin = spere.position;
+	origin = sphere.position;
 	rayon = sphere.diameter / 2.0;
 	res.x_pow_two = powf(rayline.x.t, 2) + powf(rayline.y.t, 2) + powf(rayline.z.t, 2);
 	res.x_pow_one = 2  * (rayline.x.t * (rayline.x.c - origin.x) + rayline.y.t * (rayline.y.c - origin.y) + rayline.z.t * (rayline.z.c - origin.z));
