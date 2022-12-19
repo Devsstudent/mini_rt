@@ -6,25 +6,25 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 12:04:35 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:53:18 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-int	create_color(unsigned char r, unsigned char g, unsigned char b)
+int	create_color(t_rgb rgb)
 {
 	int	color;
 
 	color = 0;
-	color = (color << 16 & r) | color;
-	color = (color << 8 & g) | color;
-	color = (color << 0 & b) | color;
+	color = (color << 16 & rgb.R) | color;
+	color = (color << 8 & rgb.G) | color;
+	color = (color << 0 & rgb.B) | color;
 	return (color);
 }
 
-void	add_color(int *color, unsigned char r, unsigned char g, unsigned char b)
+void	add_color(int *color, t_rgb rgb)
 {
-	*color = (*color << 16 & ((*color << 16) / 2 + r / 2));
-	*color = (*color << 8 & ((*color << 8) / 2 + g / 2));
-	*color = (*color << 0 & ((*color << 0) / 2 + b / 2));
+	*color = (*color << 16 & ((*color << 16) / 2 + rgb.R / 2));
+	*color = (*color << 8 & ((*color << 8) / 2 + rgb.G / 2));
+	*color = (*color << 0 & ((*color << 0) / 2 + rgb.B / 2));
 }

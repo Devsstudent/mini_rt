@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 13:22:22 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:00:08 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -37,16 +37,16 @@ bool	get_cy(t_obj_cy cy, t_viewplan *viewplpan, t_solution_list *list, t_vect ra
 //Mettre i et j dans la structure objs pour que ca respecte la norme
 bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **list, t_vect rayvec, int j, int i)
 {
-	int		color;
-	t_xyz	intersec_point;
+	int				color;
+	t_disp_point	intersec_point;
 
-	color = create_color(objs->amb->color.R, objs->amb->color.G, objs->amb->color.B);
+	color = 0;
 	if (!get_sphere(objs, view_plan, list, rayvec))
 		return (false);
 	if (!get_plane(objs, view_plan, list, rayvec))
 		return (false);
 	intersec_point = fill_list_intersection(objs, list);
-	if (intersec_point.x == -1 && intersec_point.y == -1 && intersec_point.z == -1)
+	if (intersec_point.intersec_point.x == -1 && intersec_point.intersec_point.y == -1 && intersec_point.intersec_point.z == -1)
 		return (false);
 	//We got the point where to check the color
 	//So lets get the equation from it to lights

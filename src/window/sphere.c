@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 13:22:36 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:52:21 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -29,7 +29,7 @@ bool	get_sphere(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_
 		solu = solution(quadratic, rayline, &err);
 		if (err)
 			return (false);
-		if (!list_add(list, new_elem(SP, solu)))
+		if (solu.sol_one && !list_add(list, new_elem(solu, obj->sp[i].color)))
 			return (false);
 		i++;
 	}

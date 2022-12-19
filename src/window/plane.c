@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 12:05:26 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:52:39 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -43,7 +43,7 @@ bool	get_plane(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_v
 		solu = solution(quadratic, rayline, &err);
 		if (err)
 			return (false);
-		if (!list_add(list, new_elem(SP, solu)))
+		if (solu.sol_one && !list_add(list, new_elem(solu, obj->pl[i].color)))
 			return (false);
 		i++;
 	}

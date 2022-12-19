@@ -6,9 +6,9 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 13:12:16 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:54:34 by odessein         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/* ************************************************************************** */ 
 #ifndef WINDOW_H
 # define WINDOW_H
 # define ESC 65307
@@ -25,6 +25,9 @@ typedef struct s_objects		t_objectss;
 typedef void * t_mlx;
 typedef struct s_plane t_plane;
 typedef struct s_sphere t_sphere;
+typedef struct s_solution_list	t_solution_list;
+typedef struct s_disp_point	t_disp_point;
+typedef struct s_solution	t_solution;
 
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
@@ -45,8 +48,7 @@ typedef struct s_equation {
 typedef struct s_viewplan{
 	t_vect	hori;
 	t_vect	verti;
-	t_vect	up_left;
-}			t_viewplan;
+	t_vect	up_left; }			t_viewplan;
 
 typedef struct s_eq{
 	float	c;
@@ -59,24 +61,6 @@ typedef struct s_line_eq {
 	t_eq	z;
 }		t_line_eq;
 
-typedef struct s_solution{
-	t_xyz	*one;
-	t_xyz	*two;
-	bool	sol_one;
-	bool	sol_two;
-}		t_solution;
-
-typedef enum e_elem_type{
-	CY,
-	PL,
-	SP,
-}	t_elem_type;
-
-typedef struct s_solution_list {
-	t_elem_type				type;
-	t_solution				solution;
-	struct s_solution_list	*next;
-}							t_solution_list;
 
 //raytracing_utils.c
 t_vect	multp(t_vect vector, int t);
@@ -91,15 +75,13 @@ t_vect	get_up_left(t_vect hori, t_vect verti, t_vect orient);
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i);
 	t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
 bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **list, t_vect rayvec, int j, int i);
-int	create_color(unsigned char r, unsigned char g, unsigned char b);
-void	add_color(int *color, unsigned char r, unsigned char g, unsigned char b);
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_plane plane);
 t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere);
 
 //intersection.c
-t_xyz	fill_list_intersection(t_objects *objs, t_solution_list **list);
-bool	get_pixel_color(int *color, t_xyz intersec_point, t_objects *objs);
-bool	is_closer(t_xyz *closest, t_xyz *intersec, t_xyz start_point, float *final_distance);
+t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list);
+bool	get_pixel_color(int *color, t_disp_point intersec_point, t_objects *objs);
+bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance);
 
 	//equation.c
 	bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation);
@@ -131,7 +113,11 @@ t_vect	get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
 //solution_list.c
 bool	list_add(t_solution_list **head, t_solution_list *new);
 void	free_list(t_solution_list **head);
-t_solution_list	*new_elem(t_elem_type type, t_solution solution);
+t_solution_list	*new_elem(t_solution solution, t_rgb color);
+
+//color.c
+void	add_color(int *color, t_rgb rgb);
+int	create_color(t_rgb rgb);
 
 //shadow_light.c
 bool	check_shadow(t_line_eq rayline, t_objects *objs);

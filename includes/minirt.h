@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/12 14:25:38 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:24:50 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -85,6 +85,23 @@ typedef struct	s_cylinder {
 	t_rgb			color;
 }					t_cylinder;
 
+typedef struct s_solution {
+	t_xyz	one;
+	t_xyz	two;
+	bool	sol_one;
+	bool	sol_two;
+}		t_solution;
+
+typedef struct s_solution_list {
+	t_rgb					color;
+	t_solution				solution;
+	struct s_solution_list	*next;
+}							t_solution_list;
+
+typedef struct s_disp_point{
+	t_xyz		intersec_point;
+	t_rgb		color;
+}				t_disp_point;
 
 typedef struct	s_objects {
 	t_sphere		*sp;
