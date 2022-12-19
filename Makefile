@@ -27,6 +27,12 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix error/, error \
 							fill_structs_utils) \
 		$(addprefix window/,  loop_mlx \
+								sphere \
+								plane \
+								color \
+								intersection \
+								raytracing_utils \
+								shadow_light \
 								sphere_equation \
 								solution_list \
 								raytracing \

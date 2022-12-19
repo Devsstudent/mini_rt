@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:04:47 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/16 19:15:37 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/19 13:26:29 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -16,7 +16,9 @@ bool	list_add(t_solution_list **head, t_solution_list *new)
 	t_solution_list	*buff;
 
 	if (!head)
+	{
 		return (false);
+	}
 	if (!(*head))
 	{
 		*head = new;
