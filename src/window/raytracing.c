@@ -43,6 +43,7 @@ bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **
 	color = 0;
 	if (!get_sphere(objs, view_plan, list, rayvec))
 		return (false);
+	printf("\n");
 	if (!get_plane(objs, view_plan, list, rayvec))
 		return (false);
 	intersec_point = fill_list_intersection(objs, list, rayvec);

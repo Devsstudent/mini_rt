@@ -13,6 +13,7 @@
 
 bool	list_add(t_solution_list **head, t_solution_list *new)
 {
+	printf("A");
 	t_solution_list	*buff;
 
 	if (!head)
@@ -25,8 +26,11 @@ bool	list_add(t_solution_list **head, t_solution_list *new)
 		return (true);
 	}
 	buff = *head;
+	int	i;
+	i = 0;
 	while (buff->next != NULL)
 		buff = buff->next;
+	printf("i = a %i\n", i);
 	buff->next = new;
 	return (true);
 }

@@ -34,22 +34,27 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_v
 	distance = -1;
 	start_point = objs->cam->position;	
 	buff = *list;
+	(void) rayvec;
+	int	i;
+	i = 0;
 	while (buff != NULL)
 	{
+		printf("i = %i\n", i);
+		i++;
 		if (buff->solution.sol_one)
 		{
-			if (is_closer(get_point(buff->solution.one, rayvec, start_point), start_point, &distance))
+			if (is_closer(buff->solution.one, start_point, &distance))
 			{
 				printf("%i\n", buff->type);
-				disp_point.intersec_point = get_point(buff->solution.one, rayvec, start_point);
+				disp_point.intersec_point = buff->solution.one;
 				disp_point.color = buff->color;
 			}
 		}
 		if (buff->solution.sol_two)
 		{
-			if (is_closer(get_point(buff->solution.two, rayvec, start_point), start_point, &distance))
+			if (is_closer(buff->solution.two, start_point, &distance))
 			{
-				disp_point.intersec_point = get_point(buff->solution.two, rayvec, start_point);
+				disp_point.intersec_point = buff->solution.two;
 				disp_point.color = buff->color;
 			}
 		}
@@ -93,6 +98,7 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance)
 	float	distance;
 
 	distance = (powf(start_point.x - intersec.x, 2) + powf(start_point.y - intersec.y, 2) + powf(start_point.z - intersec.z, 2)) / 2;
+	printf("buff : %f new : %f\n", *final_distance, distance);
 	if (*final_distance == -1)
 	{
 		*final_distance = distance;

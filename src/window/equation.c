@@ -15,7 +15,7 @@ bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 {
 	float	delta;
 
-	delta = (eq.x_pow_one * eq.x_pow_one) - 4 * (eq.x_pow_two * eq.c);
+	delta = powf(eq.x_pow_one, 2)  - 4 * (eq.x_pow_two * eq.c);
 	solu->sol_one = true;
 	solu->sol_two = false;
 	solu->one.x = equation.x.c + equation.x.t * delta;
@@ -64,7 +64,8 @@ t_solution	solution(t_equation eq, t_line_eq equation, bool *error)
 		//return NULL ?
 		return (solution);
 	}
-	delta = (eq.x_pow_one * eq.x_pow_one) - 4 * (eq.x_pow_two * eq.c);
+	delta = powf(eq.x_pow_one, 2) - 4 * (eq.x_pow_two * eq.c);
+	printf("delta : %f eq : %f %f %f\n", delta, eq.x_pow_two, eq.x_pow_one, eq.c);
 	if (delta < 0)
 		return (solution);
 	else if (delta == 0 || eq.x_pow_two == 0)
