@@ -39,13 +39,13 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_v
 	i = 0;
 	while (buff != NULL)
 	{
-		printf("i = %i\n", i);
+		//printf("i = %i\n", i);
 		i++;
 		if (buff->solution.sol_one)
 		{
 			if (is_closer(buff->solution.one, start_point, &distance))
 			{
-				printf("%i\n", buff->type);
+				//printf("%i\n", buff->type);
 				disp_point.intersec_point = buff->solution.one;
 				disp_point.color = buff->color;
 			}
@@ -98,7 +98,7 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance)
 	float	distance;
 
 	distance = (powf(start_point.x - intersec.x, 2) + powf(start_point.y - intersec.y, 2) + powf(start_point.z - intersec.z, 2)) / 2;
-	printf("buff : %f new : %f\n", *final_distance, distance);
+	//printf("buff : %f new : %f\n", *final_distance, distance);
 	if (*final_distance == -1)
 	{
 		*final_distance = distance;
@@ -109,6 +109,6 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance)
 		*final_distance = distance;
 		return (true);
 	}
-	printf("buff : %f new : %f\n", *final_distance, distance);
+	//printf("buff : %f new : %f\n", *final_distance, distance);
 	return (false);
 }

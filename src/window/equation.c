@@ -65,7 +65,6 @@ t_solution	solution(t_equation eq, t_line_eq equation, bool *error)
 		return (solution);
 	}
 	delta = powf(eq.x_pow_one, 2) - 4 * (eq.x_pow_two * eq.c);
-	printf("delta : %f eq : %f %f %f\n", delta, eq.x_pow_two, eq.x_pow_one, eq.c);
 	if (delta < 0)
 		return (solution);
 	else if (delta == 0 || eq.x_pow_two == 0)
