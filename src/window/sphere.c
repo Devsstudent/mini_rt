@@ -29,7 +29,7 @@ bool	get_sphere(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_
 		solu = solution(quadratic, rayline, &err);
 		if (err)
 			return (false);
-		if (solu.sol_one && !list_add(list, new_elem(solu, obj->sp[i].color)))
+		if (solu.sol_one && !list_add(list, new_elem(solu, obj->sp[i].color, SP)))
 			return (false);
 		i++;
 	}

@@ -92,9 +92,16 @@ typedef struct s_solution {
 	bool	sol_two;
 }		t_solution;
 
+typedef enum e_type{
+	SP,
+	CY,
+	PL
+}	t_type;
+
 typedef struct s_solution_list {
 	t_rgb					color;
 	t_solution				solution;
+	t_type					type;
 	struct s_solution_list	*next;
 }							t_solution_list;
 
@@ -117,4 +124,6 @@ typedef struct	s_objects {
 	t_mlx_info		*mlx;
 }	t_objects;
 
+
+t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type);
 #endif

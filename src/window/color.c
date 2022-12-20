@@ -16,9 +16,9 @@ int	create_color(t_rgb rgb)
 	int	color;
 
 	color = 0;
-	color = (color << 16 & rgb.R) | color;
-	color = (color << 8 & rgb.G) | color;
-	color = (color << 0 & rgb.B) | color;
+	color = (color << 16) | rgb.R | color;
+	color = (color << 8) | rgb.G | color;
+	color = (color) | rgb.B;
 	return (color);
 }
 

@@ -31,7 +31,7 @@ bool	list_add(t_solution_list **head, t_solution_list *new)
 	return (true);
 }
 
-t_solution_list	*new_elem(t_solution solution, t_rgb color)
+t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type)
 {
 	t_solution_list	*res;
 
@@ -40,6 +40,7 @@ t_solution_list	*new_elem(t_solution solution, t_rgb color)
 		return (NULL);
 	res->solution = solution;
 	res->color = color;
+	res->type = type;
 	res->next = NULL;
 	return (res);
 }
