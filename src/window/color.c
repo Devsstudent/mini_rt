@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 15:53:18 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:50:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -16,9 +16,11 @@ int	create_color(t_rgb rgb)
 	int	color;
 
 	color = 0;
-	color = (color << 16) | rgb.R | color;
-	color = (color << 8) | rgb.G | color;
-	color = (color) | rgb.B;
+	color |= rgb.R;
+	color = color << 8;
+	color |= rgb.G;
+	color = color << 8;
+	color |= rgb.B;
 	return (color);
 }
 

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 15:59:14 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:18:36 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -45,7 +45,8 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_v
 		{
 			if (is_closer(buff->solution.one, start_point, &distance))
 			{
-				//printf("%i\n", buff->type);
+				if (buff->type == PL)
+					printf("ayayay %i\n", buff->type);
 				disp_point.intersec_point = buff->solution.one;
 				disp_point.color = buff->color;
 			}
