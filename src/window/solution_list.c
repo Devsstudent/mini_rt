@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:04:47 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 15:59:31 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:21:56 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -30,7 +30,7 @@ bool	list_add(t_solution_list **head, t_solution_list *new)
 	i = 0;
 	while (buff->next != NULL)
 		buff = buff->next;
-	printf("i = a %i\n", i);
+	//printf("i = a %i\n", i);
 	buff->next = new;
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 15:54:34 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:14:32 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -87,6 +87,7 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance);
 	bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation);
 	bool	two_solu(t_solution *solu, t_equation eq, t_line_eq equation);
 	t_solution	solution(t_equation eq, t_line_eq equation, bool *error);
+	bool	init_solution(t_solution *solution);
 
 	//sphere_equations.c
 	t_vect	get_vec_vertical(t_vect original_pos);
