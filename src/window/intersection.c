@@ -98,7 +98,8 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance)
 	float	distance;
 
 	distance = (powf(start_point.x - intersec.x, 2) + powf(start_point.y - intersec.y, 2) + powf(start_point.z - intersec.z, 2)) / 2;
-	//printf("buff : %f new : %f\n", *final_distance, distance);
+	if (*final_distance != -1)
+		printf("buff : %f new : %f\n", *final_distance, distance);
 	if (*final_distance == -1)
 	{
 		*final_distance = distance;

@@ -41,14 +41,14 @@ bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **
 	t_disp_point	intersec_point;
 
 	color = 0;
+	//printf("\n");
 	if (!get_sphere(objs, view_plan, list, rayvec))
 		return (false);
-	//printf("\n");
 	if (!get_plane(objs, view_plan, list, rayvec))
 		return (false);
 	intersec_point = fill_list_intersection(objs, list, rayvec);
 	if (intersec_point.intersec_point.x == -1 && intersec_point.intersec_point.y == -1 && intersec_point.intersec_point.z == -1)
-		return (false);
+		return (true);
 	//We got the point where to check the color
 	//So lets get the equation from it to lights
 	if (!get_pixel_color(&color, intersec_point, objs))
