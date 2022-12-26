@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:04:47 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/22 20:21:56 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:28:57 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -47,6 +47,18 @@ t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type)
 	res->type = type;
 	res->next = NULL;
 	return (res);
+}
+
+t_solution_list	*get_last_elem(t_solution_list **head)
+{
+	t_solution_list	*last;
+
+	last = *head;
+	while (last->next != NULL)
+	{
+		last = last->next;
+	}
+	return (last);
 }
 
 void	free_list(t_solution_list **head)

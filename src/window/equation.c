@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 13:27:37 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/22 20:18:22 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:35:23 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -18,6 +18,8 @@ bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 	//cense etre -b / 2a, pas delta donc
 	//delta = powf(eq.x_pow_one, 2)  - 4 * (eq.x_pow_two * eq.c);
 	delta = (-1 * eq.x_pow_one) / (2 * eq.x_pow_two);
+	if (delta < 0.0)
+		return (true);
 	solu->sol_one = true;
 	solu->sol_two = false;
 	solu->one.x = equation.x.c + equation.x.t * delta;
@@ -45,12 +47,19 @@ bool	two_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 	solu->one.y = equation.y.c + equation.y.t * a;
 	solu->one.z = equation.z.c + equation.z.t * a;
 	b = (-eq.x_pow_one + sqrtf(delta)) / (2 * eq.x_pow_two);
+	if (a < 0.0 || b < 0.0)
+	{
+		if (a < 0.0 && b < 0.0)
+		{
+			solu->sol_one = false;
+			solu->sol_two = false;
+		}
+		else
+			solu->sol_two = false;
+	}
 	solu->two.x = equation.x.c + equation.x.t * b;
 	solu->two.y = equation.y.c + equation.y.t * b;
 	solu->two.z = equation.z.c + equation.z.t * b;
-	float	distance;
-	distance = (powf(-10 - solu->one.x, 2) + powf(15 - solu->one.y, 2) + powf(-100 - solu->one.z, 2)) / 2;
-//	printf("dist ?%f\n", distance);
 	return (true);
 }
 

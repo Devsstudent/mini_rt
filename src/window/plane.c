@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/22 20:32:08 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:41:09 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -32,12 +32,15 @@ static bool	one_solu_plan(t_solution *solu, t_equation eq, t_line_eq equation)
 {
 	float	solution;
 
-	solu->sol_one = true;
-	solu->sol_one = false;
 	solution = -1 * eq.c / eq.x_pow_one;
+	if (solution < 0.0)
+		return (false);
+	solu->sol_one = true;
+	solu->sol_two = false;
 	solu->one.x = equation.x.c + equation.x.t * solution;
 	solu->one.y = equation.y.c + equation.y.t * solution;
 	solu->one.z = equation.z.c + equation.z.t * solution;
+	//printf("solu = %f %f %f\n", solu->one.x, solu->one.y, solu->one.z);
 	return (true);
 }
 
@@ -52,12 +55,13 @@ static t_solution	solution_plan(t_equation eq, t_line_eq equation, bool *error)
 		return (solution);
 	}
 	if (eq.x_pow_one == 0)
+	{
 		return (solution);
+	}
 	else
 	{
-		//printf("coco\n");
 		if (!one_solu_plan(&solution, eq, equation))
-			*error = true;
+			return (solution);
 	}
 	return (solution);
 }
@@ -80,8 +84,10 @@ bool	get_plane(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_v
 		solu = solution_plan(quadratic, rayline, &err);
 		if (err)
 			return (false);
-		if (solu.sol_one && !list_add(list, new_elem(solu, obj->pl[i].color, PL)))
+		if (/*solu.sol_one && */!list_add(list, new_elem(solu, obj->pl[i].color, PL)))
 			return (false);
+		//t_solution_list *last = get_last_elem(list);
+		//printf("solu 2 = %f %f %f\n", last->solution.one.x, last->solution.one.y, last->solution.one.z);
 		i++;
 	}
 	return (true);

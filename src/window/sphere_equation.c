@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/16 17:57:32 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/26 15:16:25 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -48,6 +48,11 @@ t_vect	get_vec_vertical(t_vect original_pos)
 		write(2, "Not possible to get the orthogonal vector\n", ft_strlen("Not possible to get the orthogonal vector\n"));
 		return (res);
 	}
+	if (original_pos[0] == 0 && original_pos[1] == 0 && original_pos[2] > 0)
+	{
+		res[1] = 1;
+		return (res);
+	}
 	if (original_pos[2] != 0)
 	{
 		res[2] = (-((2) * original_pos[0]) / original_pos[2] - (( 4 * original_pos[1]) / original_pos[2]));
@@ -73,6 +78,13 @@ t_vect	get_vec_horizontal(t_vect v_director, t_vect v_ortho)
 {
 	t_vect	res;
 
+	if (v_director[0] == 0 && v_director[1] == 0 && v_director[2] > 0
+			&& v_ortho[0] == 0 && v_ortho[1] > 0 && v_ortho[2] == 0)
+	{
+		res[0] = 1;
+		res[1] = 0;
+		res[2] = 0;
+	}
 	res[0] = v_director[1] * v_ortho[2] - v_director[2] * v_ortho[1];
 	res[1] = v_director[2] * v_ortho[0] - v_director[0] * v_ortho[2];
 	res[2] = v_director[0] * v_ortho[1] - v_director[1] * v_ortho[0];

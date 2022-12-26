@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/22 20:14:32 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:58:42 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -80,7 +80,6 @@ t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere);
 
 //intersection.c
 t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_vect rayvec);
-bool	get_pixel_color(int *color, t_disp_point intersec_point, t_objects *objs);
 bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance);
 
 	//equation.c
@@ -114,10 +113,12 @@ t_vect	get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
 //solution_list.c
 bool	list_add(t_solution_list **head, t_solution_list *new);
 void	free_list(t_solution_list **head);
+t_solution_list	*get_last_elem(t_solution_list **head);
 
 //color.c
 void	add_color(int *color, t_rgb rgb);
-int	create_color(t_rgb rgb);
+int	create_color(t_rgb rgb, float RGB[3]);
+bool	get_pixel_color(int *color, t_disp_point intersec_point, t_objects *objs);
 
 //shadow_light.c
 bool	check_shadow(t_line_eq rayline, t_objects *objs);

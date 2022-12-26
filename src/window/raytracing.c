@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/22 16:10:50 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/26 17:06:45 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -20,8 +20,10 @@ bool	loop_rendering(t_objects *objs, t_viewplan view_plan)
 	{
 		if (!loop_line(objs, &view_plan, i))
 			return (false);
+		first++;
 		i++;
 	}
+	mlx_put_image_to_window(objs->mlx->mlx, objs->mlx->win, objs->mlx->img, 0, 0);
 	return (true);
 }
 
@@ -41,24 +43,24 @@ bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **
 	t_disp_point	intersec_point;
 
 	color = 0;
-	//printf("\n");
 	if (!get_sphere(objs, view_plan, list, rayvec))
 		return (false);
 	if (!get_plane(objs, view_plan, list, rayvec))
 		return (false);
 	intersec_point = fill_list_intersection(objs, list, rayvec);
 	if (intersec_point.intersec_point.x == -1 && intersec_point.intersec_point.y == -1 && intersec_point.intersec_point.z == -1)
+	{
 		return (true);
+	}
 	//We got the point where to check the color
 	//So lets get the equation from it to lights
 	if (!get_pixel_color(&color, intersec_point, objs))
 		return (false);
 	if (list && (*list) && (*list)->solution.sol_one)
 	{
-		mlx_pixel_put(objs->mlx->mlx, objs->mlx->win,j, i, color);
-		//img_pixel_put(objs->mlx, j, i, color);
+		//mlx_pixel_put(objs->mlx->mlx, objs->mlx->win,j, i, color);
+		img_pixel_put(objs->mlx, j, i, color);
 	}
-	//get_cy(objs->cy, view_plan, list, rayvec);
 	//loop on elem checking equation;
 	free_list(list);
 	return (true);

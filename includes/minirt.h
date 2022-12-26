@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 15:24:50 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/26 15:22:39 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -24,6 +24,8 @@
 # include "parsing.h"
 # include "libft.h"
 # include "window.h"
+
+static int first = 0;
 
 typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_mlx_info t_mlx_info;

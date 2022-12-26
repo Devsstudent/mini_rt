@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/22 20:25:09 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/26 17:50:51 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -32,21 +32,15 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_v
 	disp_point.intersec_point.y = -1;
 	disp_point.intersec_point.z = -1;
 	distance = -1;
-	start_point = objs->cam->position;	
+	start_point = objs->cam->position;
 	buff = *list;
 	(void) rayvec;
-	int	i;
-	i = 0;
 	while (buff != NULL)
 	{
-		//printf("i = %i\n", i);
-		i++;
 		if (buff->solution.sol_one)
 		{
 			if (is_closer(buff->solution.one, start_point, &distance))
 			{
-				if (buff->type == PL){}
-					//printf("ayayay %i\n", buff->type);
 				disp_point.intersec_point = buff->solution.one;
 				disp_point.color = buff->color;
 			}
@@ -59,13 +53,12 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_v
 				disp_point.color = buff->color;
 			}
 		}
-//		printf("?? %i\n", disp_point.color.B);
 		buff = buff->next;
 	}
 	return (disp_point);
 }
 
-bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
+/*bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 {
 	int			i;
 //	t_vect		dir_vec;
@@ -78,7 +71,7 @@ bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 //	rgb.B = 255;
 	*color = create_color(disp_p.color);
 	//Add the ambient color;
-	//*color = create_color(ambient)
+	// *color = create_color(ambient)
 	while (i < objs->nb_li)
 	{
 	//	dir_vec[0] = objs->li[i].position.x - disp_p.intersec_point.x;
@@ -92,7 +85,7 @@ bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 		i++;
 	}
 	return (true);
-}
+}*/
 
 bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance)
 {
