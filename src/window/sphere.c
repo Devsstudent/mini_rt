@@ -6,10 +6,28 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/27 21:45:13 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 22:26:38 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
+
+bool	get_specific_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view)
+{
+	t_equation	quadratic;
+	bool		err;
+	t_solution	solu;
+
+	err = false;
+	quadratic = get_quadra_sphere_equation(rayline, obj->sp[i_to_view]);
+	solu = solution(quadratic, rayline, &err);
+	if (err)
+		return (false);
+	if (solu.sol_one && !list_add(list, new_elem(solu, obj->sp[i_to_view].color, SP, i_to_view)))
+	{
+		return (false);
+	}
+	return (true);
+}
 
 bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude)
 {

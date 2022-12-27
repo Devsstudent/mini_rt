@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/27 21:48:51 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/28 00:10:53 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -38,10 +38,23 @@ void	ambient_light_quo(t_objects *objs, float RGB[3])
 	RGB[2] = (float)objs->amb->color.B * objs->amb->ratio / 255.0;
 }
 
-int	intersect_plane(t_objects *objs)
+bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
+{
+	t_vect	vect;
+
+	vect[0] = point.x - origin.x;
+	vect[1] = point.y - origin.y;
+	vect[2] = point.z - origin.z;
+	if (norm_of_vector(vect) > norm_of_vector(rayvec))
+		return (false);
+	return (true);
+}
+
+int	intersect_self(t_objects *objs, t_disp_point point)
 {
 	//should not just be PL but is there a way from the camera to the light that does't intersect said object,
 	// so it should be a specific object, we should know which one, keep it in memory
+	//the thing it intersects has a max value, if not, it's alright
 	t_line_eq		rayline;
 	t_solution_list	*list;
 	t_vect			rayvec;
@@ -55,20 +68,19 @@ int	intersect_plane(t_objects *objs)
 	rayvec[1] = objs->li[0].position.y - objs->cam->position.y;
 	rayvec[2] = objs->li[0].position.z - objs->cam->position.z;
 	rayline = get_rayline_eq(rayvec, objs->cam->position);
-	if (!get_sphere(objs, &list, rayline, 0))
-		return (-1);
-	if (!get_plane(objs, &list, rayline, 0))
-		return (-1);
-	intersection = fill_list_intersection(objs, &list);
-	if (intersection.intersec_point.x != -1 && intersection.intersec_point.y != - 1 && intersection.intersec_point.z != -1 && intersection.type == PL)
-		return (0);
+	if (point.type == SP && !get_specific_sphere(objs, &list, rayline, point.obj_id))
+		return (free_list(&list), -1);
+	if (point.type == PL && !get_specific_plane(objs, &list, rayline, point.obj_id))
+		return (free_list(&list), -1);
+	intersection = fill_list_intersection(&list, objs->cam->position);
+	if (list != NULL && list->solution.sol_one && in_the_way(intersection.intersec_point, rayvec, objs->cam->position))
+		return (free_list(&list), 0);
 	free_list(&list);
 	return (1);
 }
 
 void	compute_RGB(t_objects *objs, float distance, float RGB[3])
 {
-	//a chaque 100, -0.1, donc diviser par mille
 	float	ratio;
 
 	ratio = objs->li[0].ratio - distance / 1000.0;
@@ -112,23 +124,18 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 		return (false);
 	if (!get_plane(objs, &list, rayline, disp_p.obj_id))
 		return (false);
-	intersection = fill_list_intersection(objs, &list);
-	//way_to_the_light = intersect_plane(objs);
-	//if (way_to_the_light == -1)
-	//	return (false);
+	intersection = fill_list_intersection(&list, point);
+	//we can put it outside, cause if intersect self in one setting, so no good ?
+	way_to_the_light = intersect_self(objs, disp_p);
+	if (way_to_the_light == -1)
+		return (false);
 	//les -1 pas bien parce que ca pourrait etre -1
-	if (list != NULL)
-	{
+	if (disp_p.type == PL && list == NULL)
+		printf("why ?\n");
+	if (list != NULL /*&& in_the_way(intersection.intersec_point, rayvec, point)*/)
 		return (true);
-	}
-	/*else
-	{
-		if (disp_p.type == PL)
-		{
-			if (way_to_the_light == 0)
-				return (true);
-		}
-	}*/
+	else if (way_to_the_light == 0)
+			return (true);
 	//there is a way to the light, now let's calculate the distance the compute the intensity of the light
 	//distance between disp_p and light
 	//distance is norm of rayvec

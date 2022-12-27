@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/27 21:36:18 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 23:32:14 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -21,10 +21,9 @@ t_xyz	get_point(t_xyz	intersec, t_vect rayvec, t_xyz start_point)
 	return (res);
 }
 
-t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list)
+t_disp_point	fill_list_intersection(t_solution_list **list, t_xyz start_point)
 {
 	t_solution_list	*buff;
-	t_xyz			start_point;
 	t_disp_point	disp_point;
 	float			distance;
 
@@ -32,7 +31,6 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list)
 	disp_point.intersec_point.y = -1;
 	disp_point.intersec_point.z = -1;
 	distance = -1;
-	start_point = objs->cam->position;
 	buff = *list;
 	while (buff != NULL)
 	{
