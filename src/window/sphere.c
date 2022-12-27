@@ -6,30 +6,32 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 15:52:21 by odessein         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:45:13 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-bool	get_sphere(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_vect rayvec)
+bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude)
 {
-	t_line_eq	rayline;
 	t_equation	quadratic;
 	bool		err;
-	t_solution		solu;
+	t_solution	solu;
 	int		i;
 
 	i = 0;
-	(void) viewplan;
 	while (i < obj->nb_sp)
 	{
+		if (i == i_to_exclude)
+		{
+			i++;
+			continue ;
+		}
 		err = false;
-		rayline = get_rayline_eq(rayvec, obj->cam->position);
 		quadratic = get_quadra_sphere_equation(rayline, obj->sp[i]);
 		solu = solution(quadratic, rayline, &err);
 		if (err)
 			return (false);
-		if (solu.sol_one && !list_add(list, new_elem(solu, obj->sp[i].color, SP)))
+		if (solu.sol_one && !list_add(list, new_elem(solu, obj->sp[i].color, SP, i)))
 		{
 			return (false);
 		}

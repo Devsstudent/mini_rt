@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 18:58:09 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:48:51 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -36,20 +36,106 @@ void	ambient_light_quo(t_objects *objs, float RGB[3])
 	RGB[0] = (float)objs->amb->color.R * objs->amb->ratio / 255.0;
 	RGB[1] = (float)objs->amb->color.G * objs->amb->ratio / 255.0;
 	RGB[2] = (float)objs->amb->color.B * objs->amb->ratio / 255.0;
-	//rgb->R = trunc((float)rgb->R * R);
-	//rgb->G = trunc((float)rgb->G * G);
-	//rgb->B = trunc((float)rgb->B * B);
 }
 
-/*
-void	add_light(t_disp_point disp_p, t_objects *objs)
+int	intersect_plane(t_objects *objs)
 {
-	// si ca intersecte pas, on ajoute la lumiere a la bonne intensite en fonction de la distance, sinon on ajoute pas la lumiere
-	//pour l'instant addition meme si pas ca dans la realite
-	t_line_eq	rayline;
-	//faire en sorte que ce soit pas forcement camera pour la rayline in get_plane and get_sphere
+	//should not just be PL but is there a way from the camera to the light that does't intersect said object,
+	// so it should be a specific object, we should know which one, keep it in memory
+	t_line_eq		rayline;
+	t_solution_list	*list;
+	t_vect			rayvec;
+	t_disp_point	intersection;
+
+	list = malloc(sizeof(t_solution_list));
+	if (!list)
+		return (false);
+	list = NULL;
+	rayvec[0] = objs->li[0].position.x - objs->cam->position.x;
+	rayvec[1] = objs->li[0].position.y - objs->cam->position.y;
+	rayvec[2] = objs->li[0].position.z - objs->cam->position.z;
+	rayline = get_rayline_eq(rayvec, objs->cam->position);
+	if (!get_sphere(objs, &list, rayline, 0))
+		return (-1);
+	if (!get_plane(objs, &list, rayline, 0))
+		return (-1);
+	intersection = fill_list_intersection(objs, &list);
+	if (intersection.intersec_point.x != -1 && intersection.intersec_point.y != - 1 && intersection.intersec_point.z != -1 && intersection.type == PL)
+		return (0);
+	free_list(&list);
+	return (1);
 }
-*/
+
+void	compute_RGB(t_objects *objs, float distance, float RGB[3])
+{
+	//a chaque 100, -0.1, donc diviser par mille
+	float	ratio;
+
+	ratio = objs->li[0].ratio - distance / 1000.0;
+	if (ratio < 0.0)
+		ratio = 0.0;
+	RGB[0] += (float)objs->li[0].color.R * ratio / 255.0;
+	RGB[1] += (float)objs->li[0].color.G * ratio / 255.0;
+	RGB[2] += (float)objs->li[0].color.B * ratio / 255.0;
+	if (RGB[0] > 1.0)
+		RGB[0] = 1.0;
+	if (RGB[1] > 1.0)
+		RGB[1] = 1.0;
+	if (RGB[2] > 1.0)
+		RGB[2] = 1.0;
+}
+
+bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
+{
+	t_line_eq		rayline;
+	t_xyz			point;
+	t_solution_list	*list;
+	t_vect			rayvec;
+	int				way_to_the_light;
+	t_disp_point	intersection;
+
+	list = malloc(sizeof(t_solution_list));
+	if (!list)
+		return (false);
+	list = NULL;
+	way_to_the_light = 0;
+	point = disp_p.intersec_point;
+	rayvec[0] = objs->li[0].position.x - point.x;
+	rayvec[1] = objs->li[0].position.y - point.y;
+	rayvec[2] = objs->li[0].position.z - point.z;
+	//du coup il faut connaitre lui meme
+	//ca revient au meme probleme
+	//lets go
+	//le probleme se pose lorsqu'il s'intersecte avec lui-meme
+	rayline = get_rayline_eq(rayvec, point);
+	if (!get_sphere(objs, &list, rayline, disp_p.obj_id))
+		return (false);
+	if (!get_plane(objs, &list, rayline, disp_p.obj_id))
+		return (false);
+	intersection = fill_list_intersection(objs, &list);
+	//way_to_the_light = intersect_plane(objs);
+	//if (way_to_the_light == -1)
+	//	return (false);
+	//les -1 pas bien parce que ca pourrait etre -1
+	if (list != NULL)
+	{
+		return (true);
+	}
+	/*else
+	{
+		if (disp_p.type == PL)
+		{
+			if (way_to_the_light == 0)
+				return (true);
+		}
+	}*/
+	//there is a way to the light, now let's calculate the distance the compute the intensity of the light
+	//distance between disp_p and light
+	//distance is norm of rayvec
+	compute_RGB(objs, norm_of_vector(rayvec), RGB);
+	free_list(&list);
+	return (true);
+}
 
 bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 {
@@ -62,9 +148,8 @@ bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 	color_rgb.R = disp_p.color.R;
 	color_rgb.G = disp_p.color.G;
 	color_rgb.B = disp_p.color.B;
-	//*color = create_color(disp_p.color);
 	ambient_light_quo(objs, RGB);
-//	add_light(disp_p, objs, RGB);
+	add_light(disp_p, objs, RGB);
 	*color = create_color(color_rgb, RGB);
 	return (true);
 }

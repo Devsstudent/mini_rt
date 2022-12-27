@@ -6,54 +6,45 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 17:06:45 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:42:33 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
 bool	loop_rendering(t_objects *objs, t_viewplan view_plan)
 {
-	int			i;
+	int	i;
 
 	i = 0;
+	if (first > 0)
+		return (true);
 	while (i < WIN_H)
 	{
 		if (!loop_line(objs, &view_plan, i))
 			return (false);
-		first++;
 		i++;
 	}
 	mlx_put_image_to_window(objs->mlx->mlx, objs->mlx->win, objs->mlx->img, 0, 0);
+	first++;
 	return (true);
 }
-
-/*
-bool	get_cy(t_obj_cy cy, t_viewplan *viewplpan, t_solution_list *list, t_vect rayvec)
-{
-	return (true);
-}
-*/
-
-//Get all quadratic equaton solution and fill the structure solution
 
 //Mettre i et j dans la structure objs pour que ca respecte la norme
-bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **list, t_vect rayvec, int j, int i)
+bool	resolve_equation(t_objects *objs, t_solution_list **list, t_vect rayvec, int j, int i)
 {
 	int				color;
+	t_line_eq		rayline;
 	t_disp_point	intersec_point;
 
+	rayline = get_rayline_eq(rayvec, objs->cam->position);
 	color = 0;
-	if (!get_sphere(objs, view_plan, list, rayvec))
+	if (!get_sphere(objs, list, rayline, -1))
 		return (false);
-	if (!get_plane(objs, view_plan, list, rayvec))
+	if (!get_plane(objs, list, rayline, -1))
 		return (false);
-	intersec_point = fill_list_intersection(objs, list, rayvec);
+	intersec_point = fill_list_intersection(objs, list);
 	if (intersec_point.intersec_point.x == -1 && intersec_point.intersec_point.y == -1 && intersec_point.intersec_point.z == -1)
-	{
 		return (true);
-	}
-	//We got the point where to check the color
-	//So lets get the equation from it to lights
 	if (!get_pixel_color(&color, intersec_point, objs))
 		return (false);
 	if (list && (*list) && (*list)->solution.sol_one)
@@ -87,7 +78,7 @@ bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i)
 	while (j < WIN_W)
 	{
 		rayvec = get_vector(view_plan->up_left, multp(get_opposite_vector(view_plan->hori), j), multp(get_opposite_vector(view_plan->verti), i));
-		if (!resolve_equation(objs, view_plan, &list, rayvec, j, i))
+		if (!resolve_equation(objs, &list, rayvec, j, i))
 			return (false);
 		j++;
 	}

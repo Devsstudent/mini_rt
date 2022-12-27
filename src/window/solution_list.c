@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:04:47 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 18:28:57 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:33:34 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -35,7 +35,7 @@ bool	list_add(t_solution_list **head, t_solution_list *new)
 	return (true);
 }
 
-t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type)
+t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type, int i)
 {
 	t_solution_list	*res;
 
@@ -45,6 +45,7 @@ t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type)
 	res->solution = solution;
 	res->color = color;
 	res->type = type;
+	res->obj_id = i;
 	res->next = NULL;
 	return (res);
 }

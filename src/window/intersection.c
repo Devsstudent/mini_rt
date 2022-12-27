@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 17:50:51 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:36:18 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -21,7 +21,7 @@ t_xyz	get_point(t_xyz	intersec, t_vect rayvec, t_xyz start_point)
 	return (res);
 }
 
-t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_vect rayvec)
+t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list)
 {
 	t_solution_list	*buff;
 	t_xyz			start_point;
@@ -34,7 +34,6 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_v
 	distance = -1;
 	start_point = objs->cam->position;
 	buff = *list;
-	(void) rayvec;
 	while (buff != NULL)
 	{
 		if (buff->solution.sol_one)
@@ -43,6 +42,8 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_v
 			{
 				disp_point.intersec_point = buff->solution.one;
 				disp_point.color = buff->color;
+				disp_point.type = buff->type;
+				disp_point.obj_id = buff->obj_id;
 			}
 		}
 		if (buff->solution.sol_two)
@@ -51,6 +52,8 @@ t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_v
 			{
 				disp_point.intersec_point = buff->solution.two;
 				disp_point.color = buff->color;
+				disp_point.type = buff->type;
+				disp_point.obj_id = buff->obj_id;
 			}
 		}
 		buff = buff->next;

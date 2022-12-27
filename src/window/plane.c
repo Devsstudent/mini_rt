@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 16:41:09 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:41:18 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -66,28 +66,28 @@ static t_solution	solution_plan(t_equation eq, t_line_eq equation, bool *error)
 	return (solution);
 }
 
-bool	get_plane(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_vect rayvec)
+bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude)
 {
-	t_line_eq	rayline;
 	t_equation	quadratic;
 	bool		err;
-	t_solution		solu;
+	t_solution	solu;
 	int			i;
 
-	(void) viewplan;
 	i = 0;
 	while (i < obj->nb_pl)
 	{
+		if (i == i_to_exclude)
+		{
+			i++;
+			continue;
+		}
 		err = false;
-		rayline = get_rayline_eq(rayvec, obj->cam->position);
 		quadratic = get_quadra_plan_equation(rayline, obj->pl[i]);
 		solu = solution_plan(quadratic, rayline, &err);
 		if (err)
 			return (false);
-		if (/*solu.sol_one && */!list_add(list, new_elem(solu, obj->pl[i].color, PL)))
+		if (solu.sol_one && !list_add(list, new_elem(solu, obj->pl[i].color, PL, i)))
 			return (false);
-		//t_solution_list *last = get_last_elem(list);
-		//printf("solu 2 = %f %f %f\n", last->solution.one.x, last->solution.one.y, last->solution.one.z);
 		i++;
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 15:22:39 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:46:28 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -104,12 +104,15 @@ typedef struct s_solution_list {
 	t_rgb					color;
 	t_solution				solution;
 	t_type					type;
+	int						obj_id;
 	struct s_solution_list	*next;
 }							t_solution_list;
 
 typedef struct s_disp_point{
 	t_xyz		intersec_point;
 	t_rgb		color;
+	t_type		type;
+	int			obj_id;
 }				t_disp_point;
 
 typedef struct	s_objects {
@@ -127,5 +130,5 @@ typedef struct	s_objects {
 }	t_objects;
 
 
-t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type);
+t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type, int i);
 #endif

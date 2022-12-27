@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 18:58:42 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:48:12 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -68,18 +68,18 @@ t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
 t_vect	get_vector(t_vect up_left, t_vect hori, t_vect verti);
 t_vect	get_up_left(t_vect hori, t_vect verti, t_vect orient);
 
-	//raytracing.c
-	bool	get_sphere(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_vect rayvec);
-	bool	get_plane(t_objects *obj, t_viewplan *viewplan, t_solution_list **list, t_vect rayvec);
-	bool	loop_rendering(t_objects *objs, t_viewplan view_plan);
+//raytracing.c
+bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
+bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
+bool	loop_rendering(t_objects *objs, t_viewplan view_plan);
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i);
-	t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
-bool	resolve_equation(t_objects *objs, t_viewplan *view_plan, t_solution_list **list, t_vect rayvec, int j, int i);
+t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
+bool	resolve_equation(t_objects *objs, t_solution_list **list, t_vect rayvec, int j, int i);
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_plane plane);
 t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere);
 
 //intersection.c
-t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list, t_vect rayvec);
+t_disp_point	fill_list_intersection(t_objects *objs, t_solution_list **list);
 bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance);
 
 	//equation.c
@@ -117,7 +117,9 @@ t_solution_list	*get_last_elem(t_solution_list **head);
 
 //color.c
 void	add_color(int *color, t_rgb rgb);
-int	create_color(t_rgb rgb, float RGB[3]);
+void	ambient_light_quo(t_objects *objs, float RGB[3]);
+bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3]);
+int		create_color(t_rgb rgb, float RGB[3]);
 bool	get_pixel_color(int *color, t_disp_point intersec_point, t_objects *objs);
 
 //shadow_light.c
