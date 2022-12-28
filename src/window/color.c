@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/28 00:10:53 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:36:02 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -104,6 +104,8 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 	t_solution_list	*list;
 	t_vect			rayvec;
 	int				way_to_the_light;
+	int				obj_id_sphere;
+	int				obj_id_plane;
 	t_disp_point	intersection;
 
 	list = malloc(sizeof(t_solution_list));
@@ -120,9 +122,19 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 	//lets go
 	//le probleme se pose lorsqu'il s'intersecte avec lui-meme
 	rayline = get_rayline_eq(rayvec, point);
-	if (!get_sphere(objs, &list, rayline, disp_p.obj_id))
+	if (disp_p.type == PL)
+	{
+		obj_id_sphere = -1;
+		obj_id_plane = disp_p.obj_id; 
+	}
+	else
+	{
+		obj_id_sphere = disp_p.obj_id;
+		obj_id_plane = -1;
+	}
+	if (!get_sphere(objs, &list, rayline, obj_id_sphere))
 		return (false);
-	if (!get_plane(objs, &list, rayline, disp_p.obj_id))
+	if (!get_plane(objs, &list, rayline, obj_id_plane))
 		return (false);
 	intersection = fill_list_intersection(&list, point);
 	//we can put it outside, cause if intersect self in one setting, so no good ?
@@ -130,9 +142,7 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 	if (way_to_the_light == -1)
 		return (false);
 	//les -1 pas bien parce que ca pourrait etre -1
-	if (disp_p.type == PL && list == NULL)
-		printf("why ?\n");
-	if (list != NULL /*&& in_the_way(intersection.intersec_point, rayvec, point)*/)
+	if (list != NULL && in_the_way(intersection.intersec_point, rayvec, point))
 		return (true);
 	else if (way_to_the_light == 0)
 			return (true);
