@@ -29,6 +29,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix window/,  loop_mlx \
 								sphere \
 								plane \
+								cylinder \
 								color \
 								intersection \
 								raytracing_utils \

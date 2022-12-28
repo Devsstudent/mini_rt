@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/27 23:33:05 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/28 21:48:45 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -74,6 +74,8 @@ bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i
 bool	get_specific_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
 bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
 bool	get_specific_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
+bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
+bool	get_specific_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
 bool	loop_rendering(t_objects *objs, t_viewplan view_plan);
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i);
 t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
@@ -105,6 +107,7 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance);
 bool	window(t_objectss *objs);
 
 //vector_opperation.c
+t_vect	create_vector(t_xyz one, t_xyz two);
 t_vect	get_orthogonal_vect(t_vect vector);
 t_vect	get_opposite_vector(t_vect vector);
 t_vect	vector_product(t_vect vector_1, t_vect vector_2);

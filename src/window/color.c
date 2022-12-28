@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/28 17:36:02 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/28 23:42:42 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -72,6 +72,8 @@ int	intersect_self(t_objects *objs, t_disp_point point)
 		return (free_list(&list), -1);
 	if (point.type == PL && !get_specific_plane(objs, &list, rayline, point.obj_id))
 		return (free_list(&list), -1);
+	if (point.type == CY && !get_specific_cylinder(objs, &list, rayline, point.obj_id))
+		return (free_list(&list), -1);
 	intersection = fill_list_intersection(&list, objs->cam->position);
 	if (list != NULL && list->solution.sol_one && in_the_way(intersection.intersec_point, rayvec, objs->cam->position))
 		return (free_list(&list), 0);
@@ -106,6 +108,7 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 	int				way_to_the_light;
 	int				obj_id_sphere;
 	int				obj_id_plane;
+	int				obj_id_cylinder;
 	t_disp_point	intersection;
 
 	list = malloc(sizeof(t_solution_list));
@@ -122,19 +125,20 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 	//lets go
 	//le probleme se pose lorsqu'il s'intersecte avec lui-meme
 	rayline = get_rayline_eq(rayvec, point);
+	obj_id_plane = -1;
+	obj_id_sphere = -1;
+	obj_id_cylinder = -1;
 	if (disp_p.type == PL)
-	{
-		obj_id_sphere = -1;
 		obj_id_plane = disp_p.obj_id; 
-	}
-	else
-	{
+	else if (disp_p.type == SP)
 		obj_id_sphere = disp_p.obj_id;
-		obj_id_plane = -1;
-	}
+	else
+		obj_id_cylinder = disp_p.obj_id;
 	if (!get_sphere(objs, &list, rayline, obj_id_sphere))
 		return (false);
 	if (!get_plane(objs, &list, rayline, obj_id_plane))
+		return (false);
+	if (!get_cylinder(objs, &list, rayline, obj_id_cylinder))
 		return (false);
 	intersection = fill_list_intersection(&list, point);
 	//we can put it outside, cause if intersect self in one setting, so no good ?

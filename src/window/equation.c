@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 13:27:37 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 18:35:23 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/28 23:55:45 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -31,13 +31,22 @@ bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 	return (true);
 }
 
+void	copy_solu_two_in_one(t_solution *solu)
+{
+	solu->sol_one = true;
+	solu->sol_two = false;
+	solu->one.x = solu->two.x;
+	solu->one.y = solu->two.y;
+	solu->one.z = solu->two.z;
+}
+
 bool	two_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 {
 	float	a;
 	float	b;
 	float	delta;
 
-	if (!eq.x_pow_one || !eq.x_pow_two)
+	if (!eq.x_pow_two)
 		return (false);
 	delta = (eq.x_pow_one * eq.x_pow_one) - 4 * (eq.x_pow_two * eq.c);
 	a = (-eq.x_pow_one - sqrtf(delta)) / (2 * eq.x_pow_two);
@@ -47,19 +56,15 @@ bool	two_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 	solu->one.y = equation.y.c + equation.y.t * a;
 	solu->one.z = equation.z.c + equation.z.t * a;
 	b = (-eq.x_pow_one + sqrtf(delta)) / (2 * eq.x_pow_two);
-	if (a < 0.0 || b < 0.0)
-	{
-		if (a < 0.0 && b < 0.0)
-		{
-			solu->sol_one = false;
-			solu->sol_two = false;
-		}
-		else
-			solu->sol_two = false;
-	}
+	if (a < 0.0)
+		solu->sol_one = false;
+	if (b < 0.0)
+		solu->sol_two = false;
 	solu->two.x = equation.x.c + equation.x.t * b;
 	solu->two.y = equation.y.c + equation.y.t * b;
 	solu->two.z = equation.z.c + equation.z.t * b;
+	if (solu->sol_one == false && solu->sol_two == true)
+		copy_solu_two_in_one(solu);
 	return (true);
 }
 
