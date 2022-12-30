@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:53:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/28 23:47:43 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:53:13 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -108,20 +108,15 @@ bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int
 	i = 0;
 	while (i < obj->nb_cy)
 	{
-		if (i == i_to_exclude)
-		{
-			i++;
+		if (i == i_to_exclude && i++)
 			continue ;
-		}
 		err = false;
 		quadratic = get_quadra_cylinder_equation(rayline, obj->cy[i]);
-		printf("a = %f b = %f c = %f, i = %d\n", quadratic.x_pow_two, quadratic.x_pow_one, quadratic.c, i);
 		solu = solution(quadratic, rayline, &err);
-		if (!solu.sol_one && !solu.sol_two)
-			printf("meh\n");
 		if (err)
 			return (false);
 		check_solution(&solu, obj->cy[i]);
+		get_disc(obj, list, rayline, i_to_exclude);
 		if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
 			return (false);
 		i++;
@@ -141,6 +136,7 @@ bool	get_specific_cylinder(t_objects *obj, t_solution_list **list, t_line_eq ray
 	if (err)
 		return (false);
 	check_solution(&solu, obj->cy[i_to_view]);
+	get_specific_disc(obj, list, rayline, i_to_view);
 	if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i_to_view].color, CY, i_to_view)))
 		return (false);
 	return (true);

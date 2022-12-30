@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/28 21:48:45 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:56:16 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -76,6 +76,8 @@ bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_
 bool	get_specific_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
 bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
 bool	get_specific_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
+bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
+bool	get_specific_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
 bool	loop_rendering(t_objects *objs, t_viewplan view_plan);
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i);
 t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);

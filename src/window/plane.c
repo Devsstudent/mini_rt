@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/27 22:26:53 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:34:58 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -24,7 +24,6 @@ t_equation	get_quadra_plan_equation(t_line_eq rayline, t_plane plane)
 	res.c = vect_plan[0] * (rayline.x.c - p_plan.x)
 					+ vect_plan[1] * (rayline.y.c - p_plan.y)
 					+ vect_plan[2] * (rayline.z.c - p_plan.z);
-	//res.c = vect_plan[0] * p_plan.x + vect_plan[1] * p_plan.y + vect_plan[2] * p_plan.z - (rayline.x.t * rayline.x.c + rayline.y.t * rayline.y.c + rayline.z.t * rayline.z.c);
 	return (res);
 }
 
@@ -40,7 +39,6 @@ static bool	one_solu_plan(t_solution *solu, t_equation eq, t_line_eq equation)
 	solu->one.x = equation.x.c + equation.x.t * solution;
 	solu->one.y = equation.y.c + equation.y.t * solution;
 	solu->one.z = equation.z.c + equation.z.t * solution;
-	//printf("solu = %f %f %f\n", solu->one.x, solu->one.y, solu->one.z);
 	return (true);
 }
 
@@ -76,11 +74,8 @@ bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_
 	i = 0;
 	while (i < obj->nb_pl)
 	{
-		if (i == i_to_exclude)
-		{
-			i++;
-			continue;
-		}
+		if (i == i_to_exclude && i++)
+			continue ;
 		err = false;
 		quadratic = get_quadra_plan_equation(rayline, obj->pl[i]);
 		solu = solution_plan(quadratic, rayline, &err);

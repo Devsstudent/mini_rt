@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/28 16:27:46 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:28:58 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -31,6 +31,7 @@ static int ok = 0;
 
 typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_mlx_info t_mlx_info;
+typedef struct s_disc_info t_disc_info;
 
 typedef struct s_xyz {
 	float	x;
