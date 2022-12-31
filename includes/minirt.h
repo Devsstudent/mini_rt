@@ -39,11 +39,18 @@ typedef struct s_xyz {
 	float	z;
 }		t_xyz;
 
+
 typedef struct s_rgb {
-	uint8_t	R; //0-255
-	uint8_t	G; //0-255
 	uint8_t	B; //0-255
+	uint8_t	G; //0-255
+	uint8_t	R; //0-255
+	uint8_t	T; //0-255
 }					t_rgb;
+
+typedef union u_color {
+	t_rgb	rgb;
+	int	color;
+}		t_color;
 
 typedef struct s_orientation{
 	float	x; //-1 1 0 20

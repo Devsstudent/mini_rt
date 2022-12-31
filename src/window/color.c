@@ -14,21 +14,15 @@
 int	create_color(t_rgb rgb, float RGB[3])
 {
 	int	color;
+	t_color	color_conv;
 
-	color = 0;
-	color |= (int)trunc((float)rgb.R * RGB[0]);
-	color = color << 8;
-	color |= (int)trunc((float)rgb.G * RGB[1]);
-	color = color << 8;
-	color |= (int)trunc((float)rgb.B * RGB[2]);
+	color_conv.rgb = rgb;
+	color_conv.rgb.T = 0;
+	color_conv.rgb.R = (uint8_t)trunc((float)color_conv.rgb.R * RGB[0]);
+	color_conv.rgb.G = (uint8_t)trunc((float)color_conv.rgb.G * RGB[0]);
+	color_conv.rgb.B = (uint8_t)trunc((float)color_conv.rgb.B * RGB[0]);
+	color = color_conv.color;
 	return (color);
-}
-
-void	add_color(int *color, t_rgb rgb)
-{
-	*color = (*color << 16 & ((*color << 16) / 2 + rgb.R / 2));
-	*color = (*color << 8 & ((*color << 8) / 2 + rgb.G / 2));
-	*color = (*color << 0 & ((*color << 0) / 2 + rgb.B / 2));
 }
 
 void	ambient_light_quo(t_objects *objs, float RGB[3])
