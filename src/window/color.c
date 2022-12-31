@@ -44,9 +44,9 @@ bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
 	return (true);
 }
 
-int	intersect_self(t_objects *objs, t_disp_point point)
+int	intersect_self(t_objects *objs, t_disp_point point, int i)
 {
-	//should not just be PL but is there a way from the camera to the light that does't intersect said object,
+	//should not just be PL but is there a way from the camera to the light that does't intersect object,
 	// so it should be a specific object, we should know which one, keep it in memory
 	//the thing it intersects has a max value, if not, it's alright
 	t_line_eq		rayline;
@@ -58,8 +58,8 @@ int	intersect_self(t_objects *objs, t_disp_point point)
 	if (!list)
 		return (false);
 	list = NULL;
-	rayvec[0] = objs->li[0].position.x - objs->cam->position.x;
-	rayvec[1] = objs->li[0].position.y - objs->cam->position.y;
+	rayvec[0] = objs->li[i].position.x - objs->cam->position.x;
+	rayvec[1] = objs->li[i].position.y - objs->cam->position.y;
 	rayvec[2] = objs->li[0].position.z - objs->cam->position.z;
 	rayline = get_rayline_eq(rayvec, objs->cam->position);
 	if (point.type == SP && !get_specific_sphere(objs, &list, rayline, point.obj_id))
@@ -93,10 +93,16 @@ void	compute_RGB(t_objects *objs, float distance, float RGB[3])
 		RGB[2] = 1.0;
 }
 
+void	get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec, int i)
+{
+	(*rayvec)[0] = objs->li[i].position.x - point.x;
+	(*rayvec)[1] = objs->li[i].position.y - point.y;
+	(*rayvec)[2] = objs->li[i].position.z - point.z;
+}
+
 bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 {
 	t_line_eq		rayline;
-	t_xyz			point;
 	t_solution_list	*list;
 	t_vect			rayvec;
 	int				way_to_the_light;
@@ -104,51 +110,54 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 	int				obj_id_plane;
 	int				obj_id_cylinder;
 	t_disp_point	intersection;
+	int		i;
 
-	list = malloc(sizeof(t_solution_list));
-	if (!list)
-		return (false);
-	list = NULL;
-	way_to_the_light = 0;
-	point = disp_p.intersec_point;
-	rayvec[0] = objs->li[0].position.x - point.x;
-	rayvec[1] = objs->li[0].position.y - point.y;
-	rayvec[2] = objs->li[0].position.z - point.z;
-	//du coup il faut connaitre lui meme
-	//ca revient au meme probleme
-	//lets go
-	//le probleme se pose lorsqu'il s'intersecte avec lui-meme
-	rayline = get_rayline_eq(rayvec, point);
-	obj_id_plane = -1;
-	obj_id_sphere = -1;
-	obj_id_cylinder = -1;
-	if (disp_p.type == PL)
-		obj_id_plane = disp_p.obj_id; 
-	else if (disp_p.type == SP)
-		obj_id_sphere = disp_p.obj_id;
-	else
-		obj_id_cylinder = disp_p.obj_id;
-	if (!get_sphere(objs, &list, rayline, obj_id_sphere))
-		return (false);
-	if (!get_plane(objs, &list, rayline, obj_id_plane))
-		return (false);
-	if (!get_cylinder(objs, &list, rayline, obj_id_cylinder))
-		return (false);
-	intersection = fill_list_intersection(&list, point);
-	//we can put it outside, cause if intersect self in one setting, so no good ?
-	way_to_the_light = intersect_self(objs, disp_p);
-	if (way_to_the_light == -1)
-		return (false);
-	//les -1 pas bien parce que ca pourrait etre -1
-	if (list != NULL && in_the_way(intersection.intersec_point, rayvec, point))
-		return (true);
-	else if (way_to_the_light == 0)
+	i = 0;
+	while (i < objs->nb_li)
+	{
+		list = malloc(sizeof(t_solution_list));
+		if (!list)
+			return (false);
+		list = NULL;
+		way_to_the_light = 0;
+		get_rayvec_light(objs, disp_p.intersec_point, &rayvec, i);
+		//du coup il faut connaitre lui meme
+		//ca revient au meme probleme
+		//lets go
+		//le probleme se pose lorsqu'il s'intersecte avec lui-meme
+		rayline = get_rayline_eq(rayvec, disp_p.intersec_point);
+		obj_id_plane = -1;
+		obj_id_sphere = -1;
+		obj_id_cylinder = -1;
+		if (disp_p.type == PL)
+			obj_id_plane = disp_p.obj_id; 
+		else if (disp_p.type == SP)
+			obj_id_sphere = disp_p.obj_id;
+		else
+			obj_id_cylinder = disp_p.obj_id;
+		if (!get_sphere(objs, &list, rayline, obj_id_sphere))
+			return (false);
+		if (!get_plane(objs, &list, rayline, obj_id_plane))
+			return (false);
+		if (!get_cylinder(objs, &list, rayline, obj_id_cylinder))
+			return (false);
+		intersection = fill_list_intersection(&list, disp_p.intersec_point);
+		//we can put it outside, cause if intersect self in one setting, so no good ?
+		way_to_the_light = intersect_self(objs, disp_p, i);
+		if (way_to_the_light == -1)
+			return (false);
+		//les -1 pas bien parce que ca pourrait etre -1
+		if (list != NULL && in_the_way(intersection.intersec_point, rayvec, disp_p.intersec_point))
 			return (true);
-	//there is a way to the light, now let's calculate the distance the compute the intensity of the light
-	//distance between disp_p and light
-	//distance is norm of rayvec
-	compute_RGB(objs, norm_of_vector(rayvec), RGB);
-	free_list(&list);
+		else if (way_to_the_light == 0)
+				return (true);
+		//there is a way to the light, now let's calculate the distance the compute the intensity of the light
+		//distance between disp_p and light
+		//distance is norm of rayvec
+		compute_RGB(objs, norm_of_vector(rayvec), RGB);
+		free_list(&list);
+		i++;
+	}
 	return (true);
 }
 
