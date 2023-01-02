@@ -124,7 +124,6 @@ void	free_list(t_solution_list **head);
 t_solution_list	*get_last_elem(t_solution_list **head);
 
 //color.c
-void	add_color(int *color, t_rgb rgb);
 void	ambient_light_quo(t_objects *objs, float RGB[3]);
 bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3]);
 int		create_color(t_rgb rgb, float RGB[3]);
