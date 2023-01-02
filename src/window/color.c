@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/28 23:42:42 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/02 17:11:50 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -134,11 +134,11 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 		obj_id_sphere = disp_p.obj_id;
 	else
 		obj_id_cylinder = disp_p.obj_id;
-	if (!get_sphere(objs, &list, rayline, obj_id_sphere))
+	if (!get_sphere(objs, &list, rayline, -1))
 		return (false);
-	if (!get_plane(objs, &list, rayline, obj_id_plane))
+	if (!get_plane(objs, &list, rayline, -1))
 		return (false);
-	if (!get_cylinder(objs, &list, rayline, obj_id_cylinder))
+	if (!get_cylinder(objs, &list, rayline, -1))
 		return (false);
 	intersection = fill_list_intersection(&list, point);
 	//we can put it outside, cause if intersect self in one setting, so no good ?
@@ -146,7 +146,7 @@ bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3])
 	if (way_to_the_light == -1)
 		return (false);
 	//les -1 pas bien parce que ca pourrait etre -1
-	if (list != NULL && in_the_way(intersection.intersec_point, rayvec, point))
+	if (intersection.intersec_point.x != -1 && intersection.intersec_point.y != -1 && intersection.intersec_point.z != -1 && in_the_way(intersection.intersec_point, rayvec, point))
 		return (true);
 	else if (way_to_the_light == 0)
 			return (true);
