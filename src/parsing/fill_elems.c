@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:29:06 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/03 14:21:20 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:50:35 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ bool	fill_ambient_light(char **arr, int j, t_objects *objects)
 
 bool	fill_camera(char **arr, int j, t_objects *objects)
 {
-	write(1, "TYEST\n", 6);
 	if (!convert_to_xyz(&objects->cam[j].position, arr[1]))
 		return (false);
 	if (!convert_to_orientation(&objects->cam[j].vec_direction, arr[2]))
@@ -37,7 +36,6 @@ bool	fill_light(char **arr, int j, t_objects *objects)
 {
 	if (!convert_to_xyz(&objects->li[j].position, arr[1]))
 		return (false);
-	ft_putstr_fd(arr[1], 2);
 	if (!convert_to_float(&objects->li[j].ratio, arr[2]))
 		return (false);
 	if (!convert_to_rgb(&objects->li[j].color, arr[3]))

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/29 18:44:31 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:08:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -34,7 +34,7 @@ typedef struct s_must_have {
 }			t_must_have;
 
 typedef struct s_function_parsing {
-	bool	(*f)(char **, t_must_have *);
+	bool	(*f) (char **, t_must_have *);
 	char	*letter;
 }			t_function_parsing;
 

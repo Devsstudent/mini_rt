@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/29 18:28:58 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:17:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -123,6 +123,7 @@ typedef struct s_disp_point{
 	t_rgb		color;
 	t_type		type;
 	int			obj_id;
+	bool		err;
 }				t_disp_point;
 
 typedef struct	s_objects {

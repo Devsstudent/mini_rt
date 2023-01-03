@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/26 15:16:25 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:05:40 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -42,7 +42,6 @@ t_vect	get_vec_vertical(t_vect original_pos)
 	res[0] = 0;
 	res[1] = 0;
 	res[2] = 0;
-	//printf("%f %f %f\n", original_pos.x, original_pos.y, original_pos.z);
 	if (original_pos[0] == 0 && original_pos[1] == 0 && original_pos[2] == 0)
 	{
 		write(2, "Not possible to get the orthogonal vector\n", ft_strlen("Not possible to get the orthogonal vector\n"));
@@ -99,7 +98,7 @@ int	render_window(void	*objss)
 	t_objects	*objs;
 
 	objs = (t_objects *) objss;
-	//printf("%f %f %f\n", objs->cam->vec_direction.x,  objs->cam->vec_direction.y,  objs->cam->vec_direction.z );
+	//printf("%f %f %f\n", objs->cam->vec_direction[0],  objs->cam->vec_direction[1],  objs->cam->vec_direction[2] );
 	vector_height = get_vec_vertical(objs->cam->vec_direction);
 	if (!vector_height[0] && !vector_height[1] && !vector_height[2])
 		return (2);
