@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:41:11 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/02 16:54:08 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:15:26 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -26,18 +26,18 @@ bool	check_fov(char *line)
 		i++;
 	}
 	value = ft_atoi(line);
-	if (value > 180	|| value < 0)
+	if (value > 180 || value < 0)
 		return (false);
 	return (true);
 }
 
 bool	check_camera(char **line_split, t_must_have *all_element)
 {
-	bool	first;
-
-	first = line_split[0] && (line_split[0][0] == 'C' || line_split[0][0] == 'c')
-				&& !line_split[0][1];
-	if (!first || (first && all_element->camera))
+	if (!(line_split[0] && (line_split[0][0] == 'C'
+			|| line_split[0][0] == 'c') && !line_split[0][1])
+			|| ((line_split[0] && (line_split[0][0] == 'C'
+			|| line_split[0][0] == 'c')
+			&& !line_split[0][1]) && all_element->camera))
 		return (false);
 	if (!check_coordinate(line_split[1]))
 		return (false);

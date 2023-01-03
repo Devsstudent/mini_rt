@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:17:04 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/05 13:46:39 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:07:50 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -27,10 +27,7 @@ static int	line_nb(int fd, t_must_have *all_elem, t_function_parsing *arr)
 			continue ;
 		}
 		if (!check_line(line, arr, all_elem))
-		{
-			free(line);
-			return (0);
-		}
+			return (free(line), 0);
 		i++;
 		free(line);
 		line = get_next_line(fd);
@@ -91,7 +88,6 @@ char	**open_and_store(char *name)
 	t_must_have			all_elem;
 	t_function_parsing	*arr;
 
-	//FILL array of function_parsing
 	line_nbr = 0;
 	arr = NULL;
 	init_all_elem(&all_elem);
@@ -100,24 +96,14 @@ char	**open_and_store(char *name)
 		return (free_array_function(arr), NULL);
 	lines = malloc(sizeof(*lines) * (line_nbr + 1));
 	if (!lines)
-	{
-		perror("Error\n");
-		return (NULL);
-	}
+		return (perror("Error\n"), NULL);
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
-	{
-		free(lines);
-		perror("Error\n");
-		return (NULL);
-	}
+		return (free(lines), perror("Error\n"), NULL);
 	if (!fill_lines(lines, fd, line_nbr))
 	{
 		//GNL ERROR ?
-		close(fd);
-		free_double_arr(lines);
-		perror("Error\n");
-		return (NULL);
+		return (close(fd), free_double_arr(lines), perror("Error\n"), NULL);
 	}
 	close(fd);
 	lines[line_nbr] = NULL;

@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:25:38 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/04 21:14:45 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:25:49 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,40 +90,6 @@ bool	build_sphere(char ***triple_arr, t_objects *objects)
 	return (true);
 }
 
-bool	build_light(char ***triple_arr, t_objects *objects)
-{
-	int		i;
-	int		j;
-	int		size;
-	char	id[2];
-
-	i = 0;
-	j = 0;
-	id[0] = 'L';
-	id[1] = '\0';
-	size = count_obj(triple_arr, id);
-	if (size == 0)
-	{
-		id[0] = 'l';
-		size = count_obj(triple_arr, id);
-	}
-	objects->li = malloc(sizeof(t_light) * size);
-	objects->nb_li = size;
-	if (!objects->li)
-		return (false);
-	while (triple_arr[i])
-	{
-		if (match_obj(triple_arr, id, i))
-		{
-			if (!fill_light(triple_arr[i], j, objects))
-				return (false);
-			j++;
-		}
-		i++;
-	}
-	return (true);
-}
-
 bool	build_camera(char ***triple_arr, t_objects *objects)
 {
 	int	i;
@@ -169,4 +135,3 @@ bool	build_ambient_light(char ***triple_arr, t_objects *objects)
 	}
 	return (true);
 }
-

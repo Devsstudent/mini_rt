@@ -22,6 +22,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								conversions \
 								fill_structs \
 								build_elems \
+								build_light \
 								fill_elems \
 								utils) \
 		$(addprefix error/, error \
