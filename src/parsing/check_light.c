@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:36:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/05 13:19:46 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:22:30 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -16,11 +16,14 @@ bool	check_light(char **line_split, t_must_have *all_element)
 	bool	first;
 	float	value;
 	bool	third;
+	bool	tmp;
 
-	first = line_split[0] && (line_split[0][0] == 'L' || line_split[0][0] == 'l') && !line_split[0][1];
+	tmp = (line_split[0][0] == 'L' || line_split[0][0] == 'l');
+	first = line_split[0] && tmp && !line_split[0][1];
 	if (!first)
 		return (false);
-	if ((line_split[0][0] == 'l' && all_element->light_maj) || (line_split[0][0] == 'L' && all_element->light))
+	if ((line_split[0][0] == 'l' && all_element->light_maj)
+		|| (line_split[0][0] == 'L' && all_element->light))
 		return (false);
 	else if(line_split[0][0] == 'L')
 		all_element->light_maj = true;

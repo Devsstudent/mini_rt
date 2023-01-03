@@ -17,3 +17,5 @@ void	error_msg(char *str)
 		return ;
 	write(2, str, ft_strlen(str));
 }
+//we should need free exit funct
+///void	free_exit()

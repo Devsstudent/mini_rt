@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/03 14:41:52 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:05:40 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -42,15 +42,13 @@ t_vect	get_vec_vertical(t_vect original_pos)
 	res[0] = 0;
 	res[1] = 0;
 	res[2] = 0;
-	//printf("%f %f %f\n", original_pos[0], original_pos[1], original_pos[2]);
 	if (original_pos[0] == 0 && original_pos[1] == 0 && original_pos[2] == 0)
 	{
-		//write(2, "Not possible to get the orthogonal vector\n", ft_strlen("Not possible to get the orthogonal vector\n"));
+		write(2, "Not possible to get the orthogonal vector\n", ft_strlen("Not possible to get the orthogonal vector\n"));
 		return (res);
 	}
 	if (original_pos[0] == 0 && original_pos[1] == 0 && original_pos[2] > 0)
 	{
-		//printf("test\n");
 		res[1] = 1;
 		return (res);
 	}

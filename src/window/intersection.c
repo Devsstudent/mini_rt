@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/02 17:26:00 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:25:45 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -30,6 +30,7 @@ t_disp_point	fill_list_intersection(t_solution_list **list, t_xyz start_point)
 	disp_point.intersec_point.x = -1;
 	disp_point.intersec_point.y = -1;
 	disp_point.intersec_point.z = -1;
+	disp_point.err = false;
 	distance = -1;
 	buff = *list;
 	while (buff != NULL)

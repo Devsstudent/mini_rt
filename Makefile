@@ -1,6 +1,6 @@
 NAME = mini_rt
 CC = cc
-FLAGS = -Wall -Werror -Wextra -g -O3 -MMD
+FLAGS = -Wall -Werror -Wextra -g -MMD
 LIB = -L $(addprefix lib/, mlx) -lmlx -lXext -lX11 -lm -L $(addprefix lib/, libft) -lft
 HEADER = -I $(addprefix lib/, mlx) -I $(addprefix lib/, libft) -I ./includes -I ./src/parsing -I ./src/error -I ./src/window
 OBJ = $(addsuffix .o, $(addprefix obj/, main \
