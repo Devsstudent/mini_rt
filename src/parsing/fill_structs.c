@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 11:37:21 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/05 12:58:16 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:23:07 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	***create_triple_arr(char **lines)
 	i = 0;
 	while (i < size)
 	{
-		triple_arr[i] = ft_split(lines[i], ' ');
+		triple_arr[i] = split_func_condition(lines[i], ft_is_space);
 		if (triple_arr[i] == NULL)
 			return (free_triple_arr(triple_arr), free_double_arr(lines), NULL);
 		i++;

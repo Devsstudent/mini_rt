@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:29:06 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/04 21:54:55 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:21:20 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ bool	fill_light(char **arr, int j, t_objects *objects)
 {
 	if (!convert_to_xyz(&objects->li[j].position, arr[1]))
 		return (false);
+	ft_putstr_fd(arr[1], 2);
 	if (!convert_to_float(&objects->li[j].ratio, arr[2]))
 		return (false);
 	if (!convert_to_rgb(&objects->li[j].color, arr[3]))
