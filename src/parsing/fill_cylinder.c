@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_plane.c                                      :+:      :+:    :+:   */
+/*   fill_cylinder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 18:00:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/04 15:08:36 by odessein         ###   ########.fr       */
+/*   Created: 2023/01/04 15:36:13 by odessein          #+#    #+#             */
+/*   Updated: 2023/01/04 15:37:29 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minirt.h"
+#include "parsing.h"
 
-bool	check_plane(char **line_split, t_must_have *all_elem)
+bool	fill_cylinder(char **arr, int j, t_objects *objects)
 {
-	bool	first;
-
-	first = (line_split[0] && (line_split[0][0] == 'p'
-				|| line_split[0][0] == 'P') && line_split[0][1]
-			&& (line_split[0][1] == 'l' || line_split[0][1] == 'L')
-			&& !line_split[0][2]);
-	if (!first)
+	if (!convert_to_xyz(&objects->cy[j].position, arr[1]))
 		return (false);
-	if (!check_coordinate(line_split[1]))
+	if (!convert_to_orientation(&objects->cy[j].vec_direction, arr[2]))
 		return (false);
-	if (!check_coordinate_direction(line_split[2]))
+	if (!convert_to_float(&objects->cy[j].diameter, arr[3]))
 		return (false);
-	if (!check_rgb(line_split[3]))
+	if (!convert_to_float(&objects->cy[j].height, arr[4]))
 		return (false);
-	if (line_split[4])
+	if (!convert_to_rgb(&objects->cy[j].color, arr[5]))
 		return (false);
-	all_elem->object = true;
 	return (true);
 }

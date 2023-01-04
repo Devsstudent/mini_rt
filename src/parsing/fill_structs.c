@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 11:37:21 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/03 14:47:15 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:49:29 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ char	***create_triple_arr(char **lines)
 
 bool	match_obj(char ***triple_arr, char *type, int i)
 {
-	if ((triple_arr[i][0][0] == type[0] || triple_arr[i][0][0] == type[0] + 32) && triple_arr[i][0][1] == type[1])
+	if ((triple_arr[i][0][0] == type[0]
+		|| triple_arr[i][0][0] == type[0] + 32)
+		&& triple_arr[i][0][1] == type[1])
 		return (true);
 	return (false);
 }
@@ -69,7 +71,6 @@ bool	fill_each_struct(char ***triple_arr, t_objects *objects)
 	final_ret = true;
 	ret[0] = build_ambient_light(triple_arr, objects);
 	ret[1] = build_camera(triple_arr, objects);
-
 	ret[2] = build_light(triple_arr, objects);
 	ret[3] = build_cylinder(triple_arr, objects);
 	ret[4] = build_sphere(triple_arr, objects);

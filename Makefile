@@ -21,6 +21,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								split_on_function \
 								conversions \
 								fill_structs \
+								fill_cylinder \
 								build_elems \
 								build_light \
 								fill_elems \

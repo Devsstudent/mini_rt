@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/03 15:08:42 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:38:49 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -19,7 +19,7 @@
 
 # define ELEM_MAX 6
 
-typedef float t_vect __attribute__ ((vector_size(16)));
+typedef float					t_vect __attribute__ ((vector_size(16)));
 typedef struct s_xyz			t_xyz;
 typedef struct s_rgb			t_rgb;
 typedef struct s_orientation	t_orientation;
@@ -34,7 +34,7 @@ typedef struct s_must_have {
 }			t_must_have;
 
 typedef struct s_function_parsing {
-	bool	(*f) (char **, t_must_have *);
+	bool	(*f)();
 	char	*letter;
 }			t_function_parsing;
 

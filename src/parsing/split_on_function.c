@@ -5,13 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 11:48:01 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/04 20:00:56 by mbelrhaz         ###   ########.fr       */
+/*   Created: 2023/01/04 14:55:37 by odessein          #+#    #+#             */
+/*   Updated: 2023/01/04 14:55:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//#include "minirt.h"
 #include "parsing.h"
-#include <stdlib.h>
 
 static char	*ft_strndup(char *s, size_t n)
 {

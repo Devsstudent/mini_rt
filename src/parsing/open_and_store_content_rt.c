@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:17:04 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/03 16:07:50 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:50:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -101,10 +101,7 @@ char	**open_and_store(char *name)
 	if (fd == -1)
 		return (free(lines), perror("Error\n"), NULL);
 	if (!fill_lines(lines, fd, line_nbr))
-	{
-		//GNL ERROR ?
 		return (close(fd), free_double_arr(lines), perror("Error\n"), NULL);
-	}
 	close(fd);
 	lines[line_nbr] = NULL;
 	return (lines);

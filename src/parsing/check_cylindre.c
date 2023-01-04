@@ -6,17 +6,25 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:05:02 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/02 17:29:07 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:16:31 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-bool	check_cylinder(char **line_split, t_must_have *all_elem)
+bool	convert_to_float_check_value(char *to_conv)
 {
-	bool	first;
-	float	value;
+	float	val;
 
-	first = line_split[0] && (line_split[0][0] == 'c' || line_split[0][0] == 'C') && line_split[0][1] && (line_split[0][1] == 'y' || line_split[0][1] == 'Y') && !line_split[0][2];
+	val = 0;
+	if (!convert_to_float(&val, to_conv))
+		return (false);
+	if (val > (float) INT_MAX || val < (float) INT_MIN)
+		return (false);
+	return (true);
+}
+
+bool	conditional_sequence(char **line_split, bool first)
+{
 	if (!first)
 		return (false);
 	if (!check_coordinate(line_split[1]))
@@ -25,19 +33,29 @@ bool	check_cylinder(char **line_split, t_must_have *all_elem)
 		return (false);
 	if (!check_float_construction(line_split[3]))
 		return (false);
-	if (!convert_to_float(&value, line_split[3]))
-		return (false);
-	if (value > (float) INT_MAX || value < (float) INT_MIN)
+	if (!convert_to_float_check_value(line_split[3]))
 		return (false);
 	if (!check_float_construction(line_split[4]))
 		return (false);
-	if (!convert_to_float(&value, line_split[4]))
-		return (false);
-	if (value > (float) INT_MAX || value < (float) INT_MIN)
+	if (!convert_to_float_check_value(line_split[4]))
 		return (false);
 	if (!check_rgb(line_split[5]))
 		return (false);
 	if (line_split[6])
+		return (false);
+	return (true);
+}
+
+bool	check_cylinder(char **line_split, t_must_have *all_elem)
+{
+	bool	first;
+
+	first = (line_split[0]
+			&& (line_split[0][0] == 'c' || line_split[0][0] == 'C')
+			&& line_split[0][1]
+			&& (line_split[0][1] == 'y' || line_split[0][1] == 'Y')
+			&& !line_split[0][2]);
+	if (!conditional_sequence(line_split, first))
 		return (false);
 	all_elem->object = true;
 	return (true);

@@ -6,10 +6,23 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:02:34 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 22:22:10 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:26:16 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
+
+static int	loop_on_number(char **line)
+{
+	int	i;
+
+	i = 0;
+	while (**line && ft_isdigit(**line))
+	{
+		i++;
+		(*line)++;
+	}
+	return (i);
+}
 
 bool	check_float_construction(char *line)
 {
@@ -17,12 +30,7 @@ bool	check_float_construction(char *line)
 	int		i;
 
 	save = line;
-	i = 0;
-	while (*line && ft_isdigit(*line))
-	{
-		line++;
-		i++;
-	}
+	i = loop_on_number(&line);
 	if (i == 10)
 	{
 		if (!check_int_max(save))
@@ -36,12 +44,7 @@ bool	check_float_construction(char *line)
 		line++;
 	else
 		return (false);
-	i = 0;
-	while (*line && ft_isdigit(*line))
-	{
-		i++;
-		line++;
-	}
+	i = loop_on_number(&line);
 	if (i > 3 || i == 0)
 		return (false);
 	line = save;

@@ -6,10 +6,9 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:29:06 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/03 14:50:35 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:37:01 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "parsing.h"
 
 bool	fill_ambient_light(char **arr, int j, t_objects *objects)
@@ -28,7 +27,6 @@ bool	fill_camera(char **arr, int j, t_objects *objects)
 	if (!convert_to_orientation(&objects->cam[j].vec_direction, arr[2]))
 		return (false);
 	objects->cam[j].fov = ft_atoi(arr[3]);
-	//printf("%f\n", objects->cam->vec_direction.x);
 	return (true);
 }
 
@@ -64,19 +62,3 @@ bool	fill_plane(char **arr, int j, t_objects *objects)
 		return (false);
 	return (true);
 }
-
-bool	fill_cylinder(char **arr, int j, t_objects *objects)
-{
-	if (!convert_to_xyz(&objects->cy[j].position, arr[1]))
-		return (false);
-	if (!convert_to_orientation(&objects->cy[j].vec_direction, arr[2]))
-		return (false);
-	if (!convert_to_float(&objects->cy[j].diameter, arr[3]))
-		return (false);
-	if (!convert_to_float(&objects->cy[j].height, arr[4]))
-		return (false);
-	if (!convert_to_rgb(&objects->cy[j].color, arr[5]))
-		return (false);
-	return (true);
-}
-
