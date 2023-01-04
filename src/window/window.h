@@ -107,8 +107,8 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance);
 
 	//loop_mlx.c
 	void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color);
-	int	close_window(t_mlx_info *mlx);
-	int	hook_press(int keycode, t_mlx_info *mlx);
+	int	close_window(t_objects *objs);
+int	hook_press(int keycode, t_objects *objs);
 	int	hook_release(int keycode, t_mlx_info *mlx);
 	void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color);
 bool	window(t_objectss *objs);

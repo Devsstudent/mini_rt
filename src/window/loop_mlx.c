@@ -11,19 +11,20 @@
 /* ************************************************************************** */
 #include "window.h"
 
-int	close_window(t_mlx_info *mlx)
+int	close_window(t_objects *objs)
 {
-	mlx_destroy_image(mlx->mlx, mlx->img);
-	mlx_destroy_window(mlx->mlx, mlx->win);
-	free(mlx->mlx);
+	mlx_destroy_image(objs->mlx->mlx, objs->mlx->img);
+	mlx_destroy_window(objs->mlx->mlx, objs->mlx->win);
+	free_objs(objs);
+	free(objs->mlx->mlx);
 	exit(0);
 	return (0);
 }
 
-int	hook_press(int keycode, t_mlx_info *mlx)
+int	hook_press(int keycode, t_objects *objs)
 {
 	if (keycode == ESC)
-		close_window(mlx);
+		close_window(objs);
 	return (0);
 }
 
@@ -59,7 +60,7 @@ bool	window(t_objects *objs)
 			&objs->mlx->line_size, &objs->mlx->endian);
 	printf("fov = %i\n", objs->cam[0].fov);
 	mlx_loop_hook(objs->mlx->mlx, &(render_window), objs);
-	mlx_hook(objs->mlx->win, 33, 1L << 1, &(close_window), objs->mlx);
+	mlx_hook(objs->mlx->win, 33, 1L << 1, &(close_window), objs);
 	mlx_hook(objs->mlx->win, 2, 1L << 1, &(hook_release), objs->mlx);
 	mlx_hook(objs->mlx->win, 2, 1L << 0, &(hook_press), objs->mlx);
 	mlx_loop(objs->mlx->mlx);

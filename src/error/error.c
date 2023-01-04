@@ -21,10 +21,7 @@ void	error_msg(char *str)
 void	free_exit(void *objs)
 {
 	if (objs)
-	{
-		free_objs((t_objects *) objs);
-		close_window(((t_objects *) objs)->mlx);
-	}
+		close_window((t_objects *) objs);
 	exit(0);
 }
 
