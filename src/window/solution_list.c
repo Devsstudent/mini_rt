@@ -13,7 +13,6 @@
 
 bool	list_add(t_solution_list **head, t_solution_list *new)
 {
-//	printf("A");
 	t_solution_list	*buff;
 
 	if (!head)

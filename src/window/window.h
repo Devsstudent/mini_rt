@@ -32,12 +32,17 @@ typedef struct s_solution	t_solution;
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
 	t_mlx	*win;
-	t_mlx	*img;
+	t_img	*img;
 	int		bpp;
 	int		line_size;
 	int		endian;
 	char	*data;
 }			t_mlx_info;
+
+typedef struct s_i_j{
+	int	i;
+	int	j;
+}		t_i_j;
 
 typedef struct s_equation {
 	float	x_pow_two;
@@ -81,7 +86,7 @@ bool	get_specific_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline
 bool	loop_rendering(t_objects *objs, t_viewplan view_plan);
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i);
 t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
-bool	resolve_equation(t_objects *objs, t_solution_list **list, t_vect rayvec, int j, int i);
+bool	resolve_equation(t_objects *objs, t_solution_list **list, t_vect rayvec, t_i_j i_j);
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_plane plane);
 t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere);
 

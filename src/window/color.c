@@ -114,11 +114,7 @@ t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,
 {
 	t_line_eq		rayline;
 	t_vect			rayvec;
-	int				way_to_the_light;
-	t_disp_point	intersection;
 
-	intersection.err = false;
-	way_to_the_light = 0;
 	get_rayvec_light(objs, disp_p.intersec_point, &rayvec, i);
 	rayline = get_rayline_eq(rayvec, disp_p.intersec_point);
 	if (!get_sphere(objs, &list, rayline, -1))

@@ -25,10 +25,6 @@
 # include "libft.h"
 # include "window.h"
 
-static int first = 0;
-
-static int ok = 0;
-
 typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_mlx_info t_mlx_info;
 typedef struct s_disc_info t_disc_info;

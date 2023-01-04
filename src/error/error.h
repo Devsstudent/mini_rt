@@ -21,7 +21,8 @@ typedef struct s_objects		t_objects;
 
 //error.c
 void	error_msg(char *str);
-void	free_double_arr(char **lines);
+void	free_exit(void *objs);
+void	free_objs(t_objects *objs);
 
 //free_structs_utils.c
 void	free_structs(t_objects *objects);

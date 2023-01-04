@@ -21,6 +21,17 @@ t_xyz	get_point(t_xyz	intersec, t_vect rayvec, t_xyz start_point)
 	return (res);
 }
 
+void	fill_disp_point(t_solution_list *buff, t_disp_point *disp_point, bool two)
+{
+	if (!two)
+		disp_point->intersec_point = buff->solution.one;
+	else
+		disp_point->intersec_point = buff->solution.two;
+	disp_point->color = buff->color;
+	disp_point->type = buff->type;
+	disp_point->obj_id = buff->obj_id;
+}
+
 t_disp_point	fill_list_intersection(t_solution_list **list, t_xyz start_point)
 {
 	t_solution_list	*buff;
@@ -36,58 +47,15 @@ t_disp_point	fill_list_intersection(t_solution_list **list, t_xyz start_point)
 	while (buff != NULL)
 	{
 		if (buff->solution.sol_one)
-		{
 			if (is_closer(buff->solution.one, start_point, &distance))
-			{
-				disp_point.intersec_point = buff->solution.one;
-				disp_point.color = buff->color;
-				disp_point.type = buff->type;
-				disp_point.obj_id = buff->obj_id;
-			}
-		}
+					fill_disp_point(buff, &disp_point, 0);
 		if (buff->solution.sol_two)
-		{
 			if (is_closer(buff->solution.two, start_point, &distance))
-			{
-				disp_point.intersec_point = buff->solution.two;
-				disp_point.color = buff->color;
-				disp_point.type = buff->type;
-				disp_point.obj_id = buff->obj_id;
-			}
-		}
+					fill_disp_point(buff, &disp_point, 1);
 		buff = buff->next;
 	}
 	return (disp_point);
 }
-
-/*bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
-{
-	int			i;
-//	t_vect		dir_vec;
-//	t_line_eq	rayline;
-//	t_rgb		rgb;
-
-	i = 0;
-//	rgb.R = 255;
-//	rgb.G = 255;
-//	rgb.B = 255;
-	*color = create_color(disp_p.color);
-	//Add the ambient color;
-	// *color = create_color(ambient)
-	while (i < objs->nb_li)
-	{
-	//	dir_vec[0] = objs->li[i].position.x - disp_p.intersec_point.x;
-	//	dir_vec[1] = objs->li[i].position.y - disp_p.intersec_point.y;
-	//	dir_vec[2] = objs->li[i].position.z - disp_p.intersec_point.z;
-//		rayline = get_rayline_eq(dir_vec, disp_p.intersec_point);
-	//	if (check_shadow(rayline, objs))
-	//		add_color(color, rgb);
-	//	else
-	//		add_color(color, objs->li[i].color);
-		i++;
-	}
-	return (true);
-}*/
 
 bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance)
 {
@@ -106,6 +74,5 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance)
 		*final_distance = distance;
 		return (true);
 	}
-	//printf("buff : %f new : %f\n", *final_distance, distance);
 	return (false);
 }

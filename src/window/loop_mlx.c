@@ -13,7 +13,9 @@
 
 int	close_window(t_mlx_info *mlx)
 {
+	mlx_destroy_image(mlx->mlx, mlx->img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
+	free(mlx->mlx);
 	exit(0);
 	return (0);
 }

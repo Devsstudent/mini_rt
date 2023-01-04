@@ -15,8 +15,6 @@ bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 {
 	float	delta;
 
-	//cense etre -b / 2a, pas delta donc
-	//delta = powf(eq.x_pow_one, 2)  - 4 * (eq.x_pow_two * eq.c);
 	delta = (-1 * eq.x_pow_one) / (2 * eq.x_pow_two);
 	if (delta < 0.0)
 		return (true);
@@ -25,9 +23,6 @@ bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 	solu->one.x = equation.x.c + equation.x.t * delta;
 	solu->one.y = equation.y.c + equation.y.t * delta;
 	solu->one.z = equation.z.c + equation.z.t * delta;
-//	float	distance;
-//	distance = (powf(-10 - solu->one.x, 2) + powf(15 - solu->one.y, 2) + powf(-100 - solu->one.z, 2)) / 2;
-//	printf("dist plan %f\n", distance);
 	return (true);
 }
 

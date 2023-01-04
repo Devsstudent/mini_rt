@@ -17,5 +17,27 @@ void	error_msg(char *str)
 		return ;
 	write(2, str, ft_strlen(str));
 }
+
+void	free_exit(void *objs)
+{
+	if (objs)
+	{
+		free_objs((t_objects *) objs);
+		close_window(((t_objects *) objs)->mlx);
+	}
+	exit(0);
+}
+
+void	free_objs(t_objects *objs)
+{
+	free(objs->sp);
+	free(objs->li);
+	free(objs->cy);
+	free(objs->pl);
+	free(objs->cam);
+	free(objs->amb);
+}
 //we should need free exit funct
 ///void	free_exit()
+
+
