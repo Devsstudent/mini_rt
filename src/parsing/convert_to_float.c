@@ -6,34 +6,25 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:36:53 by odessein          #+#    #+#             */
-/*   Updated: 2022/11/30 15:23:19 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:48:14 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-bool	convert_to_float(float *val, char *arr)
+static void	remove_dot(char *arr, char *nb, int *dot)
 {
-	int		i;
-	int		j;
-	int		dot;
-	char	*nb;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	dot = 0;
-	nb = malloc(sizeof(char) * (ft_strlen(arr) + 1));
-	if (!nb)
-	{
-		//msg_error
-		return (false);
-	}
 	while (arr[i])
 	{
 		if (arr[i] == '.')
 		{
-			dot = 1;
+			*dot = 1;
 			if (arr[i + 1] && arr[i + 2] != '\0')
-				dot++;
+				(*dot)++;
 			i++;
 			continue ;
 		}
@@ -42,6 +33,18 @@ bool	convert_to_float(float *val, char *arr)
 		i++;
 	}
 	nb[j] = '\0';
+}
+
+bool	convert_to_float(float *val, char *arr)
+{
+	int		dot;
+	char	*nb;
+
+	dot = 0;
+	nb = malloc(sizeof(char) * (ft_strlen(arr) + 1));
+	if (!nb)
+		return (perror("Malloc error\n"), false);
+	remove_dot(arr, nb, &dot);
 	if (dot == 1)
 		*val = (float)(ft_atoi(nb)) / 10.0;
 	else if (dot == 2)
