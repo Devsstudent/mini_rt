@@ -103,7 +103,9 @@ typedef struct s_solution {
 typedef enum e_type{
 	SP,
 	CY,
-	PL
+	PL,
+	C,
+	LI
 }	t_type;
 
 typedef struct s_solution_list {
@@ -134,6 +136,8 @@ typedef struct	s_objects {
 	t_camera		*cam;
 	t_ambient_light	*amb;
 	t_mlx_info		*mlx;
+	int			nb_elem;
+	bool			editing;
 }	t_objects;
 
 

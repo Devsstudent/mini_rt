@@ -25,15 +25,21 @@ void	free_exit(void *objs)
 	exit(0);
 }
 
-void	free_objs(t_objects *objs)
+void	free_objs(t_objects *obj)
 {
-	free(objs->sp);
-	free(objs->li);
-	free(objs->cy);
-	free(objs->pl);
-	free(objs->cam);
-	free(objs->amb);
+	if (obj->cy)
+		free(obj->cy);
+	if (obj->pl)
+		free(obj->pl);
+	if (obj->sp)
+		free(obj->sp);
+	if (obj->li)
+		free(obj->li);
+	free(obj->cam);
+	free(obj->amb);
+	free(obj->mlx);
 }
+
 //we should need free exit funct
 ///void	free_exit()
 

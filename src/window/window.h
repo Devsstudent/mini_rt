@@ -12,6 +12,7 @@
 #ifndef WINDOW_H
 # define WINDOW_H
 # define ESC 65307
+# define E 101
 # define PI 3.1415926535
 # define WIN_W 780
 # define WIN_H 540
@@ -28,6 +29,7 @@ typedef struct s_sphere t_sphere;
 typedef struct s_solution_list	t_solution_list;
 typedef struct s_disp_point	t_disp_point;
 typedef struct s_solution	t_solution;
+
 
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
