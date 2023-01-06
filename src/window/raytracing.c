@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/05 22:47:22 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:34:10 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -78,5 +78,6 @@ bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i)
 			return (false);
 		j++;
 	}
+	printf("nice\n");
 	return (true);
 }

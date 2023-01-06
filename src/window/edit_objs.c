@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:38:20 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 17:24:14 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:20:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -14,7 +14,6 @@
 
 static bool	check_str(char *str)
 {
-
 	if (!str)
 	       return (false);
 	if (!ft_strncmp("sp\n", str, 4))
@@ -63,8 +62,6 @@ void	edit_objs(t_objects *objs)
 	//objs->editing = false;
 	objs->need_display = true;
 }
-
-
 
 /*
 void	apply_action_sp(t_edit edit_info, t_sphere *sp)
