@@ -30,6 +30,20 @@ typedef struct s_solution_list	t_solution_list;
 typedef struct s_disp_point	t_disp_point;
 typedef struct s_solution	t_solution;
 
+typedef enum e_edit_type {
+	RESIZE,
+	ROTATE,
+	TRANSLATE
+}	t_edit_type;
+
+typedef struct s_edit {
+	t_edit_type	action;
+	t_xyz		coord;
+	long		width;
+	long		height
+	long		diameter;
+	int		angle;
+}			t_edit;
 
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
