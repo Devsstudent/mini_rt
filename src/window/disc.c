@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/29 18:56:06 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/05 23:14:09 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -75,34 +75,26 @@ static t_solution	solution_disc(t_equation eq, t_line_eq equation, bool *error, 
 	return (solution);
 }
 
-bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude)
+bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i)
 {
 	t_equation	quadratic;
 	bool		err;
 	t_solution	solu;
 	t_xyz		p_disc;
 	float		radius;
-	int			i;
 	int			j;
 
-	i = 0;
-	while (i < obj->nb_cy)
+	j = 0;
+	while (j < 2)
 	{
-		j = 0;
-		if (i == i_to_exclude && i++)
-			continue ;
-		while (j < 2)
-		{
-			err = false;
-			quadratic = get_quadra_disc_equation(rayline, obj->cy[i], j, &p_disc, &radius);
-			solu = solution_disc(quadratic, rayline, &err, p_disc, radius);
-			if (err)
-				return (false);
-			if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
-				return (false);
-			j++;
-		}
-		i++;
+		err = false;
+		quadratic = get_quadra_disc_equation(rayline, obj->cy[i], j, &p_disc, &radius);
+		solu = solution_disc(quadratic, rayline, &err, p_disc, radius);
+		if (err)
+			return (false);
+		if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
+			return (false);
+		j++;
 	}
 	return (true);
 }
