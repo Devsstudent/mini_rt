@@ -11,6 +11,18 @@
 /* ************************************************************************** */
 #include "edit.h"
 
+void	apply_action_sp(t_edit edit_info, t_sphere *sp)
+{
+	if (edit_info.action == RESIZE)
+		sp->diameter = edit_info.diameter;
+	else if (edit_info.action == TRANSLATE)
+	{
+		sp->position.x = edit_info.coord.x;
+		sp->position.y = edit_info.coord.y;
+		sp->position.z = edit_info.coord.z;
+	}
+}
+
 bool	ask_sp(t_objects *objs)
 {
 	t_type		type;
@@ -24,8 +36,6 @@ bool	ask_sp(t_objects *objs)
 		nb = get_input_nb("Which sphere do you want to select ?\n");
 	edit_info = get_edit(type);
 	sp = &objs->sp[nb - 1];
-	if (edit_info.action == RESIZE)
-		sp->diameter = edit_info.diameter;
-//	apply_action_sp(edit_info, &objs->sp[nb]);
+	apply_action_sp(edit_info, sp);
 	return (true);
 }

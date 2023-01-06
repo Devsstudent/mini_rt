@@ -11,6 +11,20 @@
 /* ************************************************************************** */
 #include "edit.h"
 
+void	apply_action_cy(t_edit edit_info, t_cylinder *cy)
+{
+	if (edit_info.action == RESIZE)
+		cy->height = edit_info.height;
+	else if (edit_info.action == RESIZE_WIDTH)
+		cy->diameter = edit_info.width;
+	else if (edit_info.action == TRANSLATE)
+	{
+		cy->position.x = edit_info.coord.x;
+		cy->position.y = edit_info.coord.y;
+		cy->position.z = edit_info.coord.z;
+	}
+}
+
 bool	ask_cy(t_objects *objs)
 {
 	t_type	type;
@@ -28,11 +42,8 @@ bool	ask_cy(t_objects *objs)
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_cy || nb <= 0)
 		nb = get_input_nb("Which cylinder do you want to select ?\n");
-	cy = &objs->cy[nb];
+	cy = &objs->cy[nb - 1];
 	edit_info = get_edit(type);
-	if (edit_info.action == RESIZE)
-		cy->height = edit_info.height;
-	if (edit_info.action == RESIZE_WIDTH)
-		cy->height = edit_info.width;
+	apply_action_cy(edit_info, cy);
 	return (true);
 }
