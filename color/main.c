@@ -4,13 +4,12 @@
 
 int	main(void)
 {
+	float	a;
+	long	b;
 	unsigned char	r;
-	unsigned char	b;
-	unsigned char	b;
-	int	color;
 
 	r = 255;
-	g = 0;
-	b = 0;
-	color = create(r, g, b);
+	b = -2147483649;
+	a = b;
+	printf("%f\n", a);
 }

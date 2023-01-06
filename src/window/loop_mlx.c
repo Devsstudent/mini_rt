@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/05 18:25:34 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:00:28 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -15,8 +15,8 @@ int	close_window(t_objects *objs)
 {
 	mlx_destroy_image(objs->mlx->mlx, objs->mlx->img);
 	mlx_destroy_window(objs->mlx->mlx, objs->mlx->win);
-	free_objs(objs);
 	free(objs->mlx->mlx);
+	free_objs(objs);
 	exit(0);
 	return (0);
 }
@@ -25,6 +25,10 @@ int	hook_press(int keycode, t_objects *objs)
 {
 	if (keycode == ESC)
 		close_window(objs);
+	if (keycode == E && !objs->editing)
+		edit_objs(objs);
+//	else if (keycode == E && objs->editing)
+		//edit_objs(objs);
 	return (0);
 }
 
@@ -60,6 +64,7 @@ bool	window(t_objects *objs)
 			&objs->mlx->line_size, &objs->mlx->endian);
 //	printf("fov = %i\n", objs->cam[0].fov);
 	mlx_loop_hook(objs->mlx->mlx, &(render_window), objs);
+//	mlx_loop_hook(objs->mlx->mlx, &(setup_new_scene), objs);
 	mlx_hook(objs->mlx->win, 33, 1L << 1, &(close_window), objs);
 	mlx_hook(objs->mlx->win, 2, 1L << 1, &(hook_release), objs->mlx);
 	mlx_hook(objs->mlx->win, 2, 1L << 0, &(hook_press), objs);

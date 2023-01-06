@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/03 16:17:42 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:55:00 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -35,7 +35,6 @@ typedef struct s_xyz {
 	float	z;
 }		t_xyz;
 
-
 typedef struct s_rgb {
 	uint8_t	B; //0-255
 	uint8_t	G; //0-255
@@ -53,6 +52,13 @@ typedef struct s_orientation{
 	float	y; //-1 1
 	float	z; //-1 1
 }			t_orientation;
+
+typedef enum e_edit_type {
+	UNDEF,
+	RESIZE,
+	ROTATE,
+	TRANSLATE
+}	t_edit_type;
 
 typedef struct s_ambient_light
 {
@@ -103,7 +109,9 @@ typedef struct s_solution {
 typedef enum e_type{
 	SP,
 	CY,
-	PL
+	PL,
+	C,
+	LI
 }	t_type;
 
 typedef struct s_solution_list {
@@ -122,6 +130,16 @@ typedef struct s_disp_point{
 	bool		err;
 }				t_disp_point;
 
+typedef struct s_edit {
+	t_edit_type	action;
+	t_xyz		coord;
+	long		width;
+	long		height;
+	long		diameter;
+	int		angle;
+}			t_edit;
+
+
 typedef struct	s_objects {
 	t_sphere		*sp;
 	int			nb_sp;
@@ -134,8 +152,10 @@ typedef struct	s_objects {
 	t_camera		*cam;
 	t_ambient_light	*amb;
 	t_mlx_info		*mlx;
+	bool		need_display;
+	int			nb_elem;
+	bool			editing;
 }	t_objects;
-
 
 t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type, int i);
 #endif
