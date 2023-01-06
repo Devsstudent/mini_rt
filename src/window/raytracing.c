@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/28 22:55:37 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/05 22:47:22 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -14,7 +14,10 @@
 bool	loop_rendering(t_objects *objs, t_viewplan view_plan)
 {
 	int	i;
+	static int	done;
 
+	if (done > 0)
+		return (true);
 	i = 0;
 	while (i < WIN_H)
 	{
@@ -23,6 +26,7 @@ bool	loop_rendering(t_objects *objs, t_viewplan view_plan)
 		i++;
 	}
 	mlx_put_image_to_window(objs->mlx->mlx, objs->mlx->win, objs->mlx->img, 0, 0);
+	done++;
 	return (true);
 }
 

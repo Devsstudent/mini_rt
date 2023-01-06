@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbelrhaz <mbelrhaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:53:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/29 18:53:13 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:26:58 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
-
+/*
+float	powf_2(float a, int b)
+{
+	(void)b;
+	return (a * a);
+}
+*/
 t_equation	get_quadra_cylinder_equation(t_line_eq rayline, t_cylinder cylinder)
 {
 	t_equation	res;
@@ -38,24 +44,24 @@ t_equation	get_quadra_cylinder_equation(t_line_eq rayline, t_cylinder cylinder)
 	ym = origin.y;
 	zm = origin.z;
 	//a of the equation
-	res.x_pow_two = powf(k, 2) * (powf(b, 2) + powf(a, 2)) + powf(i, 2) 
-* (powf(c, 2) + powf(b, 2)) + powf(j, 2) * (powf(c, 2) + powf(a, 2)) - 2 * 
+	res.x_pow_two = powf(k, 2) * (powf(b, 2) + powf(a, 2)) + powf(i, 2)
+* (powf(c, 2) + powf(b, 2)) + powf(j, 2) * (powf(c, 2) + powf(a, 2)) - 2 *
 b * c * k * j - 2 * a * c * i * k - 2 * a * b * j * i;
 
 	//b of the equation
 	res.x_pow_one = 2 * k * zp * (powf(b, 2) + powf(a, 2)) + 2 * j * yp
 * (powf(c, 2) + powf(a, 2)) + 2 * i * xp * (powf(c, 2) + powf(b, 2)) + k
 * (-2 * powf(b, 2) * zm + 2 * b * c * ym + 2 * a * c * xm - 2 * powf(a, 2) * zm)
- + j * (2 * b * c * zm - 2 * powf(c, 2) * ym - 2 * powf(a, 2) * ym + 2 * a * b 
-* xm) + i * (-2 * powf(c, 2) * xm + 2 * a * c * zm + 2 * a * b * ym - 2 
-* powf(b, 2) * xm) - 2 * b * c * (k * yp + j * zp) - 2 * a * c 
+ + j * (2 * b * c * zm - 2 * powf(c, 2) * ym - 2 * powf(a, 2) * ym + 2 * a * b
+* xm) + i * (-2 * powf(c, 2) * xm + 2 * a * c * zm + 2 * a * b * ym - 2
+* powf(b, 2) * xm) - 2 * b * c * (k * yp + j * zp) - 2 * a * c
 * (i * zp + k * xp) - 2 * a * b * (j * xp + i * yp);
 
 	//c of the equation
 	res.c = -1 * powf(radius, 2) * (powf(a, 2) + powf(b, 2) + powf(c, 2))
-+ powf(b, 2) * (powf(zm, 2) + powf(xm, 2)) + powf(c, 2) * (powf(ym, 2) + powf(xm, 2)) + powf(a, 2) * (powf(zm, 2) + powf(ym, 2)) - 2 * b * c * zm * ym 
++ powf(b, 2) * (powf(zm, 2) + powf(xm, 2)) + powf(c, 2) * (powf(ym, 2) + powf(xm, 2)) + powf(a, 2) * (powf(zm, 2) + powf(ym, 2)) - 2 * b * c * zm * ym
 - 2 * a * c * zm * xm - 2 * a * b * ym * xm + powf(zp, 2) * (powf(b, 2) + powf(a, 2)) + powf(yp, 2) * (powf(c, 2) + powf(a, 2)) + powf(xp, 2) * (powf(c, 2) + powf(b, 2))
-+ zp * (-2 * powf(b, 2) * zm + 2 * b * c * ym + 2 * a * c * xm - 2 
++ zp * (-2 * powf(b, 2) * zm + 2 * b * c * ym + 2 * a * c * xm - 2
 * powf(a, 2) * zm) + yp * (2 * b * c * zm - 2 * ym * powf(c, 2) - 2 * powf(a, 2)
 * ym + 2 * a * b * xm) + xp * (-2 * powf(c, 2) * xm + 2 * a * c * zm + 2 * a * b * ym - 2 * powf(b, 2) * xm) - 2 * b * c * zp * yp - 2 * a * c * xp * zp - 2 * a * b * yp * xp;
 
@@ -116,7 +122,7 @@ bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int
 		if (err)
 			return (false);
 		check_solution(&solu, obj->cy[i]);
-		get_disc(obj, list, rayline, i_to_exclude);
+		get_disc(obj, list, rayline, i);
 		if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
 			return (false);
 		i++;
