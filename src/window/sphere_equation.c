@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/05 18:56:02 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:28:33 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -89,7 +89,6 @@ t_vect	get_vec_horizontal(t_vect v_director, t_vect v_ortho)
 	res[2] = v_director[0] * v_ortho[1] - v_director[1] * v_ortho[0];
 	return (res);
 }
-
 
 //HFOV_rad = FOV * PI / 180;
 

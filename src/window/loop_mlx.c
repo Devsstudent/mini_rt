@@ -15,8 +15,8 @@ int	close_window(t_objects *objs)
 {
 	mlx_destroy_image(objs->mlx->mlx, objs->mlx->img);
 	mlx_destroy_window(objs->mlx->mlx, objs->mlx->win);
-	free_objs(objs);
 	free(objs->mlx->mlx);
+	free_objs(objs);
 	exit(0);
 	return (0);
 }
@@ -25,6 +25,10 @@ int	hook_press(int keycode, t_objects *objs)
 {
 	if (keycode == ESC)
 		close_window(objs);
+//	if (keycode == E && !objs->editing)
+//		edit_objs(objs);
+//	else if (keycode == E && objs->editing)
+		//edit_objs(objs);
 	return (0);
 }
 

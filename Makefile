@@ -20,6 +20,8 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								setup_array_function \
 								split_on_function \
 								conversions \
+								convert_to_float \
+								convert_to_vect \
 								fill_structs \
 								fill_cylinder \
 								build_elems \
@@ -30,6 +32,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 							fill_structs_utils) \
 		$(addprefix window/,  loop_mlx \
 								render_window \
+								edit_objs \
 								sphere \
 								plane \
 								cylinder \

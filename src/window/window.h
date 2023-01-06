@@ -6,12 +6,13 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/05 18:24:34 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:32:07 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
 # define WINDOW_H
 # define ESC 65307
+# define E 101
 # define PI 3.1415926535
 # define WIN_W 780
 # define WIN_H 540
@@ -28,6 +29,7 @@ typedef struct s_sphere t_sphere;
 typedef struct s_solution_list	t_solution_list;
 typedef struct s_disp_point	t_disp_point;
 typedef struct s_solution	t_solution;
+typedef struct s_edit	t_edit;
 
 typedef struct s_mlx_info {
 	t_mlx	*mlx;

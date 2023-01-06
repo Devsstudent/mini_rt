@@ -11,19 +11,6 @@
 /* ************************************************************************** */
 #include "minirt.h"
 
-void	free_object(t_objects *obj)
-{
-	if (obj->cy)
-		free(obj->cy);
-	if (obj->pl)
-		free(obj->pl);
-	if (obj->sp)
-		free(obj->sp);
-	if (obj->li)
-		free(obj->li);
-	free(obj->cam);
-	free(obj->amb);
-}
 
 int		main(int ac, char **av)
 {
@@ -51,7 +38,7 @@ int		main(int ac, char **av)
 	//Parsing
 		//if not error msg (function for it)
 	//Start_game
-	free_object(&objects);
+	free_objs(&objects);
 	return (0);
 }
 
