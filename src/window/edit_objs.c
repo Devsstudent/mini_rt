@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 #include "window.h"
 
-
 static bool	check_str(char *str)
 {
 	if (!str)
@@ -62,21 +61,3 @@ void	edit_objs(t_objects *objs)
 	//objs->editing = false;
 	objs->need_display = true;
 }
-
-/*
-void	apply_action_sp(t_edit edit_info, t_sphere *sp)
-{
-	if (edit_info.action == RESIZE)
-	{
-
-	}
-	else if (edit_info.action == ROTATE)
-	{
-
-	}
-	else if (edit_info.action == TRANSLATE)
-	{
-
-	}
-}
-*/

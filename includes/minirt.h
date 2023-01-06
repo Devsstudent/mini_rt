@@ -116,6 +116,13 @@ typedef enum e_type{
 	LI
 }	t_type;
 
+typedef enum e_axis{
+	NO_ONE,
+	X,
+	Y,
+	Z
+}	t_axis;
+
 typedef struct s_solution_list {
 	t_rgb					color;
 	t_solution				solution;
@@ -139,6 +146,7 @@ typedef struct s_edit {
 	long		height;
 	long		diameter;
 	int		angle;
+	t_axis		axis;
 }			t_edit;
 
 

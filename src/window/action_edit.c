@@ -67,25 +67,41 @@ static void	resize(t_edit *res, t_type type)
 	}
 }
 
-static int	get_angle_rotate(void)
+void	get_angle_rotate(t_edit *edit_info)
 {
 	long	val;
+	char	*buff;
 
 	val = 400;
+	edit_info->action = ROTATE; 
+	buff = 0;
 	while (val > 360 || val < -360)
 		val = get_input_nb("Enter the angle of rotation you want: \n");
-	return (val);
+	while (!buff || (ft_strncmp("x\n", buff, 3) && ft_strncmp("y\n", buff, 3) && ft_strncmp("z\n", buff, 3)))
+	{
+		if (buff)
+			free(buff);
+		buff = take_input_str("Over which axis do you want to rotate \n");
+	}
+	if (!ft_strncmp("x\n", buff, 3))
+		edit_info->axis = X;
+	else if (!ft_strncmp("y\n", buff, 3))
+		edit_info->axis = Y;
+	else if (!ft_strncmp("z\n", buff, 3))
+		edit_info->axis = Z;
+	free(buff);
+	edit_info->angle = val;
 }
 
 static bool	check_edit(t_type type, char *str)
 {
 	if (!str)
 		return (false);
-	if (*str == 'r' && (type == SP || type == CY))
+	if (!ft_strncmp("r\n", str, 3) && (type == SP || type == CY))
 		return (true);
-	if (*str == 'o' && (type != LI && type != SP))
+	if (!ft_strncmp("o\n", str, 3) && (type != LI && type != SP))
 		return (true);
-	if (*str == 't')
+	if (!ft_strncmp("t\n", str, 3))
 		return (true);
 	return (false);
 }
@@ -113,10 +129,7 @@ t_edit	get_edit(t_type type)
 	if (*str == 'r')
 		resize(&res, type);
 	else if (*str == 'o')
-	{
-		res.action = ROTATE;
-		res.angle = get_angle_rotate();
-	}
+		get_angle_rotate(&res);
 	else if (*str == 't')
 	{
 		res.action = TRANSLATE;
