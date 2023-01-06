@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 14:00:28 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:34:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -25,7 +25,9 @@ int	hook_press(int keycode, t_objects *objs)
 {
 	if (keycode == ESC)
 		close_window(objs);
-	if (keycode == E && !objs->editing)
+	//A voir si on veux modifier ou pas plusieurs element a la fois ou pas
+	//Possibilite de mettre un key hook pour dire que c'est fini avant de recalculer
+	if (keycode == E)
 		edit_objs(objs);
 //	else if (keycode == E && objs->editing)
 		//edit_objs(objs);

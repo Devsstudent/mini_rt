@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 13:55:00 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:16:53 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -24,6 +24,7 @@
 # include "parsing.h"
 # include "libft.h"
 # include "window.h"
+# include "edit.h"
 
 typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_mlx_info t_mlx_info;
@@ -56,6 +57,7 @@ typedef struct s_orientation{
 typedef enum e_edit_type {
 	UNDEF,
 	RESIZE,
+	RESIZE_WIDTH,
 	ROTATE,
 	TRANSLATE
 }	t_edit_type;
