@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:38:20 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 15:29:01 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:49:24 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -60,7 +60,6 @@ t_xyz	get_input_coord(void)
 	long	z;
 
 	x = get_input_nb("Enter the new x coordinate value\n");
-	printf("here:%li\n", x);
 	while (x > (long) INT_MAX)
 		x = get_input_nb("Enter the new x coordinate value\n");
 	y = get_input_nb("Enter the new y coordinate value\n");
@@ -93,12 +92,14 @@ void	resize(t_edit *res, t_type type)
 			val = get_input_nb("Enter 1 if you want to modify height otherwise enter 2\n");
 		if (val == 1)
 		{
+			val = get_input_nb("Enter the new height :\n");
 			while (val <= 0 || val > INT_MAX)
 				val = get_input_nb("Enter the new height :\n");
 			res->height = val;
 		}
 		else
 		{
+			val = get_input_nb("Enter the new width :\n");
 			while (val <= 0 || val > INT_MAX)
 				val = get_input_nb("Enter the new width :\n");
 			res->width = val;
@@ -128,7 +129,7 @@ t_edit	get_edit(t_type type)
 	res.width = 0;
 	res.height = 0;
 	res.diameter = 0;
-	res.angle = 500;
+	res.angle = 0;
 	str = 0;
 	while (!check_edit(type, str))
 	{
@@ -174,6 +175,12 @@ bool	ask_cy(t_objects *objs)
 	long	nb;
 	t_edit		edit_info;
 
+	if (objs->nb_cy == 0)
+	{
+		//I guess i the end we should INVALID MAP if not 1 cylinder & 1 sphere & 1 plane
+		ft_putstr_fd("No cylinder sorry :(\n", 1);
+		return (true);
+	}
 	type = CY;
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_cy || nb <= 0)
