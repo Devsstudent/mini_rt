@@ -29,6 +29,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix error/, error \
 							fill_structs_utils) \
 		$(addprefix window/,  loop_mlx \
+								render_window \
 								sphere \
 								plane \
 								cylinder \

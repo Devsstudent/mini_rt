@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/05 14:35:18 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:54:12 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -41,6 +41,7 @@ int		main(int ac, char **av)
 		return (2);
 	}
 	objects.mlx = malloc(sizeof(t_mlx_info));
+	objects.need_display = true;
 //	printf("%f %f %f\n", objects.cam->vec_direction.x,  objects.cam->vec_direction.y,  objects.cam->vec_direction.z );
 	if (!window(&objects))
 		return (3);

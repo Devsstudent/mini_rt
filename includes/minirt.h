@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/03 16:17:42 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/05 18:50:24 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -134,6 +134,7 @@ typedef struct	s_objects {
 	t_camera		*cam;
 	t_ambient_light	*amb;
 	t_mlx_info		*mlx;
+	bool			need_display;
 }	t_objects;
 
 

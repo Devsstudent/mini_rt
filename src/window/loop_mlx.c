@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/05 18:25:34 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/05 19:03:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -60,6 +60,7 @@ bool	window(t_objects *objs)
 			&objs->mlx->line_size, &objs->mlx->endian);
 //	printf("fov = %i\n", objs->cam[0].fov);
 	mlx_loop_hook(objs->mlx->mlx, &(render_window), objs);
+//	mlx_loop_hook(objs->mlx->mlx, &(setup_new_scene), objs);
 	mlx_hook(objs->mlx->win, 33, 1L << 1, &(close_window), objs);
 	mlx_hook(objs->mlx->win, 2, 1L << 1, &(hook_release), objs->mlx);
 	mlx_hook(objs->mlx->win, 2, 1L << 0, &(hook_press), objs);
