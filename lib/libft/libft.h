@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 12:38:41 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/02 17:47:29 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:58:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
 # define BASE_L "0123456789abcdef"
 # define BASE_U "0123456789ABCDEF"
 # ifndef BUFFER_SIZE

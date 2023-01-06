@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:38:20 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 13:58:35 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:29:01 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -25,12 +25,16 @@ long	get_input_nb(char *ask)
 	char	*str;
 	long	nb;
 
-	nb = 0;
-	while (nb > INT_MAX || nb <= 0)
+	nb = (long) INT_MAX + 1;
+	while (nb > INT_MAX)
 	{
 		str = take_input_str(ask);
+		if (!str)
+		{
+			free(str);
+			continue ;
+		}
 		nb = ft_atoi(str);
-		free(str);
 	}
 	return (nb);
 }
@@ -51,16 +55,23 @@ bool	check_edit(t_type type, char *str)
 t_xyz	get_input_coord(void)
 {
 	t_xyz	res;
+	long	x;
+	long	y;
+	long	z;
 
-	res.x = get_input_nb("Enter the new x coordinate value\n");
-	while ((long) res.x > INT_MAX)
-		res.x = get_input_nb("Enter the new x coordinate value\n");
-	res.y = get_input_nb("Enter the new y coordinate value\n");
-	while ((long) res.y > INT_MAX)
-		res.y = get_input_nb("Enter the new y coordinate value\n");
-	res.z = get_input_nb("Enter the new z coordinate value\n");
-	while ((long) res.z > INT_MAX)
-		res.z = get_input_nb("Enter the new z coordinate value\n");
+	x = get_input_nb("Enter the new x coordinate value\n");
+	printf("here:%li\n", x);
+	while (x > (long) INT_MAX)
+		x = get_input_nb("Enter the new x coordinate value\n");
+	y = get_input_nb("Enter the new y coordinate value\n");
+	while (y > (long) INT_MAX)
+		y = get_input_nb("Enter the new y coordinate value\n");
+	z = get_input_nb("Enter the new z coordinate value\n");
+	while (z > (long) INT_MAX)
+		z = get_input_nb("Enter the new z coordinate value\n");
+	res.x = x;
+	res.y = y;
+	res.z = z;
 	return (res);
 }
 
@@ -144,18 +155,13 @@ bool	ask_sp(t_objects *objs)
 {
 	t_type		type;
 	long		nb;
-	char		*buff;
 	//t_sphere	*sp;
 	t_edit		edit_info;
 
 	type = SP;
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_sp || nb <= 0)
-	{
-		buff = take_input_str("Which sphere do you want to select ?\n");
-		nb = atoi(buff);
-		free(buff);
-	}
+		nb = get_input_nb("Which sphere do you want to select ?\n");
 	edit_info = get_edit(type);
 	(void) edit_info;
 //	apply_action_sp(edit_info, &objs->sp[nb]);
@@ -166,17 +172,12 @@ bool	ask_cy(t_objects *objs)
 {
 	t_type	type;
 	long	nb;
-	char	*buff;
 	t_edit		edit_info;
 
 	type = CY;
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_cy || nb <= 0)
-	{
-		buff = take_input_str("Which cylinder do you want to select ?\n");
-		nb = atoi(buff);
-		free(buff);
-	}
+		nb = get_input_nb("Which cylinder do you want to select ?\n");
 	edit_info = get_edit(type);
 	(void) edit_info;
 	return (true);
@@ -186,17 +187,12 @@ bool	ask_pl(t_objects *objs)
 {
 	t_type	type;
 	long	nb;
-	char	*buff;
 	t_edit		edit_info;
 
 	nb = 0;
 	type = PL;
 	while (nb > INT_MAX || nb > objs->nb_pl || nb <= 0)
-	{
-		buff = take_input_str("Which plane do you want to select ?\n");
-		nb = atoi(buff);
-		free(buff);
-	}
+		nb = get_input_nb("Which plane do you want to select ?\n");
 	edit_info = get_edit(type);
 	(void) edit_info;
 	return (true);
@@ -206,17 +202,12 @@ bool	ask_li(t_objects *objs)
 {
 	t_type	type;
 	long	nb;
-	char	*buff;
 	t_edit		edit_info;
 
 	type = LI;
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_li || nb <= 0)
-	{
-		buff = take_input_str("Which light do you want to select ?\n");
-		nb = atoi(buff);
-		free(buff);
-	}
+		nb = get_input_nb("Which light do you want to select ?\n");
 	edit_info = get_edit(type);
 	(void) edit_info;
 	return (true);
@@ -239,15 +230,15 @@ bool	check_str(char *str)
 
 	if (!str)
 	       return (false);
-	else if (!ft_strncmp("sp", str, 3))
+	if (!ft_strncmp("sp\n", str, 4))
 	       return (true);
-	else if (!ft_strncmp("cy", str, 3))
+	else if (!ft_strncmp("cy\n", str, 4))
 	       return (true);
-	else if (!ft_strncmp("pl", str, 3))
+	else if (!ft_strncmp("pl\n", str, 4))
 	       return (true);
-	else if (!ft_strncmp("li", str, 3))
+	else if (!ft_strncmp("li\n", str, 4))
 	       return (true);
-	else if (!ft_strncmp("c", str, 2))
+	else if (!ft_strncmp("c\n", str, 3))
 	       return (true);
 	return (false);
 }
@@ -256,15 +247,15 @@ void	go_for_asked(char *str, t_objects *objs)
 {
 	if (!str)
 		return ;
-	if (!ft_strncmp("sp", str, 3))
+	if (!ft_strncmp("sp\n", str, 4))
 		ask_sp(objs);
-	if (!ft_strncmp("cy", str, 3))
+	if (!ft_strncmp("cy\n", str, 4))
 		ask_cy(objs);
-	if (!ft_strncmp("pl", str, 3))
+	if (!ft_strncmp("pl\n", str, 4))
 		ask_pl(objs);
-	if (!ft_strncmp("li", str, 3))
+	if (!ft_strncmp("li\n", str, 4))
 		ask_li(objs);
-	if (!ft_strncmp("c", str, 2))
+	if (!ft_strncmp("c\n", str, 3))
 		ask_c(objs);
 	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/05 19:03:42 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:00:28 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -25,8 +25,8 @@ int	hook_press(int keycode, t_objects *objs)
 {
 	if (keycode == ESC)
 		close_window(objs);
-//	if (keycode == E && !objs->editing)
-//		edit_objs(objs);
+	if (keycode == E && !objs->editing)
+		edit_objs(objs);
 //	else if (keycode == E && objs->editing)
 		//edit_objs(objs);
 	return (0);

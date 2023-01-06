@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 13:32:07 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:01:52 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -69,6 +69,8 @@ typedef struct s_line_eq {
 	t_eq	z;
 }		t_line_eq;
 
+//edit_objs.c
+void	edit_objs(t_objects *objs);
 
 //raytracing_utils.c
 t_vect	multp(t_vect vector, int t);
