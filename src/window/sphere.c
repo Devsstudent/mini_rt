@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 18:01:12 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:33:00 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -47,9 +47,7 @@ bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline)
 			return (false);
 		if (solu.sol_one
 			&& !list_add(list, new_elem(solu, obj->sp[i].color, SP, i)))
-		{
 			return (false);
-		}
 		i++;
 	}
 	return (true);

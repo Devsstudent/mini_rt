@@ -33,6 +33,13 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix window/,  loop_mlx \
 								render_window \
 								edit_objs \
+								edit_utils \
+								action_edit \
+								camera_edit \
+								cylinder_edit \
+								sphere_edit \
+								light_edit \
+								plane_edit \
 								sphere \
 								plane \
 								cylinder \
