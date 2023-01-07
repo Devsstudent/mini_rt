@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/03 17:34:19 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:15:27 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -117,11 +117,11 @@ t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,
 
 	get_rayvec_light(objs, disp_p.intersec_point, &rayvec, i);
 	rayline = get_rayline_eq(rayvec, disp_p.intersec_point);
-	if (!get_sphere(objs, &list, rayline, -1))
+	if (!get_sphere(objs, &list, rayline))
 		return (error_intersec());
-	if (!get_plane(objs, &list, rayline, -1))
+	if (!get_plane(objs, &list, rayline))
 		return (error_intersec());
-	if (!get_cylinder(objs, &list, rayline, -1))
+	if (!get_cylinder(objs, &list, rayline))
 		return (error_intersec());
 	return (fill_list_intersection(&list, disp_p.intersec_point));
 }

@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <mbelrhaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:53:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/06 17:26:58 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:10:20 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -104,7 +104,7 @@ void	check_solution(t_solution *solu, t_cylinder cylinder)
 	}
 }
 
-bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude)
+bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline)
 {
 	t_equation	quadratic;
 	bool		err;
@@ -114,8 +114,6 @@ bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int
 	i = 0;
 	while (i < obj->nb_cy)
 	{
-		if (i == i_to_exclude && i++)
-			continue ;
 		err = false;
 		quadratic = get_quadra_cylinder_equation(rayline, obj->cy[i]);
 		solu = solution(quadratic, rayline, &err);
@@ -123,7 +121,8 @@ bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int
 			return (false);
 		check_solution(&solu, obj->cy[i]);
 		get_disc(obj, list, rayline, i);
-		if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
+		if (solu.sol_one
+				&& !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
 			return (false);
 		i++;
 	}
@@ -142,8 +141,9 @@ bool	get_specific_cylinder(t_objects *obj, t_solution_list **list, t_line_eq ray
 	if (err)
 		return (false);
 	check_solution(&solu, obj->cy[i_to_view]);
-	get_specific_disc(obj, list, rayline, i_to_view);
-	if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i_to_view].color, CY, i_to_view)))
+	get_disc(obj, list, rayline, i_to_view);
+	if (solu.sol_one && !list_add(list,
+			new_elem(solu, obj->cy[i_to_view].color, CY, i_to_view)))
 		return (false);
 	return (true);
 }

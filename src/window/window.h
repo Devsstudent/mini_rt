@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 14:01:52 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:09:34 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -79,14 +79,14 @@ t_vect	get_vector(t_vect up_left, t_vect hori, t_vect verti);
 t_vect	get_up_left(t_vect hori, t_vect verti, t_vect orient);
 
 //raytracing.c
-bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
+bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline);
 bool	get_specific_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
-bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
+bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline);
 bool	get_specific_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
-bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
+bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline);
 bool	get_specific_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
-bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude);
-bool	get_specific_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
+bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline,
+		int i);
 bool	loop_rendering(t_objects *objs, t_viewplan view_plan);
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i);
 t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);

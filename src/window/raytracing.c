@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/05 22:47:22 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:16:34 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -38,11 +38,11 @@ bool	resolve_equation(t_objects *objs, t_solution_list **list, t_vect rayvec, t_
 
 	rayline = get_rayline_eq(rayvec, objs->cam->position);
 	color = 0;
-	if (!get_sphere(objs, list, rayline, -1))
+	if (!get_sphere(objs, list, rayline))
 		return (false);
-	if (!get_plane(objs, list, rayline, -1))
+	if (!get_plane(objs, list, rayline))
 		return (false);
-	if (!get_cylinder(objs, list, rayline, -1))
+	if (!get_cylinder(objs, list, rayline))
 		return (false);
 	intersec_point = fill_list_intersection(list, objs->cam->position);
 	if (intersec_point.intersec_point.x == -1 && intersec_point.intersec_point.y == -1 && intersec_point.intersec_point.z == -1)

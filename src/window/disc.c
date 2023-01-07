@@ -6,12 +6,13 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/05 23:14:09 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:09:12 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-t_equation	get_quadra_disc_equation(t_line_eq rayline, t_cylinder cylinder, int i, t_xyz *p_disc, float *radius)
+t_equation	get_quadra_disc_equation(t_line_eq rayline, t_cylinder cylinder,
+		int i, t_xyz *p_disc, float *radius)
 {
 	t_equation	res;
 	t_vect		vect_disc;
@@ -36,7 +37,8 @@ t_equation	get_quadra_disc_equation(t_line_eq rayline, t_cylinder cylinder, int 
 	return (res);
 }
 
-static bool	one_solu_disc(t_solution *solu, t_equation eq, t_line_eq equation, t_xyz p_disc, float radius)
+static bool	one_solu_disc(t_solution *solu, t_equation eq, t_line_eq equation,
+		t_xyz p_disc, float radius)
 {
 	float	solution;
 
@@ -53,7 +55,8 @@ static bool	one_solu_disc(t_solution *solu, t_equation eq, t_line_eq equation, t
 	return (true);
 }
 
-static t_solution	solution_disc(t_equation eq, t_line_eq equation, bool *error, t_xyz p_disc, float radius)
+static t_solution	solution_disc(t_equation eq, t_line_eq equation,
+		bool *error, t_xyz p_disc, float radius)
 {
 	t_solution	solution;
 
@@ -75,9 +78,9 @@ static t_solution	solution_disc(t_equation eq, t_line_eq equation, bool *error, 
 	return (solution);
 }
 
-bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i)
+bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline,
+		int i)
 {
-	t_equation	quadratic;
 	bool		err;
 	t_solution	solu;
 	t_xyz		p_disc;
@@ -88,35 +91,12 @@ bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i)
 	while (j < 2)
 	{
 		err = false;
-		quadratic = get_quadra_disc_equation(rayline, obj->cy[i], j, &p_disc, &radius);
-		solu = solution_disc(quadratic, rayline, &err, p_disc, radius);
+		solu = solution_disc(get_quadra_disc_equation(rayline, obj->cy[i],
+			j, &p_disc, &radius), rayline, &err, p_disc, radius);
 		if (err)
 			return (false);
-		if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
-			return (false);
-		j++;
-	}
-	return (true);
-}
-
-bool	get_specific_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view)
-{
-	t_equation	quadratic;
-	bool		err;
-	t_solution	solu;
-	t_xyz		p_disc;
-	float	radius;
-	int			j;
-
-	j = 0;
-	while (j < 2)
-	{
-		err = false;
-		quadratic = get_quadra_disc_equation(rayline, obj->cy[i_to_view], j, &p_disc, &radius);
-		solu = solution_disc(quadratic, rayline, &err, p_disc, radius);
-		if (err)
-			return (false);
-		if (solu.sol_one && !list_add(list, new_elem(solu, obj->cy[i_to_view].color, CY, i_to_view)))
+		if (solu.sol_one
+			&& !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
 			return (false);
 		j++;
 	}

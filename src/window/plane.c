@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/29 16:34:58 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:00:21 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -64,7 +64,7 @@ static t_solution	solution_plan(t_equation eq, t_line_eq equation, bool *error)
 	return (solution);
 }
 
-bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_exclude)
+bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline)
 {
 	t_equation	quadratic;
 	bool		err;
@@ -74,14 +74,13 @@ bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_
 	i = 0;
 	while (i < obj->nb_pl)
 	{
-		if (i == i_to_exclude && i++)
-			continue ;
 		err = false;
 		quadratic = get_quadra_plan_equation(rayline, obj->pl[i]);
 		solu = solution_plan(quadratic, rayline, &err);
 		if (err)
 			return (false);
-		if (solu.sol_one && !list_add(list, new_elem(solu, obj->pl[i].color, PL, i)))
+		if (solu.sol_one
+			&& !list_add(list, new_elem(solu, obj->pl[i].color, PL, i)))
 			return (false);
 		i++;
 	}
@@ -94,13 +93,13 @@ bool	get_specific_plane(t_objects *obj, t_solution_list **list, t_line_eq raylin
 	bool		err;
 	t_solution	solu;
 
-
 	err = false;
 	quadratic = get_quadra_plan_equation(rayline, obj->pl[i_to_view]);
 	solu = solution_plan(quadratic, rayline, &err);
 	if (err)
 		return (false);
-	if (solu.sol_one && !list_add(list, new_elem(solu, obj->pl[i_to_view].color, PL, i_to_view)))
+	if (solu.sol_one && !list_add(list,
+			new_elem(solu, obj->pl[i_to_view].color, PL, i_to_view)))
 		return (false);
 	return (true);
 }
