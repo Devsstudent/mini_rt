@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:54 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 17:25:05 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:48:24 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -16,12 +16,19 @@ void	apply_action_cy(t_edit edit_info, t_cylinder *cy)
 	if (edit_info.action == RESIZE)
 		cy->height = edit_info.height;
 	else if (edit_info.action == RESIZE_WIDTH)
+	{
 		cy->diameter = edit_info.width;
+		cy->radius = cy->diameter / 2.0;
+		cy->radius_2 = cy->radius * cy->radius;
+	}
 	else if (edit_info.action == TRANSLATE)
 	{
 		cy->position.x = edit_info.coord.x;
+		cy->xm_2[0] = cy->position.x * cy->position.x;
 		cy->position.y = edit_info.coord.y;
+		cy->xm_2[1] = cy->position.y * cy->position.y;
 		cy->position.z = edit_info.coord.z;
+		cy->xm_2[2] = cy->position.z * cy->position.z;
 	}
 }
 

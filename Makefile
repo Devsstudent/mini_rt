@@ -43,6 +43,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								sphere \
 								plane \
 								cylinder \
+								cylinder_equation \
 								disc \
 								color \
 								intersection \

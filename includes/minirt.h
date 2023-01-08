@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 17:16:53 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:49:34 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -95,8 +95,12 @@ typedef struct	s_plane {
 
 typedef struct	s_cylinder {
 	t_xyz			position;
+	float			xm_2[3];
 	t_vect			vec_direction;
+	float			abc_2[3];
 	float			diameter;
+	float			radius;
+	float			radius_2;
 	float			height;
 	t_rgb			color;
 }					t_cylinder;
@@ -145,10 +149,38 @@ typedef struct s_edit {
 	long		width;
 	long		height;
 	long		diameter;
-	int		angle;
+	int			angle;
 	t_axis		axis;
 }			t_edit;
 
+typedef struct	s_cy_eq {
+	float		r;
+	float		r_2;
+	float		a;
+	float		b;
+	float		c;
+	float		a_2;
+	float		b_2;
+	float		c_2;
+	float		xm;
+	float		ym;
+	float		zm;
+	float		xm_2;
+	float		ym_2;
+	float		zm_2;
+	float		i;
+	float		j;
+	float		k;
+	float		i_2;
+	float		j_2;
+	float		k_2;
+	float		xp;
+	float		yp;
+	float		zp;
+	float		xp_2;
+	float		yp_2;
+	float		zp_2;
+}			t_cy_eq;
 
 typedef struct	s_objects {
 	t_sphere		*sp;

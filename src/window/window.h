@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 18:09:34 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/08 21:15:55 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -26,6 +26,7 @@ typedef struct s_objects		t_objectss;
 typedef void * t_mlx;
 typedef struct s_plane t_plane;
 typedef struct s_sphere t_sphere;
+typedef struct s_cylinder t_cylinder;
 typedef struct s_solution_list	t_solution_list;
 typedef struct s_disp_point	t_disp_point;
 typedef struct s_solution	t_solution;
@@ -60,7 +61,9 @@ typedef struct s_viewplan{
 
 typedef struct s_eq{
 	float	c;
+	float	c2;
 	float	t;
+	float	t2;
 }		t_eq;
 
 typedef struct s_line_eq {
@@ -93,6 +96,7 @@ t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
 bool	resolve_equation(t_objects *objs, t_solution_list **list, t_vect rayvec, t_i_j i_j);
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_plane plane);
 t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere);
+t_equation	get_quadra_cylinder_equation(t_line_eq rayline, t_cylinder cylinder);
 
 //intersection.c
 t_disp_point	fill_list_intersection(t_solution_list **list, t_xyz start_point);
