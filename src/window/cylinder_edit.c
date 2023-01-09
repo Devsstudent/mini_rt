@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:54 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 15:30:54 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:36:44 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -31,7 +31,13 @@ void	apply_action_cy(t_edit edit_info, t_cylinder *cy)
 		cy->xm_2[2] = cy->position.z * cy->position.z;
 	}
 	else if (edit_info.action == ROTATE)
-		cy->vec_direction = apply_rotation(cy->vec_direction, edit_info.axis, edit_info.angle);
+	{
+		cy->vec_direction = apply_rotation(cy->vec_direction,
+			edit_info.axis, edit_info.angle);
+		cy->abc_2[0] = cy->vec_direction[0] * cy->vec_direction[0];
+		cy->abc_2[1] = cy->vec_direction[1] * cy->vec_direction[1];
+		cy->abc_2[2] = cy->vec_direction[2] * cy->vec_direction[2];
+	}
 }
 
 bool	ask_cy(t_objects *objs)

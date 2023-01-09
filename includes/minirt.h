@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 15:26:02 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:14:02 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -185,6 +185,8 @@ typedef struct	s_cy_eq {
 }			t_cy_eq;
 
 typedef struct	s_objects {
+	t_vect			vect_height;
+	t_vect			vect_width;
 	t_sphere		*sp;
 	int			nb_sp;
 	t_cylinder		*cy;
@@ -198,7 +200,7 @@ typedef struct	s_objects {
 	t_mlx_info		*mlx;
 	bool		need_display;
 	int			nb_elem;
-	bool			editing;
+	bool			edited;
 }	t_objects;
 
 t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type, int i);

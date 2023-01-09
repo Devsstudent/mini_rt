@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 18:41:41 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:21:59 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -33,6 +33,7 @@ int	hook_press(int keycode, t_objects *objs)
 		objs->mlx->img = mlx_new_image(objs->mlx->mlx, WIN_W, WIN_H);
 		if (!objs->mlx->img)
 			free_exit(objs);
+		objs->edited = false;
 		edit_objs(objs);
 	}
 //	else if (keycode == E && objs->editing)
@@ -60,6 +61,7 @@ void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color)
 bool	window(t_objects *objs)
 {
 	objs->mlx->mlx = mlx_init();
+	objs->edited = false;
 	if (!objs->mlx->mlx)
 		return (false);
 	objs->mlx->win = mlx_new_window(objs->mlx->mlx, 780, 540, "mini_rt :)");

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:12:31 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 18:29:20 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/09 21:32:23 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -16,17 +16,8 @@ t_vect	apply_rotation(t_vect initial, t_axis axis, int angle)
 	t_vect	res;
 	double	_cos;
 	double	_sin;
-	if (angle < 0)
-	{
-		angle = angle * -1;
-		_sin = -sin(((float) angle) * (PI / 180));
-		_cos = -cos(((float) angle) * (PI / 180));
-	}
-	else
-	{
-		_sin = -sin(((float) angle) * (PI / 180));
-		_cos = -cos(((float) angle) * (PI / 180));
-	}
+	_sin = sin(((float) angle) * (PI / 180));
+	_cos = cos(((float) angle) * (PI / 180));
 	if (axis == X)
 	{
 		res[0] = initial[0];
@@ -37,7 +28,7 @@ t_vect	apply_rotation(t_vect initial, t_axis axis, int angle)
 	{
 		res[0] = initial[2] * _sin +  initial[0] * _cos;
 		res[1] = initial[1];
-		res[2] = initial[1] * _cos - initial[0] * _sin;
+		res[2] = initial[2] * _cos - initial[0] * _sin;
 	}
 	else if (axis == Z)
 	{
