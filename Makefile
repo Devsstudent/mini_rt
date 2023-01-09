@@ -40,6 +40,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								sphere_edit \
 								light_edit \
 								plane_edit \
+								rotation \
 								sphere \
 								plane \
 								cylinder \

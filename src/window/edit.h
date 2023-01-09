@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:13:47 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 17:28:58 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:29:32 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EDIT_H
@@ -26,6 +26,7 @@ typedef struct s_disp_point	t_disp_point;
 typedef struct s_solution	t_solution;
 typedef struct s_edit	t_edit;
 typedef enum e_type		t_type;
+typedef enum e_axis		t_axis;
 
 //action_edit.c
 t_edit	get_edit(t_type type);
@@ -51,4 +52,8 @@ bool	ask_sp(t_objects *objs);
 
 //light_edit.c
 bool	ask_li(t_objects *objs);
+
+//rotation.c
+t_vect	apply_rotation(t_vect initial, t_axis axis, int angle);
+
 #endif

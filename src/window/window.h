@@ -6,14 +6,13 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/08 21:15:55 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:25:54 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
 # define WINDOW_H
 # define ESC 65307
 # define E 101
-# define PI 3.1415926535
 # define WIN_W 780
 # define WIN_H 540
 # include "minirt.h"
