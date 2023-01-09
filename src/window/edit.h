@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:13:47 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 15:29:32 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:20:17 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EDIT_H
@@ -55,5 +55,6 @@ bool	ask_li(t_objects *objs);
 
 //rotation.c
 t_vect	apply_rotation(t_vect initial, t_axis axis, int angle);
+t_xyz	apply_rotation_pos(t_xyz initial, t_axis axis, int angle);
 
 #endif

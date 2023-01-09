@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 16:34:03 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:41:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -28,7 +28,13 @@ int	hook_press(int keycode, t_objects *objs)
 	//A voir si on veux modifier ou pas plusieurs element a la fois ou pas
 	//Possibilite de mettre un key hook pour dire que c'est fini avant de recalculer
 	if (keycode == E)
+	{
+		mlx_destroy_image(objs->mlx->mlx, objs->mlx->img);
+		objs->mlx->img = mlx_new_image(objs->mlx->mlx, WIN_W, WIN_H);
+		if (!objs->mlx->img)
+			free_exit(objs);
 		edit_objs(objs);
+	}
 //	else if (keycode == E && objs->editing)
 		//edit_objs(objs);
 	return (0);
