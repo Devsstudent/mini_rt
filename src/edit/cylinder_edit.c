@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:54 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 14:31:11 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:24:22 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -49,7 +49,6 @@ bool	ask_cy(t_objects *objs)
 
 	if (objs->nb_cy == 0)
 	{
-		//I guess i the end we should INVALID MAP if not 1 cylinder & 1 sphere & 1 plane
 		ft_putstr_fd("No cylinder sorry :(\n", 1);
 		return (true);
 	}

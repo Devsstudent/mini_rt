@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:05:02 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/04 17:25:10 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:22:34 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -46,6 +46,6 @@ bool	check_cylinder(char **line_split, t_must_have *all_elem)
 		return (false);
 	if (line_split[6])
 		return (false);
-	all_elem->object = true;
+	all_elem->cylinder = true;
 	return (true);
 }

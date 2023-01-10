@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:12:29 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/19 13:09:59 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:18:19 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -16,7 +16,6 @@ bool	check_shadow(t_line_eq rayline, t_objects *objs)
 	bool		err;
 
 	err = false;
-	//free_exit if err
 	if (check_sphere_between(rayline, objs, &err))
 		return (true);
 	if (!check_plan_between(rayline, objs, &err))

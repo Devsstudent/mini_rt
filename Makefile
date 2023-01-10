@@ -45,6 +45,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								solution_list \
 								raytracing \
 								vector_operations \
+								vector_operations_bis \
 								equation) \
 		$(addprefix edit/, edit_objs \
 								resize \

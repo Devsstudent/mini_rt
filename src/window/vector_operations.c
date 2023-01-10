@@ -6,29 +6,10 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 18:27:49 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/28 21:32:46 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:21:27 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "window.h"
-
-t_vect	create_vector(t_xyz one, t_xyz two)
-{
-	t_vect	res;
-
-	res[0] = two.x - one.x;
-	res[1] = two.y - one.y;
-	res[2] = two.z - one.z;
-	return (res);
-}
-
-t_vect	get_opposite_vector(t_vect vector)
-{
-	t_vect	res;
-
-	res = -vector;
-	return (res);
-}
 
 t_vect	vector_product(t_vect vector_1, t_vect vector_2)
 {
@@ -52,7 +33,7 @@ t_vect	normalize_vector(t_vect vector)
 	float	norm;
 
 	norm = norm_of_vector(vector);
-	res = vector * ((float) (1.0 / norm));
+	res = vector * ((float)(1.0 / norm));
 	return (res);
 }
 
@@ -64,7 +45,6 @@ t_vect	get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov)
 	float	desired_norm;
 
 	norm_d = norm_of_vector(vect_d);
-	//tan() takes an angle in radians, conversion is necessary
 	desired_norm = (tan((fov * PI / 180.0) / 2) / norm_d);
 	normed_w = normalize_vector(vect_w);
 	unit_w = normed_w * (desired_norm / (float)(WIN_W * 2.0));

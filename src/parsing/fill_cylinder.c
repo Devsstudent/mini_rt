@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:36:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/08 19:51:10 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:49:54 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -26,7 +26,7 @@ bool	fill_cylinder(char **arr, int j, t_objects *objects)
 	objects->cy[j].xm_2[0] = objects->cy[j].position.x
 		* objects->cy[j].position.x;
 	objects->cy[j].xm_2[1] = objects->cy[j].position.y
-			* objects->cy[j].position.y;
+		* objects->cy[j].position.y;
 	objects->cy[j].xm_2[2] = objects->cy[j].position.z
 		* objects->cy[j].position.z;
 	objects->cy[j].abc_2[0] = objects->cy[j].vec_direction[0]

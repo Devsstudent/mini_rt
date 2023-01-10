@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:06:19 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:18:08 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:28:25 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -28,6 +28,11 @@ bool	ask_li(t_objects *objs)
 	t_edit	edit_info;
 	t_light	*li;
 
+	if (objs->nb_li == 0)
+	{
+		ft_putstr_fd("No lights sorry : (\n", 1);
+		return (true);
+	}
 	type = LI;
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_li || nb <= 0)
