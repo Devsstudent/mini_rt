@@ -6,10 +6,11 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:04:47 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 17:27:14 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:21:28 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "window.h"
+#include "head.h"
+#include <stdlib.h>
 
 bool	list_add(t_solution_list **head, t_solution_list *new)
 {
@@ -66,5 +67,4 @@ void	free_list(t_solution_list **head)
 		free(*head);
 		*head = buff;
 	}
-	free(*head);
 }

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 16:19:56 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:25:24 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -25,9 +25,7 @@ bool	get_specific_sphere(t_objects *obj, t_solution_list **list,
 		return (false);
 	if (solu.sol_one && !list_add(list,
 			new_elem(solu, obj->sp[i_to_view].color, SP, i_to_view)))
-	{
 		return (false);
-	}
 	return (true);
 }
 

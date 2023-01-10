@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:54:24 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:44:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -37,22 +37,20 @@ bool	resolve_equation(t_objects *objs, t_solution_list **list,
 	rayline = get_rayline_eq(rayvec, objs->cam->position);
 	color = 0;
 	if (!get_sphere(objs, list, rayline))
-		return (false);
+		free_exit(objs);
 	if (!get_plane(objs, list, rayline))
-		return (false);
+		free_exit(objs);
 	if (!get_cylinder(objs, list, rayline))
-		return (false);
-	intersec_point = fill_list_intersection(list, objs->cam->position);
+		free_exit(objs);
+	intersec_point = get_intersection(list, objs->cam->position);
 	if (intersec_point.intersec_point.x == -1
 		&& intersec_point.intersec_point.y == -1
 		&& intersec_point.intersec_point.z == -1)
-		return (true);
+		return (free_list(list), true);
 	if (!get_pixel_color(&color, intersec_point, objs))
-		return (false);
+		free_exit(objs);
 	if (list && (*list) && (*list)->solution.sol_one)
-	{
 		img_pixel_put(objs->mlx, i_j.j, i_j.i, color);
-	}
 	free_list(list);
 	return (true);
 }
@@ -77,8 +75,10 @@ bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i)
 				multp(get_opposite_vector(view_plan->hori), j),
 				multp(get_opposite_vector(view_plan->verti), i));
 		if (!resolve_equation(objs, &list, rayvec, i_j))
-			return (false);
+			return (free(list), false);
 		j++;
 	}
+	free_list(&list);
+	free(list);
 	return (true);
 }

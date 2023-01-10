@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:53:03 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:44:23 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -33,7 +33,7 @@ void	fill_disp_point(t_solution_list *buff,
 	disp_point->obj_id = buff->obj_id;
 }
 
-t_disp_point	fill_list_intersection(t_solution_list **list,
+t_disp_point	get_intersection(t_solution_list **list,
 					t_xyz start_point)
 {
 	t_solution_list	*buff;

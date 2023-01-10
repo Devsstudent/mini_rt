@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 15:25:54 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:44:40 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -98,7 +98,7 @@ t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere);
 t_equation	get_quadra_cylinder_equation(t_line_eq rayline, t_cylinder cylinder);
 
 //intersection.c
-t_disp_point	fill_list_intersection(t_solution_list **list, t_xyz start_point);
+t_disp_point	get_intersection(t_solution_list **list, t_xyz start_point);
 bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance);
 
 	//equation.c
