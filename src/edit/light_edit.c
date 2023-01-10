@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:06:19 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 15:31:24 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:18:08 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -25,7 +25,7 @@ bool	ask_li(t_objects *objs)
 {
 	t_type	type;
 	long	nb;
-	t_edit		edit_info;
+	t_edit	edit_info;
 	t_light	*li;
 
 	type = LI;

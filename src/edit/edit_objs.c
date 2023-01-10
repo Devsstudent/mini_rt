@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:38:20 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 19:20:03 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:29:19 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -14,17 +14,17 @@
 static bool	check_str(char *str)
 {
 	if (!str)
-	       return (false);
+		return (false);
 	if (!ft_strncmp("sp\n", str, 4))
-	       return (true);
+		return (true);
 	else if (!ft_strncmp("cy\n", str, 4))
-	       return (true);
+		return (true);
 	else if (!ft_strncmp("pl\n", str, 4))
-	       return (true);
+		return (true);
 	else if (!ft_strncmp("li\n", str, 4))
-	       return (true);
+		return (true);
 	else if (!ft_strncmp("c\n", str, 3))
-	       return (true);
+		return (true);
 	return (false);
 }
 
@@ -50,7 +50,6 @@ void	edit_objs(t_objects *objs)
 	char	*str;
 
 	str = 0;
-//	objs->editing = true;
 	while (!check_str(str))
 	{
 		if (str)
@@ -58,6 +57,5 @@ void	edit_objs(t_objects *objs)
 		str = take_input_str("Which object type you want to edit ?\n");
 	}
 	go_for_asked(str, objs);
-	//objs->editing = false;
 	objs->need_display = true;
 }

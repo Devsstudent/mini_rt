@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:05:40 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 15:30:41 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:30:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -20,14 +20,15 @@ void	apply_action_pl(t_edit edit_info, t_plane *pl)
 		pl->position.z = edit_info.coord.z;
 	}
 	else if (edit_info.action == ROTATE)
-		pl->vec_direction = apply_rotation(pl->vec_direction, edit_info.axis, edit_info.angle);
+		pl->vec_direction = apply_rotation(pl->vec_direction,
+				edit_info.axis, edit_info.angle);
 }
 
 bool	ask_pl(t_objects *objs)
 {
 	t_type	type;
 	long	nb;
-	t_edit		edit_info;
+	t_edit	edit_info;
 	t_plane	*pl;
 
 	nb = 0;

@@ -2,7 +2,7 @@ NAME = mini_rt
 CC = cc
 FLAGS = -Wall -Werror -Wextra -pg -MMD
 LIB = -L $(addprefix lib/, mlx) -lmlx -lXext -lX11 -lm -L $(addprefix lib/, libft) -lft
-HEADER = -I $(addprefix lib/, mlx) -I $(addprefix lib/, libft) -I ./includes -I ./src/parsing -I ./src/error -I ./src/window
+HEADER = -I $(addprefix lib/, mlx) -I $(addprefix lib/, libft) -I ./includes -I ./src/parsing -I ./src/error -I ./src/window -I ./src/edit
 OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix parsing/, parsing \
 							$(addprefix check_, ambient \
@@ -32,15 +32,6 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 							fill_structs_utils) \
 		$(addprefix window/,  loop_mlx \
 								render_window \
-								edit_objs \
-								edit_utils \
-								action_edit \
-								camera_edit \
-								cylinder_edit \
-								sphere_edit \
-								light_edit \
-								plane_edit \
-								rotation \
 								sphere \
 								plane \
 								cylinder \
@@ -54,7 +45,17 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								solution_list \
 								raytracing \
 								vector_operations \
-								equation)))
+								equation) \
+		$(addprefix edit/, edit_objs \
+								resize \
+								rotation \
+								edit_utils \
+								action_edit \
+								camera_edit \
+								cylinder_edit \
+								sphere_edit \
+								light_edit \
+								plane_edit)))
 
 D_LST = $(OBJ:.o=.d)
 
@@ -74,6 +75,7 @@ obj_rep:
 	@mkdir -p obj/parsing/
 	@mkdir -p obj/error/
 	@mkdir -p obj/window/
+	@mkdir -p obj/edit/
 
 clean:
 	make clean -s -C lib/libft
