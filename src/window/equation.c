@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 13:27:37 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/28 23:55:45 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:16:55 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -78,7 +78,6 @@ t_solution	solution(t_equation eq, t_line_eq equation, bool *error)
 	if (!init_solution(&solution))
 	{
 		*error = true;
-		//return NULL ?
 		return (solution);
 	}
 	delta = powf(eq.x_pow_one, 2) - 4 * (eq.x_pow_two * eq.c);

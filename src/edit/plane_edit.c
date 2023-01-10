@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:05:40 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 14:30:03 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:28:33 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -31,6 +31,11 @@ bool	ask_pl(t_objects *objs)
 	t_edit	edit_info;
 	t_plane	*pl;
 
+	if (objs->nb_pl == 0)
+	{
+		ft_putstr_fd("No planes, sorry : ( \n", 1);
+		return (true);
+	}
 	nb = 0;
 	type = PL;
 	while (nb > INT_MAX || nb > objs->nb_pl || nb <= 0)

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 18:15:27 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:57:53 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -61,18 +61,19 @@ int	intersect_self(t_objects *objs, t_disp_point point, int i)
 	rayline = get_rayline_eq(rayvec, objs->cam->position);
 	if (point.type == SP
 		&& !get_specific_sphere(objs, &list, rayline, point.obj_id))
-		return (free_list(&list), -1);
+		return (free_list(&list), free(list),-1);
 	if (point.type == PL
 		&& !get_specific_plane(objs, &list, rayline, point.obj_id))
-		return (free_list(&list), -1);
+		return (free_list(&list), free(list),-1);
 	if (point.type == CY
 		&& !get_specific_cylinder(objs, &list, rayline, point.obj_id))
-		return (free_list(&list), -1);
-	intersection = fill_list_intersection(&list, objs->cam->position);
+		return (free_list(&list), free(list),-1);
+	intersection = get_intersection(&list, objs->cam->position);
 	if (list != NULL && list->solution.sol_one
 		&& in_the_way(intersection.intersec_point, rayvec, objs->cam->position))
-		return (free_list(&list), 0);
+		return (free_list(&list), free(list), 0);
 	free_list(&list);
+	free(list);
 	return (1);
 }
 
@@ -123,7 +124,7 @@ t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,
 		return (error_intersec());
 	if (!get_cylinder(objs, &list, rayline))
 		return (error_intersec());
-	return (fill_list_intersection(&list, disp_p.intersec_point));
+	return (get_intersection(&list, disp_p.intersec_point));
 }
 
 bool	check_no_shadow(t_disp_point intersection, t_disp_point initial,
@@ -155,11 +156,11 @@ bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 	t_vect				rayvec;
 
 	i = -1;
+	list = malloc(sizeof(t_solution_list));
+	if (!list)
+		free_exit(objs);
 	while (++i < objs->nb_li)
 	{
-		list = malloc(sizeof(t_solution_list));
-		if (!list)
-			return (false);
 		list = NULL;
 		intersection = check_light_shadow(disp_p, objs, i, list);
 		if (intersection.err)
@@ -173,6 +174,8 @@ bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 		compute_rgb(objs, norm_of_vector(rayvec), rgb, i);
 		free_list(&list);
 	}
+	free_list(&list);
+	free(list);
 	return (true);
 }
 

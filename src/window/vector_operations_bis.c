@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elem_structure.c                                   :+:      :+:    :+:   */
+/*   vector_operations_bis.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 11:34:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:21:43 by odessein         ###   ########.fr       */
+/*   Created: 2023/01/10 16:21:10 by odessein          #+#    #+#             */
+/*   Updated: 2023/01/10 16:21:27 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minirt.h"
+#include "window.h"
 
-void	init_all_elem(t_must_have *all_elem)
+t_vect	create_vector(t_xyz one, t_xyz two)
 {
-	all_elem->ambient = false;
-	all_elem->camera = false;
-	all_elem->object = false;
-	all_elem->light_maj = false;
-	all_elem->light = false;
+	t_vect	res;
+
+	res[0] = two.x - one.x;
+	res[1] = two.y - one.y;
+	res[2] = two.z - one.z;
+	return (res);
 }
 
-bool	check_all_elem(t_must_have all_elem)
+t_vect	get_opposite_vector(t_vect vector)
 {
-	if (!all_elem.ambient || !all_elem.camera || !all_elem.object)
-		return (false);
-	return (true);
+	t_vect	res;
+
+	res = -vector;
+	return (res);
 }

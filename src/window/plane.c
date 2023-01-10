@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/06 18:00:21 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:23:32 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -20,10 +20,11 @@ t_equation	get_quadra_plan_equation(t_line_eq rayline, t_plane plane)
 	vect_plan = plane.vec_direction;
 	p_plan = plane.position;
 	res.x_pow_two = 0;
-	res.x_pow_one = vect_plan[0] * rayline.x.t + vect_plan[1] * rayline.y.t + vect_plan[2] * rayline.z.t;
+	res.x_pow_one = vect_plan[0] * rayline.x.t + vect_plan[1]
+		* rayline.y.t + vect_plan[2] * rayline.z.t;
 	res.c = vect_plan[0] * (rayline.x.c - p_plan.x)
-					+ vect_plan[1] * (rayline.y.c - p_plan.y)
-					+ vect_plan[2] * (rayline.z.c - p_plan.z);
+		+ vect_plan[1] * (rayline.y.c - p_plan.y)
+		+ vect_plan[2] * (rayline.z.c - p_plan.z);
 	return (res);
 }
 
@@ -42,14 +43,14 @@ static bool	one_solu_plan(t_solution *solu, t_equation eq, t_line_eq equation)
 	return (true);
 }
 
-static t_solution	solution_plan(t_equation eq, t_line_eq equation, bool *error)
+static t_solution	solution_plan(t_equation eq, t_line_eq equation,
+			bool *error)
 {
 	t_solution	solution;
 
 	if (!init_solution(&solution))
 	{
 		*error = true;
-		//return NULL ?
 		return (solution);
 	}
 	if (eq.x_pow_one == 0)
@@ -87,7 +88,8 @@ bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline)
 	return (true);
 }
 
-bool	get_specific_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view)
+bool	get_specific_plane(t_objects *obj, t_solution_list **list,
+			t_line_eq rayline, int i_to_view)
 {
 	t_equation	quadratic;
 	bool		err;
