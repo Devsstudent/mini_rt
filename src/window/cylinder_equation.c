@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:09:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/08 21:11:43 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/10 23:45:45 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -50,7 +50,7 @@ void	get_quadra_b(t_cy_eq cy, t_equation *res)
 		* (cy.c_2 + cy.a_2) + 2 * cy.i * cy.xp * (cy.c_2 + cy.b_2) + cy.k
 		* (-2 * cy.b_2 * cy.zm + 2 * cy.b * cy.c * cy.ym + 2 * cy.a
 			* cy.c * cy.xm - 2 * cy.a_2 * cy.zm) + cy.j * (2 * cy.b * cy.c
-			* cy.zm - 2 * cy.c_2 * cy.ym + 2 * cy.a_2 * cy.ym + 2 * cy.a
+			* cy.zm - 2 * cy.c_2 * cy.ym - 2 * cy.a_2 * cy.ym + 2 * cy.a
 			* cy.b * cy.xm) + cy.i * (-2 * cy.c_2 * cy.xm + 2 * cy.a * cy.c
 			* cy.zm + 2 * cy.a * cy.b * cy.ym - 2 * cy.b_2 * cy.xm) - 2
 		* cy.b * cy.c * (cy.k * cy.yp + cy.j * cy.zp) - 2 * cy.a
