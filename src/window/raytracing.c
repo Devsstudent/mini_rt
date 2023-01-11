@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 17:44:03 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:49:10 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -27,7 +27,7 @@ bool	loop_rendering(t_objects *objs, t_viewplan view_plan)
 	return (true);
 }
 
-bool	resolve_equation(t_objects *objs, t_solution_list **list,
+bool	resolve_equation(t_objects *objs, t_sol_li *list,
 			t_vect rayvec, t_i_j i_j)
 {
 	int				color;
@@ -39,17 +39,26 @@ bool	resolve_equation(t_objects *objs, t_solution_list **list,
 	if (!get_sphere(objs, list, rayline))
 		free_exit(objs);
 	if (!get_plane(objs, list, rayline))
+	{
+		free_list(list);
 		free_exit(objs);
+	}
 	if (!get_cylinder(objs, list, rayline))
+	{
+		free_list(list);
 		free_exit(objs);
+	}
 	intersec_point = get_intersection(list, objs->cam->position);
 	if (intersec_point.intersec_point.x == -1
 		&& intersec_point.intersec_point.y == -1
 		&& intersec_point.intersec_point.z == -1)
 		return (free_list(list), true);
 	if (!get_pixel_color(&color, intersec_point, objs))
+	{
+		free_list(list);
 		free_exit(objs);
-	if (list && (*list) && (*list)->solution.sol_one)
+	}
+	if (list && (list->head) && (list->head)->solution.sol_one)
 		img_pixel_put(objs->mlx, i_j.j, i_j.i, color);
 	free_list(list);
 	return (true);
@@ -58,27 +67,22 @@ bool	resolve_equation(t_objects *objs, t_solution_list **list,
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i)
 {
 	int				j;
-	t_solution_list	*list;
+	t_sol_li		list;
 	t_vect			rayvec;
 	t_i_j			i_j;
 
 	j = 0;
-	list = malloc(sizeof(t_solution_list));
-	if (!list)
-		free_exit(objs);
-	list = NULL;
 	while (j < WIN_W)
 	{
+		init_sol_li(&list);
 		i_j.i = i;
 		i_j.j = j;
 		rayvec = get_vector(view_plan->up_left,
 				multp(get_opposite_vector(view_plan->hori), j),
 				multp(get_opposite_vector(view_plan->verti), i));
 		if (!resolve_equation(objs, &list, rayvec, i_j))
-			return (free(list), false);
+			return (false);
 		j++;
 	}
-	free_list(&list);
-	free(list);
 	return (true);
 }

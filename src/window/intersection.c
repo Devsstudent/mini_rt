@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 17:44:23 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:46:37 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -21,7 +21,7 @@ t_xyz	get_point(t_xyz	intersec, t_vect rayvec, t_xyz start_point)
 	return (res);
 }
 
-void	fill_disp_point(t_solution_list *buff,
+static void	fill_disp_point(t_solution_elem *buff,
 			t_disp_point *disp_point, bool two)
 {
 	if (!two)
@@ -33,10 +33,10 @@ void	fill_disp_point(t_solution_list *buff,
 	disp_point->obj_id = buff->obj_id;
 }
 
-t_disp_point	get_intersection(t_solution_list **list,
+t_disp_point	get_intersection(t_sol_li *list,
 					t_xyz start_point)
 {
-	t_solution_list	*buff;
+	t_solution_elem	*buff;
 	t_disp_point	disp_point;
 	float			distance;
 
@@ -45,7 +45,7 @@ t_disp_point	get_intersection(t_solution_list **list,
 	disp_point.intersec_point.z = -1;
 	disp_point.err = false;
 	distance = -1;
-	buff = *list;
+	buff = list->head;
 	while (buff != NULL)
 	{
 		if (buff->solution.sol_one)

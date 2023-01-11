@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:03:54 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 17:57:53 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:45:14 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -47,33 +47,29 @@ bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
 int	intersect_self(t_objects *objs, t_disp_point point, int i)
 {
 	t_line_eq		rayline;
-	t_solution_list	*list;
+	t_sol_li		list;
 	t_vect			rayvec;
 	t_disp_point	intersection;
 
-	list = malloc(sizeof(t_solution_list));
-	if (!list)
-		return (false);
-	list = NULL;
+	init_sol_li(&list);
 	rayvec[0] = objs->li[i].position.x - objs->cam->position.x;
 	rayvec[1] = objs->li[i].position.y - objs->cam->position.y;
 	rayvec[2] = objs->li[i].position.z - objs->cam->position.z;
 	rayline = get_rayline_eq(rayvec, objs->cam->position);
 	if (point.type == SP
 		&& !get_specific_sphere(objs, &list, rayline, point.obj_id))
-		return (free_list(&list), free(list),-1);
+		return (free_list(&list),-1);
 	if (point.type == PL
 		&& !get_specific_plane(objs, &list, rayline, point.obj_id))
-		return (free_list(&list), free(list),-1);
+		return (free_list(&list),-1);
 	if (point.type == CY
 		&& !get_specific_cylinder(objs, &list, rayline, point.obj_id))
-		return (free_list(&list), free(list),-1);
+		return (free_list(&list),-1);
 	intersection = get_intersection(&list, objs->cam->position);
-	if (list != NULL && list->solution.sol_one
+	if (list.head != NULL && list.head->solution.sol_one
 		&& in_the_way(intersection.intersec_point, rayvec, objs->cam->position))
-		return (free_list(&list), free(list), 0);
+		return (free_list(&list), 0);
 	free_list(&list);
-	free(list);
 	return (1);
 }
 
@@ -111,20 +107,20 @@ t_disp_point	error_intersec(void)
 }
 
 t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,
-					int i, t_solution_list *list)
+					int i, t_sol_li *list)
 {
 	t_line_eq		rayline;
 	t_vect			rayvec;
 
 	get_rayvec_light(objs, disp_p.intersec_point, &rayvec, i);
 	rayline = get_rayline_eq(rayvec, disp_p.intersec_point);
-	if (!get_sphere(objs, &list, rayline))
+	if (!get_sphere(objs, list, rayline))
 		return (error_intersec());
-	if (!get_plane(objs, &list, rayline))
+	if (!get_plane(objs, list, rayline))
 		return (error_intersec());
-	if (!get_cylinder(objs, &list, rayline))
+	if (!get_cylinder(objs, list, rayline))
 		return (error_intersec());
-	return (get_intersection(&list, disp_p.intersec_point));
+	return (get_intersection(list, disp_p.intersec_point));
 }
 
 bool	check_no_shadow(t_disp_point intersection, t_disp_point initial,
@@ -151,18 +147,15 @@ bool	check_no_shadow(t_disp_point intersection, t_disp_point initial,
 bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 {
 	int					i;
-	t_solution_list		*list;
+	t_sol_li		list;
 	t_disp_point		intersection;
 	t_vect				rayvec;
 
 	i = -1;
-	list = malloc(sizeof(t_solution_list));
-	if (!list)
-		free_exit(objs);
 	while (++i < objs->nb_li)
 	{
-		list = NULL;
-		intersection = check_light_shadow(disp_p, objs, i, list);
+		init_sol_li(&list);
+		intersection = check_light_shadow(disp_p, objs, i, &list);
 		if (intersection.err)
 			return (free_list(&list), false);
 		if (check_no_shadow(intersection, disp_p, objs, i))
@@ -174,8 +167,6 @@ bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 		compute_rgb(objs, norm_of_vector(rayvec), rgb, i);
 		free_list(&list);
 	}
-	free_list(&list);
-	free(list);
 	return (true);
 }
 

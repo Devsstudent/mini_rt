@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 17:44:40 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:41:16 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */ 
 #ifndef WINDOW_H
@@ -26,10 +26,12 @@ typedef void * t_mlx;
 typedef struct s_plane t_plane;
 typedef struct s_sphere t_sphere;
 typedef struct s_cylinder t_cylinder;
-typedef struct s_solution_list	t_solution_list;
+typedef struct s_solution_elem	t_solution_elem;
 typedef struct s_disp_point	t_disp_point;
+typedef struct s_sol_li			t_sol_li;
 typedef struct s_solution	t_solution;
 typedef struct s_edit	t_edit;
+typedef enum e_type		t_type;
 
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
@@ -81,24 +83,24 @@ t_vect	get_vector(t_vect up_left, t_vect hori, t_vect verti);
 t_vect	get_up_left(t_vect hori, t_vect verti, t_vect orient);
 
 //raytracing.c
-bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline);
-bool	get_specific_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
-bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline);
-bool	get_specific_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
-bool	get_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline);
-bool	get_specific_cylinder(t_objects *obj, t_solution_list **list, t_line_eq rayline, int i_to_view);
-bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline,
+bool	get_sphere(t_objects *obj, t_sol_li *list, t_line_eq rayline);
+bool	get_specific_sphere(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view);
+bool	get_plane(t_objects *obj, t_sol_li *list, t_line_eq rayline);
+bool	get_specific_plane(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view);
+bool	get_cylinder(t_objects *obj, t_sol_li *list, t_line_eq rayline);
+bool	get_specific_cylinder(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view);
+bool	get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 		int i);
 bool	loop_rendering(t_objects *objs, t_viewplan view_plan);
 bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i);
 t_line_eq	get_rayline_eq(t_vect vec_line, t_xyz start_point);
-bool	resolve_equation(t_objects *objs, t_solution_list **list, t_vect rayvec, t_i_j i_j);
+bool	resolve_equation(t_objects *objs, t_sol_li *list, t_vect rayvec, t_i_j i_j);
 t_equation	get_quadra_plan_equation(t_line_eq rayline, t_plane plane);
 t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere);
 t_equation	get_quadra_cylinder_equation(t_line_eq rayline, t_cylinder cylinder);
 
 //intersection.c
-t_disp_point	get_intersection(t_solution_list **list, t_xyz start_point);
+t_disp_point	get_intersection(t_sol_li *list, t_xyz start_point);
 bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance);
 
 	//equation.c
@@ -131,9 +133,10 @@ t_vect	get_screen_unit_vert_vect(t_vect unit_w, t_vect vect_h);
 t_vect	get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
 
 //solution_list.c
-bool	list_add(t_solution_list **head, t_solution_list *new);
-void	free_list(t_solution_list **head);
-t_solution_list	*get_last_elem(t_solution_list **head);
+void			init_sol_li(t_sol_li *sol_li);
+bool			list_add(t_sol_li *sol_li, t_solution_elem *new);
+t_solution_elem	*new_elem(t_solution solution, t_rgb color, t_type type, int i);
+void			free_list(t_sol_li *sol_li);
 
 //color.c
 void	ambient_light_quo(t_objects *objs, float RGB[3]);

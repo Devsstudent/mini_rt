@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/06 18:09:12 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:42:12 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -78,7 +78,7 @@ static t_solution	solution_disc(t_equation eq, t_line_eq equation,
 	return (solution);
 }
 
-bool	get_disc(t_objects *obj, t_solution_list **list, t_line_eq rayline,
+bool	get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 		int i)
 {
 	bool		err;

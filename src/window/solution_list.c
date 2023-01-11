@@ -6,34 +6,43 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:04:47 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 17:27:14 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:48:32 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
 
-bool	list_add(t_solution_list **head, t_solution_list *new)
+void	init_sol_li(t_sol_li *sol_li)
 {
-	t_solution_list	*buff;
+	sol_li->size = 0;
+	sol_li->head = NULL;
+	sol_li->last = NULL;
+}
 
-	if (!head)
+bool	list_add(t_sol_li *sol_li, t_solution_elem *new)
+{
+	t_solution_elem	*buff;
+
+	if (!sol_li)
 		return (false);
-	if (!(*head))
+	if (!sol_li->head)
 	{
-		*head = new;
+		sol_li->head = new;
 		return (true);
 	}
-	buff = *head;
+	buff = sol_li->head;
 	while (buff->next != NULL)
 		buff = buff->next;
 	buff->next = new;
+	sol_li->size += 1;
+	sol_li->last = new;
 	return (true);
 }
 
-t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type, int i)
+t_solution_elem	*new_elem(t_solution solution, t_rgb color, t_type type, int i)
 {
-	t_solution_list	*res;
+	t_solution_elem	*res;
 
-	res = malloc(sizeof(t_solution_list));
+	res = (t_solution_elem *) malloc(sizeof(*res));
 	if (!res)
 		return (NULL);
 	res->solution = solution;
@@ -44,27 +53,14 @@ t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type, int i)
 	return (res);
 }
 
-t_solution_list	*get_last_elem(t_solution_list **head)
+void	free_list(t_sol_li *sol_li)
 {
-	t_solution_list	*last;
+	t_solution_elem	*buff;
 
-	last = *head;
-	while (last->next != NULL)
+	while (sol_li->head != NULL)
 	{
-		last = last->next;
+		buff = sol_li->head->next;
+		free(sol_li->head);
+		sol_li->head = buff;
 	}
-	return (last);
-}
-
-void	free_list(t_solution_list **head)
-{
-	t_solution_list	*buff;
-
-	while (*head != NULL)
-	{
-		buff = (*head)->next;
-		free(*head);
-		*head = buff;
-	}
-	free(*head);
 }

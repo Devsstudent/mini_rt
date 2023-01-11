@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 16:23:32 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:12:40 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -65,7 +65,7 @@ static t_solution	solution_plan(t_equation eq, t_line_eq equation,
 	return (solution);
 }
 
-bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline)
+bool	get_plane(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 {
 	t_equation	quadratic;
 	bool		err;
@@ -88,7 +88,7 @@ bool	get_plane(t_objects *obj, t_solution_list **list, t_line_eq rayline)
 	return (true);
 }
 
-bool	get_specific_plane(t_objects *obj, t_solution_list **list,
+bool	get_specific_plane(t_objects *obj, t_sol_li *list,
 			t_line_eq rayline, int i_to_view)
 {
 	t_equation	quadratic;

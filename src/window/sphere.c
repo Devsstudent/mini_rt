@@ -6,12 +6,12 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 17:25:24 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:11:46 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-bool	get_specific_sphere(t_objects *obj, t_solution_list **list,
+bool	get_specific_sphere(t_objects *obj, t_sol_li *list,
 			t_line_eq rayline, int i_to_view)
 {
 	t_equation	quadratic;
@@ -29,7 +29,7 @@ bool	get_specific_sphere(t_objects *obj, t_solution_list **list,
 	return (true);
 }
 
-bool	get_sphere(t_objects *obj, t_solution_list **list, t_line_eq rayline)
+bool	get_sphere(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 {
 	t_equation	quadratic;
 	bool		err;

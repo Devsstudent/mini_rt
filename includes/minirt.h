@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/09 20:14:02 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:47:55 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -129,13 +129,19 @@ typedef enum e_axis{
 	Z
 }	t_axis;
 
-typedef struct s_solution_list {
+typedef struct s_solution_elem {
 	t_rgb					color;
 	t_solution				solution;
 	t_type					type;
 	int						obj_id;
-	struct s_solution_list	*next;
-}							t_solution_list;
+	struct s_solution_elem	*next;
+}							t_solution_elem;
+
+typedef struct s_sol_li {
+	t_solution_elem	*head;
+	int				size;
+	t_solution_elem	*last;
+}					t_sol_li;
 
 typedef struct s_disp_point{
 	t_xyz		intersec_point;
@@ -203,5 +209,4 @@ typedef struct	s_objects {
 	bool			edited;
 }	t_objects;
 
-t_solution_list	*new_elem(t_solution solution, t_rgb color, t_type type, int i);
 #endif

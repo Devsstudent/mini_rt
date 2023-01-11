@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <mbelrhaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:53:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/08 21:12:29 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:13:21 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -49,7 +49,7 @@ void	check_solution(t_solution *solu, t_cylinder cylinder)
 	}
 }
 
-bool	get_cylinder(t_objects *obj, t_solution_list **list,
+bool	get_cylinder(t_objects *obj, t_sol_li *list,
 	t_line_eq rayline)
 {
 	t_equation	quadratic;
@@ -75,7 +75,7 @@ bool	get_cylinder(t_objects *obj, t_solution_list **list,
 	return (true);
 }
 
-bool	get_specific_cylinder(t_objects *obj, t_solution_list **list,
+bool	get_specific_cylinder(t_objects *obj, t_sol_li *list,
 	t_line_eq rayline, int i_to_view)
 {
 	t_equation	quadratic;
