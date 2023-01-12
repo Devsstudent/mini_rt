@@ -138,15 +138,18 @@ bool			list_add(t_sol_li *sol_li, t_solution_elem *new);
 t_solution_elem	*new_elem(t_solution solution, t_rgb color, t_type type, int i);
 void			free_list(t_sol_li *sol_li);
 
-//color.c
+//rgb.c
 void	ambient_light_quo(t_objects *objs, float RGB[3]);
-bool	add_light(t_disp_point disp_p, t_objects *objs, float RGB[3]);
 int		create_color(t_rgb rgb, float RGB[3]);
-bool	get_pixel_color(int *color, t_disp_point intersec_point, t_objects *objs);
+void	compute_rgb(t_objects *objs, float distance, float rgb[3], int i);
+
 
 //shadow_light.c
-bool	check_shadow(t_line_eq rayline, t_objects *objs);
-bool	check_sphere_between(t_line_eq rayline, t_objects *objs, bool *err);
-bool	check_plan_between(t_line_eq rayline, t_objects *objs, bool *err);
+t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs, int i, t_sol_li *list);
+bool	check_no_shadow(t_disp_point intersection, t_disp_point initial, t_objects *objs, int i);
+void	get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec, int i);
+
+//get_pixel_color.c
+bool	get_pixel_color(int *color, t_disp_point intersec_point, t_objects *objs);
 
 #endif

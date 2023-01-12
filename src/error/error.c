@@ -40,6 +40,21 @@ void	free_objs(t_objects *obj)
 	free(obj->mlx);
 }
 
+void	free_list_exit(t_objects *objss, t_sol_li *list)
+{
+	free_list(list);
+	free_exit(objss);
+}
+
+t_disp_point	error_intersec(void)
+{
+	t_disp_point	res;
+
+	res.err = true;
+	return (res);
+}
+
+
 //we should need free exit funct
 ///void	free_exit()
 

@@ -37,10 +37,11 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								cylinder \
 								cylinder_equation \
 								disc \
-								color \
+								get_pixel_color \
+								shadow_light \
+								rgb \
 								intersection \
 								raytracing_utils \
-								shadow_light \
 								sphere_equation \
 								solution_list \
 								raytracing \
