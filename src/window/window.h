@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 14:26:31 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:29:32 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -32,6 +32,12 @@ typedef struct s_sol_li				t_sol_li;
 typedef struct s_solution			t_solution;
 typedef struct s_edit				t_edit;
 typedef enum e_type					t_type;
+
+typedef strcut s_color_pam{
+	float	distance,
+	float	diffuse,
+	float	specualr
+}			t_color_pam;
 
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
