@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:19:12 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 14:19:13 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:39:48 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -49,4 +49,3 @@ void	ambient_light_quo(t_objects *objs, float rgb[3])
 	rgb[1] = (float)objs->amb->color.G * objs->amb->ratio / 255.0;
 	rgb[2] = (float)objs->amb->color.B * objs->amb->ratio / 255.0;
 }
-

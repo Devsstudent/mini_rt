@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/11 15:47:55 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:57:57 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -106,6 +106,11 @@ typedef struct	s_cylinder {
 	float			height;
 	t_rgb			color;
 }					t_cylinder;
+
+typedef struct	s_disc_info {
+	t_xyz	p_disc;
+	float	radius;
+}				t_disc_info;
 
 typedef struct s_solution {
 	t_xyz	one;
