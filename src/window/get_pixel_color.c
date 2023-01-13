@@ -6,6 +6,7 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 	t_sol_li			list;
 	t_disp_point		intersection;
 	t_vect				rayvec;
+	t_color_pam			param;
 
 	i = -1;
 	while (++i < objs->nb_li)
@@ -20,7 +21,9 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 			continue ;
 		}
 		get_rayvec_light(objs, disp_p.intersec_point, &rayvec, i);
-		compute_rgb(objs, norm_of_vector(rayvec), rgb, i);
+		
+		param.distance = norm_of_vecto(rayvec);
+		compute_rgb(objs, param, rgb, i);
 		free_list(&list);
 	}
 	return (true);
