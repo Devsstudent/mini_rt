@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/11 15:42:12 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:18:54 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -29,11 +29,11 @@ t_equation	get_quadra_disc_equation(t_line_eq rayline, t_cylinder cylinder,
 	p_disc->y = cylinder.position.y + i * height * vect_disc[1];
 	p_disc->z = cylinder.position.z + i * height * vect_disc[2];
 	res.x_pow_two = 0;
-	res.x_pow_one = vect_disc[0] * rayline.x.t + vect_disc[1] * rayline.y.t 
-						+ vect_disc[2] * rayline.z.t;
+	res.x_pow_one = vect_disc[0] * rayline.x.t + vect_disc[1] * rayline.y.t
+		+ vect_disc[2] * rayline.z.t;
 	res.c = vect_disc[0] * (rayline.x.c - p_disc->x)
-					+ vect_disc[1] * (rayline.y.c - p_disc->y)
-					+ vect_disc[2] * (rayline.z.c - p_disc->z);
+		+ vect_disc[1] * (rayline.y.c - p_disc->y)
+		+ vect_disc[2] * (rayline.z.c - p_disc->z);
 	return (res);
 }
 
@@ -63,7 +63,6 @@ static t_solution	solution_disc(t_equation eq, t_line_eq equation,
 	if (!init_solution(&solution))
 	{
 		*error = true;
-		//return NULL ?
 		return (solution);
 	}
 	if (eq.x_pow_one == 0)
@@ -92,7 +91,7 @@ bool	get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 	{
 		err = false;
 		solu = solution_disc(get_quadra_disc_equation(rayline, obj->cy[i],
-			j, &p_disc, &radius), rayline, &err, p_disc, radius);
+					j, &p_disc, &radius), rayline, &err, p_disc, radius);
 		if (err)
 			return (false);
 		if (solu.sol_one

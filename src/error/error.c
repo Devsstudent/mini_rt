@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:53:48 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/04 21:31:35 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:17:11 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -53,9 +53,3 @@ t_disp_point	error_intersec(void)
 	res.err = true;
 	return (res);
 }
-
-
-//we should need free exit funct
-///void	free_exit()
-
-
