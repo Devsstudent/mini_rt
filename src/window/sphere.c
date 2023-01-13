@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/11 15:11:46 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/13 18:14:01 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -60,14 +60,15 @@ t_equation	get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere)
 
 	origin = sphere.position;
 	rayon = sphere.diameter / 2.0;
-	res.x_pow_two = powf(rayline.x.t, 2)
-		+ powf(rayline.y.t, 2) + powf(rayline.z.t, 2);
+	res.x_pow_two = rayline.x.t * rayline.x.t
+		+ rayline.y.t * rayline.y.t + rayline.z.t * rayline.z.t;
 	res.x_pow_one = 2 * (rayline.x.t * (rayline.x.c - origin.x)
 			+ rayline.y.t * (rayline.y.c - origin.y)
 			+ rayline.z.t * (rayline.z.c - origin.z));
-	res.c = powf(origin.x, 2) + powf(origin.y, 2) + powf(origin.z, 2)
-		+ powf(rayline.x.c, 2) + powf(rayline.y.c, 2) + powf(rayline.z.c, 2)
+	res.c = origin.x * origin.x + origin.y * origin.y
+		+ origin.z * origin.z + rayline.x.c * rayline.x.c
+		+ rayline.y.c * rayline.y.c + rayline.z.c * rayline.z.c
 		- 2 * (rayline.x.c * origin.x + rayline.y.c * origin.y
-			+ rayline.z.c * origin.z) - powf(rayon, 2);
+			+ rayline.z.c * origin.z) - rayon * rayon;
 	return (res);
 }

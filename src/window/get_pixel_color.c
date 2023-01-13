@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/13 17:39:29 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/13 18:16:19 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -33,7 +33,7 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 		}
 		get_rayvec_light(objs, disp_p.intersec_point, &rayvec, i);
 		
-		param.distance = norm_of_vecto(rayvec);
+		param.distance = norm_of_vector(rayvec);
 		compute_rgb(objs, param, rgb, i);
 		free_list(&list);
 	}

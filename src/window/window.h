@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 16:29:32 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/13 18:17:30 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -33,10 +33,10 @@ typedef struct s_solution			t_solution;
 typedef struct s_edit				t_edit;
 typedef enum e_type					t_type;
 
-typedef strcut s_color_pam{
-	float	distance,
-	float	diffuse,
-	float	specualr
+typedef struct s_color_pam{
+	float	distance;
+	float	diffuse;
+	float	specular;
 }			t_color_pam;
 
 typedef struct s_mlx_info {
@@ -153,7 +153,7 @@ void			free_list(t_sol_li *sol_li);
 //rgb.c
 void			ambient_light_quo(t_objects *objs, float RGB[3]);
 int				create_color(t_rgb rgb, float RGB[3]);
-void			compute_rgb(t_objects *objs, float distance,
+void			compute_rgb(t_objects *objs, t_color_pam distance,
 					float rgb[3], int i);
 
 //shadow_light.c
