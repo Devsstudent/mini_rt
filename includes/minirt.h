@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 17:57:57 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:18:48 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -124,6 +124,7 @@ typedef enum e_type{
 	CY,
 	PL,
 	C,
+	DI,
 	LI
 }	t_type;
 

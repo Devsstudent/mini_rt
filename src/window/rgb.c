@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:19:12 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 18:05:59 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/14 21:23:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -29,12 +29,12 @@ void	compute_rgb(t_objects *objs, t_color_pam param, float rgb[3], int i)
 {
 	float	ratio;
 
-	ratio = objs->li[i].ratio - param.distance / 1000.0;
+	ratio = objs->li[i].ratio - (param.distance / 1000.0);
 	if (ratio < 0.0)
 		ratio = 0.0;
-	rgb[0] += (float)objs->li[i].color.R * ratio / 255.0;
-	rgb[1] += (float)objs->li[i].color.G * ratio / 255.0;
-	rgb[2] += (float)objs->li[i].color.B * ratio / 255.0;
+	rgb[0] += (float)objs->li[i].color.R * ratio / 255;
+	rgb[1] += (float)objs->li[i].color.G * ratio / 255;
+	rgb[2] += (float)objs->li[i].color.B * ratio / 255;
 	if (rgb[0] > 1.0)
 		rgb[0] = 1.0;
 	if (rgb[1] > 1.0)
