@@ -4,9 +4,9 @@
 /*   disc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                +#+#+#+#+#+   +#           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/13 17:58:41 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:31:27 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -95,7 +95,7 @@ bool	get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 		if (err)
 			return (false);
 		if (solu.sol_one
-			&& !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
+			&& !list_add(list, new_elem(solu, obj->cy[i].color, DI, i)))
 			return (false);
 		j++;
 	}
