@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 18:17:30 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/14 22:48:29 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -19,6 +19,7 @@
 
 typedef float						t_vect __attribute__ ((vector_size(16)));
 typedef struct s_xyz				t_xyz;
+typedef struct s_color_pam			t_color_pam;
 typedef struct s_rgb				t_rgb;
 typedef struct s_orientation		t_orientation;
 typedef struct s_objects			t_objectss;
@@ -32,12 +33,6 @@ typedef struct s_sol_li				t_sol_li;
 typedef struct s_solution			t_solution;
 typedef struct s_edit				t_edit;
 typedef enum e_type					t_type;
-
-typedef struct s_color_pam{
-	float	distance;
-	float	diffuse;
-	float	specular;
-}			t_color_pam;
 
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
@@ -140,6 +135,8 @@ t_vect			get_orthogonal_vect(t_vect vector);
 t_vect			get_opposite_vector(t_vect vector);
 t_vect			vector_product(t_vect vector_1, t_vect vector_2);
 float			norm_of_vector(t_vect vector);
+t_vect			get_normal_vect_sp(t_disp_point interse, t_objects *objs);
+float			scalar_product(t_vect one, t_vect two);
 t_vect			normalize_vector(t_vect vector);
 t_vect			get_screen_unit_vert_vect(t_vect unit_w, t_vect vect_h);
 t_vect			get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);

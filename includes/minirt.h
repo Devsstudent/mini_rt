@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 17:57:57 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/14 22:07:43 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -155,6 +155,14 @@ typedef struct s_disp_point{
 	int			obj_id;
 	bool		err;
 }				t_disp_point;
+
+typedef struct s_color_pam{
+	float			distance;
+	float			diffuse;
+	float			specular;
+	t_disp_point	disp_p;
+	t_vect			rayvec;
+}			t_color_pam;
 
 typedef struct s_edit {
 	t_edit_type	action;

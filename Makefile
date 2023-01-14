@@ -47,6 +47,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								raytracing \
 								vector_operations \
 								vector_operations_bis \
+								get_normal_vector \
 								equation) \
 		$(addprefix edit/, edit_objs \
 								resize \
