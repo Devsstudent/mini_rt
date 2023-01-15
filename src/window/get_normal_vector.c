@@ -11,16 +11,14 @@
 /* ************************************************************************** */
 #include "window.h"
 
-/*t_vect	get_normal_vect_cy(t_disp_point intersec, t_objects *objs)
 float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs,
 			int i)
 {
-	float	specular;
-	float	
 	t_vect	normal;
 	t_vect	reflected;
 	t_vect	view_line;
 
+	(void) i;
 	ft_memset(&normal, 0, sizeof(normal));
 	if (intersec.type == SP)
 		normal = get_normal_vect_sp(intersec, objs);
@@ -31,14 +29,12 @@ float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs,
 	else if (intersec.type == DI)
 		normal = get_normal_vect_di(intersec, objs);
 	reflected = -light_vec - 2 * (normal * (-light_vec)) * normal;
-	view_line = create_vector(intersec.intersec_point, objs->c->position);
-	return (objs->li[i].intensity * (view_line * reflected));
-//	specular : //light intensity * (view_line * reflected)
+	view_line = create_vector(intersec.intersec_point, objs->cam->position);
+	return (pow(scalar_product(view_line, reflected) / (norm_of_vector(view_line) * norm_of_vector(reflected)), 1));
 }
 
 
 t_vect	get_normal_vect_cy(t_disp_point intersec, t_objects *objs)
->>>>>>> a4cff9912e690bd7badeb77fd5ac3ac62e19d519
 {
 	t_vect		normal_cy;
 	float		t;
@@ -50,12 +46,12 @@ t_vect	get_normal_vect_cy(t_disp_point intersec, t_objects *objs)
 	b = objs->cy[intersec.obj_id].vec_direction[1];
 	c = objs->cy[intersec.obj_id].vec_direction[2];
 	//Check 0
-	t = (a * (objs->cy[intersec.obj_id].position.x- intersec.intersec_point.x) + b * (objs->cy[intersec.obj_id].position.y- intersec.intersec_point.y) + c * (objs->cy[intersec.obj_id].position.z - intersec.intersec_point.z)x) / (pow(a, 2) + pow(b, 2) + pow(c , 2));
-	normal_cy[0] = a * t + objs->cy[intersec.obj_id].x;
-	normal_cy[1] = b * t + objs->cy[intersec.obj_id].y;
-	normal_cy[2] = c * t + objs->cy[intersec.obj_id].z;
+	t = (a * (objs->cy[intersec.obj_id].position.x- intersec.intersec_point.x) + b * (objs->cy[intersec.obj_id].position.y- intersec.intersec_point.y) + c * (objs->cy[intersec.obj_id].position.z - intersec.intersec_point.z)) / (pow(a, 2) + pow(b, 2) + pow(c , 2));
+	normal_cy[0] = a * t + objs->cy[intersec.obj_id].position.x;
+	normal_cy[1] = b * t + objs->cy[intersec.obj_id].position.y;
+	normal_cy[2] = c * t + objs->cy[intersec.obj_id].position.z;
 	return (normal_cy);
-}*/
+}
 
 t_vect	get_normal_vect_di(t_disp_point intersec, t_objects *objs)
 {

@@ -47,7 +47,8 @@ void	compute_rgb(t_objects *objs, t_color_pam param, float rgb[3], int i)
 	float	ratio;
 
 	ratio = objs->li[i].ratio - param.distance / 1000.0;
-	ratio = ratio * compute_rgb_from_angle(objs, param);
+	ratio = ratio * compute_rgb_from_angle(objs, param)
+		* get_specular(param.rayvec, param.intersec, objs, i);
 	if (ratio < 0.0)
 		ratio = 0.0;
 	rgb[0] += (float)objs->li[i].color.R * ratio / 255;

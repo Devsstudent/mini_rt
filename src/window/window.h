@@ -135,11 +135,18 @@ t_vect			get_orthogonal_vect(t_vect vector);
 t_vect			get_opposite_vector(t_vect vector);
 t_vect			vector_product(t_vect vector_1, t_vect vector_2);
 float			norm_of_vector(t_vect vector);
-t_vect			get_normal_vect_sp(t_disp_point interse, t_objects *objs);
 float			scalar_product(t_vect one, t_vect two);
 t_vect			normalize_vector(t_vect vector);
 t_vect			get_screen_unit_vert_vect(t_vect unit_w, t_vect vect_h);
 t_vect			get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
+
+//get_normal_vector.c
+float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs,
+			int i);
+t_vect	get_normal_vect_sp(t_disp_point intersec, t_objects *objs);
+t_vect	get_normal_vect_di(t_disp_point intersec, t_objects *objs);
+t_vect	get_normal_vect_pl(t_disp_point intersec, t_objects *objs);
+t_vect	get_normal_vect_cy(t_disp_point intersec, t_objects *objs);
 
 //solution_list.c
 void			init_sol_li(t_sol_li *sol_li);

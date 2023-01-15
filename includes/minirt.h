@@ -162,6 +162,7 @@ typedef struct s_color_pam{
 	float			diffuse;
 	float			specular;
 	t_disp_point	disp_p;
+	t_disp_point	intersec;
 	t_vect			rayvec;
 }			t_color_pam;
 

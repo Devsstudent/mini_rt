@@ -35,6 +35,7 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 		param.distance = norm_of_vector(rayvec);
 		param.rayvec = rayvec;
 		param.disp_p = disp_p;
+		param.intersec = intersection;
 		compute_rgb(objs, param, rgb, i);
 		free_list(&list);
 	}
