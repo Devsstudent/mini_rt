@@ -13,7 +13,7 @@
 
 float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs)
 {
-	int		shy = 15;
+	int		shy = 25;
 	float	ks;
 	t_vect	normed_view_line;
 	t_vect	normed_normal;
@@ -43,7 +43,7 @@ float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs)
 	}
 	else
 		return (1);
-	ks = 0.3;
+	ks = 0.6;
 	normed_reflected = normalize_vector(2 * (scalar_product(normed_normal, normalize_vector(light_vec)) * normed_normal) - normalize_vector(light_vec));
 	
 	normed_view_line = normalize_vector(create_vector(intersec.intersec_point, objs->cam->position));

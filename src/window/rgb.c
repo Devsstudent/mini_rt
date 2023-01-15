@@ -73,7 +73,7 @@ float	compute_rgb_from_angle(t_objects *objs, t_color_pam param)
 	}
 	else
 		return (1);
-	kd = 0.3;
+	kd = 0.8;
 	rayvec = normalize_vector(param.rayvec);
 	ratio = kd * fmax(scalar_product(rayvec, normal), 0);
 	return (ratio);
