@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:19:12 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/14 22:56:57 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/15 01:02:34 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -26,19 +26,27 @@ int	create_color(t_rgb rgb, float rgb_val[3])
 }
 
 //compute cos(angle) between normal vector and rayvec
-//for now only works on spheres
 float	compute_rgb_from_angle(t_objects *objs, t_color_pam param)
 {
 	float	ratio;
 	t_vect	rayvec;
 	t_vect	normal;
 
-	if (param.disp_p.type != SP)
+	if (param.disp_p.type == SP)
+		normal = get_normal_vect_sp(param.disp_p, objs);
+	else if (param.disp_p.type == PL)
+		normal = get_normal_vect_pl(param.disp_p, objs);
+	else if (param.disp_p.type == CY)
+		normal = get_normal_vect_cy(param.disp_p, objs);
+	else if (param.disp_p.type == DI)
+		normal = get_normal_vect_di(param.disp_p, objs);
+	else
 		return (1);
 	rayvec = param.rayvec;
-	normal = get_normal_vect_sp(param.disp_p, objs);
 	ratio = scalar_product(rayvec, normal)
 		/ (norm_of_vector(rayvec) * norm_of_vector(normal));
+	if (ratio < 0.0)
+		ratio = -ratio;
 	return (ratio);
 }
 
@@ -47,9 +55,9 @@ void	compute_rgb(t_objects *objs, t_color_pam param, float rgb[3], int i)
 	float	ratio;
 
 	ratio = objs->li[i].ratio - param.distance / 1000.0;
-	ratio = ratio * compute_rgb_from_angle(objs, param);
 	if (ratio < 0.0)
 		ratio = 0.0;
+	ratio = ratio * compute_rgb_from_angle(objs, param);
 	rgb[0] += (float)objs->li[i].color.R * ratio / 255;
 	rgb[1] += (float)objs->li[i].color.G * ratio / 255;
 	rgb[2] += (float)objs->li[i].color.B * ratio / 255;
