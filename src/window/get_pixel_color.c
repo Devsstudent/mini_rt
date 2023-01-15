@@ -30,7 +30,6 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, t_final_pix_color *
 		{
 			if (disp_p.type == PL)
 				printf("AHAH\n");
-			final->shadow[0] += 1;
 			(free_list(&list));
 			continue ;
 		}
@@ -52,25 +51,16 @@ bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 	t_final_pix_color	final;
 	float				ka;
 
-	ka = 0.1;
+	ka = 0.8;
 	ft_memset(&rgb, 0, sizeof(rgb));
 	ft_memset(&final, 0, sizeof(final));
 	final.ambient[0] = ka * objs->amb->ratio * objs->amb->color.R;
 	final.ambient[1] = ka * objs->amb->ratio * objs->amb->color.G;
 	final.ambient[2] = ka * objs->amb->ratio * objs->amb->color.B;
 	loop_light(disp_p, objs, &final);
-	if (final.shadow[0] == objs->nb_li)
-	{
-		color_rgb.R = disp_p.color.R / 200;
-		color_rgb.G = disp_p.color.G / 200;
-		color_rgb.B = disp_p.color.B / 200;
-	}
-	else
-	{
-		color_rgb.R = disp_p.color.R;
-		color_rgb.G = disp_p.color.G;
-		color_rgb.B = disp_p.color.B;
-	}
+	color_rgb.R = disp_p.color.R;
+	color_rgb.G = disp_p.color.G;
+	color_rgb.B = disp_p.color.B;
 	*color = create_color(color_rgb, final);
 	return (true);
 }
