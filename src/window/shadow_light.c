@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:12:29 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 17:17:53 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:34:40 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -41,7 +41,7 @@ static int	intersect_self(t_objects *objs, t_disp_point point, int i)
 	if (point.type == PL
 		&& !get_specific_plane(objs, &list, rayline, point.obj_id))
 		return (free_list(&list), -1);
-	if (point.type == CY
+	if ((point.type == CY || point.type == DI)
 		&& !get_specific_cylinder(objs, &list, rayline, point.obj_id))
 		return (free_list(&list), -1);
 	intersection = get_intersection(&list, objs->cam->position);
