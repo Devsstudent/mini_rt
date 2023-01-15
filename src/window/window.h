@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/14 22:48:29 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:15:41 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -33,6 +33,12 @@ typedef struct s_sol_li				t_sol_li;
 typedef struct s_solution			t_solution;
 typedef struct s_edit				t_edit;
 typedef enum e_type					t_type;
+
+typedef struct s_final_pix_color{
+	t_vect	ambient;
+	t_vect	diffuse;
+	t_vect	specular;
+}			t_final_pix_color;
 
 typedef struct s_mlx_info {
 	t_mlx	*mlx;
@@ -111,7 +117,6 @@ bool			is_closer(t_xyz intersec, t_xyz start_point,
 					float *final_distance);
 
 	//equation.c
-bool			one_solu(t_solution *solu, t_equation eq, t_line_eq equation);
 bool			two_solu(t_solution *solu, t_equation eq, t_line_eq equation);
 t_solution		solution(t_equation eq, t_line_eq equation, bool *error);
 bool			init_solution(t_solution *solution);
@@ -141,8 +146,7 @@ t_vect			get_screen_unit_vert_vect(t_vect unit_w, t_vect vect_h);
 t_vect			get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
 
 //get_normal_vector.c
-float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs,
-			int i);
+float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs);
 t_vect	get_normal_vect_sp(t_disp_point intersec, t_objects *objs);
 t_vect	get_normal_vect_di(t_disp_point intersec, t_objects *objs);
 t_vect	get_normal_vect_pl(t_disp_point intersec, t_objects *objs);
@@ -156,10 +160,9 @@ void			free_list(t_sol_li *sol_li);
 
 //rgb.c
 void			ambient_light_quo(t_objects *objs, float RGB[3]);
-int				create_color(t_rgb rgb, float RGB[3]);
-void			compute_rgb(t_objects *objs, t_color_pam distance,
-					float rgb[3], int i);
-
+void	compute_rgb(t_objects *objs, t_color_pam param, t_vect *diffuse, int i);
+int	create_color(t_rgb rgb, t_final_pix_color final);
+void	fill_specular(t_objects *objs, t_color_pam param, t_vect *specular, int i);
 //shadow_light.c
 t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs, int i,
 					t_sol_li *list);

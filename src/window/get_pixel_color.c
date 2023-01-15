@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "window.h"
 
-static bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
+static bool	loop_light(t_disp_point disp_p, t_objects *objs, t_final_pix_color *final)
 {
 	int					i;
 	t_sol_li			list;
@@ -36,7 +36,8 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 		param.rayvec = rayvec;
 		param.disp_p = disp_p;
 		param.intersec = intersection;
-		compute_rgb(objs, param, rgb, i);
+		compute_rgb(objs, param, &final->diffuse, i);
+		fill_specular(objs, param, &final->specular, i);
 		free_list(&list);
 	}
 	return (true);
@@ -44,17 +45,19 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, float rgb[3])
 
 bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 {
-	t_rgb	color_rgb;
-	float	rgb[3];
+	t_rgb				color_rgb;
+	float				rgb[3];
+	t_final_pix_color	final;
 
-	rgb[0] = 0;
-	rgb[1] = 0;
-	rgb[2] = 0;
+	ft_memset(&rgb, 0, sizeof(rgb));
+	ft_memset(&final, 0, sizeof(final));
+	final.ambient[0] = objs->amb->ratio * objs->amb->color.R;
+	final.ambient[1] = objs->amb->ratio * objs->amb->color.G;
+	final.ambient[2] = objs->amb->ratio * objs->amb->color.B;
 	color_rgb.R = disp_p.color.R;
 	color_rgb.G = disp_p.color.G;
 	color_rgb.B = disp_p.color.B;
-	ambient_light_quo(objs, rgb);
-	loop_light(disp_p, objs, rgb);
-	*color = create_color(color_rgb, rgb);
+	loop_light(disp_p, objs, &final);
+	*color = create_color(color_rgb, final);
 	return (true);
 }
