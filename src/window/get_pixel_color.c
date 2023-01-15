@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/14 22:56:27 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/15 21:29:30 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -28,6 +28,9 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, t_final_pix_color *
 			return (free_list(&list), false);
 		if (check_no_shadow(intersection, disp_p, objs, i))
 		{
+			if (disp_p.type == PL)
+				printf("AHAH\n");
+			final->shadow[0] += 1;
 			(free_list(&list));
 			continue ;
 		}
@@ -35,7 +38,6 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs, t_final_pix_color *
 		param.distance = norm_of_vector(rayvec);
 		param.rayvec = rayvec;
 		param.disp_p = disp_p;
-		param.intersec = intersection;
 		compute_rgb(objs, param, &final->diffuse, i);
 		fill_specular(objs, param, &final->specular, i);
 		free_list(&list);
@@ -48,16 +50,27 @@ bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 	t_rgb				color_rgb;
 	float				rgb[3];
 	t_final_pix_color	final;
+	float				ka;
 
+	ka = 0.1;
 	ft_memset(&rgb, 0, sizeof(rgb));
 	ft_memset(&final, 0, sizeof(final));
-	final.ambient[0] = objs->amb->ratio * objs->amb->color.R;
-	final.ambient[1] = objs->amb->ratio * objs->amb->color.G;
-	final.ambient[2] = objs->amb->ratio * objs->amb->color.B;
-	color_rgb.R = disp_p.color.R;
-	color_rgb.G = disp_p.color.G;
-	color_rgb.B = disp_p.color.B;
+	final.ambient[0] = ka * objs->amb->ratio * objs->amb->color.R;
+	final.ambient[1] = ka * objs->amb->ratio * objs->amb->color.G;
+	final.ambient[2] = ka * objs->amb->ratio * objs->amb->color.B;
 	loop_light(disp_p, objs, &final);
+	if (final.shadow[0] == objs->nb_li)
+	{
+		color_rgb.R = disp_p.color.R / 200;
+		color_rgb.G = disp_p.color.G / 200;
+		color_rgb.B = disp_p.color.B / 200;
+	}
+	else
+	{
+		color_rgb.R = disp_p.color.R;
+		color_rgb.G = disp_p.color.G;
+		color_rgb.B = disp_p.color.B;
+	}
 	*color = create_color(color_rgb, final);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/14 23:15:41 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/15 21:09:23 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -38,6 +38,7 @@ typedef struct s_final_pix_color{
 	t_vect	ambient;
 	t_vect	diffuse;
 	t_vect	specular;
+	t_vect	shadow;
 }			t_final_pix_color;
 
 typedef struct s_mlx_info {
@@ -138,7 +139,6 @@ bool			window(t_objectss *objs);
 t_vect			create_vector(t_xyz one, t_xyz two);
 t_vect			get_orthogonal_vect(t_vect vector);
 t_vect			get_opposite_vector(t_vect vector);
-t_vect			vector_product(t_vect vector_1, t_vect vector_2);
 float			norm_of_vector(t_vect vector);
 float			scalar_product(t_vect one, t_vect two);
 t_vect			normalize_vector(t_vect vector);

@@ -6,18 +6,10 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 18:27:49 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/11 00:04:01 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/15 18:58:32 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
-
-t_vect	vector_product(t_vect vector_1, t_vect vector_2)
-{
-	t_vect	res;
-
-	res = vector_1 * vector_2 - vector_1 * vector_2;
-	return (res);
-}
 
 float	norm_of_vector(t_vect vector)
 {

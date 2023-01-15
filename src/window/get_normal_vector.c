@@ -6,30 +6,49 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:21:28 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/15 01:01:36 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/15 21:23:34 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
 
 float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs)
 {
-	t_vect	normal;
-	t_vect	reflected;
-	t_vect	view_line;
-	int		shy = 20;
+	int		shy = 15;
+	float	ks;
+	t_vect	normed_view_line;
+	t_vect	normed_normal;
+	t_vect	normed_reflected;
+	float	res;
 
-	ft_memset(&normal, 0, sizeof(normal));
+	ft_memset(&normed_normal, 0, sizeof(normed_normal));
 	if (intersec.type == SP)
-		normal = get_normal_vect_sp(intersec, objs);
+	{
+		ks = 1;
+		normed_normal = normalize_vector(get_normal_vect_sp(intersec, objs));
+	}
 	else if (intersec.type == PL)
-		normal = get_normal_vect_pl(intersec, objs);
+	{
+		ks = 1;
+		normed_normal = normalize_vector(get_normal_vect_pl(intersec, objs));
+	}
 	else if (intersec.type == CY)
-		normal = get_normal_vect_cy(intersec, objs);
+	{
+		ks = 1;
+		normed_normal = normalize_vector(get_normal_vect_cy(intersec, objs));
+	}
 	else if (intersec.type == DI)
-		normal = get_normal_vect_di(intersec, objs);
-	reflected = light_vec - 2 * scalar_product(normal, light_vec) * normal;
-	view_line = create_vector(intersec.intersec_point, objs->cam->position);
-	return (pow(-scalar_product(view_line, reflected), shy));
+	{
+		ks = 1;
+		normed_normal = normalize_vector(get_normal_vect_di(intersec, objs));
+	}
+	else
+		return (1);
+	ks = 0.9;
+	normed_reflected = normalize_vector(2 * (scalar_product(normed_normal, normalize_vector(light_vec)) * normed_normal) - normalize_vector(light_vec));
+	
+	normed_view_line = normalize_vector(create_vector(intersec.intersec_point, objs->cam->position));
+	res = ks * pow(fmax(scalar_product(normed_view_line, normed_reflected), 0), shy);
+	return (res);
 }
 
 t_vect	get_normal_vect_cy(t_disp_point intersec, t_objects *objs)
