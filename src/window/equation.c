@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 13:27:37 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 16:16:55 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:12:48 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -15,6 +15,8 @@ bool	one_solu(t_solution *solu, t_equation eq, t_line_eq equation)
 {
 	float	delta;
 
+	if (!eq.x_pow_two)
+		return (true);
 	delta = (-1 * eq.x_pow_one) / (2 * eq.x_pow_two);
 	if (delta < 0.0)
 		return (true);

@@ -42,7 +42,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								rgb \
 								intersection \
 								raytracing_utils \
-								sphere_equation \
+								vector_operations_again \
 								solution_list \
 								raytracing \
 								vector_operations \

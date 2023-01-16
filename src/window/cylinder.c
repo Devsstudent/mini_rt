@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <mbelrhaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:53:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/11 15:13:21 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:14:21 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -30,7 +30,7 @@ void	check_solution(t_solution *solu, t_cylinder cylinder)
 	origin = cylinder.position;
 	radius = cylinder.diameter / 2.0;
 	half_height = cylinder.height / 2.0;
-	distance_max = sqrtf(powf(radius, 2) + powf(half_height, 2));
+	distance_max = sqrtf(radius * radius + half_height * half_height);
 	if (solu->sol_one || solu->sol_two)
 	{
 		if (solu->sol_two)
