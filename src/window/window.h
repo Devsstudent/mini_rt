@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/15 21:09:23 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:59:43 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -146,11 +146,12 @@ t_vect			get_screen_unit_vert_vect(t_vect unit_w, t_vect vect_h);
 t_vect			get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
 
 //get_normal_vector.c
-float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs);
-t_vect	get_normal_vect_sp(t_disp_point intersec, t_objects *objs);
-t_vect	get_normal_vect_di(t_disp_point intersec, t_objects *objs);
-t_vect	get_normal_vect_pl(t_disp_point intersec, t_objects *objs);
-t_vect	get_normal_vect_cy(t_disp_point intersec, t_objects *objs);
+float			get_specular(t_vect light_vec, t_disp_point intersec,
+					t_objects *objs);
+t_vect			get_normal_vect_sp(t_disp_point intersec, t_objects *objs);
+t_vect			get_normal_vect_di(t_disp_point intersec, t_objects *objs);
+t_vect			get_normal_vect_pl(t_disp_point intersec, t_objects *objs);
+t_vect			get_normal_vect_cy(t_disp_point intersec, t_objects *objs);
 
 //solution_list.c
 void			init_sol_li(t_sol_li *sol_li);
@@ -160,9 +161,11 @@ void			free_list(t_sol_li *sol_li);
 
 //rgb.c
 void			ambient_light_quo(t_objects *objs, float RGB[3]);
-void	compute_rgb(t_objects *objs, t_color_pam param, t_vect *diffuse, int i);
-int	create_color(t_rgb rgb, t_final_pix_color final);
-void	fill_specular(t_objects *objs, t_color_pam param, t_vect *specular, int i);
+void			compute_rgb(t_objects *objs, t_color_pam param,
+					t_vect *diffuse, int i);
+int				create_color(t_rgb rgb, t_final_pix_color final);
+void			fill_specular(t_objects *objs, t_color_pam param,
+					t_vect *specular, int i);
 //shadow_light.c
 t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs, int i,
 					t_sol_li *list);

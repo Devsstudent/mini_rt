@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:12:29 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 17:17:53 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/16 13:59:39 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -87,7 +87,6 @@ bool	check_no_shadow(t_disp_point intersection, t_disp_point initial,
 	if (way_to_the_light == -1)
 		return (false);
 	get_rayvec_light(objs, initial.intersec_point, &rayvec, i);
-
 	if (intersection.intersec_point.x != -1
 		&& intersection.intersec_point.y != -1
 		&& intersection.intersec_point.z != -1
