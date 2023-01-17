@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:05:56 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/16 21:52:43 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/17 10:15:35 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -14,7 +14,7 @@
 static void	fill_vec_from_z(t_vect *vertical, t_vect original_pos)
 {
 	(*vertical)[1] = -original_pos[0] / original_pos[2]
-			- original_pos[1] / original_pos[2];
+		- original_pos[1] / original_pos[2];
 	(*vertical)[0] = 1;
 	(*vertical)[2] = 1;
 }
@@ -22,7 +22,7 @@ static void	fill_vec_from_z(t_vect *vertical, t_vect original_pos)
 static void	fill_vec_from_y(t_vect *vertical, t_vect original_pos)
 {
 	(*vertical)[2] = -original_pos[0] / original_pos[1]
-			- original_pos[2] / original_pos[1];
+		- original_pos[2] / original_pos[1];
 	(*vertical)[0] = 1;
 	(*vertical)[1] = 1;
 }
@@ -30,7 +30,7 @@ static void	fill_vec_from_y(t_vect *vertical, t_vect original_pos)
 static void	fill_vec_from_x(t_vect *vertical, t_vect original_pos)
 {
 	(*vertical)[0] = -original_pos[2] / original_pos[0]
-			- original_pos[1] / original_pos[0];
+		- original_pos[1] / original_pos[0];
 	(*vertical)[1] = 1;
 	(*vertical)[2] = 1;
 }
