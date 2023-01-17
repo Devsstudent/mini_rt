@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:21:28 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/16 21:04:23 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/17 10:16:55 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -60,11 +60,11 @@ t_vect	get_normal_vect_cy(t_disp_point intersec, t_objects *objs)
 			+ c * (-objs->cy[intersec.obj_id].position.z
 				+ intersec.intersec_point.z)) / (a * a + b * b + c * c);
 	normal_cy[0] = intersec.intersec_point.x - (a * t
-		+ objs->cy[intersec.obj_id].position.x);
+			+ objs->cy[intersec.obj_id].position.x);
 	normal_cy[1] = intersec.intersec_point.y - (b * t
-		+ objs->cy[intersec.obj_id].position.y);
+			+ objs->cy[intersec.obj_id].position.y);
 	normal_cy[2] = intersec.intersec_point.z - (c * t
-		+ objs->cy[intersec.obj_id].position.z);
+			+ objs->cy[intersec.obj_id].position.z);
 	return (normal_cy);
 }
 

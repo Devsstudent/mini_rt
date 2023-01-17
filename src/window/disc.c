@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/16 22:52:22 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/17 10:16:05 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -42,7 +42,6 @@ static bool	one_solu_disc(t_solution *solu, t_equation eq, t_line_eq equation,
 {
 	float	solution;
 
-	(void)	disc_info;
 	solution = -1 * eq.c / eq.x_pow_one;
 	if (solution < 0.0)
 		return (false);
