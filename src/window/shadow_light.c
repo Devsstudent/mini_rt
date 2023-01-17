@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:12:29 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/16 21:06:22 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:27:37 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -23,6 +23,8 @@ static bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
 	return (true);
 }
 
+//intersec_self checks if between the light and the camera, the line intersects
+//the object
 static int	intersect_self(t_objects *objs, t_disp_point point, int i)
 {
 	t_line_eq		rayline;
@@ -59,6 +61,7 @@ void	get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec, int i)
 	(*rayvec)[2] = objs->li[i].position.z - point.z;
 }
 
+//check_light_shadow checks if there are objects between the light and the point
 t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,
 					int i, t_sol_li *list)
 {
@@ -76,6 +79,10 @@ t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,
 	return (get_intersection(list, disp_p.intersec_point));
 }
 
+//check_no_shadow checks if the point is illuminated from our point of view
+//it checks if there is a way from the camera to the light
+//it also checks if the closest intersection is before the point resulting
+//in a shadow or if it is after the point resulting in an illuminated point
 bool	check_no_shadow(t_disp_point intersection, t_disp_point initial,
 			t_objects *objs, int i)
 {

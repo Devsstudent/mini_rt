@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/16 13:37:27 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:27:12 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -63,10 +63,10 @@ bool	is_closer(t_xyz intersec, t_xyz start_point, float *final_distance)
 {
 	float	distance;
 
-	distance = (powf(start_point.x - intersec.x, 2)
-			+ powf(start_point.y - intersec.y, 2)
-			+ powf(start_point.z - intersec.z, 2)) / 2;
-	if (distance >= -0.001 && distance <= 0.001)
+	distance = ((start_point.x - intersec.x) * (start_point.x - intersec.x)
+			+ (start_point.y - intersec.y) * (start_point.y - intersec.y)
+			+ (start_point.z - intersec.z) * (start_point.z - intersec.z)) / 2;
+	if (distance >= -0.1 && distance <= 0.1)
 		return (false);
 	if (*final_distance == -1)
 	{
