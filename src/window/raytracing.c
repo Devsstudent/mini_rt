@@ -42,6 +42,8 @@ bool	resolve_equation(t_objects *objs, t_sol_li *list,
 		free_list_exit(objs, list);
 	if (!get_cylinder(objs, list, rayline))
 		free_list_exit(objs, list);
+	if (!get_cones(objs, list, rayline))
+		free_list_exit(objs, list);
 	intersec_point = get_intersection(list, objs->cam->position);
 	if (intersec_point.intersec_point.x == -1
 		&& intersec_point.intersec_point.y == -1

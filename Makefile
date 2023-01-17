@@ -35,6 +35,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								sphere \
 								plane \
 								cylinder \
+								cones \
 								cylinder_equation \
 								disc \
 								get_pixel_color \

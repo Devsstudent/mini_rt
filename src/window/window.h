@@ -25,6 +25,7 @@ typedef struct s_orientation		t_orientation;
 typedef struct s_objects			t_objectss;
 typedef void						*t_mlx;
 typedef struct s_plane				t_plane;
+typedef struct s_cones				t_cones;
 typedef struct s_sphere				t_sphere;
 typedef struct s_cylinder			t_cylinder;
 typedef struct s_solution_elem		t_solution_elem;
@@ -177,5 +178,8 @@ void			get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec,
 //get_pixel_color.c
 bool			get_pixel_color(int *color, t_disp_point intersec_point,
 					t_objects *objs);
+
+//cones.c
+bool	get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline);
 
 #endif

@@ -77,6 +77,14 @@ typedef struct s_camera
 	uint8_t		fov; //0-180
 }				t_camera;
 
+typedef struct s_cones {
+	t_xyz	position;
+	t_vect	vec_direction;
+	float	height;
+	float	radius;
+	t_rgb	color;
+}			t_cones;
+
 typedef struct s_light {
 	t_xyz			position;
 	float			ratio; //0 1 2 3 4 5 6 7 8 9 10
@@ -125,7 +133,8 @@ typedef enum e_type{
 	PL,
 	C,
 	DI,
-	LI
+	LI,
+	CO
 }	t_type;
 
 typedef enum e_axis{
@@ -216,6 +225,8 @@ typedef struct	s_objects {
 	int			nb_li;
 	t_plane			*pl;
 	int			nb_pl;
+	t_cones			*co;
+	int			nb_co;
 	t_camera		*cam;
 	t_ambient_light	*amb;
 	t_mlx_info		*mlx;
