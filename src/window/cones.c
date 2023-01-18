@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:00:39 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/17 19:13:22 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/18 16:10:34 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -23,9 +23,9 @@ t_equation	get_quadra_cones_equation(t_line_eq rayline, t_cones cones)
 	origin = cones.position;
 	height = cones.height;
 	radius = cones.radius;
-	res.x_pow_two = radius * radius - 2 * (height * height);
-	res.x_pow_one = (radius * radius) * (2 * rayline.x.t * rayline.x.c - 2 * rayline.x.t * rayline.x.c * origin.x + 2 * rayline.y.t * rayline.y.c - 2 * rayline.y.t * rayline.y.c * origin.y - rayline.z.t * rayline.z.c - 2 * rayline.z.c * rayline.z.t * origin.z) - (height * height) * (rayline.x.t * rayline.x.c - 2 * rayline.x.t * rayline.x.c * origin.x + rayline.y.c * rayline.y.t - 2 * rayline.y.c * rayline.y.t * origin.y);
-	res.c = (rayline.x.t * rayline.x.c) * (rayline.x.t * rayline.x.c) + origin.x * origin.x + origin.y * origin.y - origin.z * origin.z + (rayline.y.t * rayline.y.c) * (rayline.y.t * rayline.y.c) - (rayline.z.c * rayline.z.t) * (rayline.z.c *rayline.z.t) - (height * height) * ((rayline.x.t * rayline.x.c) * (rayline.x.c * rayline.x.t) + origin.x * origin.x + (rayline.y.c * rayline.y.t) * (rayline.y.c * rayline.y.t) + origin.y * origin.y);
+	res.x_pow_two = (radius * radius) * (rayline.x.t * rayline.x.t + rayline.y.t * rayline.y.t - rayline.z.t * rayline.z.t) - (height * height) * (rayline.x.t * rayline.x.t + rayline.y.t * rayline.y.t);
+	res.x_pow_one = (radius * radius) * (2 * rayline.x.t * rayline.x.c - 2 * origin.x * rayline.x.t + 2 * rayline.y.t * rayline.y.c - 2 * rayline.y.t * origin.y - 2 * rayline.z.t * rayline.z.c - 2 * rayline.z.t * origin.z) - (height * height) * (2 * rayline.x.t * rayline.x.c - 2 * rayline.x.t * origin.x + 2 * rayline.y.t * rayline.y.c - 2 * rayline.y.t * origin.y);
+	res.c = (radius * radius) * (rayline.x.c * rayline.x.c - 2 * rayline.x.c * origin.x + origin.x * origin.x + rayline.y.c * rayline.y.c - 2 * rayline.y.c * origin.y + origin.y * origin.y - 2 * rayline.z.c * origin.z - origin.z * origin.z - rayline.z.c * rayline.z.c) - (height * height) * (rayline.x.c * rayline.x.c - 2 * rayline.x.c * origin.x + origin.x * origin.x - 2 * rayline.y.c * origin.y + rayline.y.c * rayline.y.c + origin.y * origin.y);
 	return (res);
 }
 
