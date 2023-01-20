@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:20:50 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:11:51 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/18 17:46:54 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -85,7 +85,7 @@ t_edit	get_edit(t_type type)
 	{
 		if (str)
 			free(str);
-		ft_putstr_fd("What kind of edit you wnat to apply ?\n", 1);
+		ft_putstr_fd("What kind of edit do you want to apply ?\n", 1);
 		str = take_input_str("r to resize\no to rotate\nt to translate\n");
 	}
 	if (*str == 'r')

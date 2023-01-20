@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:06:19 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:28:25 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:15:02 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -19,6 +19,7 @@ void	apply_action_li(t_edit edit_info, t_light *li)
 		li->position.y = edit_info.coord.y;
 		li->position.z = edit_info.coord.z;
 	}
+	li->hidden = false;
 }
 
 bool	ask_li(t_objects *objs)
@@ -30,7 +31,7 @@ bool	ask_li(t_objects *objs)
 
 	if (objs->nb_li == 0)
 	{
-		ft_putstr_fd("No lights sorry : (\n", 1);
+		printf("No lights sorry : (\n");
 		return (true);
 	}
 	type = LI;

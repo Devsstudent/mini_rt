@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/17 20:42:01 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:25:00 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -53,6 +53,7 @@ bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 	final.ambient[0] = ka * objs->amb->ratio * objs->amb->color.R;
 	final.ambient[1] = ka * objs->amb->ratio * objs->amb->color.G;
 	final.ambient[2] = ka * objs->amb->ratio * objs->amb->color.B;
+	is_light_hidden(objs);
 	loop_light(disp_p, objs, &final);
 	color_rgb.R = disp_p.color.R;
 	color_rgb.G = disp_p.color.G;

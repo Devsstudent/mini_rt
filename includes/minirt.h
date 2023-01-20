@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/14 22:54:28 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:09:46 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -89,6 +89,7 @@ typedef struct s_light {
 	t_xyz			position;
 	float			ratio; //0 1 2 3 4 5 6 7 8 9 10
 	t_rgb			color;
+	bool			hidden;
 }					t_light;
 
 typedef struct s_sphere {

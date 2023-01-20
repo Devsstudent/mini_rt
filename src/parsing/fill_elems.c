@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:29:06 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/04 15:37:01 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:13:12 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -38,6 +38,7 @@ bool	fill_light(char **arr, int j, t_objects *objects)
 		return (false);
 	if (!convert_to_rgb(&objects->li[j].color, arr[3]))
 		return (false);
+	objects->li[j].hidden = false;
 	return (true);
 }
 
