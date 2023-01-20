@@ -6,12 +6,12 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:12:29 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/20 16:33:37 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:37:57 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
 
-static bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
+bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
 {
 	t_vect	vect;
 
@@ -25,7 +25,7 @@ static bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
 
 /*intersec_self checks if between the light and the camera, the line intersects
 the object*/
-static int	intersect_self(t_objects *objs, t_disp_point point, int i)
+int	intersect_self(t_objects *objs, t_disp_point point, int i)
 {
 	t_line_eq		rayline;
 	t_sol_li		list;
@@ -88,20 +88,13 @@ bool	check_no_shadow(t_disp_point intersection, t_disp_point initial,
 			t_objects *objs, int i)
 {
 	t_vect			rayvec;
-	int				way_to_the_light;
 
-	way_to_the_light = 0;
-	way_to_the_light = intersect_self(objs, initial, i);
-	if (way_to_the_light == -1)
-		return (false);
 	get_rayvec_light(objs, initial.intersec_point, &rayvec, i);
 	if (intersection.intersec_point.x != -1
 		&& intersection.intersec_point.y != -1
 		&& intersection.intersec_point.z != -1
 		&& in_the_way(intersection.intersec_point,
 			rayvec, initial.intersec_point))
-		return (true);
-	else if (way_to_the_light == 0)
 		return (true);
 	return (false);
 }

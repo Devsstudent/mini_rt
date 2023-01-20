@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/16 14:59:43 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:42:30 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -174,6 +174,9 @@ bool			check_no_shadow(t_disp_point intersection, t_disp_point initial,
 					t_objects *objs, int i);
 void			get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec,
 					int i);
+bool			in_the_way(t_xyz point, t_vect rayvec, t_xyz origin);
+int				intersect_self(t_objects *objs, t_disp_point point, int i);
+void			is_light_hidden(t_objects *objs);
 
 //get_pixel_color.c
 bool			get_pixel_color(int *color, t_disp_point intersec_point,

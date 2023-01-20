@@ -40,6 +40,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								disc \
 								get_pixel_color \
 								shadow_light \
+								light_hidden \
 								rgb \
 								intersection \
 								raytracing_utils \

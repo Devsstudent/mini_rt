@@ -6,12 +6,13 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:34 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/20 16:23:17 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:46:26 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
 
-bool	light_hidden_in_plane(t_objects *objs, t_plane *pl, int i)
+static bool	light_hidden_in_plane(t_objects *objs, t_line_eq rayline,
+		t_vect rayvec)
 {
 	int				j;
 	t_sol_li		list;
@@ -36,7 +37,8 @@ bool	light_hidden_in_plane(t_objects *objs, t_plane *pl, int i)
 	return (false);
 }
 
-bool	light_hidden_in_sphere(t_objects *objs, t_sphere *sp, int i)
+static bool	light_hidden_in_sphere(t_objects *objs, t_line_eq rayline,
+		t_vect rayvec)
 {
 	int				j;
 	t_sol_li		list;
@@ -61,7 +63,8 @@ bool	light_hidden_in_sphere(t_objects *objs, t_sphere *sp, int i)
 	return (false);
 }
 
-bool	light_hidden_in_cylinder(t_objects *objs, t_cylinder *cy, int i)
+static bool	light_hidden_in_cylinder(t_objects *objs, t_line_eq rayline,
+		t_vect rayvec)
 {
 	int				j;
 	t_sol_li		list;
@@ -92,16 +95,16 @@ void	is_light_hidden(t_objects *objs)
 	t_line_eq	rayline;
 	t_vect		rayvec;
 
-	rayvec[0] = objs->li[i].position.x - objs->cam->position.x;
-	rayvec[1] = objs->li[i].position.y - objs->cam->position.y;
-	rayvec[2] = objs->li[i].position.z - objs->cam->position.z;
-	rayline = get_rayline_eq(rayvec, objs->cam->position);
 	i = 0;
 	while (i < objs->nb_li)
 	{
-		if (light_hidden_in_plane(objs, rayline, rayvec, i)
-			|| light_hidden_in_sphere(objs, rayline, rayvec, i)
-			|| light_hidden_in_cylinder(objs, rayline, rayvec, i))
+		rayvec[0] = objs->li[i].position.x - objs->cam->position.x;
+		rayvec[1] = objs->li[i].position.y - objs->cam->position.y;
+		rayvec[2] = objs->li[i].position.z - objs->cam->position.z;
+		rayline = get_rayline_eq(rayvec, objs->cam->position);
+		if (light_hidden_in_plane(objs, rayline, rayvec)
+			|| light_hidden_in_sphere(objs, rayline, rayvec)
+			|| light_hidden_in_cylinder(objs, rayline, rayvec))
 		{
 			objs->li[i].hidden = true;
 		}
