@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/18 16:14:28 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:41:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -24,20 +24,15 @@ int	main(int ac, char **av)
 	objects.mlx = malloc(sizeof(t_mlx_info));
 	objects.need_display = true;
 	objects.co = malloc(sizeof(t_cones));
-	objects.co->height = 25;
+	objects.co->height = 10;
 	objects.co->radius = 10;
-	float	t;
-	t = 25 / sqrt(0 * 0 + 1 * 1 + 0 * 0);
-	float	x,y,z;
-	x = 0 * t + 0;
-	y = 1 * t + 10;
-	z = 0 * t + 10; 
-	objects.co->position.x = x;
-	objects.co->position.y = y;
-	objects.co->position.z = z;
-	objects.co->vec_direction[0] = 0;
+	objects.co->position.x = 3;
+	objects.co->position.y = 4;
+	objects.co->position.z = 10;
+	objects.co->vec_direction[0] = 1;
 	objects.co->vec_direction[1] = 1;
-	objects.co->vec_direction[2] = 0;
+	objects.co->vec_direction[2] = 1;
+	objects.co->center_base = objects.co->height / sqrt(objects.co->vec_direction[0] * objects.co->vec_direction[0] + objects.co->vec_direction[1] * objects.co->vec_direction[1] + objects.co->vec_direction[2] * objects.co->vec_direction[2]);
 	objects.co->color.R = 255;
 	objects.co->color.G = 0;
 	objects.co->color.B = 0;
