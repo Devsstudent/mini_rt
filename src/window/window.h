@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/16 14:59:43 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/23 20:04:50 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -112,6 +112,7 @@ t_equation		get_quadra_plan_equation(t_line_eq rayline, t_plane plane);
 t_equation		get_quadra_sphere_equation(t_line_eq rayline, t_sphere sphere);
 t_equation		get_quadra_cylinder_equation(t_line_eq rayline,
 					t_cylinder cylinder);
+bool	get_specific_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view);
 
 //intersection.c
 t_disp_point	get_intersection(t_sol_li *list, t_xyz start_point);
