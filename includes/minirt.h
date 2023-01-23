@@ -78,10 +78,9 @@ typedef struct s_camera
 }				t_camera;
 
 typedef struct s_cones {
-	t_xyz	position;
-	t_vect	vec_direction;
-	float	height;
-	float	radius;
+	t_xyz	c_top;
+	t_vect	vec_dir;
+	int		angle;
 	t_rgb	color;
 }			t_cones;
 
