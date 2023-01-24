@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/20 16:34:26 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:08:07 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -32,18 +32,23 @@ typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_mlx_info t_mlx_info;
 typedef struct s_disc_info t_disc_info;
 
-typedef struct s_xyz {
-	float	x;
-	float	y;
-	float	z;
-}		t_xyz;
-
 typedef struct s_rgb {
 	uint8_t	B; //0-255
 	uint8_t	G; //0-255
 	uint8_t	R; //0-255
 	uint8_t	T; //0-255
 }					t_rgb;
+
+typedef struct s_pattern {
+	t_rgb	color1;
+	t_rgb	color2;
+}			t_pattern;
+
+typedef struct s_xyz {
+	float	x;
+	float	y;
+	float	z;
+}		t_xyz;
 
 typedef union u_color {
 	t_rgb	rgb;
@@ -97,10 +102,11 @@ typedef struct s_sphere {
 }				t_sphere;
 
 typedef struct	s_plane {
-	t_xyz	position;
-	t_vect	vec_direction;
-	t_rgb	color;
-}			t_plane;
+	t_xyz		position;
+	t_vect		vec_direction;
+	t_rgb		color;
+	bool		need_pattern;
+}				t_plane;
 
 typedef struct	s_cylinder {
 	t_xyz			position;
@@ -162,6 +168,7 @@ typedef struct s_disp_point{
 	t_rgb		color;
 	t_type		type;
 	int			obj_id;
+	bool		pattern_on;
 	bool		err;
 }				t_disp_point;
 
@@ -232,6 +239,7 @@ typedef struct	s_objects {
 	bool		need_display;
 	int			nb_elem;
 	bool			edited;
+	t_pattern		pattern;
 }	t_objects;
 
 #endif

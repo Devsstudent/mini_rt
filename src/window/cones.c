@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:00:39 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/23 21:30:02 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/24 20:26:10 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -31,9 +31,9 @@ t_equation	get_quadra_cones_equation(t_line_eq rayline, t_cones cones, t_objects
 	ray.dir[2] = rayline.z.t;
 	ray.dir = normalize_vector(ray.dir);
 	angle = cones.angle * PI / 180;
-	cam_top_cones[0] = objs->cam->position.x - cones.c_top.x;
-	cam_top_cones[1] = objs->cam->position.y - cones.c_top.y;
-	cam_top_cones[2] = objs->cam->position.z - cones.c_top.z;
+	cam_top_cones[0] = cones.c_top.x - objs->cam->position.x;
+	cam_top_cones[1] = cones.c_top.y - objs->cam->position.y;
+	cam_top_cones[2] = cones.c_top.z - objs->cam->position.z;
 	cam_top_cones = normalize_vector(cam_top_cones);
 	res.x_pow_two = powf(scalar_product(ray.dir, cones.vec_dir), 2) - pow(cosf(angle), 2);
 	res.x_pow_one = 2 * (scalar_product(ray.dir, cones.vec_dir) * scalar_product(cam_top_cones, ray.dir) - scalar_product(ray.dir, cam_top_cones) * powf(cosf(angle), 2));
@@ -57,6 +57,8 @@ bool	get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 		solu = solution(quadra, rayline, &err);
 		if (err)
 			return (false);
+		if (solu.one.x == -1 && solu.one.y == -1 && solu.one.z == -1)
+			printf("hmm\n");
 		if (solu.sol_one && !list_add(list, new_elem(solu, obj->co[i].color, CO, i)))
 			return (false);
 		i++;

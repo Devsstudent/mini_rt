@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/23 15:54:50 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/24 19:39:44 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -49,7 +49,7 @@ bool	resolve_equation(t_objects *objs, t_sol_li *list,
 		&& intersec_point.intersec_point.y == -1
 		&& intersec_point.intersec_point.z == -1)
 		return (free_list(list), true);
-	if (!get_pixel_color(&color, intersec_point, objs))
+	if (!get_pixel_color(&color, intersec_point, objs, i_j))
 		free_list_exit(objs, list);
 	if (list && (list->head) && (list->head)->solution.sol_one)
 		img_pixel_put(objs->mlx, i_j.j, i_j.i, color);
@@ -65,6 +65,8 @@ bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i)
 	t_i_j			i_j;
 
 	j = 0;
+	//Definir tous les combiens on decale la couleurs
+	//Pour faire un damier
 	while (j < WIN_W)
 	{
 		init_sol_li(&list);

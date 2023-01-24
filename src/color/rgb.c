@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:19:12 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/23 21:16:22 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:53:23 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -33,10 +33,6 @@ int	create_color(t_rgb rgb, t_final_pix_color final)
 	t_color	color_conv;
 	int		rgb1[3];
 
-		rgb1[0] = rgb.R;
-		rgb1[1] = rgb.G;
-		rgb1[2] = rgb.B;
-	
 	color_conv.rgb.T = 0;
 	rgb1[0] = rgb.R * (final.diffuse[0] + final.ambient[0] / 255)
 		+ final.specular[0];

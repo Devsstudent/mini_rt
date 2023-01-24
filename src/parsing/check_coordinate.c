@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:00:43 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/04 14:46:08 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/24 19:58:50 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -52,7 +52,11 @@ bool	loop_check_coord_dir(char *line, float *value, int *turn, int *i)
 			return (false);
 		line = line + *i;
 		if (!*line)
+		{
+			if (*turn < 2)
+				return (false);
 			break ;
+		}
 		if (*line != ',' && *turn < 2)
 			return (false);
 		if (*turn > (int) size / 3)

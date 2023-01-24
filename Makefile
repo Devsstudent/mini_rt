@@ -39,8 +39,6 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								cylinder_equation \
 								disc \
 								get_pixel_color \
-								shadow_light \
-								rgb \
 								intersection \
 								raytracing_utils \
 								vector_operations_again \
@@ -59,7 +57,9 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								cylinder_edit \
 								sphere_edit \
 								light_edit \
-								plane_edit)))
+								plane_edit) \
+		$(addprefix color/, rgb \
+							shadow_light)))
 
 D_LST = $(OBJ:.o=.d)
 
@@ -80,6 +80,7 @@ obj_rep:
 	@mkdir -p obj/error/
 	@mkdir -p obj/window/
 	@mkdir -p obj/edit/
+	@mkdir -p obj/color/
 
 clean:
 	make clean -s -C lib/libft

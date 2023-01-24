@@ -6,9 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/23 20:23:35 by odessein         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+/*   Updated: 2023/01/24 15:35:58 by odessein         ###   ########.fr       */
 #include "window.h"
 
 static bool	loop_light(t_disp_point disp_p, t_objects *objs,
@@ -40,7 +38,32 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 	return (true);
 }
 
-bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
+static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j)
+{
+	if (disp_p.pattern_on)
+	{
+		if (i_j.j % 7 == 0 || i_j.i % 5 == 0)
+		{
+			(*color).R = objs->pattern.color1.R;
+			(*color).G = objs->pattern.color1.G;
+			(*color).B = objs->pattern.color1.B;
+		}
+		else
+		{
+			(*color).R = objs->pattern.color2.R;
+			(*color).G = objs->pattern.color2.G;
+			(*color).B = objs->pattern.color2.B;
+		}
+	}
+	else
+	{
+		(*color).R = disp_p.color.R;
+		(*color).G = disp_p.color.G;
+		(*color).B = disp_p.color.B;
+	}
+}
+
+bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j)
 {
 	t_rgb				color_rgb;
 	float				rgb[3];
@@ -53,10 +76,8 @@ bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 	final.ambient[0] = ka * objs->amb->ratio * objs->amb->color.R;
 	final.ambient[1] = ka * objs->amb->ratio * objs->amb->color.G;
 	final.ambient[2] = ka * objs->amb->ratio * objs->amb->color.B;
+	fill_color(&color_rgb, disp_p, objs, i_j);
 	loop_light(disp_p, objs, &final);
-	color_rgb.R = disp_p.color.R;
-	color_rgb.G = disp_p.color.G;
-	color_rgb.B = disp_p.color.B;
 	*color = create_color(color_rgb, final);
 	return (true);
 }
