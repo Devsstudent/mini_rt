@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:00:39 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 18:56:53 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:07:59 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -21,8 +21,8 @@ t_equation	get_quadra_cone_equation(t_line_eq rayline, t_cone cone)
 	float		a2cos2, b2cos2, c2cos2;
 	float		x0xc2, y0yc2, z0zc2;
 
-	cos = cone.height / (sqrtf(cone.radius * cone.radius + (cone.radius / 2)
-		* (cone.radius / 2)));
+	cos = cone.height / (sqrtf(cone.height * cone.height + (cone.radius)
+		* (cone.radius)));
 	vec = normalize_vector(cone.vec_dir);
 	a = vec[0];
 	b = vec[1];
@@ -60,6 +60,38 @@ t_equation	get_quadra_cone_equation(t_line_eq rayline, t_cone cone)
 	return (res);
 }
 
+void	check_solution_cone(t_solution *solu, t_cone cone)
+{
+	float	distance_max;
+	float	radius;
+	float	height;
+	t_xyz	origin;
+
+	origin = cone.position;
+	radius = cone.radius;
+	height = cone.height;
+	distance_max = sqrtf(radius * radius + height * height);
+	if (solu->sol_one || solu->sol_two)
+	{
+		if (solu->sol_two)
+		{
+			
+			if (norm_of_vector(create_vector(solu->two, origin)) > distance_max
+				|| scalar_product(create_vector(origin, solu->two)
+					, cone.vec_dir) < 0)
+				solu->sol_two = false;
+		}
+		if (norm_of_vector(create_vector(solu->one, origin)) > distance_max
+				|| scalar_product(create_vector(origin, solu->one)
+					, cone.vec_dir) < 0)
+		{
+			solu->sol_one = false;
+			if (solu->sol_two)
+				copy_sol_two_in_one(solu);
+		}
+	}
+}
+
 bool	get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 {
 	t_equation	quadra;
@@ -75,6 +107,8 @@ bool	get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 		solu = solution(quadra, rayline, &err);
 		if (err)
 			return (false);
+		check_solution_cone(&solu, obj->co[i]);
+		get_disc_cone(obj, list, rayline, i);
 		if (solu.sol_one
 			&& !list_add(list, new_elem(solu, obj->co[i].color, CO, i)))
 			return (false);
@@ -94,6 +128,8 @@ bool	get_specific_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_
 	solu = solution(quadra, rayline, &err);
 	if (err)
 		return (false);
+	check_solution_cone(&solu, obj->co[i_to_view]);
+	get_disc_cone(obj, list, rayline, i_to_view);
 	if (solu.sol_one && !list_add(list
 			,new_elem(solu, obj->co[i_to_view].color, CO, i_to_view)))
 		return (false);

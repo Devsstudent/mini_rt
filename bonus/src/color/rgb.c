@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:19:12 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/23 21:53:23 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:14:12 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -64,6 +64,8 @@ float	compute_rgb_from_angle(t_objects *objs, t_color_pam param)
 		normal = normalize_vector(get_normal_vect_cy(param.disp_p, objs));
 	else if (param.disp_p.type == DI)
 		normal = normalize_vector(get_normal_vect_di(param.disp_p, objs));
+	else if (param.disp_p.type == CO)
+		normal = normalize_vector(get_normal_vect_co(param.disp_p, objs));
 	else
 		return (1);
 	//If we want we can setup a different diffuse_material value depending the surface

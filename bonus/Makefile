@@ -41,6 +41,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								cones \
 								cylinder_equation \
 								disc \
+								disc_cone \
 								get_pixel_color \
 								intersection \
 								raytracing_utils \

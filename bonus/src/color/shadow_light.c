@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:12:29 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/23 20:09:54 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:10:41 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -46,8 +46,8 @@ static int	intersect_self(t_objects *objs, t_disp_point point, int i)
 	if ((point.type == CY || point.type == DI)
 		&& !get_specific_cylinder(objs, &list, rayline, point.obj_id))
 		return (free_list(&list), -1);
-//	if (point.type == CO && !get_specific_cone(objs, &list, rayline, point.obj_id))
-//		return (free_list(&list), -1);
+	if (point.type == CO && !get_specific_cone(objs, &list, rayline, point.obj_id))
+		return (free_list(&list), -1);
 	intersection = get_intersection(&list, objs->cam->position);
 	if (list.head != NULL && list.head->solution.sol_one
 		&& in_the_way(intersection.intersec_point, rayvec, objs->cam->position))
@@ -78,8 +78,8 @@ t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,
 		return (error_intersec());
 	if (!get_cylinder(objs, list, rayline))
 		return (error_intersec());
-//	if (!get_cones(objs, list, rayline))
-//		return (error_intersec());
+	if (!get_cones(objs, list, rayline))
+		return (error_intersec());
 	return (get_intersection(list, disp_p.intersec_point));
 }
 

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:21:28 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 16:21:24 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:50:20 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -28,6 +28,8 @@ float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs)
 		normal = normalize_vector(get_normal_vect_cy(intersec, objs));
 	else if (intersec.type == DI)
 		normal = normalize_vector(get_normal_vect_di(intersec, objs));
+	else if (intersec.type == CO)
+		normal = normalize_vector(get_normal_vect_co(intersec, objs));
 	else
 		return (1);
 	//Same for the specular reflection of object we can change between object to personalize more 
@@ -66,6 +68,38 @@ t_vect	get_normal_vect_cy(t_disp_point intersec, t_objects *objs)
 	normal_cy[2] = intersec.intersec_point.z - (c * t
 			+ objs->cy[intersec.obj_id].position.z);
 	return (normal_cy);
+}
+
+t_vect	get_normal_vect_co(t_disp_point intersec, t_objects *objs)
+{
+	t_vect	normal_co;
+	float	t;
+	float	a;
+	float	b;
+	float	c;
+	float	xp,yp,zp,xc,yc,zc;
+
+	a = objs->co[intersec.obj_id].vec_dir[0];
+	b = objs->co[intersec.obj_id].vec_dir[1];
+	c = objs->co[intersec.obj_id].vec_dir[2];
+	xc = objs->co[intersec.obj_id].position.x;
+	yc = objs->co[intersec.obj_id].position.y;
+	zc = objs->co[intersec.obj_id].position.z;
+	xp = intersec.intersec_point.x;
+	yp = intersec.intersec_point.y;
+	zp = intersec.intersec_point.z;
+	normal_co[0] = a;
+	normal_co[1] = b;
+	normal_co[2] = c;
+	if ((xc - xp) * a + (yc - yp) * b + (zc - zp) * c == 0)
+		return (normal_co);
+	t = (- xp * xp + xc * xp - yp * yp + yc * yp - zp * zp + zp * zc
+		- xc * (xc - xp) - yc * (yc - yp) - zc * (zc - zp))
+		/ (a * (xc - xp) + b * (yc - yp) + c * (zc - zp));
+	normal_co[0] = intersec.intersec_point.x - (a * t + xc);
+	normal_co[1] = intersec.intersec_point.y - (b * t + yc);
+	normal_co[2] = intersec.intersec_point.z - (c * t + zc);
+	return (normal_co);
 }
 
 t_vect	get_normal_vect_di(t_disp_point intersec, t_objects *objs)

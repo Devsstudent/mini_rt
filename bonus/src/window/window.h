@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 15:10:07 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:00:37 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -108,6 +108,7 @@ bool			get_cylinder(t_objects *obj, t_sol_li *list, t_line_eq rayline);
 bool			get_specific_cylinder(t_objects *obj, t_sol_li *list,
 					t_line_eq rayline, int i_to_view);
 bool			get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view);
+bool			get_disc_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view);
 t_equation		get_quadra_cylinder_equation(t_line_eq rayline,
 					t_cylinder cylinder);
 
@@ -165,12 +166,16 @@ t_vect			get_normal_vect_sp(t_disp_point intersec, t_objects *objs);
 t_vect			get_normal_vect_di(t_disp_point intersec, t_objects *objs);
 t_vect			get_normal_vect_pl(t_disp_point intersec, t_objects *objs);
 t_vect			get_normal_vect_cy(t_disp_point intersec, t_objects *objs);
+t_vect			get_normal_vect_co(t_disp_point intersec, t_objects *objs);
 
 //solution_list.c
 void			init_sol_li(t_sol_li *sol_li);
 bool			list_add(t_sol_li *sol_li, t_solution_elem *new);
 t_solution_elem	*new_elem(t_solution solution, t_rgb color, t_type type, int i);
 void			free_list(t_sol_li *sol_li);
+
+//copy_sol_two_in_one
+void	copy_sol_two_in_one(t_solution *solu);
 
 //rgb.c
 void			ambient_light_quo(t_objects *objs, float RGB[3]);
