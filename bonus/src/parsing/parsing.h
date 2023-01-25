@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/04 15:38:49 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:08:55 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -17,7 +17,7 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define ELEM_MAX 6
+# define ELEM_MAX 7
 
 typedef float					t_vect __attribute__ ((vector_size(16)));
 typedef struct s_xyz			t_xyz;
@@ -91,6 +91,9 @@ bool	check_sphere(char **line_split, t_must_have *all_elem);
 //check_line_parsing.c
 bool	check_line(char *line, t_function_parsing *arr, t_must_have *all_elem);
 
+//check_cones.c
+bool	check_cones(char **line, t_must_have *all_elem);
+
 //conversions
 bool	convert_to_float(float *val, char *arr);
 bool	convert_to_vect_float(t_vect *val, char *arr, char *arr1, char *arr2);
@@ -113,6 +116,12 @@ bool	build_sphere(char ***triple_arr, t_objects *objects);
 bool	build_light(char ***triple_arr, t_objects *objects);
 bool	build_camera(char ***triple_arr, t_objects *objects);
 bool	build_ambient_light(char ***triple_arr, t_objects *objects);
+
+//build_cones.c
+bool	build_cones(char ***triple_arr, t_objects *objects);
+
+//fill_cones.c
+bool	fill_cones(char **arr, int j, t_objects *objs);
 
 //fill_structs
 char	***create_triple_arr(char **lines);

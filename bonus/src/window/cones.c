@@ -6,11 +6,11 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:00:39 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 12:27:30 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:11:00 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
-
+/*
 typedef struct s_eqq{
 	t_xyz	x;
 	t_vect	dir;
@@ -80,4 +80,4 @@ bool	get_specific_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_
 	if (solu.sol_one && !list_add(list ,new_elem(solu, obj->co[i_to_view].color, CO, i_to_view)))
 		return (false);
 	return (true);
-}
+}*/

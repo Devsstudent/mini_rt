@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 14:08:42 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:08:06 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -83,12 +83,13 @@ typedef struct s_camera
 	uint8_t		fov; //0-180
 }				t_camera;
 
-typedef struct s_cones {
-	t_xyz	c_top;
+typedef struct s_cone {
+	t_xyz	position;
 	t_vect	vec_dir;
-	int		angle;
+	float	radius;
+	float	height;
 	t_rgb	color;
-}			t_cones;
+}			t_cone;
 
 typedef struct s_light {
 	t_xyz			position;
@@ -232,7 +233,7 @@ typedef struct	s_objects {
 	int			nb_li;
 	t_plane			*pl;
 	int			nb_pl;
-	t_cones			*co;
+	t_cone			*co;
 	int			nb_co;
 	t_camera		*cam;
 	t_ambient_light	*amb;

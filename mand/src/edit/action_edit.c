@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:20:50 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:11:51 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:29:32 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -97,5 +97,6 @@ t_edit	get_edit(t_type type)
 		res.action = TRANSLATE;
 		res.coord = get_input_coord();
 	}
+	free(str);
 	return (res);
 }

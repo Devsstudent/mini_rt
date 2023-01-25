@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:19:18 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/04 14:56:47 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:56:48 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -42,6 +42,8 @@ static bool	loop_attribute_func(t_function_parsing **arr, bool *res)
 			*res = attribute_function_letter(check_plane, &(*arr)[i], "PL");
 		if (i == 5)
 			*res = attribute_function_letter(check_cylinder, &(*arr)[i], "CY");
+		if (i == 6)
+			*res = attribute_function_letter(check_cones, &(*arr)[i], "CO");
 		if (!(*res))
 			return (false);
 		i++;

@@ -7,6 +7,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix parsing/, parsing \
 							$(addprefix check_, ambient \
 												camera \
+												cones \
 												coordinate \
 												cylindre \
 												float_construction \
@@ -23,9 +24,11 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								convert_to_float \
 								convert_to_vect \
 								fill_structs \
+								fill_cones \
 								fill_cylinder \
 								build_elems \
 								build_light \
+								build_cones \
 								fill_elems \
 								utils) \
 		$(addprefix error/, error \
