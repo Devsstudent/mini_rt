@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 18:05:04 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 18:17:04 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 11:31:59 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef HEAD_H
@@ -15,6 +15,7 @@
 # include <stdint.h>
 # include <stdbool.h>
 
+typedef float t_vect __attribute__ ((vector_size(16)));
 typedef struct s_xyz {
 	float	x;
 	float	y;

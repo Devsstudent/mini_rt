@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:00:39 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 20:26:10 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 12:27:30 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -30,7 +30,7 @@ t_equation	get_quadra_cones_equation(t_line_eq rayline, t_cones cones, t_objects
 	ray.dir[1] = rayline.y.t;
 	ray.dir[2] = rayline.z.t;
 	ray.dir = normalize_vector(ray.dir);
-	angle = cones.angle * PI / 180;
+	angle = cones.angle * M_PI / 180;
 	cam_top_cones[0] = cones.c_top.x - objs->cam->position.x;
 	cam_top_cones[1] = cones.c_top.y - objs->cam->position.y;
 	cam_top_cones[2] = cones.c_top.z - objs->cam->position.z;

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 15:08:07 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 14:08:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -26,9 +26,10 @@
 # include "window.h"
 # include "edit.h"
 
-# define PI 3.1415926535
-
 typedef float t_vect __attribute__ ((vector_size(16)));
+typedef t_vect t_matrix[4];
+typedef t_vect t_matrix_3[3];
+typedef t_vect t_matrix_2[2];
 typedef struct s_mlx_info t_mlx_info;
 typedef struct s_disc_info t_disc_info;
 

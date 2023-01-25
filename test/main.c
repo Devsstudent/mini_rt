@@ -4,12 +4,14 @@
 
 int	main(void)
 {
+	t_vect	test[4];
 	t_solution_list	*head;
 	t_solution		ahha;
 	t_rgb			color;
 	t_type			type;
 
 	type = SP;
+	memset(&test, 0, sizeof(test));
 	memset(&ahha, 0, sizeof(ahha));
 	memset(&color, 0, sizeof(color));
 	head = malloc(sizeof(1));

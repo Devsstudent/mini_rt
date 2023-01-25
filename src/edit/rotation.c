@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:12:31 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 19:03:48 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/25 12:29:00 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -26,11 +26,11 @@ static void	axis_y(void *new_vec, double _cos, double _sin, t_vect initial)
 	t_vect	*res;
 
 	res = (t_vect *) new_vec;
-	printf("%f %f %f\n", initial[0], initial[1], initial[2]);
+	//printf("%f %f %f\n", initial[0], initial[1], initial[2]);
 	(*res)[0] = initial[2] * _sin + initial[0] * _cos;
 	(*res)[1] = initial[1];
 	(*res)[2] = initial[2] * _cos - initial[0] * _sin;
-	printf("%f %f %f\n", (*res)[0], (*res)[1], (*res)[2]);
+	//printf("%f %f %f\n", (*res)[0], (*res)[1], (*res)[2]);
 }
 
 static void	axis_z(void *new_vec, double _cos, double _sin, t_vect initial)
@@ -49,8 +49,8 @@ t_vect	apply_rotation(t_vect initial, t_axis axis, int angle)
 	double	_cos;
 	double	_sin;
 
-	_sin = sin(((float) angle) * (PI / 180));
-	_cos = cos(((float) angle) * (PI / 180));
+	_sin = sin(((float) angle) * (M_PI / 180));
+	_cos = cos(((float) angle) * (M_PI / 180));
 	memset(&res, 0, sizeof(res));
 	if (axis == X)
 		axis_x(&res, _cos, _sin, initial);
