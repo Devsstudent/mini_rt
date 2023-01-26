@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/26 00:01:44 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/26 09:35:18 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -85,7 +85,7 @@ bool	get_disc_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 	if (err)
 		return (false);
 	if (solu.sol_one
-		&& !list_add(list, new_elem(solu, obj->co[i].color, DI, i)))
+		&& !list_add(list, new_elem(solu, obj->co[i].color, CO_DI, i)))
 		return (false);
 	return (true);
 }

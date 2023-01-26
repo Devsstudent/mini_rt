@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 18:08:06 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 09:33:43 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -141,7 +141,8 @@ typedef enum e_type{
 	C,
 	DI,
 	LI,
-	CO
+	CO,
+	CO_DI
 }	t_type;
 
 typedef enum e_axis{

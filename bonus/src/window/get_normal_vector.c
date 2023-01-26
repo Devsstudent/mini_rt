@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:21:28 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 23:50:20 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/26 09:36:09 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -26,7 +26,7 @@ float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs)
 		normal = normalize_vector(get_normal_vect_pl(intersec, objs));
 	else if (intersec.type == CY)
 		normal = normalize_vector(get_normal_vect_cy(intersec, objs));
-	else if (intersec.type == DI)
+	else if (intersec.type == DI || intersec.type == CO_DI)
 		normal = normalize_vector(get_normal_vect_di(intersec, objs));
 	else if (intersec.type == CO)
 		normal = normalize_vector(get_normal_vect_co(intersec, objs));
