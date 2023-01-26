@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/24 15:35:58 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:56:27 by odessein         ###   ########.fr       */
 #include "window.h"
 
 static bool	loop_light(t_disp_point disp_p, t_objects *objs,
@@ -63,6 +63,9 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 	}
 }
 
+//Rajouter une structure de static a reinstialiser pour s'avoir la position du dernier moment ou on a changer de couleur pour comparer avec le vecteur u et v si la distance a ete parcourus ou pas
+
+//C'est bancale ca casse les couiiles
 bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j)
 {
 	t_rgb				color_rgb;

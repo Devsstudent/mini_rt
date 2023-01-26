@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 09:33:43 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:27:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -103,11 +103,17 @@ typedef struct s_sphere {
 	t_rgb		color;
 }				t_sphere;
 
+typedef struct s_uv {
+	t_vect	u;
+	t_vect	v;
+}			t_uv;
+
 typedef struct	s_plane {
 	t_xyz		position;
 	t_vect		vec_direction;
 	t_rgb		color;
 	bool		need_pattern;
+	t_uv		uv;
 }				t_plane;
 
 typedef struct	s_cylinder {
