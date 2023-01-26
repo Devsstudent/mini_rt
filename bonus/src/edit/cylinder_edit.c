@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:54 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:24:22 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:58:24 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -33,6 +33,10 @@ void	apply_action_cy(t_edit edit_info, t_cylinder *cy)
 	else if (edit_info.action == ROTATE)
 	{
 		cy->vec_direction = apply_rotation(cy->vec_direction,
+				edit_info.axis, edit_info.angle);
+		cy->vec_width = apply_rotation(cy->vec_width,
+				edit_info.axis, edit_info.angle);
+		cy->vec_depth = apply_rotation(cy->vec_depth,
 				edit_info.axis, edit_info.angle);
 		cy->abc_2[0] = cy->vec_direction[0] * cy->vec_direction[0];
 		cy->abc_2[1] = cy->vec_direction[1] * cy->vec_direction[1];

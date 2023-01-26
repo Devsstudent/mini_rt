@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 09:22:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 09:32:23 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:54:44 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -24,8 +24,14 @@ static void	apply_action_co(t_edit edit_info, t_cone *co)
 		co->position.z = edit_info.coord.z;
 	}
 	else if (edit_info.action == ROTATE)
+	{
 		co->vec_dir = apply_rotation(co->vec_dir, edit_info.axis,
 			edit_info.angle);
+		co->vec_width = apply_rotation(co->vec_width, edit_info.axis,
+			edit_info.angle);
+		co->vec_depth = apply_rotation(co->vec_depth, edit_info.axis,
+			edit_info.angle);
+	}
 }
 
 bool	ask_co(t_objects *objs)

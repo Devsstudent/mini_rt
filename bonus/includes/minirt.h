@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 13:27:03 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:49:45 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -86,6 +86,8 @@ typedef struct s_camera
 typedef struct s_cone {
 	t_xyz	position;
 	t_vect	vec_dir;
+	t_vect	vec_width;
+	t_vect	vec_depth;
 	float	radius;
 	float	height;
 	t_rgb	color;
@@ -100,6 +102,9 @@ typedef struct s_light {
 typedef struct s_sphere {
 	t_xyz		position;
 	float		diameter;
+	t_vect		vec_height;
+	t_vect		vec_width;
+	t_vect		vec_depth;
 	t_rgb		color;
 }				t_sphere;
 
@@ -111,6 +116,8 @@ typedef struct s_uv {
 typedef struct	s_plane {
 	t_xyz		position;
 	t_vect		vec_direction;
+	t_vect		vec_height;
+	t_vect		vec_width;
 	t_rgb		color;
 	bool		need_pattern;
 	t_uv		uv;
@@ -120,6 +127,8 @@ typedef struct	s_cylinder {
 	t_xyz			position;
 	float			xm_2[3];
 	t_vect			vec_direction;
+	t_vect			vec_width;
+	t_vect			vec_depth;
 	float			abc_2[3];
 	float			diameter;
 	float			radius;

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:50:44 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 15:25:47 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:57:18 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -21,6 +21,7 @@ void	apply_action_sp(t_edit edit_info, t_sphere *sp)
 		sp->position.y = edit_info.coord.y;
 		sp->position.z = edit_info.coord.z;
 	}
+	//here get the rotation of sphere, would be interesting with textures
 }
 
 bool	ask_sp(t_objects *objs)
