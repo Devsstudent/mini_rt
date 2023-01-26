@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:21:28 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 17:40:27 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 21:49:21 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -37,9 +37,6 @@ float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs)
 	//Same for the specular reflection of object we can change between object to personalize more 
 	ks = 0.4;
 	shy = 9;
-	float	scalar = scalar_product(normal, normalize_vector(light_vec));
-	if (scalar < 0)
-		normal = -normal;
 	reflected = normalize_vector(2 * (scalar_product(normal,
 					normalize_vector(light_vec)) * normal)
 			- normalize_vector(light_vec));

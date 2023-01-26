@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:19:12 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 17:21:13 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 21:44:23 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -73,9 +73,6 @@ float	compute_rgb_from_angle(t_objects *objs, t_color_pam param)
 	//If we want we can setup a different diffuse_material value depending the surface
 	kd = 0.7;
 	rayvec = normalize_vector(param.rayvec);
-	float scalar = scalar_product(rayvec, normal);
-	if (scalar < 0)
-		normal = -normal;
 	ratio = kd * fmax(scalar_product(rayvec, normal), 0);
 	return (ratio);
 }
