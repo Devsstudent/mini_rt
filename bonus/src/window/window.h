@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 00:00:37 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/26 16:35:34 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -42,15 +42,28 @@ typedef struct s_final_pix_color{
 	t_vect	shadow;
 }			t_final_pix_color;
 
+typedef struct s_detail {
+	t_img	*textures;
+	int		width;
+	int		height;
+}			t_detail;
+
+typedef struct s_texture {
+	t_detail	*textures;
+	int			nb_textures;
+	char		**paths;
+}			t_texture;
+
 typedef struct s_mlx_info {
-	t_mlx	*mlx;
-	t_mlx	*win;
-	t_img	*img;
-	int		bpp;
-	int		line_size;
-	int		endian;
-	char	*data;
-}			t_mlx_info;
+	t_mlx		*mlx;
+	t_mlx		*win;
+	t_img		*img;
+	int			bpp;
+	int			line_size;
+	int			endian;
+	char		*data;
+	t_texture	texture;
+}				t_mlx_info;
 
 typedef struct s_i_j{
 	int	i;
@@ -163,7 +176,7 @@ t_vect			get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
 float			get_specular(t_vect light_vec, t_disp_point intersec,
 					t_objects *objs);
 t_vect			get_normal_vect_sp(t_disp_point intersec, t_objects *objs);
-t_vect			get_normal_vect_di(t_disp_point intersec, t_objects *objs);
+t_vect	get_normal_vect_di(t_disp_point intersec, t_objects *objs, bool cy);
 t_vect			get_normal_vect_pl(t_disp_point intersec, t_objects *objs);
 t_vect			get_normal_vect_cy(t_disp_point intersec, t_objects *objs);
 t_vect			get_normal_vect_co(t_disp_point intersec, t_objects *objs);

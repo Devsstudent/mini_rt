@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/26 13:56:27 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:09:53 by odessein         ###   ########.fr       */
 #include "window.h"
 
 static bool	loop_light(t_disp_point disp_p, t_objects *objs,
