@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:38:20 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 14:29:19 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 09:30:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -25,6 +25,8 @@ static bool	check_str(char *str)
 		return (true);
 	else if (!ft_strncmp("c\n", str, 3))
 		return (true);
+	else if (!ft_strncmp("co\n", str, 4))
+		return (true);
 	return (false);
 }
 
@@ -42,6 +44,8 @@ static void	go_for_asked(char *str, t_objects *objs)
 		ask_li(objs);
 	if (!ft_strncmp("c\n", str, 3))
 		ask_c(objs);
+	if (!ft_strncmp("co\n", str, 4))
+		ask_co(objs);
 	free(str);
 }
 

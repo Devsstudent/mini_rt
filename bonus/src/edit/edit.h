@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:13:47 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/10 14:40:40 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/26 09:31:04 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EDIT_H
@@ -44,6 +44,9 @@ bool	ask_pl(t_objects *objs);
 
 //sphere_edit.c
 bool	ask_sp(t_objects *objs);
+
+//cones_edit.c
+bool	ask_co(t_objects *objs);
 
 //light_edit.c
 bool	ask_li(t_objects *objs);

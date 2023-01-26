@@ -60,6 +60,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								camera_edit \
 								cylinder_edit \
 								sphere_edit \
+								cones_edit \
 								light_edit \
 								plane_edit) \
 		$(addprefix color/, rgb \
