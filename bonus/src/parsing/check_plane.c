@@ -6,10 +6,27 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:00:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 15:28:59 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:43:57 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
+
+bool	check_path(char *path)
+{
+	size_t	size;
+
+	if (!path)
+		return (false);
+	size = ft_strlen(path);
+	if (size > 4 && (path[size - 1] != 'm' || path[size - 2] != 'p'
+		|| path[size - 3] != 'm' || path[size - 4] != '.'))
+		return (false)
+	else if (size < 4)
+		return (false);
+	if (access(path, F_OK) == -1)
+		return (false);
+	return (true);
+}
 
 bool	check_plane(char **line_split, t_must_have *all_elem)
 {
@@ -27,7 +44,7 @@ bool	check_plane(char **line_split, t_must_have *all_elem)
 		return (false);
 	if (!check_rgb(line_split[3]))
 		return (false);
-	if (line_split[4] || (line_split[4] && !ft_strncmp(line_split[4], "1", 2) && !line_split[5]))
+	if (line_split[4] && !check_path(line_split[4]) && !line_split[5])
 		return (false);
 	all_elem->object = true;
 	return (true);

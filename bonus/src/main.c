@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 23:49:33 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:27:10 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -39,6 +39,7 @@ void	fill_sp_system(t_objects *objs, int i)
 	sp = objs->sp[i];
 	sp.vec_height = normalize_vector(objs->vect_height);
 	sp.vec_width = normalize_vector(objs->vect_width);
+	//why the vector director of the cam ? 
 	sp.vec_depth = normalize_vector(objs->cam->vec_direction);
 }
 
@@ -65,9 +66,7 @@ void	fill_co_system(t_objects *objs, int i)
 }
 
 bool	fill_obj_systems(t_objects *objs)
-{
-	int	i;
-
+{ int	i;
 	i = 0;
 	if (!fill_cam_system(objs))
 		return (false);
