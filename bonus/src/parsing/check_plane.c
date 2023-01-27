@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:00:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/27 10:43:57 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:48:11 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -19,8 +19,8 @@ bool	check_path(char *path)
 		return (false);
 	size = ft_strlen(path);
 	if (size > 4 && (path[size - 1] != 'm' || path[size - 2] != 'p'
-		|| path[size - 3] != 'm' || path[size - 4] != '.'))
-		return (false)
+		|| path[size - 3] != 'x' || path[size - 4] != '.'))
+		return (false);
 	else if (size < 4)
 		return (false);
 	if (access(path, F_OK) == -1)
