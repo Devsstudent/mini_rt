@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/26 17:09:53 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/27 17:19:00 by odessein         ###   ########.fr       */
 #include "window.h"
 
 static bool	loop_light(t_disp_point disp_p, t_objects *objs,
@@ -40,27 +40,39 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 
 static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j)
 {
-	if (disp_p.pattern_on)
+	t_vect	dist;
+	float	x;
+	float	y;
+	t_rgb	white;
+	t_rgb	black;
+
+	(void) i_j;
+	white.R = 255;
+	white.G = 255;
+	white.R = 255;
+	ft_memset(&black, 0, sizeof(black));
+	dist = create_vector(disp_p.intersec_point, objs->pl[disp_p.obj_id].position);
+	x = scalar_product(dist, objs->pl[disp_p.obj_id].vec_width);
+	y = scalar_product(dist, objs->pl[disp_p.obj_id].vec_height);
+	if (disp_p.type == PL && disp_p.pattern_on)
 	{
-		if (i_j.j % 7 == 0 || i_j.i % 5 == 0)
+		if ((x <= 0 && y <= 0) || (y >= 0 && x >= 0))
 		{
-			(*color).R = objs->pattern.color1.R;
-			(*color).G = objs->pattern.color1.G;
-			(*color).B = objs->pattern.color1.B;
+			if (((int)x / 10) % 2 == ((int)y / 10) % 2)
+				*color = black;
+			else
+				*color = white;
 		}
-		else
+		else if ((x < 0 && y > 0) || (y < 0 && x > 0))
 		{
-			(*color).R = objs->pattern.color2.R;
-			(*color).G = objs->pattern.color2.G;
-			(*color).B = objs->pattern.color2.B;
+			if (((int)x / 10) % 2 == (-(int)y / 10) % 2)
+				*color = white;
+			else
+				*color = black;
 		}
 	}
 	else
-	{
-		(*color).R = disp_p.color.R;
-		(*color).G = disp_p.color.G;
-		(*color).B = disp_p.color.B;
-	}
+		*color = disp_p.color;
 }
 
 //Rajouter une structure de static a reinstialiser pour s'avoir la position du dernier moment ou on a changer de couleur pour comparer avec le vecteur u et v si la distance a ete parcourus ou pas

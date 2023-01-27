@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/27 10:27:10 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:51:36 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -24,51 +24,54 @@ bool	fill_cam_system(t_objects *objs)
 
 void	fill_pl_system(t_objects *objs, int i)
 {
-	t_plane	pl;
+	t_plane	*pl;
 
-	pl = objs->pl[i];
-	pl.vec_height = normalize_vector(get_vec_vertical(pl.vec_direction));
-	pl.vec_width = normalize_vector(get_vec_horizontal(pl.vec_direction
-		, pl.vec_height));
+	pl = &(objs->pl[i]);
+	pl->vec_height = normalize_vector(get_vec_vertical(pl->vec_direction));
+	pl->vec_width = normalize_vector(get_vec_horizontal(pl->vec_direction
+		, pl->vec_height));
+
 }
 
 void	fill_sp_system(t_objects *objs, int i)
 {
-	t_sphere	sp;
+	t_sphere	*sp;
 
-	sp = objs->sp[i];
-	sp.vec_height = normalize_vector(objs->vect_height);
-	sp.vec_width = normalize_vector(objs->vect_width);
+	sp = &(objs->sp[i]);
+	sp->vec_height = normalize_vector(objs->vect_height);
+	sp->vec_width = normalize_vector(objs->vect_width);
 	//why the vector director of the cam ? 
-	sp.vec_depth = normalize_vector(objs->cam->vec_direction);
+	sp->vec_depth = normalize_vector(objs->cam->vec_direction);
 }
 
 void	fill_cy_system(t_objects *objs, int i)
 {
-	t_cylinder	cy;
+	t_cylinder	*cy;
 
-	cy = objs->cy[i];
-	cy.vec_direction = normalize_vector(cy.vec_direction);
-	cy.vec_width = normalize_vector(get_vec_vertical(cy.vec_direction));
-	cy.vec_depth = normalize_vector(get_vec_horizontal(cy.vec_direction
-			, cy.vec_width));
+	cy = &(objs->cy[i]);
+	cy->vec_direction = normalize_vector(cy->vec_direction);
+	cy->vec_width = normalize_vector(get_vec_vertical(cy->vec_direction));
+	cy->vec_depth = normalize_vector(get_vec_horizontal(cy->vec_direction
+			, cy->vec_width));
 }
 
 void	fill_co_system(t_objects *objs, int i)
 {
-	t_cone	co;
+	t_cone	*co;
 
-	co = objs->co[i];
-	co.vec_dir = normalize_vector(co.vec_dir);
-	co.vec_width = normalize_vector(get_vec_vertical(co.vec_dir));
-	co.vec_depth = normalize_vector(get_vec_horizontal(co.vec_dir
-			, co.vec_width));
+	co = &(objs->co[i]);
+	co->vec_dir = normalize_vector(co->vec_dir);
+	co->vec_width = normalize_vector(get_vec_vertical(co->vec_dir));
+	co->vec_depth = normalize_vector(get_vec_horizontal(co->vec_dir
+			, co->vec_width));
 }
 
 bool	fill_obj_systems(t_objects *objs)
 { int	i;
 	i = 0;
 	if (!fill_cam_system(objs))
+//	else
+//	else
 		return (false);
 	while (i < objs->nb_pl)
 		fill_pl_system(objs, i++);
@@ -96,6 +99,7 @@ int	main(int ac, char **av)
 		return (2);
 	if (!fill_obj_systems(&objects))
 		return (3);
+	printf("%f\n", objects.pl[0].vec_height[0]);
 	objects.mlx = malloc(sizeof(t_mlx_info));
 	objects.need_display = true;
 	if (!window(&objects))

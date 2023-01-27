@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 17:53:09 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:26:45 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -30,10 +30,10 @@ static void	fill_disp_point(t_solution_elem *buff,
 		disp_point->intersec_point = buff->solution.two;
 	disp_point->color = buff->color;
 	disp_point->type = buff->type;
-//	if (disp_point->type == PL)
-//		disp_point->pattern_on = true;
-//	else
-	disp_point->pattern_on = false;
+	if (disp_point->type == PL)
+		disp_point->pattern_on = true;
+	else
+		disp_point->pattern_on = false;
 	disp_point->obj_id = buff->obj_id;
 }
 
