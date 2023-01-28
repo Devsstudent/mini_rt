@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:20:50 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 18:13:32 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/28 19:30:42 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -67,7 +67,7 @@ static bool	check_edit(t_type type, char *str)
 		return (false);
 	if (!ft_strncmp("r\n", str, 3) && (type == SP || type == CY))
 		return (true);
-	if (!ft_strncmp("o\n", str, 3) && (type != LI && type != SP))
+	if (!ft_strncmp("o\n", str, 3) && type != LI)
 		return (true);
 	if (!ft_strncmp("t\n", str, 3))
 		return (true);

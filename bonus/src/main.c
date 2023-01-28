@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/27 16:51:36 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:18:49 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -49,7 +49,7 @@ void	fill_cy_system(t_objects *objs, int i)
 	t_cylinder	*cy;
 
 	cy = &(objs->cy[i]);
-	cy->vec_direction = normalize_vector(cy->vec_direction);
+	//cy->vec_direction = normalize_vector(cy->vec_direction);
 	cy->vec_width = normalize_vector(get_vec_vertical(cy->vec_direction));
 	cy->vec_depth = normalize_vector(get_vec_horizontal(cy->vec_direction
 			, cy->vec_width));

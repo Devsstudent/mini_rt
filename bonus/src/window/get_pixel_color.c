@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/27 21:51:39 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/28 20:25:17 by mbelrhaz         ###   ########.fr       */
 #include "window.h"
 
 static bool	loop_light(t_disp_point disp_p, t_objects *objs,
@@ -38,40 +38,47 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 	return (true);
 }
 
-static void	sphere_coord_move(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb black, t_rgb *color, t_objects *objs)
+static void	sphere_color(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb black, t_rgb *color, t_objects *objs)
 {
 	float	x;
 	float	y;
 	float	z;
 	t_vect	ve;
-	float	teta;
-	float	phi;
+	float	cos_teta;
+	float	cos_phi;
+	t_sphere	sp;
 
-	x = scalar_product(dist, objs->sp[disp_p.obj_id].vec_width);
-	y = scalar_product(dist, objs->sp[disp_p.obj_id].vec_height);
-	z = scalar_product(dist, objs->sp[disp_p.obj_id].vec_depth);
-	ve = x * objs->sp[disp_p.obj_id].vec_width + z * objs->sp[disp_p.obj_id].vec_depth;
-	teta = scalar_product(ve, objs->sp[disp_p.obj_id].vec_width) / ((norm_of_vector(ve) * norm_of_vector(objs->sp[disp_p.obj_id].vec_width)));
-	ve = y * objs->sp[disp_p.obj_id].vec_height + z * objs->sp[disp_p.obj_id].vec_depth;
-	phi = scalar_product(ve, objs->sp[disp_p.obj_id].vec_height) / ((norm_of_vector(ve) * norm_of_vector(objs->sp[disp_p.obj_id].vec_height)));
-	float u, v, t;
-	u = norm_of_vector(dist) * sinf(phi) * cosf(teta);
-	v = norm_of_vector(dist) * sinf(phi) * sinf(teta);
-	t = norm_of_vector(dist) * cosf(phi);
-	(void) t;
-	if ((u <= 0 && v <= 0) || (v >= 0 && u >= 0))
+	sp = objs->sp[disp_p.obj_id];
+
+	x = scalar_product(dist, sp.vec_width);
+	y = scalar_product(dist, sp.vec_height);
+	z = scalar_product(dist, sp.vec_depth);
+
+	ve = x * sp.vec_width + z * sp.vec_depth;
+
+	cos_teta = scalar_product(ve, sp.vec_width) / ((norm_of_vector(ve)));
+
+	float	teta = acos(cos_teta) * 180 / M_PI;
+	if (z < 0)
+		teta = 360 - teta;
+
+	cos_phi = scalar_product(dist, sp.vec_height) / norm_of_vector(dist);
+
+	float	phi = acos(cos_phi) * 180 / M_PI;
+
+	if (((int)teta / 30) % 2)
 	{
-		if (((int)u) % 2 == ((int)v) % 2)
-			*color = black;
-		else
+		if ((int)phi / 30 % 2)
 			*color = white;
+		else
+			*color = black;
 	}
-	else if ((u < 0 && v > 0) || (v < 0 && u > 0))
+	else
 	{
-		if (((int)u) % 2 == (-(int)v) % 2)
-			*color = white;
-		else
+		if ((int)phi / 30 % 2)
 			*color = black;
+		else
+			*color = white;
 	}
 }
 
@@ -110,8 +117,8 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 	}
 	else if (disp_p.type == SP)
 	{
-		dist = create_vector(disp_p.intersec_point, objs->sp[disp_p.obj_id].position);
-		sphere_coord_move(dist, disp_p, white, black, color, objs);
+		dist = create_vector(objs->sp[disp_p.obj_id].position, disp_p.intersec_point);
+		sphere_color(dist, disp_p, white, black, color, objs);
 	}
 	else
 		*color = disp_p.color;
