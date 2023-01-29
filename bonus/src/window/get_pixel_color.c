@@ -6,7 +6,9 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/28 20:25:17 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/30 00:11:11 by mbelrhaz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "window.h"
 
 static bool	loop_light(t_disp_point disp_p, t_objects *objs,
@@ -40,32 +42,22 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 
 static void	sphere_color(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb black, t_rgb *color, t_objects *objs)
 {
-	float	x;
-	float	y;
-	float	z;
+	float	x, z;
 	t_vect	ve;
 	float	cos_teta;
 	float	cos_phi;
 	t_sphere	sp;
 
 	sp = objs->sp[disp_p.obj_id];
-
 	x = scalar_product(dist, sp.vec_width);
-	y = scalar_product(dist, sp.vec_height);
 	z = scalar_product(dist, sp.vec_depth);
-
 	ve = x * sp.vec_width + z * sp.vec_depth;
-
 	cos_teta = scalar_product(ve, sp.vec_width) / ((norm_of_vector(ve)));
-
 	float	teta = acos(cos_teta) * 180 / M_PI;
 	if (z < 0)
 		teta = 360 - teta;
-
 	cos_phi = scalar_product(dist, sp.vec_height) / norm_of_vector(dist);
-
 	float	phi = acos(cos_phi) * 180 / M_PI;
-
 	if (((int)teta / 30) % 2)
 	{
 		if ((int)phi / 30 % 2)
@@ -76,6 +68,56 @@ static void	sphere_color(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb bl
 	else
 	{
 		if ((int)phi / 30 % 2)
+			*color = black;
+		else
+			*color = white;
+	}
+}
+
+static void	cylinder_color(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb black, t_rgb *color, t_objects *objs, t_xyz a)
+{
+	float	length;
+	float	teta;
+	float	cos_teta;
+	float	y, z;
+	t_xyz	p;
+
+	t_cylinder cy = objs->cy[disp_p.obj_id];
+	y = scalar_product(-cy.vec_height, dist);
+	z = scalar_product(cy.vec_depth, dist);
+	p.x = a.x - y * cy.vec_height[0]; 
+	p.y = a.y - y * cy.vec_height[1]; 
+	p.z = a.z - y * cy.vec_height[2];
+	t_vect	vec = create_vector(p, disp_p.intersec_point);
+	cos_teta = scalar_product(vec, cy.vec_width) / norm_of_vector(vec);
+	teta = acos(cos_teta) * 180 / M_PI;
+	if (z < 0)
+		teta = 360 - teta;
+	length = cy.radius + y;
+	if (disp_p.type == DI)
+	{
+		if (y > 0.1)
+			length = norm_of_vector(dist);
+		else
+		{
+			t_xyz point;
+			point.x = a.x - 2 * cy.vec_height[0];
+			point.y = a.y - 2 * cy.vec_height[1];
+			point.z = a.z - 2 * cy.vec_height[2];
+			length = norm_of_vector(create_vector(disp_p.intersec_point, point));
+		}
+	}
+	float	square_side = 30 * M_PI / 180 * cy.radius;
+	if ((int)teta / 30 % 2)
+	{
+		if ((int)length / (int)square_side % 2)
+			*color = white;
+		else
+			*color = black;
+	}
+	else
+	{
+		if ((int)length / (int)square_side % 2)
 			*color = black;
 		else
 			*color = white;
@@ -119,6 +161,18 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 	{
 		dist = create_vector(objs->sp[disp_p.obj_id].position, disp_p.intersec_point);
 		sphere_color(dist, disp_p, white, black, color, objs);
+	}
+	else if (disp_p.type == CY)
+	{
+		t_xyz	a;
+		t_vect	vect;
+		vect = objs->cy[disp_p.obj_id].vec_height;
+		vect = vect * objs->cy[disp_p.obj_id].height / 2.0;
+		a.x = objs->cy[disp_p.obj_id].position.x + vect[0];
+		a.y = objs->cy[disp_p.obj_id].position.y + vect[1];
+		a.z = objs->cy[disp_p.obj_id].position.z + vect[2];
+		dist = create_vector(a, disp_p.intersec_point);
+		cylinder_color(dist, disp_p, white, black, color, objs, a);
 	}
 	else
 		*color = disp_p.color;

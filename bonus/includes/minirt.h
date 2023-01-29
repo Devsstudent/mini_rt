@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 23:49:45 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/29 22:24:09 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -127,6 +127,7 @@ typedef struct	s_cylinder {
 	t_xyz			position;
 	float			xm_2[3];
 	t_vect			vec_direction;
+	t_vect			vec_height;
 	t_vect			vec_width;
 	t_vect			vec_depth;
 	float			abc_2[3];
