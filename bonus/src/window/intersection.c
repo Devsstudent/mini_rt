@@ -24,6 +24,7 @@ t_xyz	get_point(t_xyz	intersec, t_vect rayvec, t_xyz start_point)
 static void	fill_disp_point(t_solution_elem *buff,
 			t_disp_point *disp_point, bool two)
 {
+	ft_memset(disp_point, 0, sizeof(*disp_point));
 	if (!two)
 		disp_point->intersec_point = buff->solution.one;
 	else

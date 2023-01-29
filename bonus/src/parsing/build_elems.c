@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:25:38 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/29 20:55:23 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:15:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ bool	build_plane(char ***triple_arr, t_objects *objects)
 	i = 0;
 	j = 0;
 	size = count_obj(triple_arr, "pl");
+	objects->nb_pl = size;
+	if (size == 0)
+		return (true);
 	objects->pl = malloc(sizeof(t_plane) * size);
 	if (!objects->pl)
 		return (false);
-	objects->nb_pl = size;
 	while (triple_arr[i])
 	{
 		if (match_obj(triple_arr, "pl", i))
@@ -47,6 +49,9 @@ bool	build_cylinder(char ***triple_arr, t_objects *objects)
 	i = 0;
 	j = 0;
 	size = count_obj(triple_arr, "cy");
+	objects->nb_cy = size;
+	if (size == 0)
+		return (true);
 	objects->cy = malloc(sizeof(t_cylinder) * size);
 	if (!objects->cy)
 		return (false);
@@ -73,6 +78,8 @@ bool	build_sphere(char ***triple_arr, t_objects *objects)
 	i = 0;
 	j = 0;
 	size = count_obj(triple_arr, "sp");
+	if (size == 0)
+		return (true);
 	objects->sp = malloc(sizeof(t_sphere) * size);
 	if (!objects->sp)
 		return (false);

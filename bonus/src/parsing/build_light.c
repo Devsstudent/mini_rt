@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:23:20 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/29 20:55:51 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:14:15 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ bool	build_light(char ***triple_arr, t_objects *objects)
 	id[0] = 'L';
 	id[1] = '\0';
 	size = init_build_light(&i, &j, id, triple_arr);
+	objects->nb_li = size;
+	if (size == 0)
+		return (false);
 	objects->li = malloc(sizeof(t_light) * size);
 	if (!objects->li)
 		return (false);
-	objects->nb_li = size;
 	while (triple_arr[i])
 	{
 		if (match_obj(triple_arr, id, i))

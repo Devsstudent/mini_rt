@@ -13,6 +13,7 @@
 
 bool	fill_cones(char **arr, int j, t_objects *objs)
 {
+	ft_memset(&objs->co[j], 0, sizeof(objs->co[j]));
 	if (!convert_to_xyz(&objs->co[j].position, arr[1]))
 		return (false);
 	if (!convert_to_orientation(&objs->co[j].vec_dir, arr[2]))

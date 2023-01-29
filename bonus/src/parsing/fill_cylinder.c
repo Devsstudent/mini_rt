@@ -13,6 +13,7 @@
 
 bool	fill_cylinder(char **arr, int j, t_objects *objects)
 {
+	ft_memset(&objects->cy[j], 0, sizeof(objects->cy[j]));
 	if (!convert_to_xyz(&objects->cy[j].position, arr[1]))
 		return (false);
 	if (!convert_to_orientation(&objects->cy[j].vec_direction, arr[2]))

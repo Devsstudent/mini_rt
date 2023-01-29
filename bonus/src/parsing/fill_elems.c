@@ -13,6 +13,7 @@
 
 bool	fill_ambient_light(char **arr, int j, t_objects *objects)
 {
+	ft_memset(&objects->amb[j], 0, sizeof(objects->amb[j]));
 	if (!convert_to_float(&objects->amb[j].ratio, arr[1]))
 		return (false);
 	if (!convert_to_rgb(&objects->amb[j].color, arr[2]))
@@ -22,6 +23,7 @@ bool	fill_ambient_light(char **arr, int j, t_objects *objects)
 
 bool	fill_camera(char **arr, int j, t_objects *objects)
 {
+	ft_memset(&objects->cam[j], 0, sizeof(objects->cam[j]));
 	if (!convert_to_xyz(&objects->cam[j].position, arr[1]))
 		return (false);
 	if (!convert_to_orientation(&objects->cam[j].vec_direction, arr[2]))
@@ -32,6 +34,7 @@ bool	fill_camera(char **arr, int j, t_objects *objects)
 
 bool	fill_light(char **arr, int j, t_objects *objects)
 {
+	ft_memset(&objects->li[j], 0, sizeof(objects->li[j]));
 	if (!convert_to_xyz(&objects->li[j].position, arr[1]))
 		return (false);
 	if (!convert_to_float(&objects->li[j].ratio, arr[2]))
@@ -43,6 +46,7 @@ bool	fill_light(char **arr, int j, t_objects *objects)
 
 bool	fill_sphere(char **arr, int j, t_objects *objects)
 {
+	ft_memset(&objects->sp[j], 0, sizeof(objects->sp[j]));
 	if (!convert_to_xyz(&objects->sp[j].position, arr[1]))
 		return (false);
 	if (!convert_to_float(&objects->sp[j].diameter, arr[2]))
@@ -56,6 +60,7 @@ bool	fill_sphere(char **arr, int j, t_objects *objects)
 
 bool	fill_plane(char **arr, int j, t_objects *objects)
 {
+	ft_memset(&objects->pl[j], 0, sizeof(objects->pl[j]));
 	if (!convert_to_xyz(&objects->pl[j].position, arr[1]))
 		return (false);
 	if (!convert_to_orientation(&objects->pl[j].vec_direction, arr[2]))

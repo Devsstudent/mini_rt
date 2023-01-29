@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 18:00:02 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 20:55:29 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 21:14:30 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -20,10 +20,12 @@ bool	build_cones(char ***triple_arr, t_objects *objects)
 	i = 0;
 	j = 0;
 	size = count_obj(triple_arr, "co");
+	objects->nb_co = size;
+	if (size == 0)
+		return (true);
 	objects->co = malloc(sizeof(t_cone) * size);
 	if (!objects->co)
 		return (false);
-	objects->nb_co = size;
 	while (triple_arr[i])
 	{
 		if (match_obj(triple_arr, "co", i))
