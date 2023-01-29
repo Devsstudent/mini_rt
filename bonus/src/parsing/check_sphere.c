@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:46:08 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/04 15:16:04 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:34:44 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -33,7 +33,7 @@ bool	check_sphere(char **line_split, t_must_have *all_elem)
 		return (false);
 	if (!check_rgb(line_split[3]))
 		return (false);
-	if (line_split[4])
+	if (line_split[4] && (!check_path(line_split[4]) && !line_split[5]))
 		return (false);
 	all_elem->object = true;
 	return (true);

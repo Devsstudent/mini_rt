@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:04:47 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 15:02:33 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:21:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -41,7 +41,7 @@ bool	list_add(t_sol_li *sol_li, t_solution_elem *new)
 
 //On pourrais envoyer directement l'addresse de l'element
 //Comme ca on a toutes les infos
-t_solution_elem	*new_elem(t_solution solution, t_rgb color, t_type type, int i)
+t_solution_elem	*new_elem(t_solution solution, t_new_elem_info info)
 {
 	t_solution_elem	*res;
 
@@ -49,9 +49,10 @@ t_solution_elem	*new_elem(t_solution solution, t_rgb color, t_type type, int i)
 	if (!res)
 		return (NULL);
 	res->solution = solution;
-	res->color = color;
-	res->type = type;
-	res->obj_id = i;
+	res->color = info.color;
+	res->type = info.type;
+	res->obj_id = info.i;
+	res->tex = info.tex;
 	res->next = NULL;
 	return (res);
 }
@@ -66,4 +67,11 @@ void	free_list(t_sol_li *sol_li)
 		free(sol_li->head);
 		sol_li->head = buff;
 	}
+}
+
+void	fill_info(t_new_elem_info *info, t_rgb color, int i, t_obj_texture tex)
+{
+	info->color = color;
+	info->tex = tex;
+	info->i = i;
 }

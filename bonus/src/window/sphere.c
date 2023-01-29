@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 18:14:01 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:38:08 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -17,24 +17,28 @@ bool	get_specific_sphere(t_objects *obj, t_sol_li *list,
 	t_equation	quadratic;
 	bool		err;
 	t_solution	solu;
+	t_new_elem_info	info;
 
 	err = false;
 	quadratic = get_quadra_sphere_equation(rayline, obj->sp[i_to_view]);
 	solu = solution(quadratic, rayline, &err);
 	if (err)
 		return (false);
+	fill_info(&info, obj->sp[i_to_view].color, i_to_view, obj->sp[i_to_view].tex);
+	info.type = SP;
 	if (solu.sol_one && !list_add(list,
-			new_elem(solu, obj->sp[i_to_view].color, SP, i_to_view)))
+			new_elem(solu, info)))
 		return (false);
 	return (true);
 }
 
 bool	get_sphere(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 {
-	t_equation	quadratic;
-	bool		err;
-	t_solution	solu;
-	int			i;
+	t_equation		quadratic;
+	bool			err;
+	t_solution		solu;
+	int				i;
+	t_new_elem_info	info;
 
 	i = 0;
 	while (i < obj->nb_sp)
@@ -44,8 +48,10 @@ bool	get_sphere(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 		solu = solution(quadratic, rayline, &err);
 		if (err)
 			return (false);
+		fill_info(&info, obj->sp[i].color, i, obj->sp[i].tex);
+		info.type = SP;
 		if (solu.sol_one
-			&& !list_add(list, new_elem(solu, obj->sp[i].color, SP, i)))
+			&& !list_add(list, new_elem(solu, info)))
 			return (false);
 		i++;
 	}

@@ -1,34 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_plane.c                                      :+:      :+:    :+:   */
+/*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 18:00:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 19:28:37 by odessein         ###   ########.fr       */
+/*   Created: 2023/01/29 19:20:43 by odessein          #+#    #+#             */
+/*   Updated: 2023/01/29 20:42:50 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-bool	check_plane(char **line_split, t_must_have *all_elem)
+bool	check_path(char *path)
 {
-	bool	first;
+	size_t	size;
 
-	first = (line_split[0] && (line_split[0][0] == 'p'
-				|| line_split[0][0] == 'P') && line_split[0][1]
-			&& (line_split[0][1] == 'l' || line_split[0][1] == 'L')
-			&& !line_split[0][2]);
-	if (!first)
+	if (!path)
 		return (false);
-	if (!check_coordinate(line_split[1]))
+	size = ft_strlen(path);
+	if (size >= 2 && !ft_strncmp(path, "da", 3))
+		return (true);
+	else if (size > 4 && (path[size - 1] != 'm' || path[size - 2] != 'p'
+		|| path[size - 3] != 'x' || path[size - 4] != '.'))
 		return (false);
-	if (!check_coordinate_direction(line_split[2]))
+	else if (size < 4)
 		return (false);
-	if (!check_rgb(line_split[3]))
+	if (access(path, F_OK) == -1)
 		return (false);
-	if (line_split[4] && (!check_path(line_split[4])) && !line_split[5])
+	return (true);
+}
+
+bool	check_texture(t_obj_texture *tex, char *path)
+{
+	if (!path)
 		return (false);
-	all_elem->object = true;
+	tex->path = NULL;
+	if (!ft_strncmp(path, "da", 3))
+			tex->tex = DAM;
+	else
+	{
+			tex->tex = TEX;
+			tex->path = path;
+	}
 	return (true);
 }

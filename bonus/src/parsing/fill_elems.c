@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:29:06 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/24 15:08:51 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:48:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -49,6 +49,8 @@ bool	fill_sphere(char **arr, int j, t_objects *objects)
 		return (false);
 	if (!convert_to_rgb(&objects->sp[j].color, arr[3]))
 		return (false);
+	if (arr[4] && !check_texture(&objects->sp[j].tex, arr[4]))
+		return (false);
 	return (true);
 }
 
@@ -60,7 +62,7 @@ bool	fill_plane(char **arr, int j, t_objects *objects)
 		return (false);
 	if (!convert_to_rgb(&objects->pl[j].color, arr[3]))
 		return (false);
-	//if (ft_strncmp(arr[4], "1", 2))
-	//	objects->pl[j].chess = true;
+	if (arr[4] && !check_texture(&objects->pl[j].tex, arr[4]))
+		return (false);
 	return (true);
 }

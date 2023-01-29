@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/17 10:16:05 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:34:13 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -83,6 +83,7 @@ bool	get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 	t_solution	solu;
 	t_disc_info	disc_info;
 	int			j;
+	t_new_elem_info	info;
 
 	j = 0;
 	while (j < 2)
@@ -92,8 +93,10 @@ bool	get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 					j, &disc_info), rayline, &err, disc_info);
 		if (err)
 			return (false);
+		fill_info(&info, obj->cy[i].color, i, obj->cy[i].tex);
+		info.type = DI;
 		if (solu.sol_one
-			&& !list_add(list, new_elem(solu, obj->cy[i].color, DI, i)))
+			&& !list_add(list, new_elem(solu, info)))
 			return (false);
 		j++;
 	}
