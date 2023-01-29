@@ -15,7 +15,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 												line_parsing \
 												plane \
 												rgb \
-												path \
+												texture \
 												sphere) \
 								elem_structure \
 								open_and_store_content_rt \
