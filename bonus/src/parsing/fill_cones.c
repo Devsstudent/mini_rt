@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:58:06 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 19:54:53 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:20:07 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -23,6 +23,8 @@ bool	fill_cones(char **arr, int j, t_objects *objs)
 	if (!convert_to_float(&objs->co[j].height, arr[4]))
 		return (false);
 	if (!convert_to_rgb(&objs->co[j].color, arr[5]))
+		return (false);
+	if (arr[6] && !check_texture(&objs->co[j].tex, arr[6], j, CO))
 		return (false);
 	return (true);
 }

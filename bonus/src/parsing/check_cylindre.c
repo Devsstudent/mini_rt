@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:05:02 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/04 15:16:31 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:28:55 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -41,7 +41,7 @@ bool	conditional_sequence(char **line_split, bool first)
 		return (false);
 	if (!check_rgb(line_split[5]))
 		return (false);
-	if (line_split[6])
+	if (line_split[6] && !check_path(line_split[6]) && !line_split[7])
 		return (false);
 	return (true);
 }

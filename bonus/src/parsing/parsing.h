@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 20:02:06 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:26:08 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -25,6 +25,7 @@ typedef struct s_rgb			t_rgb;
 typedef struct s_orientation	t_orientation;
 typedef struct s_objects		t_objects;
 typedef struct s_obj_texture	t_obj_texture;
+typedef enum e_type			t_type;
 
 typedef struct s_must_have {
 	bool	ambient;
@@ -133,6 +134,6 @@ bool	fill_structs(char **lines, t_objects *objects);
 
 //check_path.c
 bool	check_path(char *path);
-bool	check_texture(t_obj_texture *tex, char *path);
+bool	check_texture(t_obj_texture *tex, char *path, int i, t_type type);
 
 #endif

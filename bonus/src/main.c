@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/30 19:32:10 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:59:13 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -61,9 +61,9 @@ void	fill_co_system(t_objects *objs, int i)
 	t_cone	*co;
 
 	co = &(objs->co[i]);
-	co->vec_dir = normalize_vector(co->vec_dir);
-	co->vec_width = normalize_vector(get_vec_vertical(co->vec_dir));
-	co->vec_depth = normalize_vector(get_vec_horizontal(co->vec_dir
+	co->vec_height = normalize_vector(co->vec_dir);
+	co->vec_width = normalize_vector(get_vec_vertical(co->vec_height));
+	co->vec_depth = normalize_vector(get_vec_horizontal(co->vec_height
 			, co->vec_width));
 }
 

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:11:45 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 17:53:19 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/30 20:28:46 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -43,7 +43,7 @@ bool	check_cones(char **line, t_must_have *all_elem)
 		return (false);
 	if (!check_rgb(line[5]))
 		return (false);
-	if (line[6])
+	if (line[6] && !check_path(line[6]) && !line[7])
 		return (false);
 	all_elem->object = true;
 	return (true);

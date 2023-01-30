@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/30 19:36:03 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:24:26 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -33,6 +33,17 @@ typedef t_vect t_matrix_2[2];
 typedef struct s_mlx_info t_mlx_info;
 typedef struct s_disc_info t_disc_info;
 typedef struct s_obj_texture	t_obj_texture;
+
+typedef enum e_type{
+	SP,
+	CY,
+	PL,
+	C,
+	DI,
+	LI,
+	CO,
+	CO_DI
+}	t_type;
 
 typedef struct s_rgb {
 	uint8_t	B; //0-255
@@ -77,9 +88,19 @@ typedef enum e_tex_type {
 	TEX
 }	t_tex_type;
 
+typedef struct s_detail {
+	t_img	*textures;
+	int		width;
+	int		height;
+	t_type	type;
+	int		id;
+}			t_detail;
+
 typedef struct s_obj_texture {
 	t_tex_type	tex;
 	char		*path;
+	t_type		type;
+	int			id;
 }	t_obj_texture;
 
 typedef struct s_ambient_light
@@ -98,6 +119,7 @@ typedef struct s_camera
 typedef struct s_cone {
 	t_xyz		position;
 	t_vect		vec_dir;
+	t_vect		vec_height;
 	t_vect		vec_width;
 	t_vect		vec_depth;
 	float		radius;
@@ -165,17 +187,6 @@ typedef struct s_solution {
 	bool	sol_one;
 	bool	sol_two;
 }		t_solution;
-
-typedef enum e_type{
-	SP,
-	CY,
-	PL,
-	C,
-	DI,
-	LI,
-	CO,
-	CO_DI
-}	t_type;
 
 typedef enum e_axis{
 	NO_ONE,

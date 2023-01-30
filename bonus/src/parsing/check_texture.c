@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_path.c                                       :+:      :+:    :+:   */
+/*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 19:20:43 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 20:42:50 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:37:46 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -30,7 +30,7 @@ bool	check_path(char *path)
 	return (true);
 }
 
-bool	check_texture(t_obj_texture *tex, char *path)
+bool	check_texture(t_obj_texture *tex, char *path, int i, t_type type)
 {
 	if (!path)
 		return (false);
@@ -41,6 +41,8 @@ bool	check_texture(t_obj_texture *tex, char *path)
 	{
 			tex->tex = TEX;
 			tex->path = path;
+			tex->type = type;
+			tex->id = i;
 	}
 	return (true);
 }

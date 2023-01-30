@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:53:48 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/13 14:17:11 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:43:15 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -35,6 +35,8 @@ void	free_objs(t_objects *obj)
 		free(obj->sp);
 	if (obj->nb_li)
 		free(obj->li);
+	if (obj->nb_co)
+		free(obj->co);
 	free(obj->cam);
 	free(obj->amb);
 	free(obj->mlx);

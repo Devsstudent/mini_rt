@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 20:35:58 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:24:02 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -36,6 +36,7 @@ typedef struct s_edit				t_edit;
 typedef enum e_type					t_type;
 typedef struct s_obj_texture		t_obj_texture;
 typedef struct s_new_elem_info		t_new_elem_info;
+typedef struct s_detail				t_detail;
 
 typedef struct s_final_pix_color{
 	t_vect	ambient;
@@ -43,12 +44,6 @@ typedef struct s_final_pix_color{
 	t_vect	specular;
 	t_vect	shadow;
 }			t_final_pix_color;
-
-typedef struct s_detail {
-	t_img	*textures;
-	int		width;
-	int		height;
-}			t_detail;
 
 typedef struct s_texture {
 	t_detail	*textures;
