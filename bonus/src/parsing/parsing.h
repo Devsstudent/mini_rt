@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 18:08:55 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:02:06 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -24,6 +24,7 @@ typedef struct s_xyz			t_xyz;
 typedef struct s_rgb			t_rgb;
 typedef struct s_orientation	t_orientation;
 typedef struct s_objects		t_objects;
+typedef struct s_obj_texture	t_obj_texture;
 
 typedef struct s_must_have {
 	bool	ambient;
@@ -57,7 +58,7 @@ char	**split_func_condition(char const *s, bool (*f)(char));
 //setup_array_function.c
 bool	setup_array_function(t_function_parsing **arr);
 
-//open_and_store_content_rt.c
+//open_and_store_content_rt.c;
 char	**open_and_store(char *name);
 
 //check_ambient.c
@@ -129,5 +130,9 @@ bool	match_obj(char ***triple_arr, char *type, int i);
 int		count_obj(char ***triple_arr, char *type);
 bool	fill_each_struct(char ***triple_arr, t_objects *objects);
 bool	fill_structs(char **lines, t_objects *objects);
+
+//check_path.c
+bool	check_path(char *path);
+bool	check_texture(t_obj_texture *tex, char *path);
 
 #endif

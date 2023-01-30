@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 22:24:09 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:36:03 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -32,6 +32,7 @@ typedef t_vect t_matrix_3[3];
 typedef t_vect t_matrix_2[2];
 typedef struct s_mlx_info t_mlx_info;
 typedef struct s_disc_info t_disc_info;
+typedef struct s_obj_texture	t_obj_texture;
 
 typedef struct s_rgb {
 	uint8_t	B; //0-255
@@ -70,6 +71,17 @@ typedef enum e_edit_type {
 	TRANSLATE
 }	t_edit_type;
 
+typedef enum e_tex_type {
+	NONE,
+	DAM,
+	TEX
+}	t_tex_type;
+
+typedef struct s_obj_texture {
+	t_tex_type	tex;
+	char		*path;
+}	t_obj_texture;
+
 typedef struct s_ambient_light
 {
 	float			ratio; //0 1 2 3 4 5 6 7 8 9 10
@@ -84,14 +96,15 @@ typedef struct s_camera
 }				t_camera;
 
 typedef struct s_cone {
-	t_xyz	position;
-	t_vect	vec_dir;
-	t_vect	vec_width;
-	t_vect	vec_depth;
-	float	radius;
-	float	height;
-	t_rgb	color;
-}			t_cone;
+	t_xyz		position;
+	t_vect		vec_dir;
+	t_vect		vec_width;
+	t_vect		vec_depth;
+	float		radius;
+	float		height;
+	t_rgb		color;
+	t_obj_texture	tex;
+}				t_cone;
 
 typedef struct s_light {
 	t_xyz			position;
@@ -106,6 +119,7 @@ typedef struct s_sphere {
 	t_vect		vec_width;
 	t_vect		vec_depth;
 	t_rgb		color;
+	t_obj_texture	tex;
 }				t_sphere;
 
 typedef struct s_uv {
@@ -119,8 +133,8 @@ typedef struct	s_plane {
 	t_vect		vec_height;
 	t_vect		vec_width;
 	t_rgb		color;
-	bool		need_pattern;
 	t_uv		uv;
+	t_obj_texture	tex;
 }				t_plane;
 
 typedef struct	s_cylinder {
@@ -136,11 +150,13 @@ typedef struct	s_cylinder {
 	float			radius_2;
 	float			height;
 	t_rgb			color;
+	t_obj_texture		tex;
 }					t_cylinder;
 
 typedef struct	s_disc_info {
-	t_xyz	p_disc;
-	float	radius;
+	t_xyz			p_disc;
+	float			radius;
+	t_obj_texture	tex;
 }				t_disc_info;
 
 typedef struct s_solution {
@@ -168,11 +184,19 @@ typedef enum e_axis{
 	Z
 }	t_axis;
 
+typedef struct s_new_elem_info {
+	t_rgb			color;
+	t_type			type;
+	int				i;
+	t_obj_texture	tex;
+}					t_new_elem_info;
+
 typedef struct s_solution_elem {
 	t_rgb					color;
 	t_solution				solution;
 	t_type					type;
 	int						obj_id;
+	t_obj_texture			tex;
 	struct s_solution_elem	*next;
 }							t_solution_elem;
 
@@ -187,8 +211,8 @@ typedef struct s_disp_point{
 	t_rgb		color;
 	t_type		type;
 	int			obj_id;
-	bool		pattern_on;
 	bool		err;
+	t_obj_texture	tex;
 }				t_disp_point;
 
 typedef struct s_color_pam{

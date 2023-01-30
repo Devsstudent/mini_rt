@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/26 09:35:18 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:41:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -78,14 +78,17 @@ bool	get_disc_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 	bool		err;
 	t_solution	solu;
 	t_disc_info	disc_info;
+	t_new_elem_info	info;
 
 	err = false;
 	solu = solution_disc(get_quadra_disc_cone_equation(rayline, obj->co[i],
 				&disc_info), rayline, &err, disc_info);
 	if (err)
 		return (false);
+	fill_info(&info, obj->co[i].color, i, obj->co[i].tex);
+	info.type = CO_DI;
 	if (solu.sol_one
-		&& !list_add(list, new_elem(solu, obj->co[i].color, CO_DI, i)))
+		&& !list_add(list, new_elem(solu, info)))
 		return (false);
 	return (true);
 }

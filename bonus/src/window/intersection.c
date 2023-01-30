@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:08:35 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/27 16:26:45 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:11:05 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -24,16 +24,14 @@ t_xyz	get_point(t_xyz	intersec, t_vect rayvec, t_xyz start_point)
 static void	fill_disp_point(t_solution_elem *buff,
 			t_disp_point *disp_point, bool two)
 {
+	ft_memset(disp_point, 0, sizeof(*disp_point));
 	if (!two)
 		disp_point->intersec_point = buff->solution.one;
 	else
 		disp_point->intersec_point = buff->solution.two;
 	disp_point->color = buff->color;
 	disp_point->type = buff->type;
-	if (disp_point->type == PL)
-		disp_point->pattern_on = true;
-	else
-		disp_point->pattern_on = false;
+	disp_point->tex = buff->tex;
 	disp_point->obj_id = buff->obj_id;
 }
 

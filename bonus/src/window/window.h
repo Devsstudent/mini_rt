@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 16:35:34 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:35:58 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -34,6 +34,8 @@ typedef struct s_sol_li				t_sol_li;
 typedef struct s_solution			t_solution;
 typedef struct s_edit				t_edit;
 typedef enum e_type					t_type;
+typedef struct s_obj_texture		t_obj_texture;
+typedef struct s_new_elem_info		t_new_elem_info;
 
 typedef struct s_final_pix_color{
 	t_vect	ambient;
@@ -184,8 +186,9 @@ t_vect			get_normal_vect_co(t_disp_point intersec, t_objects *objs);
 //solution_list.c
 void			init_sol_li(t_sol_li *sol_li);
 bool			list_add(t_sol_li *sol_li, t_solution_elem *new);
-t_solution_elem	*new_elem(t_solution solution, t_rgb color, t_type type, int i);
+t_solution_elem	*new_elem(t_solution solution, t_new_elem_info info);
 void			free_list(t_sol_li *sol_li);
+void	fill_info(t_new_elem_info *info, t_rgb color, int i, t_obj_texture tex);
 
 //copy_sol_two_in_one
 void	copy_sol_two_in_one(t_solution *solu);

@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <mbelrhaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:53:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/16 23:14:21 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:40:46 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -56,6 +56,7 @@ bool	get_cylinder(t_objects *obj, t_sol_li *list,
 	bool		err;
 	t_solution	solu;
 	int			i;
+	t_new_elem_info	info;
 
 	i = 0;
 	while (i < obj->nb_cy)
@@ -65,10 +66,12 @@ bool	get_cylinder(t_objects *obj, t_sol_li *list,
 		solu = solution(quadratic, rayline, &err);
 		if (err)
 			return (false);
+		fill_info(&info, obj->cy[i].color, i, obj->cy[i].tex);
+		info.type = CY;
 		check_solution(&solu, obj->cy[i]);
 		get_disc(obj, list, rayline, i);
 		if (solu.sol_one
-			&& !list_add(list, new_elem(solu, obj->cy[i].color, CY, i)))
+			&& !list_add(list, new_elem(solu, info)))
 			return (false);
 		i++;
 	}
@@ -81,16 +84,19 @@ bool	get_specific_cylinder(t_objects *obj, t_sol_li *list,
 	t_equation	quadratic;
 	bool		err;
 	t_solution	solu;
+	t_new_elem_info	info;
 
 	err = false;
 	quadratic = get_quadra_cylinder_equation(rayline, obj->cy[i_to_view]);
 	solu = solution(quadratic, rayline, &err);
 	if (err)
 		return (false);
+	fill_info(&info, obj->cy[i_to_view].color, i_to_view, obj->cy[i_to_view].tex);
+	info.type = CY;
 	check_solution(&solu, obj->cy[i_to_view]);
 	get_disc(obj, list, rayline, i_to_view);
 	if (solu.sol_one && !list_add(list,
-			new_elem(solu, obj->cy[i_to_view].color, CY, i_to_view)))
+			new_elem(solu, info)))
 		return (false);
 	return (true);
 }

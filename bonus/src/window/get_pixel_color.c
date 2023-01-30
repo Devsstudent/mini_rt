@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/30 00:11:11 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:45:06 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -135,9 +135,9 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 	(void) i_j;
 	white.R = 255;
 	white.G = 255;
-	white.R = 255;
+	white.B = 255;
 	ft_memset(&black, 0, sizeof(black));
-	if (disp_p.type == PL && disp_p.pattern_on)
+	if (disp_p.type == PL && disp_p.tex.tex == DAM)
 	{
 		dist = create_vector(disp_p.intersec_point, objs->pl[disp_p.obj_id].position);
 		x = scalar_product(dist, objs->pl[disp_p.obj_id].vec_width);
@@ -157,12 +157,12 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 				*color = black;
 		}
 	}
-	else if (disp_p.type == SP)
+	else if (disp_p.type == SP && disp_p.tex.tex == DAM)
 	{
 		dist = create_vector(objs->sp[disp_p.obj_id].position, disp_p.intersec_point);
 		sphere_color(dist, disp_p, white, black, color, objs);
 	}
-	else if (disp_p.type == CY)
+	else if (disp_p.type == CY || disp_p.type == DI)
 	{
 		t_xyz	a;
 		t_vect	vect;

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:00:39 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 00:07:59 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:41:07 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -94,10 +94,11 @@ void	check_solution_cone(t_solution *solu, t_cone cone)
 
 bool	get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 {
-	t_equation	quadra;
-	bool		err;
-	t_solution	solu;
-	int			i;
+	t_equation		quadra;
+	bool			err;
+	t_solution		solu;
+	int				i;
+	t_new_elem_info	info;
 
 	i = 0;
 	while (i < obj->nb_co)
@@ -107,10 +108,12 @@ bool	get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 		solu = solution(quadra, rayline, &err);
 		if (err)
 			return (false);
+		fill_info(&info, obj->co[i].color, i, obj->co[i].tex);
+		info.type = CO;
 		check_solution_cone(&solu, obj->co[i]);
 		get_disc_cone(obj, list, rayline, i);
 		if (solu.sol_one
-			&& !list_add(list, new_elem(solu, obj->co[i].color, CO, i)))
+			&& !list_add(list, new_elem(solu, info)))
 			return (false);
 		i++;
 	}
@@ -122,16 +125,19 @@ bool	get_specific_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_
 	t_equation	quadra;
 	bool		err;
 	t_solution	solu;
+	t_new_elem_info	info;
 
 	err = false;
 	quadra = get_quadra_cone_equation(rayline, obj->co[i_to_view]);
 	solu = solution(quadra, rayline, &err);
 	if (err)
 		return (false);
+	fill_info(&info, obj->co[i_to_view].color, i_to_view, obj->co[i_to_view].tex);
+	info.type = CO;
 	check_solution_cone(&solu, obj->co[i_to_view]);
 	get_disc_cone(obj, list, rayline, i_to_view);
 	if (solu.sol_one && !list_add(list
-			,new_elem(solu, obj->co[i_to_view].color, CO, i_to_view)))
+			,new_elem(solu, info)))
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 22:24:43 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:32:10 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -100,7 +100,6 @@ int	main(int ac, char **av)
 		return (2);
 	if (!fill_obj_systems(&objects))
 		return (3);
-	printf("%f\n", objects.pl[0].vec_height[0]);
 	objects.mlx = malloc(sizeof(t_mlx_info));
 	objects.need_display = true;
 	if (!window(&objects))

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/23 22:54:40 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:39:24 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -71,6 +71,7 @@ bool	get_plane(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 	bool		err;
 	t_solution	solu;
 	int			i;
+	t_new_elem_info info;
 
 	i = 0;
 	while (i < obj->nb_pl)
@@ -80,8 +81,10 @@ bool	get_plane(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 		solu = solution_plan(quadratic, rayline, &err);
 		if (err)
 			return (false);
+		fill_info(&info, obj->pl[i].color, i, obj->pl[i].tex);
+		info.type = PL;
 		if (solu.sol_one
-			&& !list_add(list, new_elem(solu, obj->pl[i].color, PL, i)))
+			&& !list_add(list, new_elem(solu, info)))
 			return (false);
 		i++;
 	}
@@ -94,14 +97,17 @@ bool	get_specific_plane(t_objects *obj, t_sol_li *list,
 	t_equation	quadratic;
 	bool		err;
 	t_solution	solu;
+	t_new_elem_info	info;
 
 	err = false;
 	quadratic = get_quadra_plan_equation(rayline, obj->pl[i_to_view]);
 	solu = solution_plan(quadratic, rayline, &err);
 	if (err)
 		return (false);
+	fill_info(&info, obj->pl[i_to_view].color, i_to_view, obj->pl[i_to_view].tex);
+	info.type = PL;
 	if (solu.sol_one && !list_add(list,
-			new_elem(solu, obj->pl[i_to_view].color, PL, i_to_view)))
+			new_elem(solu, info)))
 		return (false);
 	return (true);
 }
