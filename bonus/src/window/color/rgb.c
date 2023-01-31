@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:19:12 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 14:08:26 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 21:02:36 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -48,17 +48,6 @@ int	create_color(t_rgb rgb, t_final_pix_color final)
 	return (color);
 }
 
-t_rgb	rgb_fill(uint8_t r, uint8_t g, uint8_t b)
-{
-	t_rgb	res;
-
-	res.T = 0;
-	res.R = r;
-	res.G = g;
-	res.B = b;
-	return (res);
-}
-
 //compute cos(angle) between normal vector and rayvec
 float	compute_rgb_from_angle(t_objects *objs, t_color_pam param)
 {
@@ -81,7 +70,6 @@ float	compute_rgb_from_angle(t_objects *objs, t_color_pam param)
 		normal = normalize_vector(get_normal_vect_di(param.disp_p, objs, 0));
 	else
 		return (1);
-	//If we want we can setup a different diffuse_material value depending the surface
 	kd = 0.7;
 	rayvec = normalize_vector(param.rayvec);
 	ratio = kd * fmax(scalar_product(rayvec, normal), 0);

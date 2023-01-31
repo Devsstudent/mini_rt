@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/31 18:42:54 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 21:17:23 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -40,12 +40,11 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 	return (true);
 }
 
-static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j)
+static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs)
 {
 	t_rgb	white;
 	t_rgb	black;
 
-	(void) i_j;
 	white.R = 255;
 	white.G = 255;
 	white.B = 255;
@@ -72,10 +71,7 @@ t_rgb	get_texture_color(int x, int y, t_obj_texture tex)
 	return (res);
 }
 
-//Rajouter une structure de static a reinstialiser pour s'avoir la position du dernier moment ou on a changer de couleur pour comparer avec le vecteur u et v si la distance a ete parcourus ou pas
-
-//C'est bancale ca casse les couiiles
-bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j)
+bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs)
 {
 	t_rgb				color_rgb;
 	float				rgb[3];
@@ -88,7 +84,7 @@ bool	get_pixel_color(int *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j
 	final.ambient[0] = ka * objs->amb->ratio * objs->amb->color.R;
 	final.ambient[1] = ka * objs->amb->ratio * objs->amb->color.G;
 	final.ambient[2] = ka * objs->amb->ratio * objs->amb->color.B;
-	fill_color(&color_rgb, disp_p, objs, i_j);
+	fill_color(&color_rgb, disp_p, objs);
 	loop_light(disp_p, objs, &final);
 	*color = create_color(color_rgb, final);
 	return (true);

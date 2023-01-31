@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:21:06 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 15:19:57 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 21:16:25 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -17,7 +17,8 @@ static void	pl_checkerboard(t_rgb *color, t_objects *objs, t_disp_point disp_p)
 	float	y;
 	t_vect	dist;
 
-	dist = create_vector(disp_p.intersec_point, objs->pl[disp_p.obj_id].position);
+	dist = create_vector(disp_p.intersec_point,
+			objs->pl[disp_p.obj_id].position);
 	x = scalar_product(dist, objs->pl[disp_p.obj_id].vec_width);
 	y = scalar_product(dist, objs->pl[disp_p.obj_id].vec_height);
 	if ((x <= 0 && y <= 0) || (y >= 0 && x >= 0))
@@ -25,12 +26,12 @@ static void	pl_checkerboard(t_rgb *color, t_objects *objs, t_disp_point disp_p)
 		if (((int)x / 10) % 2 == ((int)y / 10) % 2)
 			*color = rgb_fill(0, 0, 0);
 		else
-			*color = rgb_fill(255,255,255);
+			*color = rgb_fill(255, 255, 255);
 	}
 	else if ((x < 0 && y > 0) || (y < 0 && x > 0))
 	{
 		if (((int)x / 10) % 2 == (-(int)y / 10) % 2)
-			*color = rgb_fill(255,255,255);
+			*color = rgb_fill(255, 255, 255);
 		else
 			*color = rgb_fill(0, 0, 0);
 	}
@@ -42,7 +43,8 @@ static void	pl_texture(t_rgb *color, t_objects *objs, t_disp_point disp_p)
 	int		y;
 	t_vect	dist;
 
-	dist = create_vector(disp_p.intersec_point, objs->pl[disp_p.obj_id].position);
+	dist = create_vector(disp_p.intersec_point,
+			objs->pl[disp_p.obj_id].position);
 	x = scalar_product(dist, objs->pl[disp_p.obj_id].vec_width);
 	y = scalar_product(dist, objs->pl[disp_p.obj_id].vec_height);
 	x = x % objs->pl[disp_p.obj_id].tex.width;
@@ -63,4 +65,3 @@ void	pl_color(t_rgb *color, t_disp_point disp_p, t_objects *objs)
 	else
 		*color = disp_p.color;
 }
-

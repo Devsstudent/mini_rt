@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 18:42:38 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 21:17:37 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -207,7 +207,7 @@ void			get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec,
 
 //get_pixel_color.c
 bool			get_pixel_color(int *color, t_disp_point intersec_point,
-					t_objects *objs, t_i_j i_j);
+					t_objects *objs);
 
 //co_color.c
 void	cones_color(t_rgb *color, t_disp_point disp_p, t_objects *objs);

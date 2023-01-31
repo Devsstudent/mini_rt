@@ -53,6 +53,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								get_normal_vector \
 								equation \
 								$(addprefix color/, rgb \
+										rgb_utils \
 										get_pixel_color \
 										shadow_light \
 										$(addsuffix _color, sp \

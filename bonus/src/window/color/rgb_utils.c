@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_translation.c                               :+:      :+:    :+:   */
+/*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 12:37:30 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 12:46:17 by odessein         ###   ########.fr       */
+/*   Created: 2023/01/31 21:02:05 by odessein          #+#    #+#             */
+/*   Updated: 2023/01/31 21:02:35 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "matrix.h"
+#include "window.h"
 
-t_matrix	get_translation_matrix(float x, float y, float z)
+t_rgb	rgb_fill(uint8_t r, uint8_t g, uint8_t b)
 {
-	t_matrix	trans_mat;
+	t_rgb	res;
 
-	trans_mat[0][0] = 1;
-	trans_mat[1][1] = 1;
-	trans_mat[2][2] = 1;
-	trans_mat[3][3] = 1;
-	trans_mat[0][3] = x;
-	trans_mat[1][3] = y;
-	trans_mat[2][3] = z;
+	res.T = 0;
+	res.R = r;
+	res.G = g;
+	res.B = b;
+	return (res);
 }

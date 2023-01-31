@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 20:05:19 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/31 21:18:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -49,7 +49,7 @@ bool	resolve_equation(t_objects *objs, t_sol_li *list,
 		&& intersec_point.intersec_point.y == -1
 		&& intersec_point.intersec_point.z == -1)
 		return (free_list(list), true);
-	if (!get_pixel_color(&color, intersec_point, objs, i_j))
+	if (!get_pixel_color(&color, intersec_point, objs))
 		free_list_exit(objs, list);
 	if (list && (list->head) && (list->head)->solution.sol_one)
 		img_pixel_put(objs->mlx, i_j.j, i_j.i, color);

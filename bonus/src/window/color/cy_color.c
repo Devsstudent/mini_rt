@@ -6,12 +6,13 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 13:23:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 19:03:58 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 21:31:06 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
 
-static float get_teta(t_vect dist, t_cylinder cy, t_disp_point disp_p, t_xyz a)
+static float	get_teta(t_vect dist, t_cylinder cy,	
+					t_disp_point disp_p, t_xyz a)
 {
 	t_xyz	p;
 	t_vect	width;
@@ -21,8 +22,8 @@ static float get_teta(t_vect dist, t_cylinder cy, t_disp_point disp_p, t_xyz a)
 
 	y = scalar_product(-cy.vec_height, dist);
 	z = scalar_product(cy.vec_depth, dist);
-	p.x = a.x - y * cy.vec_height[0]; 
-	p.y = a.y - y * cy.vec_height[1]; 
+	p.x = a.x - y * cy.vec_height[0];
+	p.y = a.y - y * cy.vec_height[1];
 	p.z = a.z - y * cy.vec_height[2];
 	width = create_vector(p, disp_p.intersec_point);
 	teta = acos(scalar_product(width, cy.vec_width) / norm_of_vector(width))
@@ -32,7 +33,8 @@ static float get_teta(t_vect dist, t_cylinder cy, t_disp_point disp_p, t_xyz a)
 	return (teta);
 }
 
-static float get_len_disc(t_vect dist, t_xyz a, t_cylinder cy, t_disp_point disp_p)
+static float	get_len_disc(t_vect dist, t_xyz a,
+					t_cylinder cy, t_disp_point disp_p)
 {
 	t_xyz	point;
 	float	len;
@@ -51,7 +53,8 @@ static float get_len_disc(t_vect dist, t_xyz a, t_cylinder cy, t_disp_point disp
 	return (len);
 }
 
-static void	cy_checkerboard(t_disp_point disp_p, t_xyz a, t_cylinder cy, t_rgb *color)
+static void	cy_checkerboard(t_disp_point disp_p, t_xyz a, t_cylinder cy,
+				t_rgb *color)
 {
 	float	length;
 	float	y;
@@ -64,21 +67,22 @@ static void	cy_checkerboard(t_disp_point disp_p, t_xyz a, t_cylinder cy, t_rgb *
 		length = get_len_disc(dist, a, cy, disp_p);
 	if ((int)get_teta(dist, cy, disp_p, a) / 30 % 2)
 	{
-		if ((int)length / (int) (30 * M_PI / 180 * cy.radius) % 2)
+		if ((int)length / (int)(30 * M_PI / 180 * cy.radius) % 2)
 			*color = rgb_fill(255, 255, 255);
 		else
 			*color = rgb_fill(0, 0, 0);
 	}
 	else
 	{
-		if ((int)length / (int) (30 * M_PI / 180 * cy.radius) % 2)
+		if ((int)length / (int)(30 * M_PI / 180 * cy.radius) % 2)
 			*color = rgb_fill(0, 0, 0);
 		else
 			*color = rgb_fill(255, 255, 255);
 	}
 }
 
-static void	cy_texture(t_disp_point disp_p, t_xyz a, t_cylinder cy, t_rgb *color)
+static void	cy_texture(t_disp_point disp_p, t_xyz a, t_cylinder cy,
+				t_rgb *color)
 {
 	float	length;
 	float	y;
@@ -90,7 +94,8 @@ static void	cy_texture(t_disp_point disp_p, t_xyz a, t_cylinder cy, t_rgb *color
 	if (disp_p.type == DI)
 		length = get_len_disc(dist, a, cy, disp_p);
 	*color = get_texture_color((get_teta(dist, cy, disp_p, a) * cy.tex.width)
-		/ 360, (cy.tex.height * length) / (2 * cy.radius * cy.height), cy.tex);
+			/ 360, (cy.tex.height * length)
+			/ (2 * cy.radius * cy.height), cy.tex);
 }
 
 void	cylinder_color(t_disp_point disp_p, t_objects *objs, t_rgb *color)
