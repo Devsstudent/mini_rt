@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/31 13:46:35 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:30:41 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -51,13 +51,10 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 	white.G = 255;
 	white.B = 255;
 	ft_memset(&black, 0, sizeof(black));
-	if (disp_p.type == PL && disp_p.tex.tex == DAM)
-		pl_color(color, disp_p, objs, white, black);
-	else if (disp_p.type == SP && (disp_p.tex.tex == DAM || disp_p.tex.tex == TEX))
-	{
-		dist = create_vector(objs->sp[disp_p.obj_id].position, disp_p.intersec_point);
-		sphere_color(dist, disp_p, white, black, color, objs);
-	}
+	if (disp_p.type == PL)
+		pl_color(color, disp_p, objs);
+	else if (disp_p.type == SP)
+		sphere_color(disp_p, color, objs);
 	else if (disp_p.type == CY || disp_p.type == DI)
 	{
 		t_xyz	a;
@@ -77,6 +74,16 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 	}
 	else
 		*color = disp_p.color;
+}
+
+t_rgb	get_texture_color(int x, int y, t_obj_texture tex)
+{
+	t_rgb	res;
+
+	res.B = tex.addr[x * (tex.bpp / 8) + y * (tex.line_size)];
+	res.G = tex.addr[x * (tex.bpp / 8) + y * (tex.line_size) + 1];
+	res.R = tex.addr[x * (tex.bpp / 8) + y * (tex.line_size) + 2];
+	return (res);
 }
 
 //Rajouter une structure de static a reinstialiser pour s'avoir la position du dernier moment ou on a changer de couleur pour comparer avec le vecteur u et v si la distance a ete parcourus ou pas

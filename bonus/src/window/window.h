@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 13:45:43 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:30:24 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -195,6 +195,8 @@ void			compute_rgb(t_objects *objs, t_color_pam param,
 int				create_color(t_rgb rgb, t_final_pix_color final);
 void			fill_specular(t_objects *objs, t_color_pam param,
 					t_vect *specular, int i);
+t_rgb	rgb_fill(uint8_t r, uint8_t g, uint8_t b);
+
 //shadow_light.c
 t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs, int i,
 					t_sol_li *list);
@@ -211,12 +213,14 @@ bool			get_pixel_color(int *color, t_disp_point intersec_point,
 void	cones_color(t_vect dist, t_rgb *color, t_rgb white, t_rgb black, t_disp_point disp_p, t_objects *objs);
 
 //sp_color.c
-void	sphere_color(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb black, t_rgb *color, t_objects *objs);
+void	sphere_color(t_disp_point disp_p, t_rgb *color, t_objects *objs);
 
 //pl_color.c
-void	pl_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_rgb white, t_rgb black);
+void	pl_color(t_rgb *color, t_disp_point disp_p, t_objects *objs);
 
 //cy_color.c
 void	cylinder_color(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb black, t_rgb *color, t_objects *objs, t_xyz a);
+
+t_rgb	get_texture_color(int x, int y, t_obj_texture tex);
 
 #endif

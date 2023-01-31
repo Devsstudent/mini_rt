@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:19:12 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 21:44:23 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:08:26 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -46,6 +46,17 @@ int	create_color(t_rgb rgb, t_final_pix_color final)
 	color_conv.rgb.B = (uint8_t)rgb1[2];
 	color = color_conv.color;
 	return (color);
+}
+
+t_rgb	rgb_fill(uint8_t r, uint8_t g, uint8_t b)
+{
+	t_rgb	res;
+
+	res.T = 0;
+	res.R = r;
+	res.G = g;
+	res.B = b;
+	return (res);
 }
 
 //compute cos(angle) between normal vector and rayvec

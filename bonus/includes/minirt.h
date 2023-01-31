@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 12:21:26 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:32:11 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -97,8 +97,12 @@ typedef struct s_orientation{
 typedef struct s_obj_texture {
 	t_tex_type	tex;
 	t_img		*img;
+	char		*addr;
 	int			width;
 	int			height;
+	int			endian;
+	int			bpp;
+	int			line_size;
 }	t_obj_texture;
 
 typedef struct s_ambient_light
