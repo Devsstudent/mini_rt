@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/31 15:30:41 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:42:54 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -42,7 +42,6 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 
 static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j)
 {
-	t_vect	dist;
 	t_rgb	white;
 	t_rgb	black;
 
@@ -56,22 +55,9 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 	else if (disp_p.type == SP)
 		sphere_color(disp_p, color, objs);
 	else if (disp_p.type == CY || disp_p.type == DI)
-	{
-		t_xyz	a;
-		t_vect	vect;
-		vect = objs->cy[disp_p.obj_id].vec_height;
-		vect = vect * objs->cy[disp_p.obj_id].height / 2.0;
-		a.x = objs->cy[disp_p.obj_id].position.x + vect[0];
-		a.y = objs->cy[disp_p.obj_id].position.y + vect[1];
-		a.z = objs->cy[disp_p.obj_id].position.z + vect[2];
-		dist = create_vector(a, disp_p.intersec_point);
-		cylinder_color(dist, disp_p, white, black, color, objs, a);
-	}
+		cylinder_color(disp_p, objs, color);
 	else if (disp_p.type == CO || disp_p.type == CO_DI)
-	{
-		dist = create_vector(objs->co[disp_p.obj_id].position, disp_p.intersec_point);
-		cones_color(dist, color, white, black, disp_p, objs);
-	}
+		cones_color(color, disp_p, objs);
 	else
 		*color = disp_p.color;
 }
