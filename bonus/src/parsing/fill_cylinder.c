@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 15:36:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/30 21:37:06 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:16:17 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -24,7 +24,7 @@ bool	fill_cylinder(char **arr, int j, t_objects *objects)
 		return (false);
 	if (!convert_to_rgb(&objects->cy[j].color, arr[5]))
 		return (false);
-	if (arr[6] && !check_texture(&objects->cy[j].tex, arr[6], j, CY))
+	if (arr[6] && !check_texture(&objects->cy[j].tex, arr[6], objects))
 		return (false);
 	objects->cy[j].xm_2[0] = objects->cy[j].position.x
 		* objects->cy[j].position.x;

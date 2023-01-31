@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/30 19:59:13 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:59:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -96,11 +96,16 @@ int	main(int ac, char **av)
 	lines = parsing(ac, av);
 	if (!lines)
 		return (1);
+	objects.mlx = malloc(sizeof(t_mlx_info));
+	if (!objects.mlx)
+		return (free_double_arr(lines), 2);
+	objects.mlx->mlx = mlx_init();
+	if (!objects.mlx->mlx)
+		return (free_double_arr(lines), 4);
 	if (!fill_structs(lines, &objects))
 		return (2);
 	if (!fill_obj_systems(&objects))
 		return (3);
-	objects.mlx = malloc(sizeof(t_mlx_info));
 	objects.need_display = true;
 	if (!window(&objects))
 		return (3);

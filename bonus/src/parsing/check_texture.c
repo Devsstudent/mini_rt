@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 19:20:43 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/30 21:37:46 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:34:17 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -30,19 +30,16 @@ bool	check_path(char *path)
 	return (true);
 }
 
-bool	check_texture(t_obj_texture *tex, char *path, int i, t_type type)
+bool	check_texture(t_obj_texture *tex, char *path, t_objects *objs)
 {
 	if (!path)
 		return (false);
-	tex->path = NULL;
 	if (!ft_strncmp(path, "da", 3))
 			tex->tex = DAM;
 	else
 	{
+			tex->img = mlx_xpm_file_to_image(objs->mlx->mlx, path, &tex->width, &tex->height);
 			tex->tex = TEX;
-			tex->path = path;
-			tex->type = type;
-			tex->id = i;
 	}
 	return (true);
 }

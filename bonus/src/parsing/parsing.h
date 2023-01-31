@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/30 21:26:08 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:16:58 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -134,6 +134,6 @@ bool	fill_structs(char **lines, t_objects *objects);
 
 //check_path.c
 bool	check_path(char *path);
-bool	check_texture(t_obj_texture *tex, char *path, int i, t_type type);
+bool	check_texture(t_obj_texture *tex, char *path, t_objects *objs);
 
 #endif

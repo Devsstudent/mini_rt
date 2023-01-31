@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/11 19:30:15 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:57:04 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -57,10 +57,7 @@ void	img_pixel_put(t_mlx_info *mlx, int j, int i, int color)
 
 bool	window(t_objects *objs)
 {
-	objs->mlx->mlx = mlx_init();
 	objs->edited = false;
-	if (!objs->mlx->mlx)
-		return (false);
 	objs->mlx->win = mlx_new_window(objs->mlx->mlx, 780, 540, "mini_rt :)");
 	if (!objs->mlx->win)
 		return (false);

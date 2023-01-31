@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/30 20:54:33 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:35:04 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -191,7 +191,7 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 				*color = black;
 		}
 	}
-	else if (disp_p.type == SP && disp_p.tex.tex == DAM)
+	else if (disp_p.type == SP && (disp_p.tex.tex == DAM || disp_p.tex.tex == TEX))
 	{
 		dist = create_vector(objs->sp[disp_p.obj_id].position, disp_p.intersec_point);
 		sphere_color(dist, disp_p, white, black, color, objs);
