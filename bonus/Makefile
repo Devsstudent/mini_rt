@@ -43,7 +43,6 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								cylinder_equation \
 								disc \
 								disc_cone \
-								get_pixel_color \
 								intersection \
 								raytracing_utils \
 								vector_operations_again \
@@ -52,7 +51,14 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								vector_operations \
 								vector_operations_bis \
 								get_normal_vector \
-								equation) \
+								equation \
+								$(addprefix color/, rgb \
+										get_pixel_color \
+										shadow_light \
+										$(addsuffix _color, sp \
+															pl \
+															cy \
+															co))) \
 		$(addprefix edit/, edit_objs \
 								resize \
 								rotation \
@@ -63,9 +69,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								sphere_edit \
 								cones_edit \
 								light_edit \
-								plane_edit) \
-		$(addprefix color/, rgb \
-							shadow_light)))
+								plane_edit)))
 
 D_LST = $(OBJ:.o=.d)
 
@@ -86,7 +90,7 @@ obj_rep:
 	@mkdir -p obj/error/
 	@mkdir -p obj/window/
 	@mkdir -p obj/edit/
-	@mkdir -p obj/color/
+	@mkdir -p obj/window/color/
 
 clean:
 	make clean -s -C ../lib/libft

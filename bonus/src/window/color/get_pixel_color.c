@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/31 12:35:04 by odessein         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:46:35 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -40,129 +40,9 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 	return (true);
 }
 
-static void	sphere_color(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb black, t_rgb *color, t_objects *objs)
-{
-	float	x, z;
-	t_vect	ve;
-	float	cos_teta;
-	float	cos_phi;
-	t_sphere	sp;
-
-	sp = objs->sp[disp_p.obj_id];
-	x = scalar_product(dist, sp.vec_width);
-	z = scalar_product(dist, sp.vec_depth);
-	ve = x * sp.vec_width + z * sp.vec_depth;
-	cos_teta = scalar_product(ve, sp.vec_width) / ((norm_of_vector(ve)));
-	float	teta = acos(cos_teta) * 180 / M_PI;
-	if (z < 0)
-		teta = 360 - teta;
-	cos_phi = scalar_product(dist, sp.vec_height) / norm_of_vector(dist);
-	float	phi = acos(cos_phi) * 180 / M_PI;
-	if (((int)teta / 30) % 2)
-	{
-		if ((int)phi / 30 % 2)
-			*color = white;
-		else
-			*color = black;
-	}
-	else
-	{
-		if ((int)phi / 30 % 2)
-			*color = black;
-		else
-			*color = white;
-	}
-}
-
-static void	cylinder_color(t_vect dist, t_disp_point disp_p, t_rgb white, t_rgb black, t_rgb *color, t_objects *objs, t_xyz a)
-{
-	float	length;
-	float	teta;
-	float	cos_teta;
-	float	y, z;
-	t_xyz	p;
-
-	t_cylinder cy = objs->cy[disp_p.obj_id];
-	y = scalar_product(-cy.vec_height, dist);
-	z = scalar_product(cy.vec_depth, dist);
-	p.x = a.x - y * cy.vec_height[0]; 
-	p.y = a.y - y * cy.vec_height[1]; 
-	p.z = a.z - y * cy.vec_height[2];
-	t_vect	vec = create_vector(p, disp_p.intersec_point);
-	cos_teta = scalar_product(vec, cy.vec_width) / norm_of_vector(vec);
-	teta = acos(cos_teta) * 180 / M_PI;
-	if (z < 0)
-		teta = 360 - teta;
-	length = cy.radius + y;
-	if (disp_p.type == DI)
-	{
-		if (y > 0.1)
-			length = norm_of_vector(dist);
-		else
-		{
-			t_xyz point;
-			point.x = a.x - 2 * cy.vec_height[0];
-			point.y = a.y - 2 * cy.vec_height[1];
-			point.z = a.z - 2 * cy.vec_height[2];
-			length = norm_of_vector(create_vector(disp_p.intersec_point, point));
-		}
-	}
-	float	square_side = 30 * M_PI / 180 * cy.radius;
-	if ((int)teta / 30 % 2)
-	{
-		if ((int)length / (int)square_side % 2)
-			*color = white;
-		else
-			*color = black;
-	}
-	else
-	{
-		if ((int)length / (int)square_side % 2)
-			*color = black;
-		else
-			*color = white;
-	}
-}
-
-void	cones_color(t_vect dist, t_rgb *color, t_rgb white, t_rgb black, t_disp_point disp_p, t_objects *objs)
-{
-	float	y, z;
-	t_vect	len;
-	t_vect	buff;
-	float	teta;
-	t_xyz	b;
-
-	z = scalar_product(dist, -objs->co[disp_p.obj_id].vec_depth);
-	y = scalar_product(dist, -objs->co[disp_p.obj_id].vec_height);
-	buff = y * -objs->co[disp_p.obj_id].vec_height;
-	b.x = buff[0] + objs->co[disp_p.obj_id].position.x;
-	b.y = buff[1] + objs->co[disp_p.obj_id].position.y;
-	b.z = buff[2] + objs->co[disp_p.obj_id].position.z;
-	len = (create_vector(b, disp_p.intersec_point));
-	teta = acos(scalar_product(len, objs->co[disp_p.obj_id].vec_width) / norm_of_vector(len)) * 180 / M_PI;
-	if (z < 0)
-		teta = 360 - teta;
-	if ((int) (teta / 10) % 2 == 0)
-	{
-		if ((int) norm_of_vector(dist) % 2 == 0)
-			*color = black;
-		else
-			*color = white;
-	}
-	else
-	{
-		if ((int) norm_of_vector(dist) % 2 == 0)
-			*color = white;
-		else
-			*color = black;
-	}
-}
-
 static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j i_j)
 {
 	t_vect	dist;
-	float	x;
-	float	y;
 	t_rgb	white;
 	t_rgb	black;
 
@@ -172,25 +52,7 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs, t_i_j
 	white.B = 255;
 	ft_memset(&black, 0, sizeof(black));
 	if (disp_p.type == PL && disp_p.tex.tex == DAM)
-	{
-		dist = create_vector(disp_p.intersec_point, objs->pl[disp_p.obj_id].position);
-		x = scalar_product(dist, objs->pl[disp_p.obj_id].vec_width);
-		y = scalar_product(dist, objs->pl[disp_p.obj_id].vec_height);
-		if ((x <= 0 && y <= 0) || (y >= 0 && x >= 0))
-		{
-			if (((int)x / 10) % 2 == ((int)y / 10) % 2)
-				*color = black;
-			else
-				*color = white;
-		}
-		else if ((x < 0 && y > 0) || (y < 0 && x > 0))
-		{
-			if (((int)x / 10) % 2 == (-(int)y / 10) % 2)
-				*color = white;
-			else
-				*color = black;
-		}
-	}
+		pl_color(color, disp_p, objs, white, black);
 	else if (disp_p.type == SP && (disp_p.tex.tex == DAM || disp_p.tex.tex == TEX))
 	{
 		dist = create_vector(objs->sp[disp_p.obj_id].position, disp_p.intersec_point);
