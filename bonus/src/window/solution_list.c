@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 19:04:47 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 20:21:41 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:33:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -38,9 +38,6 @@ bool	list_add(t_sol_li *sol_li, t_solution_elem *new)
 	return (true);
 }
 
-
-//On pourrais envoyer directement l'addresse de l'element
-//Comme ca on a toutes les infos
 t_solution_elem	*new_elem(t_solution solution, t_new_elem_info info)
 {
 	t_solution_elem	*res;

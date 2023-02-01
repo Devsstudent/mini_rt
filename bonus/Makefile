@@ -19,8 +19,10 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 												sphere) \
 								elem_structure \
 								open_and_store_content_rt \
+								fill_obj_systems \
 								setup_array_function \
 								split_on_function \
+								loop_check_coord_dir \
 								conversions \
 								convert_to_float \
 								convert_to_vect \
@@ -40,6 +42,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								sphere \
 								plane \
 								cylinder \
+								specular \
 								cones \
 								cylinder_equation \
 								disc \

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 18:55:46 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 23:39:47 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:40:54 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -19,7 +19,8 @@ int	render_window(void	*objss)
 	objs = (t_objects *) objss;
 	if (!objs->need_display)
 		return (1);
-/*	if (!objs->edited)
+/*
+	if (!objs->edited)
 	{
 		objs->vect_height = get_vec_vertical(objs->cam->vec_direction);
 		if (!objs->vect_height[0] && !objs->vect_height[1]

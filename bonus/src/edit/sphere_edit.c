@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:50:44 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/28 19:10:56 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:28:30 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -24,11 +24,11 @@ void	apply_action_sp(t_edit edit_info, t_sphere *sp)
 	else if (edit_info.action == ROTATE)
 	{
 		sp->vec_depth = apply_rotation(sp->vec_depth,
-			edit_info.axis, edit_info.angle);
+				edit_info.axis, edit_info.angle);
 		sp->vec_width = apply_rotation(sp->vec_width,
-			edit_info.axis, edit_info.angle);
+				edit_info.axis, edit_info.angle);
 		sp->vec_height = apply_rotation(sp->vec_height,
-			edit_info.axis, edit_info.angle);
+				edit_info.axis, edit_info.angle);
 	}
 }
 

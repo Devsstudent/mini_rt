@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:26:25 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 17:55:08 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:56:49 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -48,7 +48,10 @@ bool	check_line(char *line, t_function_parsing *arr, t_must_have *all_elem)
 	if (!line_split)
 		return (free_split_return_false(line_split));
 	if (!brows_arr_function(line_split[0], line_split, arr, all_elem))
+	{
+		ft_putstr_fd(line, 2);
 		return (free_split_return_false(line_split));
+	}
 	free_split_return_false(line_split);
 	return (true);
 }

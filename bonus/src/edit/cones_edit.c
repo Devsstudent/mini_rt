@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 09:22:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 23:54:44 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:29:29 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -26,11 +26,11 @@ static void	apply_action_co(t_edit edit_info, t_cone *co)
 	else if (edit_info.action == ROTATE)
 	{
 		co->vec_dir = apply_rotation(co->vec_dir, edit_info.axis,
-			edit_info.angle);
+				edit_info.angle);
 		co->vec_width = apply_rotation(co->vec_width, edit_info.axis,
-			edit_info.angle);
+				edit_info.angle);
 		co->vec_depth = apply_rotation(co->vec_depth, edit_info.axis,
-			edit_info.angle);
+				edit_info.angle);
 	}
 }
 
@@ -49,7 +49,7 @@ bool	ask_co(t_objects *objs)
 	type = CO;
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_co || nb <= 0)
-		nb = get_input_nb("Which cone do you want to select ?\n");	
+		nb = get_input_nb("Which cone do you want to select ?\n");
 	co = &objs->co[nb - 1];
 	edit_info = get_edit(type);
 	apply_action_co(edit_info, co);

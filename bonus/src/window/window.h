@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 21:17:37 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:46:37 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -49,7 +49,7 @@ typedef struct s_texture {
 	t_detail	*textures;
 	int			nb_textures;
 	char		**paths;
-}			t_texture;
+}				t_texture;
 
 typedef struct s_mlx_info {
 	t_mlx		*mlx;
@@ -71,7 +71,7 @@ typedef struct s_equation {
 	float	x_pow_two;
 	float	x_pow_one;
 	float	c;
-}				t_equation;
+}			t_equation;
 
 typedef struct s_viewplan{
 	t_vect	hori;
@@ -84,13 +84,13 @@ typedef struct s_eq{
 	float	c2;
 	float	t;
 	float	t2;
-}		t_eq;
+}			t_eq;
 
 typedef struct s_line_eq {
 	t_eq	x;
 	t_eq	y;
 	t_eq	z;
-}		t_line_eq;
+}			t_line_eq;
 
 //edit_objs.c
 void			edit_objs(t_objects *objs);
@@ -117,15 +117,17 @@ t_equation		get_quadra_plan_equation(t_line_eq rayline, t_plane plane);
 bool			get_cylinder(t_objects *obj, t_sol_li *list, t_line_eq rayline);
 bool			get_specific_cylinder(t_objects *obj, t_sol_li *list,
 					t_line_eq rayline, int i_to_view);
-bool			get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view);
-bool			get_disc_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view);
+bool			get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline,
+					int i_to_view);
+bool			get_disc_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline,
+					int i_to_view);
 t_equation		get_quadra_cylinder_equation(t_line_eq rayline,
 					t_cylinder cylinder);
 
 //cones.c
-bool	get_specific_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline,
-			int i_to_view);
-bool	get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline);
+bool			get_specific_cone(t_objects *obj, t_sol_li *list,
+					t_line_eq rayline, int i_to_view);
+bool			get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline);
 
 //raytracing_utils.c
 t_line_eq		get_rayline_eq(t_vect vec_line, t_xyz start_point);
@@ -169,11 +171,14 @@ t_vect			normalize_vector(t_vect vector);
 t_vect			get_screen_unit_vert_vect(t_vect unit_w, t_vect vect_h);
 t_vect			get_screen_unit_hor_vect(t_vect vect_d, t_vect vect_w, int fov);
 
-//get_normal_vector.c
+//specular.c
 float			get_specular(t_vect light_vec, t_disp_point intersec,
 					t_objects *objs);
+
+//get_normal_vector.c
 t_vect			get_normal_vect_sp(t_disp_point intersec, t_objects *objs);
-t_vect	get_normal_vect_di(t_disp_point intersec, t_objects *objs, bool cy);
+t_vect			get_normal_vect_di(t_disp_point intersec, t_objects *objs,
+					bool cy);
 t_vect			get_normal_vect_pl(t_disp_point intersec, t_objects *objs);
 t_vect			get_normal_vect_cy(t_disp_point intersec, t_objects *objs);
 t_vect			get_normal_vect_co(t_disp_point intersec, t_objects *objs);
@@ -183,10 +188,11 @@ void			init_sol_li(t_sol_li *sol_li);
 bool			list_add(t_sol_li *sol_li, t_solution_elem *new);
 t_solution_elem	*new_elem(t_solution solution, t_new_elem_info info);
 void			free_list(t_sol_li *sol_li);
-void	fill_info(t_new_elem_info *info, t_rgb color, int i, t_obj_texture tex);
+void			fill_info(t_new_elem_info *info, t_rgb color, int i,
+					t_obj_texture tex);
 
 //copy_sol_two_in_one
-void	copy_sol_two_in_one(t_solution *solu);
+void			copy_sol_two_in_one(t_solution *solu);
 
 //rgb.c
 void			ambient_light_quo(t_objects *objs, float RGB[3]);
@@ -195,7 +201,7 @@ void			compute_rgb(t_objects *objs, t_color_pam param,
 int				create_color(t_rgb rgb, t_final_pix_color final);
 void			fill_specular(t_objects *objs, t_color_pam param,
 					t_vect *specular, int i);
-t_rgb	rgb_fill(uint8_t r, uint8_t g, uint8_t b);
+t_rgb			rgb_fill(uint8_t r, uint8_t g, uint8_t b);
 
 //shadow_light.c
 t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs, int i,
@@ -210,17 +216,19 @@ bool			get_pixel_color(int *color, t_disp_point intersec_point,
 					t_objects *objs);
 
 //co_color.c
-void	cones_color(t_rgb *color, t_disp_point disp_p, t_objects *objs);
+void			cones_color(t_rgb *color, t_disp_point disp_p, t_objects *objs);
 
 //sp_color.c
-void	sphere_color(t_disp_point disp_p, t_rgb *color, t_objects *objs);
+void			sphere_color(t_disp_point disp_p, t_rgb *color,
+					t_objects *objs);
 
 //pl_color.c
-void	pl_color(t_rgb *color, t_disp_point disp_p, t_objects *objs);
+void			pl_color(t_rgb *color, t_disp_point disp_p, t_objects *objs);
 
 //cy_color.c
-void	cylinder_color(t_disp_point disp_p, t_objects *objs, t_rgb *color);
+void			cylinder_color(t_disp_point disp_p, t_objects *objs,
+					t_rgb *color);
 
-t_rgb	get_texture_color(int x, int y, t_obj_texture tex);
+t_rgb			get_texture_color(int x, int y, t_obj_texture tex);
 
 #endif

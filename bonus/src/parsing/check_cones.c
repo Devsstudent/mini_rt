@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:11:45 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/30 20:28:46 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:26:17 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -33,8 +33,9 @@ static bool	check_floats(char **line)
 bool	check_cones(char **line, t_must_have *all_elem)
 {
 	if (!(line[0] && (line[0][0] == 'c' || line[0][0] == 'C')
-			&& line[0][1] && (line[0][1] == 'o' || line[0][1] == 'O') && !line[0][2]))
-			return (false);
+		&& line[0][1] && (line[0][1] == 'o' || line[0][1] == 'O')
+		&& !line[0][2]))
+		return (false);
 	if (!check_coordinate(line[1]))
 		return (false);
 	if (!check_coordinate_direction(line[2]))

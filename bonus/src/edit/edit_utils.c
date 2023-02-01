@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:20:00 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 09:48:20 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:30:04 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -35,7 +35,8 @@ long	get_input_nb(char *ask)
 			continue ;
 		}
 		if (str && (!ft_strncmp(str, "-\n", 3) || !ft_strncmp(str, "+\n", 3)
-			|| (ft_strlen(str) > 2 && !ft_is_digit(str[ft_strlen(str) - 2]))))
+				|| (ft_strlen(str) > 2
+					&& !ft_is_digit(str[ft_strlen(str) - 2]))))
 			continue ;
 		nb = ft_atoi(str);
 		free(str);

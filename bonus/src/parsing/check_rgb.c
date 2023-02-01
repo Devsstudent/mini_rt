@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <mbelrhaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:56:41 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/04 15:15:05 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:14:50 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -34,7 +34,7 @@ bool	loop_check_rgb(char *line, int *i, long *value, int *turn)
 		if (*value < 0 || *value > 255 || *value > (long) INT_MAX)
 			return (false);
 		line = line + *i;
-		if (*line == '\0')
+		if (*line == '\0' || !(*line))
 			break ;
 		if (*line != ',' && *turn < 2)
 			return (false);
@@ -45,6 +45,8 @@ bool	loop_check_rgb(char *line, int *i, long *value, int *turn)
 		if (*turn > (int) size / 3)
 			break ;
 	}
+	if (*turn < 2)
+		return (false);
 	return (true);
 }
 

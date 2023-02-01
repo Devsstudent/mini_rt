@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:30 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 20:38:08 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:34:05 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -14,9 +14,9 @@
 bool	get_specific_sphere(t_objects *obj, t_sol_li *list,
 			t_line_eq rayline, int i_to_view)
 {
-	t_equation	quadratic;
-	bool		err;
-	t_solution	solu;
+	t_equation		quadratic;
+	bool			err;
+	t_solution		solu;
 	t_new_elem_info	info;
 
 	err = false;
@@ -24,7 +24,8 @@ bool	get_specific_sphere(t_objects *obj, t_sol_li *list,
 	solu = solution(quadratic, rayline, &err);
 	if (err)
 		return (false);
-	fill_info(&info, obj->sp[i_to_view].color, i_to_view, obj->sp[i_to_view].tex);
+	fill_info(&info, obj->sp[i_to_view].color,
+		i_to_view, obj->sp[i_to_view].tex);
 	info.type = SP;
 	if (solu.sol_one && !list_add(list,
 			new_elem(solu, info)))

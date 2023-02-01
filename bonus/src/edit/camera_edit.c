@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:06:38 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 19:26:09 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:29:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -29,7 +29,7 @@ static void	apply_action_cam(t_edit edit_info, t_objects *objs)
 				edit_info.axis, edit_info.angle);
 	}
 	else
-		return;
+		return ;
 	objs->edited = true;
 }
 

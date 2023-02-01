@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 21:18:03 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:31:50 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -65,8 +65,6 @@ bool	loop_line(t_objects *objs, t_viewplan *view_plan, int i)
 	t_i_j			i_j;
 
 	j = 0;
-	//Definir tous les combiens on decale la couleurs
-	//Pour faire un damier
 	while (j < WIN_W)
 	{
 		init_sol_li(&list);

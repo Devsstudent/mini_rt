@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#           */
 /*   Created: 2022/12/29 16:27:23 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/29 20:34:13 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:42:01 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -79,10 +79,10 @@ static t_solution	solution_disc(t_equation eq, t_line_eq equation,
 bool	get_disc(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 		int i)
 {
-	bool		err;
-	t_solution	solu;
-	t_disc_info	disc_info;
-	int			j;
+	bool			err;
+	t_solution		solu;
+	t_disc_info		disc_info;
+	int				j;
 	t_new_elem_info	info;
 
 	j = 0;

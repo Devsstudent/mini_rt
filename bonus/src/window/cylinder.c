@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <mbelrhaz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 17:53:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/29 20:40:46 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:41:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -52,10 +52,10 @@ void	check_solution(t_solution *solu, t_cylinder cylinder)
 bool	get_cylinder(t_objects *obj, t_sol_li *list,
 	t_line_eq rayline)
 {
-	t_equation	quadratic;
-	bool		err;
-	t_solution	solu;
-	int			i;
+	t_equation		quadratic;
+	bool			err;
+	t_solution		solu;
+	int				i;
 	t_new_elem_info	info;
 
 	i = 0;
@@ -81,9 +81,9 @@ bool	get_cylinder(t_objects *obj, t_sol_li *list,
 bool	get_specific_cylinder(t_objects *obj, t_sol_li *list,
 	t_line_eq rayline, int i_to_view)
 {
-	t_equation	quadratic;
-	bool		err;
-	t_solution	solu;
+	t_equation		quadratic;
+	bool			err;
+	t_solution		solu;
 	t_new_elem_info	info;
 
 	err = false;
@@ -91,7 +91,8 @@ bool	get_specific_cylinder(t_objects *obj, t_sol_li *list,
 	solu = solution(quadratic, rayline, &err);
 	if (err)
 		return (false);
-	fill_info(&info, obj->cy[i_to_view].color, i_to_view, obj->cy[i_to_view].tex);
+	fill_info(&info, obj->cy[i_to_view].color,
+		i_to_view, obj->cy[i_to_view].tex);
 	info.type = CY;
 	check_solution(&solu, obj->cy[i_to_view]);
 	get_disc(obj, list, rayline, i_to_view);

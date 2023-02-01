@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 19:20:43 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 14:17:57 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:54:48 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -21,7 +21,7 @@ bool	check_path(char *path)
 	if (size >= 2 && !ft_strncmp(path, "da", 3))
 		return (true);
 	else if (size > 4 && (path[size - 1] != 'm' || path[size - 2] != 'p'
-		|| path[size - 3] != 'x' || path[size - 4] != '.'))
+			|| path[size - 3] != 'x' || path[size - 4] != '.'))
 		return (false);
 	else if (size < 4)
 		return (false);
@@ -38,11 +38,13 @@ bool	check_texture(t_obj_texture *tex, char *path, t_objects *objs)
 			tex->tex = DAM;
 	else
 	{
-			tex->img = mlx_xpm_file_to_image(objs->mlx->mlx, path, &tex->width, &tex->height);
-			if (!tex->img)
-				return (false);
-			tex->tex = TEX;
-			tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_size, &tex->endian);
+		tex->img = mlx_xpm_file_to_image(objs->mlx->mlx,
+				path, &tex->width, &tex->height);
+		if (!tex->img)
+			return (false);
+		tex->tex = TEX;
+		tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
+				&tex->line_size, &tex->endian);
 	}
 	return (true);
 }

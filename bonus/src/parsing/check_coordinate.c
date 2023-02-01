@@ -6,12 +6,12 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:00:43 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/24 19:58:50 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:24:38 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
-static bool	brows_line(char *line, int *i)
+bool	brows_line_coord(char *line, int *i)
 {
 	bool	test;
 	char	*save;
@@ -34,38 +34,6 @@ static bool	brows_line(char *line, int *i)
 		(*i)++;
 	while (line[*i] && ft_isdigit(line[*i]))
 		(*i)++;
-	return (true);
-}
-
-bool	loop_check_coord_dir(char *line, float *value, int *turn, int *i)
-{
-	size_t	size;
-
-	size = ft_strlen(line);
-	while (line)
-	{
-		if (!brows_line(line, i))
-			return (false);
-		if (!convert_to_float(value, line))
-			return (false);
-		if (*value < -1 || *value > 1)
-			return (false);
-		line = line + *i;
-		if (!*line)
-		{
-			if (*turn < 2)
-				return (false);
-			break ;
-		}
-		if (*line != ',' && *turn < 2)
-			return (false);
-		if (*turn > (int) size / 3)
-			break ;
-		if (!*line)
-			break ;
-		(*turn)++;
-		line++;
-	}
 	return (true);
 }
 
@@ -92,7 +60,7 @@ bool	loop_check_coord(char *line, float *value, int *turn, int *i)
 	size = ft_strlen(line);
 	while (line)
 	{
-		if (!brows_line(line, i))
+		if (!brows_line_coord(line, i))
 			return (false);
 		if (!convert_to_float(value, line))
 			return (false);

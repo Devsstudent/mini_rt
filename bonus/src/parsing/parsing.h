@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 12:16:58 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:25:54 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -25,7 +25,7 @@ typedef struct s_rgb			t_rgb;
 typedef struct s_orientation	t_orientation;
 typedef struct s_objects		t_objects;
 typedef struct s_obj_texture	t_obj_texture;
-typedef enum e_type			t_type;
+typedef enum e_type				t_type;
 
 typedef struct s_must_have {
 	bool	ambient;
@@ -69,6 +69,7 @@ bool	check_ambient(char **line_split, t_must_have *all_elem);
 bool	check_camera(char **line_split, t_must_have *all_element);
 
 //check_coordinate.c
+bool	brows_line_coord(char *line, int *i);
 bool	check_coordinate_direction(char *line);
 bool	check_coordinate(char *line);
 
@@ -135,5 +136,15 @@ bool	fill_structs(char **lines, t_objects *objects);
 //check_path.c
 bool	check_path(char *path);
 bool	check_texture(t_obj_texture *tex, char *path, t_objects *objs);
+
+//fill_obj_systems.c
+bool	fill_cam_system(t_objects *objs);
+void	fill_pl_system(t_objects *objs, int i);
+void	fill_sp_system(t_objects *objs, int i);
+void	fill_cy_system(t_objects *objs, int i);
+void	fill_co_system(t_objects *objs, int i);
+
+//loop_check_coord_dir
+bool	loop_check_coord_dir(char *line, float *value, int *turn, int *i);
 
 #endif

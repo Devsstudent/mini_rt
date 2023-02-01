@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:17:04 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/30 21:39:24 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:56:53 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -27,10 +27,7 @@ static int	line_nb(int fd, t_must_have *all_elem, t_function_parsing *arr)
 			continue ;
 		}
 		if (!check_line(line, arr, all_elem))
-		{
-			printf("%s\n", line);
 			return (free(line), 0);
-		}
 		i++;
 		free(line);
 		line = get_next_line(fd);

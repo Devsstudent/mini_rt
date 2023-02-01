@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:05:05 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 20:39:24 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 20:32:54 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -67,11 +67,11 @@ static t_solution	solution_plan(t_equation eq, t_line_eq equation,
 
 bool	get_plane(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 {
-	t_equation	quadratic;
-	bool		err;
-	t_solution	solu;
-	int			i;
-	t_new_elem_info info;
+	t_equation		quadratic;
+	bool			err;
+	t_solution		solu;
+	int				i;
+	t_new_elem_info	info;
 
 	i = 0;
 	while (i < obj->nb_pl)
@@ -94,9 +94,9 @@ bool	get_plane(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 bool	get_specific_plane(t_objects *obj, t_sol_li *list,
 			t_line_eq rayline, int i_to_view)
 {
-	t_equation	quadratic;
-	bool		err;
-	t_solution	solu;
+	t_equation		quadratic;
+	bool			err;
+	t_solution		solu;
 	t_new_elem_info	info;
 
 	err = false;
@@ -104,7 +104,8 @@ bool	get_specific_plane(t_objects *obj, t_sol_li *list,
 	solu = solution_plan(quadratic, rayline, &err);
 	if (err)
 		return (false);
-	fill_info(&info, obj->pl[i_to_view].color, i_to_view, obj->pl[i_to_view].tex);
+	fill_info(&info, obj->pl[i_to_view].color,
+		i_to_view, obj->pl[i_to_view].tex);
 	info.type = PL;
 	if (solu.sol_one && !list_add(list,
 			new_elem(solu, info)))
