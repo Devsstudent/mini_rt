@@ -6,84 +6,30 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:00:39 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/29 20:41:07 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:34:04 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
 
-t_equation	get_quadra_cone_equation(t_line_eq rayline, t_cone cone)
-{
-	t_equation	res;
-	float		cos;
-	t_vect		vec;
-	float		a,b,c,i,j,k;
-	float		x0,y0,z0,xc,yc,zc;
-	float		a2cos2, b2cos2, c2cos2;
-	float		x0xc2, y0yc2, z0zc2;
-
-	cos = cone.height / (sqrtf(cone.height * cone.height + (cone.radius)
-		* (cone.radius)));
-	vec = normalize_vector(cone.vec_dir);
-	a = vec[0];
-	b = vec[1];
-	c = vec[2];
-	i = rayline.x.t;
-	j = rayline.y.t;
-	k = rayline.z.t;
-	x0 = rayline.x.c;
-	y0 = rayline.y.c;
-	z0 = rayline.z.c;
-	xc = cone.position.x;
-	yc = cone.position.y;
-	zc = cone.position.z;
-	a2cos2 = a * a - cos * cos;
-	b2cos2 = b * b - cos * cos;
-	c2cos2 = c * c - cos * cos;
-	x0xc2 = (x0 - xc) * (x0 - xc);
-	y0yc2 = (y0 - yc) * (y0 - yc);
-	z0zc2 = (z0 - zc) * (z0 - zc);
-	//a
-	res.x_pow_two = i * i * (a2cos2) + j * j * (b2cos2)
-		+ k * k * (c2cos2) + 2 * (b * c * j * k + a * b * i * j
-		+ a * c * i * k);
-
-	//b
-	res.x_pow_one = 2 * (i * a2cos2 * (x0 - xc) + j * b2cos2 * (y0-yc)
-		+ k * c2cos2 * (z0 - zc) + a * b * (i * y0 - i * yc + x0 * j - xc * j)
-		+ a * c * (i * z0 - i * zc + x0 * k - xc * k) + b * c * (j * z0
-		+ k * y0 - zc * j - yc * k));
-
-	//c
-	res.c = a2cos2 * x0xc2 + b2cos2 * y0yc2 + c2cos2 * z0zc2 + 2 * (a * (b
-		* (x0 * y0 - yc * x0) + c * (x0 * z0 - x0 * zc)) - a * xc * (b
-		* (y0 - yc) + c * (z0 - zc)) + b * c * ((y0 - yc) * (z0 - zc)));
-	return (res);
-}
-
 void	check_solution_cone(t_solution *solu, t_cone cone)
 {
 	float	distance_max;
-	float	radius;
-	float	height;
 	t_xyz	origin;
 
 	origin = cone.position;
-	radius = cone.radius;
-	height = cone.height;
-	distance_max = sqrtf(radius * radius + height * height);
+	distance_max = sqrtf(cone.radius * cone.radius + cone.height * cone.height);
 	if (solu->sol_one || solu->sol_two)
 	{
 		if (solu->sol_two)
 		{
-			
 			if (norm_of_vector(create_vector(solu->two, origin)) > distance_max
 				|| scalar_product(create_vector(origin, solu->two)
 					, cone.vec_dir) < 0)
 				solu->sol_two = false;
 		}
 		if (norm_of_vector(create_vector(solu->one, origin)) > distance_max
-				|| scalar_product(create_vector(origin, solu->one)
-					, cone.vec_dir) < 0)
+			|| scalar_product(create_vector(origin, solu->one)
+				, cone.vec_dir) < 0)
 		{
 			solu->sol_one = false;
 			if (solu->sol_two)
@@ -120,11 +66,12 @@ bool	get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline)
 	return (true);
 }
 
-bool	get_specific_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_to_view)
+bool	get_specific_cone(t_objects *obj, t_sol_li *list,
+			t_line_eq rayline, int i_to_view)
 {
-	t_equation	quadra;
-	bool		err;
-	t_solution	solu;
+	t_equation		quadra;
+	bool			err;
+	t_solution		solu;
 	t_new_elem_info	info;
 
 	err = false;
@@ -132,13 +79,13 @@ bool	get_specific_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline, int i_
 	solu = solution(quadra, rayline, &err);
 	if (err)
 		return (false);
-	fill_info(&info, obj->co[i_to_view].color, i_to_view, obj->co[i_to_view].tex);
+	fill_info(&info, obj->co[i_to_view].color,
+		i_to_view, obj->co[i_to_view].tex);
 	info.type = CO;
 	check_solution_cone(&solu, obj->co[i_to_view]);
 	get_disc_cone(obj, list, rayline, i_to_view);
-	if (solu.sol_one && !list_add(list
-			,new_elem(solu, info)))
+	if (solu.sol_one && !list_add(list,
+			new_elem(solu, info)))
 		return (false);
 	return (true);
 }
-

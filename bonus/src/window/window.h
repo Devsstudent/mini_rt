@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 20:46:37 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:36:42 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -37,6 +37,43 @@ typedef enum e_type					t_type;
 typedef struct s_obj_texture		t_obj_texture;
 typedef struct s_new_elem_info		t_new_elem_info;
 typedef struct s_detail				t_detail;
+
+typedef struct s_var_normal_co {
+	float	xc;
+	float	yc;
+	float	zc;
+	float	xp;
+	float	yp;
+	float	zp;
+}			t_var_normal_co;
+
+typedef struct s_var_normal {
+	float	t;
+	float	a;
+	float	b;
+	float	c;
+}			t_var_normal;
+
+typedef struct s_cone_variable {
+	float	a;
+	float	b;
+	float	c;
+	float	i;
+	float	j;
+	float	k;
+	float	x0;
+	float	y0;
+	float	z0;
+	float	xc;
+	float	yc;
+	float	zc;
+	float	a2cos2;
+	float	b2cos2;
+	float	c2cos2;
+	float	x0xc2;
+	float	y0yc2;
+	float	z0zc2;
+}			t_cone_variable;
 
 typedef struct s_final_pix_color{
 	t_vect	ambient;
@@ -124,6 +161,9 @@ bool			get_disc_cone(t_objects *obj, t_sol_li *list, t_line_eq rayline,
 t_equation		get_quadra_cylinder_equation(t_line_eq rayline,
 					t_cylinder cylinder);
 
+//get_quadra_cone_equation.c
+t_equation		get_quadra_cone_equation(t_line_eq rayline, t_cone cone);
+
 //cones.c
 bool			get_specific_cone(t_objects *obj, t_sol_li *list,
 					t_line_eq rayline, int i_to_view);
@@ -176,12 +216,14 @@ float			get_specular(t_vect light_vec, t_disp_point intersec,
 					t_objects *objs);
 
 //get_normal_vector.c
+t_vect			get_normal_vect_cy(t_disp_point intersec, t_objects *objs);
+t_vect			get_normal_vect_co(t_disp_point intersec, t_objects *objs);
+
+//get_normal_vector_bis.c
 t_vect			get_normal_vect_sp(t_disp_point intersec, t_objects *objs);
 t_vect			get_normal_vect_di(t_disp_point intersec, t_objects *objs,
 					bool cy);
 t_vect			get_normal_vect_pl(t_disp_point intersec, t_objects *objs);
-t_vect			get_normal_vect_cy(t_disp_point intersec, t_objects *objs);
-t_vect			get_normal_vect_co(t_disp_point intersec, t_objects *objs);
 
 //solution_list.c
 void			init_sol_li(t_sol_li *sol_li);

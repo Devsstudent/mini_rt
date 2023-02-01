@@ -6,13 +6,15 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 19:50:57 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 21:36:13 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
 
 bool	fill_obj_systems(t_objects *objs)
-{ int	i;
+{
+	int	i;
+
 	i = 0;
 	if (!fill_cam_system(objs))
 		return (false);

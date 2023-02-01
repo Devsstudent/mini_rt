@@ -44,6 +44,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								cylinder \
 								specular \
 								cones \
+								get_quadra_cones \
 								cylinder_equation \
 								disc \
 								disc_cone \
@@ -55,6 +56,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								vector_operations \
 								vector_operations_bis \
 								get_normal_vector \
+								get_normal_vector_bis \
 								equation \
 								$(addprefix color/, rgb \
 										rgb_utils \
