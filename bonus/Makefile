@@ -33,7 +33,8 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 								fill_elems \
 								utils) \
 		$(addprefix error/, error \
-							fill_structs_utils) \
+							fill_structs_utils \
+							free_objs) \
 		$(addprefix window/,  loop_mlx \
 								render_window \
 								sphere \

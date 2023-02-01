@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:12:33 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 11:57:04 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:34:38 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -15,9 +15,10 @@ int	close_window(t_objects *objs)
 {
 	mlx_destroy_image(objs->mlx->mlx, objs->mlx->img);
 	mlx_destroy_window(objs->mlx->mlx, objs->mlx->win);
+	free_objs(objs);
 	mlx_destroy_display(objs->mlx->mlx);
 	free(objs->mlx->mlx);
-	free_objs(objs);
+	free(objs->mlx);
 	exit(0);
 	return (0);
 }

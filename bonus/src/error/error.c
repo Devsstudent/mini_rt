@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:53:48 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 13:10:40 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:34:24 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -28,24 +28,23 @@ void	free_exit(void *objs)
 void	free_objs(t_objects *obj)
 {
 	if (obj->nb_cy)
-		free(obj->cy);
+		free_cy(obj, obj->cy);
 	if (obj->nb_pl)
-		free(obj->pl);
+		free_pl(obj, obj->pl);
 	if (obj->nb_sp)
-		free(obj->sp);
+		free_sp(obj, obj->sp);
 	if (obj->nb_li)
 		free(obj->li);
 	if (obj->nb_co)
-		free(obj->co);
+		free_co(obj, obj->co);
 	free(obj->cam);
 	free(obj->amb);
-	free(obj->mlx);
 }
 
-void	free_list_exit(t_objects *objss, t_sol_li *list)
+void	free_list_exit(t_objects *objs, t_sol_li *list)
 {
 	free_list(list);
-	free_exit(objss);
+	free_exit(objs);
 }
 
 t_disp_point	error_intersec(void)
