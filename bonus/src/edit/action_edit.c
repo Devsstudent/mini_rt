@@ -65,7 +65,7 @@ static bool	check_edit(t_type type, char *str)
 {
 	if (!str)
 		return (false);
-	if (!ft_strncmp("r\n", str, 3) && (type == SP || type == CY))
+	if (!ft_strncmp("r\n", str, 3) && (type == SP || type == CY || type == CO))
 		return (true);
 	if (!ft_strncmp("o\n", str, 3) && type != LI)
 		return (true);
@@ -85,7 +85,7 @@ t_edit	get_edit(t_type type)
 	{
 		if (str)
 			free(str);
-		ft_putstr_fd("What kind of edit you wnat to apply ?\n", 1);
+		ft_putstr_fd("What kind of edit you want to apply ?\n", 1);
 		str = take_input_str("r to resize\no to rotate\nt to translate\n");
 	}
 	if (*str == 'r')

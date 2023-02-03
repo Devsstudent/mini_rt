@@ -12,47 +12,6 @@
 
 #include "parsing.h"
 
-/*
-bool	convert_to_float(float *val, char *arr)
-{
-	int		i;
-	int		j;
-	int		dot;
-	char	*nb;
-
-	i = 0;
-	j = 0;
-	dot = 0;
-	nb = malloc(sizeof(char) * (ft_strlen(arr) + 1));
-	if (!nb)
-	{
-		return (false);
-	}
-	while (arr[i])
-	{
-		if (arr[i] == '.')
-		{
-			dot = 1;
-			if (arr[i + 1] && arr[i + 2] != '\0')
-				dot++;
-			i++;
-			continue ;
-		}
-		nb[j] = arr[i];
-		j++;
-		i++;
-	}
-	nb[j] = '\0';
-	if (dot == 1)
-		*val = (float)(ft_atoi(nb)) / 10.0;
-	else if (dot == 2)
-		*val = (float)(ft_atoi(nb)) / 100.0;
-	else
-		*val = ft_atoi(nb);
-	return (free(nb), true);
-}
-*/
-
 bool	convert_to_rgb(t_rgb *rgb, char *arr)
 {
 	char	**rgb_arr;

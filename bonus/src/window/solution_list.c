@@ -22,7 +22,7 @@ bool	list_add(t_sol_li *sol_li, t_solution_elem *new)
 {
 	t_solution_elem	*buff;
 
-	if (!sol_li)
+	if (!sol_li || !new)
 		return (false);
 	if (!sol_li->head)
 	{

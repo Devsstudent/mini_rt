@@ -30,7 +30,7 @@ char	***create_triple_arr(char **lines)
 	{
 		triple_arr[i] = split_func_condition(lines[i], ft_is_space);
 		if (triple_arr[i] == NULL)
-			return (free_triple_arr(triple_arr), free_double_arr(lines), NULL);
+			return (free_triple_arr(triple_arr), NULL);
 		i++;
 	}
 	triple_arr[i] = NULL;
@@ -90,6 +90,6 @@ bool	fill_structs(char **lines, t_objects *objects)
 	if (!triple_arr)
 		return (false);
 	if (!fill_each_struct(triple_arr, objects))
-		return (free_structs(objects), free_triple_arr(triple_arr), false);
+		return (free_triple_arr(triple_arr), false);
 	return (free_triple_arr(triple_arr), true);
 }

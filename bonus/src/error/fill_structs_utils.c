@@ -6,21 +6,11 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:05:57 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2022/12/04 20:56:14 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:12:07 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-void	free_structs(t_objects *objects)
-{
-	free(objects->amb);
-	free(objects->cam);
-	free(objects->li);
-	free(objects->sp);
-	free(objects->pl);
-	free(objects->cy);
-}
 
 void	free_double_arr(char **double_arr)
 {

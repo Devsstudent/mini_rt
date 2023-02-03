@@ -91,7 +91,8 @@ char	**open_and_store(char *name)
 	line_nbr = 0;
 	arr = NULL;
 	init_all_elem(&all_elem);
-	setup_array_function(&arr);
+	if (!setup_array_function(&arr))
+		return (perror("Error\n"), NULL);
 	if (!get_line_nb_checking_line(name, arr, &line_nbr, &all_elem))
 		return (free_array_function(arr), NULL);
 	lines = malloc(sizeof(*lines) * (line_nbr + 1));

@@ -6,8 +6,8 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:49:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 20:16:38 by odessein         ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2023/02/03 16:23:56 by odessein         ###   ########.fr       */
+/*                                                                           */
 /* ************************************************************************** */
 #include "parsing.h"
 
@@ -22,17 +22,21 @@ bool	fill_cam_system(t_objects *objs)
 	return (true);
 }
 
-void	fill_pl_system(t_objects *objs, int i)
+bool	fill_pl_system(t_objects *objs, int i)
 {
 	t_plane	*pl;
 
 	pl = &(objs->pl[i]);
+	if (!pl->vec_direction[0] && !pl->vec_direction[1]
+		&& !pl->vec_direction[2])
+		return (false);
 	pl->vec_height = normalize_vector(get_vec_vertical(pl->vec_direction));
 	pl->vec_width = normalize_vector(get_vec_horizontal(pl->vec_direction,
 				pl->vec_height));
+	return (true);
 }
 
-void	fill_sp_system(t_objects *objs, int i)
+bool	fill_sp_system(t_objects *objs, int i)
 {
 	t_sphere	*sp;
 
@@ -40,26 +44,35 @@ void	fill_sp_system(t_objects *objs, int i)
 	sp->vec_height = normalize_vector(objs->vect_height);
 	sp->vec_width = normalize_vector(objs->vect_width);
 	sp->vec_depth = normalize_vector(objs->cam->vec_direction);
+	return (true);
 }
 
-void	fill_cy_system(t_objects *objs, int i)
+bool	fill_cy_system(t_objects *objs, int i)
 {
 	t_cylinder	*cy;
 
 	cy = &(objs->cy[i]);
+	if (!cy->vec_direction[0] && !cy->vec_direction[1]
+		&& !cy->vec_direction[2])
+		return (false);
 	cy->vec_height = normalize_vector(cy->vec_direction);
 	cy->vec_width = normalize_vector(get_vec_vertical(cy->vec_direction));
 	cy->vec_depth = normalize_vector(get_vec_horizontal(cy->vec_direction,
 				cy->vec_width));
+	return (true);
 }
 
-void	fill_co_system(t_objects *objs, int i)
+bool	fill_co_system(t_objects *objs, int i)
 {
 	t_cone	*co;
 
 	co = &(objs->co[i]);
+	if (!co->vec_dir[0] && !co->vec_dir[1]
+		&& !co->vec_dir[2])
+		return (false);
 	co->vec_height = normalize_vector(co->vec_dir);
 	co->vec_width = normalize_vector(get_vec_vertical(co->vec_height));
 	co->vec_depth = normalize_vector(get_vec_horizontal(co->vec_height,
 				co->vec_width));
+	return (true);
 }

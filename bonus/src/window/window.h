@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 21:36:42 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:29:35 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -194,12 +194,12 @@ t_vect			get_vec_horizontal(t_vect v_director, t_vect v_ortho);
 int				render_window(void	*objss);
 
 //loop_mlx.c
+void	window(t_objects *objs);
 void			img_pixel_put(t_mlx_info *mlx, int j, int i, int color);
 int				close_window(t_objects *objs);
 int				hook_press(int keycode, t_objects *objs);
 int				hook_release(int keycode, t_mlx_info *mlx);
 void			img_pixel_put(t_mlx_info *mlx, int j, int i, int color);
-bool			window(t_objectss *objs);
 
 //vector_opperation.c
 t_vect			create_vector(t_xyz one, t_xyz two);

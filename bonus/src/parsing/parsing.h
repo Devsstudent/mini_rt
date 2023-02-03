@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 20:25:54 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:23:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -139,10 +139,10 @@ bool	check_texture(t_obj_texture *tex, char *path, t_objects *objs);
 
 //fill_obj_systems.c
 bool	fill_cam_system(t_objects *objs);
-void	fill_pl_system(t_objects *objs, int i);
-void	fill_sp_system(t_objects *objs, int i);
-void	fill_cy_system(t_objects *objs, int i);
-void	fill_co_system(t_objects *objs, int i);
+bool	fill_pl_system(t_objects *objs, int i);
+bool	fill_sp_system(t_objects *objs, int i);
+bool	fill_cy_system(t_objects *objs, int i);
+bool	fill_co_system(t_objects *objs, int i);
 
 //loop_check_coord_dir
 bool	loop_check_coord_dir(char *line, float *value, int *turn, int *i);

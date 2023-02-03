@@ -27,14 +27,16 @@ static bool	check_first_char(char **line_split, t_must_have *all_element)
 bool	check_light(char **line_split, t_must_have *all_element)
 {
 	float	value;
+	bool	intensity;
 
 	if (!check_first_char(line_split, all_element))
 		return (false);
 	if (!check_coordinate(line_split[1]))
 		return (false);
-	if (!(line_split[2] && line_split[2][0] && ft_isdigit(line_split[2][0])
+	intensity = (line_split[2] && line_split[2][0] && ft_isdigit(line_split[2][0])
 		&& line_split[2][1] && line_split[2][1] == '.' && line_split[2][2]
-		&& ft_isdigit(line_split[2][2]) && !line_split[2][3]))
+		&& ft_isdigit(line_split[2][2]) && !line_split[2][3]);
+	if (!intensity && !(line_split[2] && line_split[2][0] && ft_isdigit(line_split[2][0]) && !line_split[2][1]))
 		return (false);
 	else if (!convert_to_float(&value, line_split[2]))
 		return (false);
