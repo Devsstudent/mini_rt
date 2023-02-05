@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/03 16:21:18 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:31:20 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -62,6 +62,7 @@ int	main(int ac, char **av)
 	t_objects	objects;
 
 	ft_memset(&objects, 0, sizeof(objects));
+	objects.editing = false;
 	lines = parsing(ac, av);
 	if (!lines)
 		return (1);

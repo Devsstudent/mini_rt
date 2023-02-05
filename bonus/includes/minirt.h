@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 14:32:11 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/04 19:30:30 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
@@ -282,6 +282,7 @@ typedef struct	s_objects {
 	bool		need_display;
 	int			nb_elem;
 	bool			edited;
+	bool			editing;
 	t_pattern		pattern;
 }	t_objects;
 

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:38:20 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 20:57:19 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/04 20:17:44 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -30,36 +30,46 @@ static bool	check_str(char *str)
 	return (false);
 }
 
-static void	go_for_asked(char *str, t_objects *objs)
+static bool	go_for_asked(char *str, t_objects *objs)
 {
+	bool	ret;
+
+	ret = true;
 	if (!str)
-		return ;
+		return (false);
 	if (!ft_strncmp("sp\n", str, 4))
-		ask_sp(objs);
+		ret = ask_sp(objs);
 	if (!ft_strncmp("cy\n", str, 4))
-		ask_cy(objs);
+		ret = ask_cy(objs);
 	if (!ft_strncmp("pl\n", str, 4))
-		ask_pl(objs);
+		ret = ask_pl(objs);
 	if (!ft_strncmp("li\n", str, 4))
-		ask_li(objs);
+		ret = ask_li(objs);
 	if (!ft_strncmp("c\n", str, 3))
-		ask_c(objs);
+		ret = ask_c(objs);
 	if (!ft_strncmp("co\n", str, 4))
-		ask_co(objs);
+		ret = ask_co(objs);
 	free(str);
+	return (ret);
 }
 
 void	edit_objs(t_objects *objs)
 {
 	char	*str;
 
-	str = 0;
+	str = NULL;
 	while (!check_str(str))
 	{
 		if (str)
 			free(str);
-		str = take_input_str("Which object type you want to edit ?\n");
+		str = take_input_str("Which object type do you want to edit ?\n");
+		if (str && ft_strncmp(str, "exit\n", 5) == 0)
+		{
+			free(str);
+			str = NULL;
+			return ;
+		}
 	}
-	go_for_asked(str, objs);
-	objs->need_display = true;
+	if (go_for_asked(str, objs))
+		objs->need_display = true;
 }

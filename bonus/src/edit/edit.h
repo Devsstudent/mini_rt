@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:13:47 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 09:31:04 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/05 21:13:34 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef EDIT_H
@@ -24,11 +24,12 @@ typedef enum e_type				t_type;
 typedef enum e_axis				t_axis;
 
 //action_edit.c
-t_edit	get_edit(t_type type);
+t_edit	get_edit(t_type type, bool *exit_request);
 
 //edit_utils.c
 char	*take_input_str(char *str);
-long	get_input_nb(char *ask);
+long	get_input_nb_int(char *ask, bool *exit_request);
+float	get_input_nb(char *ask, bool *exit_request);
 
 //edit_objs.c
 void	edit_objs(t_objects *objs);
@@ -52,7 +53,10 @@ bool	ask_co(t_objects *objs);
 bool	ask_li(t_objects *objs);
 
 //resize.c
-void	resize(t_edit *res, t_type type);
+void	resize(t_edit *res, t_type type, bool *exit_request);
+
+//get_rotation_angle.c
+void	get_angle_rotate(t_edit *edit_info, bool *exit_request);
 
 //rotation.c
 t_vect	apply_rotation(t_vect initial, t_axis axis, int angle);

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 09:22:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 20:29:29 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/05 20:43:10 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -40,18 +40,24 @@ bool	ask_co(t_objects *objs)
 	long	nb;
 	t_edit	edit_info;
 	t_cone	*co;
+	bool	exit_request;
 
+	exit_request = false;
 	if (objs->nb_co == 0)
-	{
-		ft_putstr_fd("No cones sorry :(\n", 1);
-		return (true);
-	}
+		return (ft_putstr_fd("No cones sorry :(\n", 1), true);
 	type = CO;
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_co || nb <= 0)
-		nb = get_input_nb("Which cone do you want to select ?\n");
+	{
+		nb = get_input_nb_int("Which cone do you want to select ?\n",
+				&exit_request);
+		if (exit_request == true)
+			return (false);
+	}
 	co = &objs->co[nb - 1];
-	edit_info = get_edit(type);
+	edit_info = get_edit(type, &exit_request);
+	if (exit_request == true)
+		return (false);
 	apply_action_co(edit_info, co);
 	return (true);
 }

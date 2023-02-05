@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:05:40 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/26 23:56:24 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/05 20:40:47 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -36,17 +36,23 @@ bool	ask_pl(t_objects *objs)
 	long	nb;
 	t_edit	edit_info;
 	t_plane	*pl;
+	bool	exit_request;
 
+	exit_request = false;
 	if (objs->nb_pl == 0)
-	{
-		ft_putstr_fd("No planes, sorry : ( \n", 1);
-		return (true);
-	}
+		return (ft_putstr_fd("No planes, sorry :(\n", 1), true);
 	nb = 0;
 	type = PL;
 	while (nb > INT_MAX || nb > objs->nb_pl || nb <= 0)
-		nb = get_input_nb("Which plane do you want to select ?\n");
-	edit_info = get_edit(type);
+	{
+		nb = get_input_nb_int("Which plane do you want to select ?\n",
+				&exit_request);
+		if (exit_request == true)
+			return (false);
+	}
+	edit_info = get_edit(type, &exit_request);
+	if (exit_request == true)
+		return (false);
 	pl = &objs->pl[nb - 1];
 	apply_action_pl(edit_info, pl);
 	return (true);

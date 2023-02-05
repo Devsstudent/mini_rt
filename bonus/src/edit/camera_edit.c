@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:06:38 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 20:29:42 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/05 18:08:15 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -37,9 +37,13 @@ bool	ask_c(t_objects *objs)
 {
 	t_edit	edit_info;
 	t_type	type;
+	bool	exit_request;
 
+	exit_request = false;
 	type = C;
-	edit_info = get_edit(type);
+	edit_info = get_edit(type, &exit_request);
+	if (exit_request == true)
+		return (false);
 	apply_action_cam(edit_info, objs);
 	return (true);
 }

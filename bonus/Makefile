@@ -68,6 +68,7 @@ OBJ = $(addsuffix .o, $(addprefix obj/, main \
 															co))) \
 		$(addprefix edit/, edit_objs \
 								resize \
+								get_rotation_angle \
 								rotation \
 								edit_utils \
 								action_edit \

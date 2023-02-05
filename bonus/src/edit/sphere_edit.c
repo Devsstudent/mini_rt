@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:50:44 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 20:28:30 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/05 21:14:31 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -38,17 +38,23 @@ bool	ask_sp(t_objects *objs)
 	long		nb;
 	t_sphere	*sp;
 	t_edit		edit_info;
+	bool		exit_request;
 
+	exit_request = false;
 	if (objs->nb_sp == 0)
-	{
-		ft_putstr_fd("No sphere sorry : ( \n", 1);
-		return (true);
-	}
+		return (ft_putstr_fd("No sphere sorry :(\n", 1), true);
 	type = SP;
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_sp || nb <= 0)
-		nb = get_input_nb("Which sphere do you want to select ?\n");
-	edit_info = get_edit(type);
+	{
+		nb = get_input_nb_int("Which sphere do you want to select ?\n",
+				&exit_request);
+		if (exit_request == true)
+			return (false);
+	}
+	edit_info = get_edit(type, &exit_request);
+	if (exit_request == true)
+		return (false);
 	sp = &objs->sp[nb - 1];
 	apply_action_sp(edit_info, sp);
 	return (true);
