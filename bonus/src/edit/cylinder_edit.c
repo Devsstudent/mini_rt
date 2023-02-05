@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:04:54 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/05 20:42:04 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:36:10 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -64,7 +64,7 @@ bool	ask_cy(t_objects *objs)
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_cy || nb <= 0)
 	{
-		nb = get_input_nb_int("Which cylinder do you want to select ?\n",
+		nb = get_input_nb_int("✴️  Which cylinder do you want to select ?\n",
 				&exit_request);
 		if (exit_request == true)
 			return (false);

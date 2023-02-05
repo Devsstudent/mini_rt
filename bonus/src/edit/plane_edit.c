@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:05:40 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/05 20:40:47 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:36:58 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -45,7 +45,7 @@ bool	ask_pl(t_objects *objs)
 	type = PL;
 	while (nb > INT_MAX || nb > objs->nb_pl || nb <= 0)
 	{
-		nb = get_input_nb_int("Which plane do you want to select ?\n",
+		nb = get_input_nb_int("✴️  Which plane do you want to select ?\n",
 				&exit_request);
 		if (exit_request == true)
 			return (false);

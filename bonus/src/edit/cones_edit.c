@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 09:22:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/05 20:43:10 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:37:13 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -49,7 +49,7 @@ bool	ask_co(t_objects *objs)
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_co || nb <= 0)
 	{
-		nb = get_input_nb_int("Which cone do you want to select ?\n",
+		nb = get_input_nb_int("✴️  Which cone do you want to select ?\n",
 				&exit_request);
 		if (exit_request == true)
 			return (false);

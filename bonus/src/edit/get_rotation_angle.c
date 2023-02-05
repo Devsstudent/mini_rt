@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 20:58:25 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/02/05 21:02:50 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:28:33 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -31,7 +31,7 @@ void	get_angle_rotate(t_edit *edit_info, bool *exit_request)
 	buff = 0;
 	while (val > 360 || val < -360)
 	{
-		val = get_input_nb_int("Enter the angle of rotation you want: \n",
+		val = get_input_nb_int("🔴 Enter the angle of rotation you want: \n",
 				exit_request);
 		if (*exit_request == true)
 			return ;

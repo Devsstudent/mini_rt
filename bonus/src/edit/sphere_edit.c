@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:50:44 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/05 21:14:31 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:36:40 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -47,7 +47,7 @@ bool	ask_sp(t_objects *objs)
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_sp || nb <= 0)
 	{
-		nb = get_input_nb_int("Which sphere do you want to select ?\n",
+		nb = get_input_nb_int("✴️  Which sphere do you want to select ?\n",
 				&exit_request);
 		if (exit_request == true)
 			return (false);

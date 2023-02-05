@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:38:20 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/04 20:17:44 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:55:58 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -58,18 +58,22 @@ void	edit_objs(t_objects *objs)
 	char	*str;
 
 	str = NULL;
+	printf("\nWELCOME TO THE EDIT ZONE\n\n");
 	while (!check_str(str))
 	{
 		if (str)
 			free(str);
-		str = take_input_str("Which object type do you want to edit ?\n");
+		str = take_input_str("❓ Which object type do you want to edit ?\n");
 		if (str && ft_strncmp(str, "exit\n", 5) == 0)
 		{
 			free(str);
 			str = NULL;
+			printf("\033[H\033[2J\n");
 			return ;
 		}
 	}
 	if (go_for_asked(str, objs))
 		objs->need_display = true;
+	else
+		printf("\033[H\033[2J\n");
 }

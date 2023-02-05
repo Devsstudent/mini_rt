@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:06:19 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/05 20:41:32 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/05 23:36:26 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "edit.h"
@@ -35,7 +35,7 @@ bool	ask_li(t_objects *objs)
 	nb = 0;
 	while (nb > INT_MAX || nb > objs->nb_li || nb <= 0)
 	{
-		nb = get_input_nb_int("Which light do you want to select ?\n",
+		nb = get_input_nb_int("✴️  Which light do you want to select ?\n",
 				&exit_request);
 		if (exit_request == true)
 			return (false);
