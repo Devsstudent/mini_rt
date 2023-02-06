@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:53:48 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/06 15:10:20 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/06 22:44:59 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -23,24 +23,6 @@ void	free_exit(void *objs)
 	if (objs)
 		close_window((t_objects *) objs);
 	exit(0);
-}
-
-void	free_objs(t_objects *obj)
-{
-	if (obj->nb_cy)
-		free_cy(obj, obj->cy);
-	if (obj->nb_pl)
-		free_pl(obj, obj->pl);
-	if (obj->nb_sp)
-		free_sp(obj, obj->sp);
-	if (obj->nb_li)
-		free(obj->li);
-	if (obj->nb_co)
-		free_co(obj, obj->co);
-	if (obj->cam)
-		free(obj->cam);
-	if (obj->amb)
-		free(obj->amb);
 }
 
 void	free_list_exit(t_objects *objs, t_sol_li *list)
