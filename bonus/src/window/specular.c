@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:34:52 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 20:43:11 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:01:52 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -49,5 +49,6 @@ float	get_specular(t_vect light_vec, t_disp_point intersec, t_objects *objs)
 			- normalize_vector(light_vec));
 	view_line = normalize_vector(create_vector(intersec.intersec_point,
 				objs->cam->position));
+	printf("%f\n",scalar_product(view_line, reflected));
 	return (ks * pow(fmax(scalar_product(view_line, reflected), 0), shy));
 }
