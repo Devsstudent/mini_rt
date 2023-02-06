@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:53:48 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/03 14:57:37 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:10:20 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -39,7 +39,7 @@ void	free_objs(t_objects *obj)
 		free_co(obj, obj->co);
 	if (obj->cam)
 		free(obj->cam);
-	if(obj->amb)
+	if (obj->amb)
 		free(obj->amb);
 }
 

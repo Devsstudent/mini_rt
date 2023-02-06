@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:36:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/03 19:11:07 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:09:58 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -33,10 +33,12 @@ bool	check_light(char **line_split, t_must_have *all_element)
 		return (false);
 	if (!check_coordinate(line_split[1]))
 		return (false);
-	intensity = (line_split[2] && line_split[2][0] && ft_isdigit(line_split[2][0])
-		&& line_split[2][1] && line_split[2][1] == '.' && line_split[2][2]
-		&& ft_isdigit(line_split[2][2]) && !line_split[2][3]);
-	if (!intensity && !(line_split[2] && line_split[2][0] && ft_isdigit(line_split[2][0]) && !line_split[2][1]))
+	intensity = (line_split[2] && line_split[2][0]
+			&& ft_isdigit(line_split[2][0])
+			&& line_split[2][1] && line_split[2][1] == '.' && line_split[2][2]
+			&& ft_isdigit(line_split[2][2]) && !line_split[2][3]);
+	if (!intensity && !(line_split[2] && line_split[2][0]
+		&& ft_isdigit(line_split[2][0]) && !line_split[2][1]))
 		return (false);
 	else if (!convert_to_float(&value, line_split[2]))
 		return (false);

@@ -1,9 +1,9 @@
 NAME = mini_rt
 CC = cc
 FLAGS = -Wall -Werror -Wextra -g -MMD
-LIB = -L $(addprefix ../lib/, mlx) -lmlx -lXext -lX11 -lm -L $(addprefix ../lib/, libft) -lft
-HEADER = -I $(addprefix ../lib/, mlx) -I $(addprefix ../lib/, libft) -I ./includes -I ./src/parsing -I ./src/error -I ./src/window -I ./src/edit
-OBJ = $(addsuffix .o, $(addprefix obj/, main \
+LIB = -L $(addprefix lib/, mlx) -lmlx -lXext -lX11 -lm -L $(addprefix lib/, libft) -lft
+HEADER = -I $(addprefix lib/, mlx) -I $(addprefix lib/, libft) -I bonus/includes -I bonus/src/parsing -I bonus/src/error -I bonus/src/window -I bonus/src/edit
+OBJ = $(addsuffix .o, $(addprefix bonus/obj/, main \
 		$(addprefix parsing/, parsing \
 							$(addprefix check_, ambient \
 												camera \
@@ -84,30 +84,30 @@ D_LST = $(OBJ:.o=.d)
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	make -s -C ../lib/mlx
-	make bonus -s -C ../lib/libft
+	make -s -C lib/mlx
+	make bonus -s -C lib/libft
 	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $@
 
-obj/%.o : src/%.c | obj_rep
+bonus/obj/%.o : bonus/src/%.c | obj_rep
 	$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 
 obj_rep:
-	@mkdir -p obj/
-	@mkdir -p obj/game/
-	@mkdir -p obj/parsing/
-	@mkdir -p obj/error/
-	@mkdir -p obj/window/
-	@mkdir -p obj/edit/
-	@mkdir -p obj/window/color/
+	@mkdir -p bonus/obj/
+	@mkdir -p bonus/obj/game/
+	@mkdir -p bonus/obj/parsing/
+	@mkdir -p bonus/obj/error/
+	@mkdir -p bonus/obj/window/
+	@mkdir -p bonus/obj/edit/
+	@mkdir -p bonus/obj/window/color/
 
 clean:
-	make clean -s -C ../lib/libft
-	make clean -s -C ../lib/mlx
+	make clean -s -C lib/libft
+	make clean -s -C lib/mlx
 
 fclean: 
-	make fclean -s -C ../lib/libft
+	make fclean -s -C lib/libft
 	rm -f $(NAME)
-	rm -rf obj/
+	rm -rf bonus/obj/
 
 re: fclean all
 
