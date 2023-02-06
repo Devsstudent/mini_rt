@@ -6,35 +6,10 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:50:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/06 15:17:33 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 00:16:50 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
-
-bool	fill_obj_systems(t_objects *objs)
-{
-	int	i;
-
-	i = 0;
-	if (!fill_cam_system(objs))
-		return (false);
-	while (i < objs->nb_pl)
-		if (!fill_pl_system(objs, i++))
-			return (false);
-	i = 0;
-	while (i < objs->nb_sp)
-		if (!fill_sp_system(objs, i++))
-			return (false);
-	i = 0;
-	while (i < objs->nb_cy)
-		if (!fill_cy_system(objs, i++))
-			return (false);
-	i = 0;
-	while (i < objs->nb_co)
-		if (!fill_co_system(objs, i++))
-			return (false);
-	return (true);
-}
 
 static bool	init_mlx(t_objects *objects)
 {
@@ -70,7 +45,7 @@ int	main(int ac, char **av)
 	if (!init_mlx(&objects))
 		return (free_double_arr(lines), 2);
 	if (!fill_structs(lines, &objects))
-		return (free_double_arr(lines), close_window(&objects), 3);
+		return (close_window(&objects), 3);
 	if (!fill_obj_systems(&objects))
 		return (close_window(&objects), 4);
 	objects.need_display = true;

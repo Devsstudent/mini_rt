@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/06 15:10:46 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/06 23:09:34 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -25,7 +25,7 @@ typedef struct s_orientation		t_orientation;
 typedef struct s_objects			t_objectss;
 typedef void						*t_mlx;
 typedef struct s_plane				t_plane;
-typedef struct s_cones				t_cones;
+typedef struct s_cone				t_cone;
 typedef struct s_sphere				t_sphere;
 typedef struct s_cylinder			t_cylinder;
 typedef struct s_solution_elem		t_solution_elem;

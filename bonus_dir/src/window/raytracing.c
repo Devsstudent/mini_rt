@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:33:51 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/01 20:31:50 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/06 23:55:32 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -42,7 +42,7 @@ bool	resolve_equation(t_objects *objs, t_sol_li *list,
 		free_list_exit(objs, list);
 	if (!get_cylinder(objs, list, rayline))
 		free_list_exit(objs, list);
-	if (!get_cones(objs, list, rayline))
+	if (BONUS && !get_cones(objs, list, rayline))
 		free_list_exit(objs, list);
 	intersec_point = get_intersection(list, objs->cam->position);
 	if (intersec_point.intersec_point.x == -1

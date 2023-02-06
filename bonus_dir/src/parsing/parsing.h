@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/03 16:23:03 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/06 23:45:23 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -146,5 +146,12 @@ bool	fill_co_system(t_objects *objs, int i);
 
 //loop_check_coord_dir
 bool	loop_check_coord_dir(char *line, float *value, int *turn, int *i);
+
+//
+bool	loop_attribute_func(t_function_parsing **arr, bool *res);
+
+//fill_objs_sytems_1.c && fill_objs_systems_bonus.c
+bool	fill_obj_systems(t_objects *objs);
+
 
 #endif

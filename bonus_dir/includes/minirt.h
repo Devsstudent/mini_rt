@@ -6,11 +6,16 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 10:39:07 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/04 19:30:30 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/06 22:28:12 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINIRT_H
 # define MINIRT_H
+
+
+# ifndef BONUS
+# define BONUS 0
+#endif 
 
 # include <unistd.h>
 # include <stdio.h>

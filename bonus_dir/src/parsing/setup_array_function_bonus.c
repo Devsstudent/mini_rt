@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_array_function.c                             :+:      :+:    :+:   */
+/*   setup_array_function_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 14:19:18 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/25 17:56:48 by odessein         ###   ########.fr       */
+/*   Created: 2023/02/06 20:20:30 by odessein          #+#    #+#             */
+/*   Updated: 2023/02/06 23:52:39 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minirt.h"
+#include "parsing.h"
 
 static bool	attribute_function_letter(bool (*func)(),
 				t_function_parsing *arr, char *letter)
@@ -23,7 +23,7 @@ static bool	attribute_function_letter(bool (*func)(),
 	return (true);
 }
 
-static bool	loop_attribute_func(t_function_parsing **arr, bool *res)
+bool	loop_attribute_func(t_function_parsing **arr, bool *res)
 {
 	int		i;
 
