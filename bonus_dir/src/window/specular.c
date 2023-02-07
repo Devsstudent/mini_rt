@@ -24,7 +24,7 @@ static bool	fill_normal_specular(t_disp_point intersec,
 		*normal = normalize_vector(get_normal_vect_di(intersec, objs, 1));
 	else if (intersec.type == CO_DI)
 		*normal = normalize_vector(get_normal_vect_di(intersec, objs, 0));
-	else if (intersec.type == CO)
+	else if (BONUS && intersec.type == CO)
 		*normal = normalize_vector(get_normal_vect_co(intersec, objs));
 	else
 		return (false);

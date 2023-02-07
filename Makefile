@@ -42,6 +42,7 @@ OBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 								plane \
 								cylinder \
 								specular \
+								resolve_equation \
 								cylinder_equation \
 								disc \
 								intersection \
@@ -57,6 +58,9 @@ OBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 										rgb_utils \
 										get_pixel_color \
 										shadow_light \
+										check_light_shadow \
+										comput_rgb_from_angle \
+										intersec_self \
 										$(addsuffix _color, sp \
 															pl \
 															cy \
@@ -117,6 +121,7 @@ BOBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 								cylinder \
 								specular \
 								cones_bonus \
+								resolve_equation_bonus \
 								get_quadra_cones_bonus \
 								cylinder_equation \
 								disc \
@@ -135,6 +140,9 @@ BOBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 										rgb_utils \
 										get_pixel_color \
 										shadow_light \
+										check_light_shadow_bonus \
+										intersec_self_bonus \
+										comput_rgb_from_angle_bonus \
 										$(addsuffix _color, sp \
 															pl \
 															cy \

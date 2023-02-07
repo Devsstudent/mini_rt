@@ -168,6 +168,7 @@ t_equation		get_quadra_cone_equation(t_line_eq rayline, t_cone cone);
 bool			get_specific_cone(t_objects *obj, t_sol_li *list,
 					t_line_eq rayline, int i_to_view);
 bool			get_cones(t_objects *obj, t_sol_li *list, t_line_eq rayline);
+void			check_solution_cone(t_solution *solu, t_cone cone);
 
 //raytracing_utils.c
 t_line_eq		get_rayline_eq(t_vect vec_line, t_xyz start_point);
@@ -246,12 +247,11 @@ void			fill_specular(t_objects *objs, t_color_pam param,
 t_rgb			rgb_fill(uint8_t r, uint8_t g, uint8_t b);
 
 //shadow_light.c
-t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs, int i,
-					t_sol_li *list);
 bool			check_no_shadow(t_disp_point intersection, t_disp_point initial,
 					t_objects *objs, int i);
 void			get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec,
 					int i);
+bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin);
 
 //get_pixel_color.c
 bool			get_pixel_color(int *color, t_disp_point intersec_point,
@@ -273,4 +273,13 @@ void			cylinder_color(t_disp_point disp_p, t_objects *objs,
 
 t_rgb			get_texture_color(int x, int y, t_obj_texture tex);
 
+//intersec_self.c
+int	intersect_self(t_objects *objs, t_disp_point point, int i);
+
+//compute_rgb_from_angle.c
+float	compute_rgb_from_angle(t_objects *objs, t_color_pam param);
+
+//check_light_shadow.c
+t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,
+					int i, t_sol_li *list);
 #endif
