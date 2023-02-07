@@ -168,7 +168,7 @@ D_LST = $(OBJ:.o=.d)
 
 all : $(NAME)
 
-bonus :
+bonus : fclean
 	$(MAKE) TEST=1 all
 
 $(NAME): $(OBJ)
@@ -201,7 +201,7 @@ clean:
 fclean:
 	make fclean -s -C lib/libft
 	rm -f $(NAME)
-	rm -rf bonus/obj/
+	rm -rf bonus_dir/obj/
 
 re: fclean all
 

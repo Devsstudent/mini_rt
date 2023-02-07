@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/01/31 21:17:23 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:49:06 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -35,7 +35,8 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 		param.rayvec = rayvec;
 		param.disp_p = disp_p;
 		compute_rgb(objs, param, &final->diffuse, i);
-		fill_specular(objs, param, &final->specular, i);
+		if (BONUS)
+			fill_specular(objs, param, &final->specular, i);
 	}
 	return (true);
 }
@@ -55,7 +56,7 @@ static void	fill_color(t_rgb *color, t_disp_point disp_p, t_objects *objs)
 		sphere_color(disp_p, color, objs);
 	else if (disp_p.type == CY || disp_p.type == DI)
 		cylinder_color(disp_p, objs, color);
-	else if (disp_p.type == CO || disp_p.type == CO_DI)
+	else if (BONUS && (disp_p.type == CO || disp_p.type == CO_DI))
 		cones_color(color, disp_p, objs);
 	else
 		*color = disp_p.color;
