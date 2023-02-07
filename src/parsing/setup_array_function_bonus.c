@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:20:30 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/06 23:52:39 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:19:19 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -28,7 +28,7 @@ bool	loop_attribute_func(t_function_parsing **arr, bool *res)
 	int		i;
 
 	i = 0;
-	while (i < ELEM_MAX)
+	while (i < ELEM_MAX + BONUS)
 	{
 		if (i == 0)
 			*res = attribute_function_letter(check_ambient, &(*arr)[i], "A");
@@ -56,7 +56,7 @@ bool	setup_array_function(t_function_parsing **arr)
 {
 	bool	res;
 
-	*arr = malloc(sizeof(t_function_parsing) * (ELEM_MAX + 1));
+	*arr = malloc(sizeof(t_function_parsing) * (ELEM_MAX + BONUS + 1));
 	if (!*arr)
 		return (false);
 	res = false;

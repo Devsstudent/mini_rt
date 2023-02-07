@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/06 23:45:23 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:16:39 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -17,7 +17,7 @@
 # include <limits.h>
 # include <fcntl.h>
 
-# define ELEM_MAX 7
+# define ELEM_MAX 6
 
 typedef float					t_vect __attribute__ ((vector_size(16)));
 typedef struct s_xyz			t_xyz;
