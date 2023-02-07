@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 11:37:21 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/02/06 20:39:49 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:18:58 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ bool	fill_structs(char **lines, t_objects *objects)
 	if (!triple_arr)
 		return (false);
 	if (!fill_each_struct(triple_arr, objects))
+	{
+		printf("Error\nMap error\n");
 		return (free_triple_arr(triple_arr), false);
+	}
 	return (free_triple_arr(triple_arr), true);
 }

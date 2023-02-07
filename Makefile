@@ -9,7 +9,7 @@ OBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 							$(addprefix check_, ambient \
 												camera \
 												coordinate \
-												cylindre \
+												cylinder \
 												float_construction \
 												light \
 												line_parsing \
@@ -84,7 +84,7 @@ BOBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 												camera \
 												cones_bonus \
 												coordinate \
-												cylindre \
+												cylinder \
 												float_construction \
 												light \
 												line_parsing \
@@ -201,7 +201,7 @@ clean:
 fclean:
 	make fclean -s -C lib/libft
 	rm -f $(NAME)
-	rm -rf bonus/obj/
+	rm -rf bonus_dir/obj/
 
 re: fclean all
 
