@@ -2,9 +2,9 @@ NAME = mini_rt
 CC = cc
 FLAGS = -Wall -Werror -Wextra -g -MMD
 LIB = -L $(addprefix lib/, mlx) -lmlx -lXext -lX11 -lm -L $(addprefix lib/, libft) -lft
-HEADER = -I $(addprefix lib/, mlx) -I $(addprefix lib/, libft) -I bonus_dir/includes -I bonus_dir/src/parsing -I bonus_dir/src/error -I bonus_dir/src/window -I bonus_dir/src/edit
+HEADER = -I $(addprefix lib/, mlx) -I $(addprefix lib/, libft) -I includes -I src/parsing -I src/error -I src/window -I src/edit
 
-OBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
+OBJ = $(addsuffix .o, $(addprefix obj/, main \
 		$(addprefix parsing/, parsing \
 							$(addprefix check_, ambient \
 												camera \
@@ -47,7 +47,6 @@ OBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 								disc \
 								intersection \
 								raytracing_utils \
-								get_normal_vector_bonus \
 								vector_operations_again \
 								vector_operations_bis \
 								solution_list \
@@ -79,7 +78,7 @@ OBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 								light_edit \
 								plane_edit)))
 
-BOBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
+BOBJ = $(addsuffix .o, $(addprefix obj_bonus/, main \
 		$(addprefix parsing/, parsing \
 							$(addprefix check_, ambient \
 												camera \
@@ -160,16 +159,18 @@ BOBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 								cones_edit \
 								light_edit \
 								plane_edit)))
-
+OBJ_DIR = obj/
 ifdef TEST
+	OBJ_DIR = obj_bonus/
 	OBJ = $(BOBJ)
+	NAME = mini_bonus
 endif
 
 D_LST = $(OBJ:.o=.d)
 
 all : $(NAME)
 
-bonus : swap 
+bonus :
 	$(MAKE) TEST=1 all
 
 $(NAME): $(OBJ)
@@ -183,30 +184,27 @@ ifdef TEST
 	BOBO = -D BONUS=1
 endif
 
-bonus_dir/obj/%.o : bonus_dir/src/%.c | obj_rep
+$(OBJ_DIR)%.o : src/%.c | obj_rep
 	$(CC) $(FLAGS) $(BOBO) $(HEADER) -c $< -o $@
 
 obj_rep:
-	@mkdir -p bonus_dir/obj/
-	@mkdir -p bonus_dir/obj/game/
-	@mkdir -p bonus_dir/obj/parsing/
-	@mkdir -p bonus_dir/obj/error/
-	@mkdir -p bonus_dir/obj/window/
-	@mkdir -p bonus_dir/obj/edit/
-	@mkdir -p bonus_dir/obj/window/color/
+	@mkdir -p $(OBJ_DIR) 
+	@mkdir -p $(OBJ_DIR)parsing/
+	@mkdir -p $(OBJ_DIR)error/
+	@mkdir -p $(OBJ_DIR)window/
+	@mkdir -p $(OBJ_DIR)edit/
+	@mkdir -p $(OBJ_DIR)window/color/
 
 clean:
 	make clean -s -C lib/libft
 	make clean -s -C lib/mlx
 
-swap:
-	rm -rf bonus_dir/obj/window
-	rm -rf bonus_dir/obj/error
-	rm -rf bonus_dir/obj/parsing
 fclean:
 	make fclean -s -C lib/libft
 	rm -f $(NAME)
-	rm -rf bonus_dir/obj/
+	rm -f mini_bonus 
+	rm -rf obj/
+	rm -rf obj_bonus/
 
 re: fclean all
 
