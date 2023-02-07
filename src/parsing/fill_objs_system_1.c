@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 23:43:36 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/06 23:44:10 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:20:34 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "parsing.h"
@@ -31,4 +31,3 @@ bool	fill_obj_systems(t_objects *objs)
 			return (false);
 	return (true);
 }
-

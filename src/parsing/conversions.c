@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 20:22:32 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/02/01 19:59:52 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:51:26 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ bool	convert_to_rgb(t_rgb *rgb, char *arr)
 		return (false);
 	if (!rgb_arr[0] || !rgb_arr[1] || !rgb_arr[2])
 		return (false);
-	rgb->R = ft_atoi(rgb_arr[0]);
-	rgb->G = ft_atoi(rgb_arr[1]);
-	rgb->B = ft_atoi(rgb_arr[2]);
+	rgb->r = ft_atoi(rgb_arr[0]);
+	rgb->g = ft_atoi(rgb_arr[1]);
+	rgb->b = ft_atoi(rgb_arr[2]);
 	return (free_double_arr(rgb_arr), true);
 }
 

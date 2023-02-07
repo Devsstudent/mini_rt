@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:38:20 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/05 23:55:58 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:14:50 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -58,7 +58,8 @@ void	edit_objs(t_objects *objs)
 	char	*str;
 
 	str = NULL;
-	printf("\nWELCOME TO THE EDIT ZONE\n\n");
+	printf("\033[H\033[2J\n");
+	printf("WELCOME TO THE EDIT ZONE\n\n");
 	while (!check_str(str))
 	{
 		if (str)

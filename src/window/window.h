@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:53:13 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/06 23:09:34 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:23:57 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef WINDOW_H
@@ -251,7 +251,7 @@ bool			check_no_shadow(t_disp_point intersection, t_disp_point initial,
 					t_objects *objs, int i);
 void			get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec,
 					int i);
-bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin);
+bool			in_the_way(t_xyz point, t_vect rayvec, t_xyz origin);
 
 //get_pixel_color.c
 bool			get_pixel_color(int *color, t_disp_point intersec_point,
@@ -274,10 +274,10 @@ void			cylinder_color(t_disp_point disp_p, t_objects *objs,
 t_rgb			get_texture_color(int x, int y, t_obj_texture tex);
 
 //intersec_self.c
-int	intersect_self(t_objects *objs, t_disp_point point, int i);
+int				intersect_self(t_objects *objs, t_disp_point point, int i);
 
 //compute_rgb_from_angle.c
-float	compute_rgb_from_angle(t_objects *objs, t_color_pam param);
+float			compute_rgb_from_angle(t_objects *objs, t_color_pam param);
 
 //check_light_shadow.c
 t_disp_point	check_light_shadow(t_disp_point disp_p, t_objects *objs,

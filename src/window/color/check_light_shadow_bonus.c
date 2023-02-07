@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_light_shadow_bonus.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/07 19:26:40 by mbelrhaz          #+#    #+#             */
+/*   Updated: 2023/02/07 19:26:43 by mbelrhaz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "window.h"
 
 //check_light_shadow checks if there are objects between the light and the point
