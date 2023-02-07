@@ -6,7 +6,7 @@
 /*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:39:22 by mbelrhaz          #+#    #+#             */
-/*   Updated: 2023/02/07 16:49:06 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:56:03 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -35,8 +35,7 @@ static bool	loop_light(t_disp_point disp_p, t_objects *objs,
 		param.rayvec = rayvec;
 		param.disp_p = disp_p;
 		compute_rgb(objs, param, &final->diffuse, i);
-		if (BONUS)
-			fill_specular(objs, param, &final->specular, i);
+		fill_specular(objs, param, &final->specular, i);
 	}
 	return (true);
 }

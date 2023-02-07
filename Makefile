@@ -9,7 +9,7 @@ OBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 							$(addprefix check_, ambient \
 												camera \
 												coordinate \
-												cylindre \
+												cylinder \
 												float_construction \
 												light \
 												line_parsing \
@@ -47,6 +47,7 @@ OBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 								disc \
 								intersection \
 								raytracing_utils \
+								get_normal_vector_bonus \
 								vector_operations_again \
 								vector_operations_bis \
 								solution_list \
@@ -84,7 +85,7 @@ BOBJ = $(addsuffix .o, $(addprefix bonus_dir/obj/, main \
 												camera \
 												cones_bonus \
 												coordinate \
-												cylindre \
+												cylinder \
 												float_construction \
 												light \
 												line_parsing \
@@ -168,7 +169,7 @@ D_LST = $(OBJ:.o=.d)
 
 all : $(NAME)
 
-bonus : fclean
+bonus : swap 
 	$(MAKE) TEST=1 all
 
 $(NAME): $(OBJ)
@@ -198,6 +199,10 @@ clean:
 	make clean -s -C lib/libft
 	make clean -s -C lib/mlx
 
+swap:
+	rm -rf bonus_dir/obj/window
+	rm -rf bonus_dir/obj/error
+	rm -rf bonus_dir/obj/parsing
 fclean:
 	make fclean -s -C lib/libft
 	rm -f $(NAME)
