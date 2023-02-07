@@ -113,7 +113,7 @@ BOBJ = $(addsuffix .o, $(addprefix obj_bonus/, main \
 								utils) \
 		$(addprefix error/, error \
 							fill_structs_utils \
-							free_objs) \
+							free_objs_bonus) \
 		$(addprefix window/,  loop_mlx \
 								render_window \
 								sphere \
