@@ -1,4 +1,4 @@
-NAME = mini_rt
+NAME = miniRT
 CC = cc
 FLAGS = -Wall -Werror -Wextra -g -MMD
 LIB = -L $(addprefix lib/, mlx) -lmlx -lXext -lX11 -lm -L $(addprefix lib/, libft) -lft
@@ -163,7 +163,7 @@ OBJ_DIR = obj/
 ifdef TEST
 	OBJ_DIR = obj_bonus/
 	OBJ = $(BOBJ)
-	NAME = mini_bonus
+	NAME = miniRT_bonus
 endif
 
 D_LST = $(OBJ:.o=.d)
@@ -202,7 +202,7 @@ clean:
 fclean:
 	make fclean -s -C lib/libft
 	rm -f $(NAME)
-	rm -f mini_bonus 
+	rm -f miniRT_bonus 
 	rm -rf obj/
 	rm -rf obj_bonus/
 
