@@ -6,10 +6,10 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 23:41:17 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/06 23:41:50 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:22:17 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minirt.h"
+#include "parsing.h"
 
 bool	fill_obj_systems(t_objects *objs)
 {
@@ -35,4 +35,3 @@ bool	fill_obj_systems(t_objects *objs)
 			return (false);
 	return (true);
 }
-

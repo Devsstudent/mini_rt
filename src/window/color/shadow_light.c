@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:12:29 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 21:18:39 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:26:19 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -23,14 +23,12 @@ bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
 	return (true);
 }
 
-
 void	get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec, int i)
 {
 	(*rayvec)[0] = objs->li[i].position.x - point.x;
 	(*rayvec)[1] = objs->li[i].position.y - point.y;
 	(*rayvec)[2] = objs->li[i].position.z - point.z;
 }
-
 
 //check_no_shadow checks if the point is illuminated from our point of view
 //it checks if there is a way from the camera to the light

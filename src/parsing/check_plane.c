@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 18:00:49 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/07 16:05:12 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:20:54 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -28,7 +28,7 @@ bool	check_plane(char **line_split, t_must_have *all_elem)
 	if (!check_rgb(line_split[3]))
 		return (false);
 	if (BONUS && line_split[4]
-			&& (!check_path(line_split[4])) && !line_split[5])
+		&& (!check_path(line_split[4])) && !line_split[5])
 		return (false);
 	else if (!BONUS && line_split[4])
 		return (false);

@@ -1,4 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   comput_rgb_from_angle_bonus.c                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/07 19:25:33 by mbelrhaz          #+#    #+#             */
+/*   Updated: 2023/02/07 19:25:39 by mbelrhaz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "window.h"
+
 //compute cos(angle) between normal vector and rayvec
 float	compute_rgb_from_angle(t_objects *objs, t_color_pam param)
 {

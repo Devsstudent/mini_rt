@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersec_self_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbelrhaz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/07 19:25:02 by mbelrhaz          #+#    #+#             */
+/*   Updated: 2023/02/07 19:25:06 by mbelrhaz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "window.h"
 
 //intersec_self checks if between the light and the camera, the line intersects

@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 21:02:05 by odessein          #+#    #+#             */
-/*   Updated: 2023/01/31 21:02:35 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 19:53:52 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -15,9 +15,9 @@ t_rgb	rgb_fill(uint8_t r, uint8_t g, uint8_t b)
 {
 	t_rgb	res;
 
-	res.T = 0;
-	res.R = r;
-	res.G = g;
-	res.B = b;
+	res.t = 0;
+	res.r = r;
+	res.g = g;
+	res.b = b;
 	return (res);
 }
