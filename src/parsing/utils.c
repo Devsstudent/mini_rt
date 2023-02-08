@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 12:57:53 by odessein          #+#    #+#             */
-/*   Updated: 2022/12/04 22:34:07 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:26:22 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -48,7 +48,7 @@ bool	free_array_function(t_function_parsing *arr)
 	int	i;
 
 	i = 0;
-	while (i < ELEM_MAX)
+	while (i < ELEM_MAX + BONUS)
 	{
 		free(arr[i].letter);
 		i++;

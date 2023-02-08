@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:55:57 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/07 18:16:39 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:30:52 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PARSING_H
@@ -152,6 +152,5 @@ bool	loop_attribute_func(t_function_parsing **arr, bool *res);
 
 //fill_objs_sytems_1.c && fill_objs_systems_bonus.c
 bool	fill_obj_systems(t_objects *objs);
-
 
 #endif
