@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 19:20:43 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/08 13:14:57 by odessein         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:53:55 by odessein         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minirt.h"
@@ -42,7 +42,8 @@ bool	check_texture(t_obj_texture *tex, char *path, t_objects *objs)
 				path, &tex->width, &tex->height);
 		if (!tex->img)
 		{
-			ft_putstr_fd("Error\nError occured while opening the image, check your file\n", 2);
+			ft_putstr_fd("Error\nError occured while opening the image, \
+check your file\n", 2);
 			return (false);
 		}
 		tex->tex = TEX;
