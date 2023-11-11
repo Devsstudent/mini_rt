@@ -20,3 +20,4 @@ So at the end we handled everything below :
 ![CheckBoard](/Images/Checkboard.png "CheckBoard")
 ![Plani](/Images/Planisphere.png "Planisphere")
 ![Classic](/Images/Classic.png "Classic")
+![Score](/Images/MiniRt_score.png "Score")
