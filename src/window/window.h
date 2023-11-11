@@ -273,9 +273,6 @@ void			cylinder_color(t_disp_point disp_p, t_objects *objs,
 
 t_rgb			get_texture_color(int x, int y, t_obj_texture tex);
 
-//intersec_self.c
-int				intersect_self(t_objects *objs, t_disp_point point, int i);
-
 //compute_rgb_from_angle.c
 float			compute_rgb_from_angle(t_objects *objs, t_color_pam param);
 

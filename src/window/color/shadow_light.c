@@ -6,7 +6,7 @@
 /*   By: odessein <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:12:29 by odessein          #+#    #+#             */
-/*   Updated: 2023/02/07 19:26:19 by mbelrhaz         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:34:40 by mbelrhaz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "window.h"
@@ -21,6 +21,35 @@ bool	in_the_way(t_xyz point, t_vect rayvec, t_xyz origin)
 	if (norm_of_vector(vect) > norm_of_vector(rayvec))
 		return (false);
 	return (true);
+}
+
+static int	intersect_self(t_objects *objs, t_disp_point point, int i)
+{
+	t_line_eq		rayline;
+	t_sol_li		list;
+	t_vect			rayvec;
+	t_disp_point	intersection;
+
+	init_sol_li(&list);
+	rayvec[0] = objs->li[i].position.x - objs->cam->position.x;
+	rayvec[1] = objs->li[i].position.y - objs->cam->position.y;
+	rayvec[2] = objs->li[i].position.z - objs->cam->position.z;
+	rayline = get_rayline_eq(rayvec, objs->cam->position);
+	if (point.type == SP
+		&& !get_specific_sphere(objs, &list, rayline, point.obj_id))
+		return (free_list(&list), -1);
+	if (point.type == PL
+		&& !get_specific_plane(objs, &list, rayline, point.obj_id))
+		return (free_list(&list), -1);
+	if ((point.type == CY || point.type == DI)
+		&& !get_specific_cylinder(objs, &list, rayline, point.obj_id))
+		return (free_list(&list), -1);
+	intersection = get_intersection(&list, objs->cam->position);
+	if (list.head != NULL && list.head->solution.sol_one
+		&& in_the_way(intersection.intersec_point, rayvec, objs->cam->position))
+		return (free_list(&list), 0);
+	free_list(&list);
+	return (1);
 }
 
 void	get_rayvec_light(t_objects *objs, t_xyz point, t_vect *rayvec, int i)
